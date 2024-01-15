@@ -1,0 +1,67 @@
+@import '../utilites/variables';
+.navbar-container {
+    height: 80px;
+    width: 100%;
+    background-color: $White;
+    box-shadow:  0px 2px 8px 0px $boxShadow;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    position: fixed;
+    top: 0;
+    margin-bottom: 20px;
+
+    .navbar-section-container {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        // width: 200px;
+        gap: 20px;
+
+        &>.navbar-section-link {
+        // padding-bottom: 0px;
+        height: 80px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        color: $Black;
+        text-decoration: none;
+        &:hover {
+            border-bottom: 2px solid $Black;
+        }
+        } 
+    }
+    .navbar-search-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 34px;
+        padding: 7px 12px 7px 20px;
+        background:$SearchBar-background;
+        border-radius: 4px;
+        &>input {
+        background:$SearchBar-background;
+        border: none;
+        &:focus {
+            outline: none;
+        }
+        &::placeholder {
+        color:$Black;
+       font-family: 'Poppins', sans-serif;
+       font-size: 12px;
+       font-style: normal;
+       font-weight: 400;
+       line-height: 18px;
+    opacity: 0.5;
+    
+        }
+        }
+
+    }
+    .navbar-right-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+    }
+}

@@ -1,0 +1,16 @@
+@import 'base/base';
+
+//components
+@import 'components/navbar';
+@import 'components/signUp';
+@import 'components/loginOrSignup';
+
+//small components
+@import 'small-components/inputField';
+
+//pages import
+@import 'sections/home';
+@import 'sections/login-signup';
+@import 'sections/notFound';
+
+@import 'utilites/variables';

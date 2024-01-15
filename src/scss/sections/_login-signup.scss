@@ -1,0 +1,10 @@
+.login-signup-container {
+margin-top: 150px;
+display: flex;
+align-items: center;
+gap: 129px;
+&>.login-signup-image {
+    width: 800px;
+    height: 600px;
+}
+}
