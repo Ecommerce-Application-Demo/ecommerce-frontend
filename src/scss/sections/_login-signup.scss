@@ -1,10 +1,18 @@
 .login-signup-container {
 margin-top: 150px;
 display: flex;
-align-items: center;
+// align-items: center;
 gap: 129px;
 &>.login-signup-image {
     width: 800px;
     height: 600px;
+}
+&>.loginSIgnup-component-container{
+    // max-height: 300px;
+    overflow-y: hidden;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+    display: flex;flex-direction: column;
+    gap: 200px;
 }
 }

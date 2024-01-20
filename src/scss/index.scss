@@ -4,9 +4,11 @@
 @import 'components/navbar';
 @import 'components/signUp';
 @import 'components/loginOrSignup';
+@import 'components/otp';
 
 //small components
 @import 'small-components/inputField';
+@import 'small-components/loading-screen';
 
 //pages import
 @import 'sections/home';

@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import LoginSignUp from './pages/Login-SignUp';
 import {Routes, BrowserRouter, Route} from 'react-router-dom';
 import NotFound from './pages/Not-found';
+import LoadingScreen from './small-components/Loading-screen';
+import LoginOrSignUp from './components/LoginOrSignUp';
 function App() {
   return (
     <BrowserRouter>
@@ -12,8 +14,9 @@ function App() {
     <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/login-signup' element={<LoginSignUp />}/>
-      <Route path='/signup' element={<LoginSignUp />}/>
-      <Route path='/login' element={<LoginSignUp />}/>
+      <Route path="/signup" element={<LoginSignUp/>} />
+      <Route path="/otp-verification" element={<LoginSignUp/>} />
+      <Route path='/loading' element={<LoadingScreen />}/>
       <Route path='*' element={<NotFound/>}/>
     </Routes>
     </BrowserRouter>

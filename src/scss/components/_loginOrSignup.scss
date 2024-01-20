@@ -1,6 +1,6 @@
 .loginorsignup-container{
     width: 371px;
-    margin-top: -150px;
+    // margin-top: -150px;
     &>h1{
         margin-bottom: 40px;
     }
@@ -11,9 +11,19 @@
         align-items: center;
         gap: 10px;
         border-radius: 4px;
-        background: var(--Button2, #DB4444);
         border: none;
         margin-top: 40px;
+        position: relative;
         color: $White;
+       width: 150px;
+        height: 60px;
+    }
+    &>.getOtp-btn--normal {
+        background: var(--Button2, #DB4444);
+        cursor: pointer;
+    }
+    &>.getOtp-btn--disabled {
+        background-color: grey;
+        cursor: not-allowed;
     }
 }
