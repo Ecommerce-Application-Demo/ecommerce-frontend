@@ -1,8 +1,12 @@
 import React,{useState} from 'react'
 import InputField from '../small-components/InputField'
 import * as Yup from 'yup';
+import LoadingScreen from '../small-components/Loading-screen';
+import { Link, useNavigate } from 'react-router-dom';
+import Otp from './Otp';
+import classNames from 'classnames';
 
-const LoginOrSignUp = () => {
+const LoginOrSignUp = ({}) => {
     const [formData, setFormData] = useState({
         email:'',
       });
@@ -10,6 +14,10 @@ const LoginOrSignUp = () => {
       const [errors, setErrors] = useState({
         email:'',
       });
+
+    //button text for loading...
+      const [buttonText,setButtonText]=useState('Get OTP');
+      const [isLoading, setIsLoading]=useState(false);
 
       const handleChange = (e) => {
         const { name, value } = e.target;
@@ -37,6 +45,8 @@ const LoginOrSignUp = () => {
             }));
           });
       };
+
+      const history = useNavigate();
     
       const handleSubmit = (e) => {
         e.preventDefault();
@@ -44,8 +54,12 @@ const LoginOrSignUp = () => {
         validationSchema
           .validate(formData, { abortEarly: false })
           .then(() => {
-            // Handle form submission logic here
             console.log('Form is valid:', formData);
+            setIsLoading(true);
+            setButtonText('sent');
+            setTimeout(() => {
+              history(`/otp-verification?email=${formData.email}`)
+            }, 2000);
           })
           .catch((validationErrors) => {
             const newErrors = {};
@@ -55,6 +69,12 @@ const LoginOrSignUp = () => {
             setErrors(newErrors);
           });
       };
+
+      const otpBtn = classNames({
+        'getOtp-btn':true,
+        'getOtp-btn--normal':buttonText!=='sent',
+        'getOtp-btn--disabled':buttonText==='sent',
+      })
     
   return (
     <div className='loginorsignup-container'>
@@ -65,14 +85,17 @@ const LoginOrSignUp = () => {
           value={formData.email}
           onChange={handleChange}
           error={errors.email}
+          disabled={buttonText==='sent'}
           className='loginorsignup-input-field'
         />
-        <button className='getOtp-btn' onClick={handleSubmit}>get OTP</button>
+         <button className={otpBtn} onClick={handleSubmit} disabled={buttonText==='sent'}>{buttonText}</button>
             </div>
   )
 }
+const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/;
+
 const validationSchema = Yup.object({
-    email: Yup.string().required('email is required').email('enter valid email'),
+    email: Yup.string().required('email is required').matches(emailRegex, 'Enter a valid email address'),
   });
 
 export default LoginOrSignUp

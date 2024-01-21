@@ -1,0 +1,48 @@
+.otp-main-container {
+    display: flex;
+    margin: 60px 40px;
+    flex-direction: column;
+    padding: 80px 40px;
+    gap: 20px;
+    height: fit-content;
+    width: fit-content;
+// background: rgba(219, 68, 68, 0.05);
+// border-radius: 16px;
+// box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+// backdrop-filter: blur(11.2px);
+// -webkit-backdrop-filter: blur(11.2px);
+
+    &>.otp-input-wrapper {
+        display: flex;
+        // margin: 20px 0px;
+        flex-direction: row;
+        gap: 30px;
+        &>.otp-input {
+            height: 40px;
+            width: 30px;
+            gap: 20px;
+           caret-color: $primary-btn-red;
+           text-align: center;
+           border: 0.5px solid $Grey;
+            border-radius: 3px;
+           &:focus {
+            outline: none;
+            border: 2px solid $primary-btn-red;
+           }
+        }
+        input[type="number"] {
+            -moz-appearance: textfield; 
+          }
+          
+          input[type="number"]::-webkit-inner-spin-button,
+          input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0; 
+          }
+        }
+        &>.resend-otp-text,&>.loginText>.password  {
+          color: $primary-btn-red;
+          font-weight: bold;
+          cursor: pointer;
+        }       
+}

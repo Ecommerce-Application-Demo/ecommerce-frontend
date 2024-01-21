@@ -4,8 +4,7 @@
     gap: 10px;
     margin-bottom: 48px;
     &>p{
-    color: rgb(90, 77, 77);
-/* Title/16PX Regular */
+    color: $Grey-text-color;
 font-family: Poppins;
 font-size: 16px;
 font-style: normal;
@@ -22,19 +21,20 @@ line-height: 24px;
     
         & .create-acount-btn {
             width: 100%;
-            color: var(--Text, #FAFAFA);
+            color: $Button-text-color;
             font-family: Poppins;
             font-size: 16px;
             font-style: normal;
             font-weight: 500;
             border-radius: 4px;
-            background: var(--Button2, #DB4444);
+            background: $primary-btn-red;
             line-height: 56px;
             border: none;
+            cursor: pointer;
     }
     &>div>p {
         margin-top: 15px;
-        color: red;
+        color: $primary-btn-red;
     }
 }
 
@@ -46,6 +46,6 @@ flex-direction: row;
 align-items:center;
 gap: 10px;
 border-radius: 4px;
-border: 1px solid rgba(0, 0, 0, 0.40);
+border: 1px solid $Button-border-black-shadow;
 cursor: pointer;
 }
