@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const Otp = () => {
   const inputRefs = [useRef(), useRef(), useRef(), useRef()];
@@ -7,7 +7,7 @@ const Otp = () => {
 
   const [searchParams]=useSearchParams();
   const email=searchParams.get('email');
-
+  const navigate=useNavigate();
   const handleInputChange = (index, e) => {
     const value = e.target.value;
     const newOtp = [...otp];
@@ -32,6 +32,8 @@ const Otp = () => {
   };
   if(getFullOtp().length===4){
     console.log('VALIDATE');
+    navigate('/login',{state:{id:email}});
+
   }
   return (
     <div className='otp-main-container'>

@@ -43,7 +43,6 @@
         &>.resend-otp-text,&>.loginText>.password  {
           color: $primary-btn-red;
           font-weight: bold;
-        }
-        &>.login>.password {
-        }
+          cursor: pointer;
+        }       
 }

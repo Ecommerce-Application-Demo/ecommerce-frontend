@@ -23,7 +23,6 @@ const InputField = ({ label, name, type = 'text', value, onChange, error,disable
       setHasContent(false);
     }
   }
-console.log('hii' + value);
     const successValidation = !error && value;
 
     const inputWrapper = classNames({

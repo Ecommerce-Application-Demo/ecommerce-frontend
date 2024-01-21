@@ -92,8 +92,10 @@ const LoginOrSignUp = ({}) => {
             </div>
   )
 }
+const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/;
+
 const validationSchema = Yup.object({
-    email: Yup.string().required('email is required').email('enter valid email'),
+    email: Yup.string().required('email is required').matches(emailRegex, 'Enter a valid email address'),
   });
 
 export default LoginOrSignUp

@@ -4,8 +4,8 @@
   height: 40px;
 
   & > .label-text-focus-disabled {
-    color: white;
-    background-color:rgb(169, 160, 160);
+    color:$White;
+    background-color:$Disabled-background;
     top: -10px;
     left: 10px;
   }
@@ -16,10 +16,10 @@
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 24px; /* 150% */
+    line-height: 24px; 
   }
   & > .label-text {
-    color: var(--Text2, #000);
+    color:$Black;
     bottom: 6px;
     left: 10px;
     // z-index: 15;
@@ -27,31 +27,32 @@
   }
 
   & > .label-text-focus {
-    color: var(--Text2, #000);
+    color:$Black;
     top: -10px;
     left: 10px;
   }
   & > .label-text-disabled {
-    color: white;
-    background-color:  rgb(169, 160, 160);
+    color: $White;
+    background-color: $Disabled-background;
     bottom: 6px;
     left: 10px;
     // z-index: 15;
     transition: transform 0.2s ease-out;
   }
   & .react-input-wrapper--success {
-    background-color: rgb(211, 254, 211);
+    background-color: $Input-success-background;
   }
   & .react-input-wrapper--normal {
-    background-color: rgb(247, 243, 243);
+    background-color:$Input-normal-background;
     
   }
   & .react-input-wrapper--disabled {
-    background-color:rgb(169, 160, 160);
+    background-color:$Disabled-background;
     cursor: not-allowed;
-    color: black;
+    color: $Black;
     &>.input-disabled {
-          color: white;
+          color: $White;
+          cursor:not-allowed;
           &:focus {
             outline: none;
           }

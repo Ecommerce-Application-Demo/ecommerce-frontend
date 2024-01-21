@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 import InputField from '../small-components/InputField';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { GoogleIcon } from '../assets/icons';
 const Login = () => {
+    const location=useLocation();
+    const {id}=location.state || {};
+    const navigate=useNavigate();
+    
     const [formData, setFormData] = useState({
       password: '',
       email:'',
@@ -13,6 +17,14 @@ const Login = () => {
       password: '',
       email:'',
     });
+
+    useEffect(() => {
+      setFormData((prevData) => ({
+        ...prevData,
+        email: id || '',
+      }));
+    }, [id]);
+    
   
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -42,17 +54,21 @@ const Login = () => {
       };
     
   
-  
     const handleSubmit = (e) => {
       e.preventDefault();
-  
+      console.log(formData);
       validationSchema
         .validate(formData, { abortEarly: false })
         .then(() => {
           console.log('Form is valid:', formData);
+          console.log('validate');
+          setTimeout(()=>{
+            navigate('/');
+          },2000);
         })
         .catch((validationErrors) => {
           const newErrors = {};
+          console.log('error');
           validationErrors.inner.forEach((error) => {
             newErrors[error.path] = error.message;
           });
@@ -70,9 +86,9 @@ const Login = () => {
          <InputField
           label="Email"
           name="email"
+          disabled={id}
           value={formData.email}
           onChange={handleChange}
-        //   onBlur={handleBlur}
           error={errors.email}
         />
         <InputField
@@ -81,7 +97,6 @@ const Login = () => {
           type="password"
           value={formData.password}
           onChange={handleChange}
-        //   onBlur={handleBlur}
           error={errors.password}
         />
         <div>
@@ -93,11 +108,10 @@ const Login = () => {
     );
   };
   
+  const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/;
   const validationSchema = Yup.object({
-    name: Yup.string().required('name is required').max(15,'name should be between 5 to 15 charrecters').min(5,'mame should be between 5 to 15 charrecters'),
     password: Yup.string().required('Password is required').matches( /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]/,'password required tleast one uppercase, one lowercase, one special charrecters and one number'),
-    email: Yup.string().required('email is required').email('enter valid email'),
-        phoneNumber: Yup.string().required('phone number is required'),
+    email: Yup.string().required('email is required').matches(emailRegex, 'Enter a valid email address'),
 
   });
   

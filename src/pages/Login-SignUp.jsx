@@ -41,15 +41,7 @@ const LoginSignUp = () => {
     {routeParams==='/login-signup' && <LoginOrSignUp/>}
     {routeParams==='/otp-verification' && <Otp/>}
     {routeParams==='/signup' && <SignUp/>}
-    {/* {routeParams==='/login-signup' &&} */}
-  {/* <div ref={loginSignUpRef}><LoginOrSignUp onClickFunc={scrollToComponent} signUpRef={signUpRef}/></div>
-  {routeParams==='/signup' && <div ref={signUpRef}><SignUp /></div>} */}
-   {/* <Routes>
-      <Route path="/login-signup" element={<LoginOrSignUp/>} />
-      <Route path="/signup" element={<SignUp/>} />
-      <Route path="/login" element={<SignUp/>} />
-    </Routes> */}
-    
+    {routeParams==='/login' && <Login/>}
   </div>
   </div>
   )

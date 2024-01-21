@@ -19,11 +19,11 @@
         height: 60px;
     }
     &>.getOtp-btn--normal {
-        background: var(--Button2, #DB4444);
+        background: $primary-btn-red;
         cursor: pointer;
     }
     &>.getOtp-btn--disabled {
-        background-color: grey;
+        background-color: $Disabled-background;
         cursor: not-allowed;
     }
 }
