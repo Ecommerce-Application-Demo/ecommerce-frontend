@@ -1,8 +1,18 @@
-import React from 'react'
-import { AccountLogo, Cart, MyntraLogo, SearchLogo, Wishlist } from '../assets/icons'
+import React, { useState } from 'react'
+import { AccountLogo, AccountLogoActive, Cart, MyntraLogo, SearchLogo, Wishlist } from '../assets/icons'
 import { Link,useLocation } from 'react-router-dom'
+import AccountDropdown from '../small-components/AccountDropdown';
 const Navbar = () => {
   const routeLocation = useLocation().pathname;
+  const [showDropDown,setShowDropdown]=useState(false);
+
+const handleMouseEnter=()=>{
+  setShowDropdown(true);
+};
+const handleMouseLeave=()=>{
+  setShowDropdown(false);
+}
+
   return (
     <div className='navbar-container'>
       <Link className='navbar-logo-container' to='/'><MyntraLogo/></Link>
@@ -17,9 +27,13 @@ const Navbar = () => {
         <SearchLogo/>
       </div>
       <div className='navbar-right-container'>
-        <Wishlist/>
-        <Cart/>
-        <AccountLogo/>
+        <Link to='/wishlist'><div><Wishlist/></div></Link>
+        <Link to='/cart'><div><Cart/></div></Link>
+        <div className='navbar-account-logo-wrapper' onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+          {!showDropDown ?<AccountLogo /> :
+          <AccountLogoActive />}
+          {showDropDown &&<div className='navbar-account-dropdown-wrapper' onMouseEnter={handleMouseEnter}><AccountDropdown/></div>}
+          </div> 
       </div>
     </div>
   )

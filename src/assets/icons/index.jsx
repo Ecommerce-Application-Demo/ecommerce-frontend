@@ -5,4 +5,9 @@ export {default as Cart} from './cart';
 export {default as GoogleIcon} from './googleIcon';
 export {default as AccountLogo} from './accountLogo';
 export {default as GreenTick} from './greenTick';
+export {default as AccountLogoActive} from './accountLogoActive';
+export {default as OrderLogo} from './orderLogo';
+export {default as CancelationLogo} from './cancelationLogo';
+export {default as ReviewsLogo} from './ReviewsLogo';
+export {default as LogoutLogo} from './logoutLogo';
 

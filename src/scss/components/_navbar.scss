@@ -64,5 +64,14 @@
         justify-content: center;
         align-items: center;
         gap: 16px;
+        &>div{
+            cursor: pointer;
+        }
+
+        &>.navbar-account-logo-wrapper {
+        //    border: 1px solid black;
+           position: relative;
+        //    cursor: pointer;
+        }
     }
 }

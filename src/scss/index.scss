@@ -9,10 +9,14 @@
 //small components
 @import 'small-components/inputField';
 @import 'small-components/loading-screen';
+@import 'small-components/accountDropdown';
 
 //pages import
 @import 'sections/home';
 @import 'sections/login-signup';
 @import 'sections/notFound';
+
+//nested component import
+@import 'nested_pages/account-imformation-page';
 
 @import 'utilites/variables';
