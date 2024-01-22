@@ -1,0 +1,41 @@
+.accountDropdown-container {
+    position: absolute;
+    top: 35px;
+    right: -8px;
+    display: flex;
+    cursor: default;
+    padding: 18px 12px 20px 20px;
+    justify-content: flex-start;
+    width: 250px;
+    align-items: center;
+    background: $Black-opacity-0_5;
+    box-shadow: 0 8px 32px 0 $Box-shadow-blue;
+    backdrop-filter: blur( 5px );
+    -webkit-backdrop-filter: blur( 11.5px );
+    border-radius: 10px;
+// border: 1px solid rgba( 255, 255, 255, 0.18 );
+
+&>.accountDropdown-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    list-style: none;
+    // justify-content: right;
+    &>.accountDropdown-link {
+        text-decoration: none;
+    }
+    & li {
+        color: $White;
+        align-items: center;
+        display: flex;
+        gap: 15px;
+        cursor: pointer;
+        transition: all 0.15s linear;
+        &:hover {
+            color: $Input-normal-background;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    }
+}
+}

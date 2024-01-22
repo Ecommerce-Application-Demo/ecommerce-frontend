@@ -8,6 +8,8 @@ import NotFound from './pages/Not-found';
 import LoadingScreen from './small-components/Loading-screen';
 import LoginOrSignUp from './components/LoginOrSignUp';
 import Login from './components/Login';
+import AccountImformation from './nested_pages/Account-imformation-page';
+import AddreessPage from './pages/Address-page';
 function App() {
   return (
     <BrowserRouter>
@@ -19,6 +21,13 @@ function App() {
       <Route path="/otp-verification" element={<LoginSignUp/>} />
       <Route path='/login' element={<LoginSignUp />}/>
       <Route path='/loading' element={<LoginSignUp />}/>
+      <Route path='/my' element={<AccountImformation/>}/>
+      <Route path='/my/address' element={<AccountImformation/>}/>
+      <Route path='/my/profile' element={<AccountImformation/>}/>
+      <Route path='/my/return' element={<AccountImformation/>}/>
+      <Route path='/my/cancelation' element={<AccountImformation/>}/>
+      <Route path='/my/order' element={<AccountImformation/>}/>
+      <Route path='/my/payment' element={<AccountImformation/>}/>
       <Route path='*' element={<NotFound/>}/>
     </Routes>
     </BrowserRouter>

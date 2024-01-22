@@ -1,0 +1,57 @@
+.account-imformation-container {
+    margin: 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    & >.account-imformation-roadmap-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        &> .account-imformation-roadmap{
+            display: flex;
+            flex-direction: row;
+            gap: 12px;
+            align-items: center;
+            &>span {
+                cursor: pointer;
+            }
+        }
+        & .login-account-name {
+            color: $primary-btn-red;
+            font-size: 22px;
+            font-weight: 400;
+        }
+    }
+    &>.account-imformation-main-container {
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+        &>.account-imformation-sidebar-container {
+            padding-right: 40px;
+            padding-bottom: 40px;
+            width: fit-content;
+            border-right: 1px solid $Grey;
+            &>.account-imformation-sidebar-wrapper {
+                margin-top: 15px;
+                &>.sidebar-dt-active {
+                    color:$primary-btn-red;
+                }
+                &>dt {
+                    font-weight: bold;
+                }
+                &>dd {
+                    margin:15px 0px 0px 30px;
+                    font-size: 14px;
+                    cursor: pointer;
+                }
+                &> .sidebar-subchild-non-active {
+                    color: $Grey;
+                }
+                &>.sidebar-subchild-active {
+                    color: $primary-btn-red;
+                }
+            }
+        }
+    }
+}
