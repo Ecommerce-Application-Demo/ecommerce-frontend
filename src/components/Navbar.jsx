@@ -27,8 +27,8 @@ const handleMouseLeave=()=>{
         <SearchLogo/>
       </div>
       <div className='navbar-right-container'>
-        <div><Wishlist/></div>
-        <div><Cart/></div>
+        <Link to='/wishlist'><div><Wishlist/></div></Link>
+        <Link to='/cart'><div><Cart/></div></Link>
         <div className='navbar-account-logo-wrapper' onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
           {!showDropDown ?<AccountLogo /> :
           <AccountLogoActive />}

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
-import React, { useState } from 'react'
-import { useNavigate,useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { useNavigate,useLocation,Link } from 'react-router-dom';
 import AddreessPage from '../pages/Address-page';
 import ProfilePage from '../pages/Profile-page';
 import OrderPage from '../pages/Order-page';
@@ -10,13 +10,40 @@ import PaymentPage from '../pages/Payment-page';
 
 const AccountImformation = () => {
     const [selectedDiv, setSelectedDiv]=useState(null);
-    let route = useLocation().pathname;
+    const [pageName,setPageName]=useState('Manage Your Account');
+    const route = useLocation().pathname;
     const navigate=useNavigate();
     
+    useEffect(()=>{
+        switch (route) {
+            case '/my/profile':
+                    setPageName('Profile')
+                break;
+            case '/my/address':setPageName('Address')
+                break;
+                case '/my/order':
+                    setPageName('Order')
+                break;
+                case '/my/return':
+                    setPageName('Return')
+                break;
+                case '/my/cancelation':
+                    setPageName('Cancelations')
+                break;
+                case '/my/payment':
+                    setPageName('Payment')
+                break;
+            default:
+                break;
+        }
+    },[route]);
+
+
     const handleClick=(index)=>{
         setSelectedDiv(index);
         navigate(`/my/${index}`)
     };
+
 
     const subProfileChildStyles=classNames({
         'sidebar-subchild-non-active':route!=='/my/profile',
@@ -38,18 +65,24 @@ const AccountImformation = () => {
         'sidebar-subchild-non-active':route!=='/my/cancelation',
         'sidebar-subchild-active':route==='/my/cancelation',
     });
+    const subOrderChildStyles=classNames({
+        'sidebar-subchild-non-active':route!=='/my/order',
+        'sidebar-subchild-active':route==='/my/order',
+    });
     const manageMyAccStyles=classNames({
-        // 'sidebar-subchild-non-active':route!=='/my/cancelation',
         'sidebar-dt-active':route==='/my/profile' || route==='/my/address' || route==='/my/payment',
+    });
+    const orderHistoryStyles=classNames({
+        'sidebar-dt-active':route==='/my/order' || route==='/my/cancelation' || route==='/my/return',
     });
 
   return (
     <div className='account-imformation-container'>
         <div className='account-imformation-roadmap-wrapper'>
             <div className='account-imformation-roadmap'>
-            <span>Home</span>
+            <Link to='/' className='link-under-roadmap'><span>Home</span></Link>
             <span>/</span>
-            <span>My Account</span>
+            <Link to={`${route}`}  className='link-under-roadmap'><span>{pageName}</span></Link>
             </div>
             <div>
               Welcome! <span className='login-account-name'>Kingshuk Roy</span>
@@ -64,12 +97,10 @@ const AccountImformation = () => {
                 <dd className={subPaymentChildStyles} name='payment' onClick={() => handleClick('payment')}>My Payment Options</dd>
             </dl>
             <dl className='account-imformation-sidebar-wrapper'>
-                <dt> My Orders</dt>
+                <dt className={orderHistoryStyles}> My Orders History</dt>
+                <dd className={subOrderChildStyles} name='order' onClick={() => handleClick('order')}>My Orders</dd>
                 <dd className={subReturnChildStyles} name='return' onClick={() => handleClick('return')}>My Returns</dd>
                 <dd className={subCancelationChildStyles} name='cancelation' onClick={() => handleClick('cancelation')}>My Cancelations</dd>
-            </dl>
-            <dl className='account-imformation-sidebar-wrapper'>
-                <dt>My Wishlists</dt>
             </dl>
         </div>
         <div className="account-imformation-right-sidebar-container">

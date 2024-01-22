@@ -13,8 +13,21 @@
             flex-direction: row;
             gap: 12px;
             align-items: center;
-            &>span {
-                cursor: pointer;
+
+            &>.link-under-roadmap {
+                text-decoration: none;
+                &>span {
+                    cursor: pointer;
+                    color: $Grey;
+                }
+            }
+            &>.link-under-roadmap:last-child {
+                text-decoration: none;
+                &>span {
+                    cursor: pointer;
+                    color: $primary-btn-red;
+                    font-weight: 800;
+                }
             }
         }
         & .login-account-name {
