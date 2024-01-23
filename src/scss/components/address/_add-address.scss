@@ -1,0 +1,15 @@
+.addAddress-main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &>.addAdress-pincode-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+       &:only-child{
+        width: 70%;
+       }
+    }
+}

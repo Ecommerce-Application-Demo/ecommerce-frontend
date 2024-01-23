@@ -1,0 +1,25 @@
+.address-main-container {
+    width: 60vw;
+.address-title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    &> .address-add-address-btn {
+        height: 50px;
+        width: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1.5px solid $primary-btn-red;
+        color: $primary-btn-red;
+        border-radius: 4px;
+        transition: all 0.3s linear;
+        cursor: pointer;
+        &:hover {
+            background-color: $primary-btn-red;
+            color: $White;
+        }
+    }
+}
+}

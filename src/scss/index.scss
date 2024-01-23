@@ -5,6 +5,8 @@
 @import 'components/signUp';
 @import 'components/loginOrSignup';
 @import 'components/otp';
+@import 'components/address/add-address';
+
 
 //small components
 @import 'small-components/inputField';
@@ -16,6 +18,7 @@
 @import 'sections/home';
 @import 'sections/login-signup';
 @import 'sections/notFound';
+@import 'sections/address';
 
 //nested component import
 @import 'nested_pages/account-imformation-page';

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import { createPortal } from 'react-dom';
 import { CrossSymbol } from '../assets/icons';
 import classNames from 'classnames';
 
@@ -44,63 +45,55 @@ const Modal = ({ onClose, children, height, width, widthForMobile, widthForTab, 
   }, [onClose]);
 
   useEffect(() => {
+    // Disable scrolling on the body when the modal is open
     document.body.style.overflow = 'hidden';
 
     return () => {
-      document.body.style.overflow = ''; // Re-enable scrolling when modal is closed
+      // Re-enable scrolling when modal is closed
+      document.body.style.overflow = '';
     };
   }, []);
 
   const screenWidth_mobile = dimensions.width < 480;
   const screenWidth_tab = dimensions.width < 768 && dimensions.width > 480;
-  
-//   const screenHeight_mobile = dimensions.height < 480;
-//   const screenHeight_tab = dimensions.he < 768 && dimensions.width > 480;
 
-
- const handleWidth = () => {
-  if (screenWidth_mobile) {
-    return widthForMobile || widthForTab || width;
-  } else if (screenWidth_tab) {
-    return widthForTab || width;
-  } else {
-    return width;
-  } 
-};
-
-// const handleHeight = () => {
-//     if (height && height) {
-//       return widthForMobile || widthForTab || width;
-//     } else if (screenWidth_tab) {
-//       return widthForTab || width;
-//     } else {
-//       return width;
-//     } 
-//   };
-
+  const handleWidth = () => {
+    if (screenWidth_mobile) {
+      return widthForMobile || widthForTab || width;
+    } else if (screenWidth_tab) {
+      return widthForTab || width;
+    } else {
+      return width;
+    }
+  };
 
   const divStyle = {
-    height: height,  
+    height: height,
     width: handleWidth(),
     overflow: 'auto',
   };
 
   const titleStyle = classNames({
-    'modal-title-container':true,
+    'modal-title-container': true,
     'modal-title-container-title-present': title,
-  })
+  });
 
-  return (
-    <div style={divStyle} className='modal-container' ref={containerRef}>
+  // Use createPortal to render the modal outside the normal DOM hierarchy
+  return createPortal(
+    <>
+      {/* Backdrop to disable background interactions */}
+      <div className="modal-backdrop"></div>
+      <div style={divStyle} className='modal-container' ref={containerRef}>
         <div className={titleStyle}>
-            <p>{title}</p>
-      <div className='close-button' onClick={onClose}>
-       <CrossSymbol/>
-      </div>
-
+          {title && <p>{title}</p>}
+          <div className='close-button' onClick={onClose}>
+            <CrossSymbol />
+          </div>
         </div>
-      {children}
-    </div>
+        <div className="modal-content">{children}</div>
+      </div>
+    </>,
+    document.body // Render the modal as a child of the body
   );
 };
 
@@ -109,40 +102,11 @@ Modal.propTypes = {
   children: PropTypes.node.isRequired,
   height: PropTypes.string,
   heightForTab: PropTypes.string,
-  heightForMobile:PropTypes.string,
-  width:PropTypes.string.isRequired,
-  widthForMobile:PropTypes.string,
-  widthForTab:PropTypes.string,
+  heightForMobile: PropTypes.string,
+  width: PropTypes.string.isRequired,
+  widthForMobile: PropTypes.string,
+  widthForTab: PropTypes.string,
   title: PropTypes.string.isRequired,
 };
 
 export default Modal;
-
-
-
-//steps to use this modal-global
-
-// const [isModalOpen, setIsModalOpen] = useState(true);
-
-//   const handleOpenModal = () => {
-//     setIsModalOpen(true);
-//   };
-
-//   const handleCloseModal = () => {
-//     setIsModalOpen(false);
-//   };
-//   return (
-//     <div>
-//       <button onClick={handleOpenModal}>Open Modal</button>
-//       {isModalOpen && (
-//         <Modal onClose={handleCloseModal} width='500px' widthForTab='400px' widthForMobile='100px' title='edit address' height='600px'>
-//           Your custom content goes here 
-//           <h2>Hello, this is my modal content!</h2>
-//           <p>Feel free to add any React components or HTML content.</p>
-//           <div style={{textAlign:'center'}}>hii all</div>
-//           <Login/>
-//         </Modal>
-//        )}
-//     </div>
-//   );
-// }

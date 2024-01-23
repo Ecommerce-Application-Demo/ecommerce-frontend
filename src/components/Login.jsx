@@ -35,14 +35,14 @@ const Login = () => {
           [name]: value,
         }));
     
-        // Validate the field using Yup
+        // Validation
         Yup
           .reach(validationSchema, name)
           .validate(value)
           .then(() => {
             setErrors((prevErrors) => ({
               ...prevErrors,
-              [name]: '', // Clear the error if validation passes
+              [name]: '', 
             }));
           })
           .catch((error) => {
