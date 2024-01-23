@@ -10,4 +10,5 @@ export {default as OrderLogo} from './orderLogo';
 export {default as CancelationLogo} from './cancelationLogo';
 export {default as ReviewsLogo} from './ReviewsLogo';
 export {default as LogoutLogo} from './logoutLogo';
+export {default as CrossSymbol} from './crossSymbol';
 

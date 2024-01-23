@@ -1,0 +1,37 @@
+.modal-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    // text-align: center;
+    padding: 0px 20px 20px 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 0 0 50vmax  rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    border-radius: 6px;
+    &> .modal-title-container-title-present {
+        border-bottom: 1px solid $Grey;
+    }
+    &>.modal-title-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        background-color: #fff; /* Set background color as needed */
+        z-index: 1001; /* Higher than the modal content */
+        padding: 10px; /* Add padding for better appearance */
+        padding-top:16px;
+        margin-bottom: 20px;
+        &>p {
+            color: $primary-btn-red;
+            font-size: 25px;
+            padding-left: 5px;
+        }
+        &>.close-button {
+            cursor: pointer;
+        }
+    }
+}
