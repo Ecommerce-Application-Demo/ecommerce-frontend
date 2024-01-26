@@ -1,7 +1,7 @@
 .addAddress-main-container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
 
     &>.addAdress-pincode-wrapper {
         display: flex;
@@ -11,5 +11,23 @@
        &:only-child{
         width: 70%;
        }
+    }
+    &>.addAddress-btn-footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 10px;
+        &>div {
+            width: 100%;
+            display: flex;
+            padding: 16px 48px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            border-radius: 4px;
+            background: var(--Button2, #DB4444);
+            color: white;
+            cursor: pointer;
+        }
     }
 }

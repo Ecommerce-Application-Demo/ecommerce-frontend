@@ -4,6 +4,7 @@ import AddAddress from '../components/address/add-address';
 
 const AddreessPage = () => {
 const [showAddModal,setShowAddModal]=useState(false);
+const [addressData,setAddressData]=useState([]);
 const handleClickAddAddress = () => {
   setShowAddModal(true)
 }
@@ -12,9 +13,9 @@ const handleClickAddAddress = () => {
       <div className='address-title-container'>
         <h3>Saved Addresses</h3>
         <div className='address-add-address-btn' onClick={handleClickAddAddress}>+ ADD NEW ADDRESS</div>
-        {showAddModal && <AddAddress showAddModal={showAddModal} setShowAddModal={setShowAddModal}/>}
+        {showAddModal && <AddAddress showAddModal={showAddModal} setShowAddModal={setShowAddModal} addressData={addressData} setAddressData={setAddressData}/>}
       </div>
-      <ViewAddress/>
+      <ViewAddress addressData={addressData}/>
     </div>
   )
 }
