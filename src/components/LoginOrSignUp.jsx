@@ -1,12 +1,23 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import InputField from '../small-components/InputField'
 import * as Yup from 'yup';
 import LoadingScreen from '../small-components/Loading-screen';
 import { Link, useNavigate } from 'react-router-dom';
 import Otp from './Otp';
 import classNames from 'classnames';
+import { useDispatch, useSelector } from 'react-redux';
+import userSlice from '../redux/Slices/userSlice';
+import { isEmailExist } from '../api/userApi';
+import { generateOtp } from '../api/otpApi';
 
 const LoginOrSignUp = ({}) => {
+  //redux state
+    const dispatch = useDispatch();
+    const data =useSelector((state)=>{
+      return state.otp;
+    })
+    const {sending,email,otpSend,error} = data;
+
     const [formData, setFormData] = useState({
         email:'',
       });
@@ -22,20 +33,18 @@ const LoginOrSignUp = ({}) => {
       const handleChange = (e) => {
         const { name, value } = e.target;
     
-        // Update form data
         setFormData((prevData) => ({
           ...prevData,
           [name]: value,
         }));
     
-        // Validate the field using Yup
         Yup
           .reach(validationSchema, name)
           .validate(value)
           .then(() => {
             setErrors((prevErrors) => ({
               ...prevErrors,
-              [name]: '', // Clear the error if validation passes
+              [name]: '', 
             }));
           })
           .catch((error) => {
@@ -46,20 +55,31 @@ const LoginOrSignUp = ({}) => {
           });
       };
 
-      const history = useNavigate();
-    
-      const handleSubmit = (e) => {
+      const navigate = useNavigate();
+
+   useEffect(()=>{
+    sending && setButtonText('sending...');
+    error && setButtonText(error);
+
+   },[sending,error]);
+      const handleSubmit = async(e) => {
         e.preventDefault();
-    
+        console.log('data',data);
         validationSchema
           .validate(formData, { abortEarly: false })
           .then(() => {
-            console.log('Form is valid:', formData);
             setIsLoading(true);
-            setButtonText('sent');
-            setTimeout(() => {
-              history(`/otp-verification?email=${formData.email}`)
-            }, 2000);
+            let data = {
+              input:formData.email
+            }
+            dispatch(generateOtp(data)).then((result)=>{
+             console.log('result.payload'+ result.payload);
+             if (otpSend) {
+              setTimeout(() => {
+                navigate(`/otp-verification?email=${formData.email}`);
+              }, 2000);
+            }
+            });
           })
           .catch((validationErrors) => {
             const newErrors = {};
@@ -73,7 +93,7 @@ const LoginOrSignUp = ({}) => {
       const otpBtn = classNames({
         'getOtp-btn':true,
         'getOtp-btn--normal':buttonText!=='sent',
-        'getOtp-btn--disabled':buttonText==='sent',
+        // 'getOtp-btn--disabled':buttonText==='sent',
       })
     
   return (
