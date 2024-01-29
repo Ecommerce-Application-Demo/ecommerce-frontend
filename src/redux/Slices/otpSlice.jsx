@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import { generateOtp } from '../../api/otpApi';
+import { generateOtp } from '../../api/asyncThunk/otpApi';
 
 
 const initialState = {
@@ -11,6 +11,14 @@ const initialState = {
 const otpSlice = createSlice({
     name: 'OTP',
     initialState:initialState,
+    reducers:{
+        resetOTP:(state)=>{
+            state.sending = false
+            state.email = ''
+            state.otpSend = false
+            state.error = ''
+        }
+    },
     extraReducers:(builder)=>{
         builder
         .addCase(generateOtp.pending,(state,action)=>{
@@ -33,3 +41,4 @@ const otpSlice = createSlice({
     }
 })
 export default otpSlice.reducer;
+export const {resetOTP} =otpSlice.actions;

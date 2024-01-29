@@ -3,14 +3,28 @@ import * as Yup from 'yup';
 import InputField from '../small-components/InputField';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { GoogleIcon } from '../assets/icons';
+import { useDispatch, useSelector } from 'react-redux';
+import userApi from '../api/asyncThunk/userApi';
+import ToastMessageWIthUpdatedState, { ToastErrorWithUpdatedState } from '../Toast/ToastMessageWIthUpdatedState';
+import { toast } from 'react-toastify';
 const Login = () => {
+  const { login } = userApi;
+    const dispatch = useDispatch();
+  const data =useSelector((state)=>state.user);
+
+  const {
+    msg,
+    isSuccess,
+    isLoggedIn,
+  } = data;
+
     const location=useLocation();
     const {id}=location.state || {};
     const navigate=useNavigate();
     
     const [formData, setFormData] = useState({
       password: '',
-      email:'',
+      email:id ? id : '',
     });
   
     const [errors, setErrors] = useState({
@@ -18,13 +32,12 @@ const Login = () => {
       email:'',
     });
 
-    useEffect(() => {
-      setFormData((prevData) => ({
-        ...prevData,
-        email: id || '',
-      }));
-    }, [id]);
-    
+
+    useEffect(()=>{
+      if(msg && isLoggedIn) {
+        navigate('/')
+      }
+    },[msg,isLoggedIn]);
   
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -54,27 +67,45 @@ const Login = () => {
       };
     
   
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      console.log(formData);
-      validationSchema
-        .validate(formData, { abortEarly: false })
-        .then(() => {
-          console.log('Form is valid:', formData);
-          console.log('validate');
-          setTimeout(()=>{
-            navigate('/');
-          },2000);
-        })
-        .catch((validationErrors) => {
-          const newErrors = {};
-          console.log('error');
-          validationErrors.inner.forEach((error) => {
-            newErrors[error.path] = error.message;
-          });
-          setErrors(newErrors);
-        });
-    };
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+          await validationSchema.validate(formData, { abortEarly: false });
+      
+          const dataToBePost = {
+            email: formData.email,
+            password: formData.password
+          };
+      
+          await toast.promise(
+            dispatch(login(dataToBePost)),
+            {
+              pending: {
+                render: 'Logging in...',
+                type: 'info'
+              },
+              success: {
+                render: () => <ToastMessageWIthUpdatedState />,
+                type: 'success'
+              },
+              error: {
+                render: () => <ToastErrorWithUpdatedState />,
+                type: 'error'
+              }
+            }
+          );
+        } catch (error) {
+          // Handle validation errors
+          if (error.name === 'ValidationError') {
+            const newErrors = {};
+            error.inner.forEach((err) => {
+              newErrors[err.path] = err.message;
+            });
+            setErrors(newErrors);
+          }
+        }
+      };
+      
   
     return (
         <div>

@@ -1,15 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { isEmailExist } from '../api/userApi';
+import { Link } from 'react-router-dom';
 const Home = () => {
-    const data =useSelector((state)=>{
-      return state.user;
-    })
+    const user =useSelector((state)=>state.user)
+    const {
+      isLoggedIn,
+      loggedInUserName,
+    } = user;
+
+    useEffect(()=>{
+
+    },[isLoggedIn]);
     const dispatch = useDispatch()
-    console.log(`data is coming from home page ${data.existEmail}`);
   return (
    <div className='home'>hi
-   <button onClick={()=>{dispatch(isEmailExist('hii'))}}>click me</button>
+   {isLoggedIn ?
+    <h1 style={{textAlign:'center', verticalAlign:'middle',marginTop:'100px'}}>Wecome {loggedInUserName}</h1>
+    :
+    <Link to='/login-signup' style={{textAlign:'center', verticalAlign:'middle',marginTop:'100px',textDecoration:'none'}}><h1 >KINDLY LOGIN</h1></Link>
+   }
    </div>
   )
 }

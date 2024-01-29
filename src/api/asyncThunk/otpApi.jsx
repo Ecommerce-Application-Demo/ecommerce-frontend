@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
-import { hostname } from './utilites';
+import { hostname } from '../utilites';
 
 export const generateOtp = createAsyncThunk (
     'OTP_GENERATE',

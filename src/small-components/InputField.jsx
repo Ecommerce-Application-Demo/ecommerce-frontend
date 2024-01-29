@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { GreenTick } from '../assets/icons';
 import classNames from 'classnames';
 
-const InputField = ({ label, name, type = 'text', value, onChange, error, disabled = false, isRequired = false }) => {
+const InputField = ({ label, name, type = 'text', value, onChange, error, disabled = false, isRequired = false, maxLength='' }) => {
   const [focus, setFocus] = useState(false);
   const [hasContent, setHasContent] = useState(false);
 
@@ -59,6 +59,7 @@ const InputField = ({ label, name, type = 'text', value, onChange, error, disabl
           autoComplete="off"
           type={type}
           disabled={disabled}
+          maxLength={maxLength}
           id={name}
           name={name}
           onFocus={handleFocus}
