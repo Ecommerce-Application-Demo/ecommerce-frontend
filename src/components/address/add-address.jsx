@@ -4,7 +4,6 @@ import InputField from '../../small-components/InputField'
 import * as yup from 'yup';
 const AddAddress = (props) => {
     const {
-        showAddModal,
         setShowAddModal,
         addressData,
         setAddressData,

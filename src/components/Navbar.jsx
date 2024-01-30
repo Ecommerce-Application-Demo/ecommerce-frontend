@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { AccountLogo, AccountLogoActive, Cart, MyntraLogo, SearchLogo, Wishlist } from '../assets/icons'
 import { Link,useLocation } from 'react-router-dom'
 import AccountDropdown from '../small-components/AccountDropdown';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 const Navbar = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   
   const isLoggedIn = useSelector((state)=>{
     return state.user.isLoggedIn;

@@ -1,7 +1,7 @@
 import React, { useRef,useEffect } from 'react'
 import loginPicture from '../assets/pictures/dl.beatsnoop 1.png';
 import SignUp from '../components/SignUp';
-import { useParams,useLocation, Link, Routes, Route } from 'react-router-dom';
+import {useLocation } from 'react-router-dom';
 import Login from '../components/Login';
 import LoginOrSignUp from '../components/LoginOrSignUp';
 import Otp from '../components/Otp';

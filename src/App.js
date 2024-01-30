@@ -1,15 +1,10 @@
 import './app.scss'
 import Navbar from './components/Navbar';
-import SignUp from './components/SignUp';
 import Home from './pages/Home';
 import LoginSignUp from './pages/Login-SignUp';
 import {Routes, BrowserRouter, Route} from 'react-router-dom';
 import NotFound from './pages/Not-found';
-import LoadingScreen from './small-components/Loading-screen';
-import LoginOrSignUp from './components/LoginOrSignUp';
-import Login from './components/Login';
 import AccountImformation from './nested_pages/Account-imformation-page';
-import AddreessPage from './pages/Address-page';
 function App() {
   return (
     <BrowserRouter>

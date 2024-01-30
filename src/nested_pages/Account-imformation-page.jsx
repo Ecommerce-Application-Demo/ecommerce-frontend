@@ -9,7 +9,7 @@ import CancelationPage from '../pages/Cancelation-page';
 import PaymentPage from '../pages/Payment-page';
 
 const AccountImformation = () => {
-    const [selectedDiv, setSelectedDiv]=useState(null);
+    // const [selectedDiv, setSelectedDiv]=useState(null);
     const [pageName,setPageName]=useState('Manage Your Account');
     const route = useLocation().pathname;
     const navigate=useNavigate();
@@ -40,7 +40,6 @@ const AccountImformation = () => {
 
 
     const handleClick=(index)=>{
-        setSelectedDiv(index);
         navigate(`/my/${index}`)
     };
 

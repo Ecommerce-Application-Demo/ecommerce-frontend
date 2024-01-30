@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 import InputField from '../small-components/InputField';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { GoogleIcon } from '../assets/icons';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import userApi from '../api/asyncThunk/userApi';
-import ToastMessageWIthUpdatedState, { ToastErrorWithUpdatedState } from '../Toast/ToastMessageWIthUpdatedState';
 import { toast } from 'react-toastify';
 import LoadingScreen from '../small-components/Loading-screen';
-import Toast from '../small-components/GlobalToast';
-import { reset } from '../redux/Slices/userSlice';
-import { unwrapResult } from '@reduxjs/toolkit';
 
 const Login = () => {
   const { login } = userApi;
@@ -43,7 +38,7 @@ const Login = () => {
     if (msg && isLoggedIn) {
       navigate('/');
     }
-  }, [msg, isLoggedIn, error, isLoading]);
+  }, [msg, isLoggedIn, error, isLoading,navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

@@ -2,13 +2,11 @@ import React, { useEffect, useState } from 'react';
 import InputField from '../small-components/InputField';
 import * as Yup from 'yup';
 import LoadingScreen from '../small-components/Loading-screen';
-import { Link, useNavigate } from 'react-router-dom';
-import Otp from './Otp';
+import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
-import userSlice, { reset } from '../redux/Slices/userSlice';
+import  { reset } from '../redux/Slices/userSlice';
 import userApi from '../api/asyncThunk/userApi';
-import { generateOtp } from '../api/asyncThunk/otpApi';
 import { toast } from 'react-toastify';
 
 
@@ -80,7 +78,7 @@ const LoginOrSignUp = () => {
         dispatch(reset());
       }, 5000);
     }
-  }, [existEmail, isSuccess, isLoading,msg]);
+  }, [existEmail, isSuccess, isLoading,msg,dispatch,formData.email,navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

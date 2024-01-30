@@ -6,7 +6,6 @@ import { GoogleIcon } from '../assets/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import userApi from '../api/asyncThunk/userApi';
 import { toast } from 'react-toastify';
-import ToastMessageWIthUpdatedState, { ToastErrorWithUpdatedState } from '../Toast/ToastMessageWIthUpdatedState';
 import LoadingScreen from '../small-components/Loading-screen';
 
 
@@ -42,9 +41,9 @@ const SignUp = () => {
 
     useEffect(()=>{
       if(isLoggedIn) {
-        navigate('/')
+       navigate('/');
       }
-    },[msg,isLoggedIn,isLoading]);
+    },[msg,isLoggedIn,isLoading,navigate]);
   
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -100,7 +99,7 @@ const SignUp = () => {
                 type: 'success'
               },
               error: {
-                render: () => <ToastErrorWithUpdatedState/>,
+                render: () => 'some error occured',
                 type: 'error'
               }
             }

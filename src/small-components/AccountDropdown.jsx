@@ -1,13 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { AccountLogo, CancelationLogo, LogoutLogo, OrderLogo, ReviewsLogo } from '../assets/icons';
-import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import userApi from '../api/asyncThunk/userApi';
 import { toast } from 'react-toastify';
 import { reset } from '../redux/Slices/userSlice';
 
 const AccountDropdown = () => {
-  const routeLocation = useLocation().pathname;
   const navigate = useNavigate()
   const {logout} = userApi;
   const dispatch = useDispatch();

@@ -1,8 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import axios from 'axios';
-import {hostname} from '../utilites';
 import authService from '../services/authService';
-import { useSelector } from 'react-redux';
 
 // const Token =()=>{
 //     const data =useSelector((state)=>{

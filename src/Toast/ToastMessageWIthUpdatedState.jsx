@@ -1,6 +1,4 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
 
 const ToastMessageWIthUpdatedState = () => {
   const msg = useSelector(state => state.user.msg);
