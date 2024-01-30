@@ -1,0 +1,76 @@
+.toast {
+    position: fixed;
+    z-index: 1000;
+    padding: 15px 25px;
+    min-width: 300px;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(-50px);
+    animation: fadeInUp 0.5s forwards;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    50% {
+        transform: translateX(-40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(50px)
+    }
+    to {
+        opacity: 0;
+        transform: translateY(100px)
+    }
+}
+
+.success {
+    background-color: #28a745;
+}
+
+.warning {
+    background-color: #ffc107;
+}
+
+.info {
+    background-color: #17a2b8;
+}
+
+.error {
+    background-color: #dc3545;
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+}
+
+.toast-title {
+    font-size: 18px;
+    flex-grow: 1;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 0;
+}
+
+.toast.hide {
+    animation: fadeOut 0.5s backwards;
+}

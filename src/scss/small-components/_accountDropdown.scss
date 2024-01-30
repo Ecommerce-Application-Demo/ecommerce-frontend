@@ -21,6 +21,37 @@
     gap: 20px;
     list-style: none;
     // justify-content: right;
+
+    &>.accountDropdown-link-wrapper-nologgedin {
+        text-align: center;
+        color: $White;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        &>p {
+            font-size: 13px;
+        }
+        &>.accountDropdown-link-notlogin {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 30px;
+            width: 80%;
+            border: 1px solid $primary-btn-red;
+            border-radius: 4px;
+            color: white;
+            background-color: $primary-btn-red;
+            padding: 10px;
+            transition: all 0.3s linear;
+
+            &:hover {
+                background-color: $Input-normal-background;
+                color: $Black;
+            }
+        }
+    }
     &>.accountDropdown-link {
         text-decoration: none;
     }
