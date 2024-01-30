@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import userApi from '../api/asyncThunk/userApi';
 import { toast } from 'react-toastify';
 import ToastMessageWIthUpdatedState, { ToastErrorWithUpdatedState } from '../Toast/ToastMessageWIthUpdatedState';
+import LoadingScreen from '../small-components/Loading-screen';
 
 
 const SignUp = () => {
@@ -19,6 +20,7 @@ const SignUp = () => {
   const {
     msg,
     isLoggedIn,
+    isLoading,
   } = user
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,7 +44,7 @@ const SignUp = () => {
       if(isLoggedIn) {
         navigate('/')
       }
-    },[msg,isLoggedIn]);
+    },[msg,isLoggedIn,isLoading]);
   
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -117,6 +119,7 @@ const SignUp = () => {
   
     return (
         <div>
+          {isLoading && <LoadingScreen/>}
             <div className='createAccount-container'>
                 <h1>Create an account</h1>
                 <p>Already have account? <Link to='/login' style={{ color:'inherit'}}>log in</Link></p>

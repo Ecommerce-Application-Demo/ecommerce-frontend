@@ -10,7 +10,7 @@ import userSlice, { reset } from '../redux/Slices/userSlice';
 import userApi from '../api/asyncThunk/userApi';
 import { generateOtp } from '../api/asyncThunk/otpApi';
 import { toast } from 'react-toastify';
-import ToastMessageWIthUpdatedState, { ToastErrorWithUpdatedState, ToastTypeWithUpdatedState } from '../Toast/ToastMessageWIthUpdatedState';
+
 
 const LoginOrSignUp = () => {
   const {
@@ -22,9 +22,8 @@ const LoginOrSignUp = () => {
   const data = useSelector((state) => {
     return state.user;
   });
-  const { isLoading, existEmail, error, isSuccess } = data;
+  const { isLoading, existEmail, error, isSuccess,msg } = data;
 
-  // const msg = useSelector(state => state.user.msg);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -81,7 +80,7 @@ const LoginOrSignUp = () => {
         dispatch(reset());
       }, 5000);
     }
-  }, [existEmail, isSuccess, isLoading]);
+  }, [existEmail, isSuccess, isLoading,msg]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -93,28 +92,11 @@ const LoginOrSignUp = () => {
           input: formData.email
         };
   
-        setButtonText('Checking...'); // Set button text to indicate checking
+        setButtonText('Checking...');
         
-        // Use toast.promise to handle promise state and display appropriate toasts
-        await toast.promise(
-          dispatch(isEmailExist(data)),
-          {
-            pending: {
-              render: 'Checking...', 
-              type: 'info'
-            },
-            success : {
-              render: () => <ToastMessageWIthUpdatedState/>,
-              type: 'success'
-            },
-            error: {
-              render: () => <ToastErrorWithUpdatedState/>,
-              type: 'error'
-            }
-          }
-        );
-  
-        setButtonText('Get OTP'); 
+          dispatch(isEmailExist(data)).then(()=>{
+            setButtonText('Get OTP'); 
+          })
       })
       .catch((validationErrors) => {
         const newErrors = {};
@@ -146,6 +128,10 @@ const LoginOrSignUp = () => {
         className='loginorsignup-input-field'
       />
       <button className={otpBtn} onClick={handleSubmit} disabled={buttonText === 'sent'}>{buttonText}</button>
+      {isLoading && <LoadingScreen/>}
+      {error && toast.error(error)}
+      {isSuccess && toast.success(msg)}
+
     </div>
   );
 };

@@ -1,14 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react';
 
 const LoadingScreen = () => {
-  return (
-    <div className='loading-screen-container'>
-    <div className='circle'></div>
-    <div className='circle'></div>
-    <div className='circle'></div>
-    <div className='circle'></div>
-    </div>
-  )
-}
+  const [loading, setLoading] = useState(false);
 
-export default LoadingScreen
+  const toggleLoading = () => {
+    setLoading(!loading);
+  };
+
+  const handleButtonClick = () => {
+    toggleLoading();
+    // Simulate an asynchronous operation
+    setTimeout(() => {
+      toggleLoading();
+    }, 2000);
+  };
+
+  return (
+    <div>
+        <div className="loading-overlay">
+          <div className="loading-spinner"></div>
+        </div>
+      {/* Your background content */}
+    </div>
+  );
+};
+
+export default LoadingScreen;

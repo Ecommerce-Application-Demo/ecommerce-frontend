@@ -23,10 +23,15 @@ const AccountDropdown = () => {
     let data ={
       input : refreshToken
     } 
-    dispatch(logout(data)).then(()=>{
+    dispatch(logout(data)).then((unwrapResult)=>{
+      console.log(unwrapResult);
+      if(unwrapResult.type === 'LOGOUT/rejected'){
+      toast.error(unwrapResult.payload)
+      }else {
       toast.success('User logged out successfully');
-      dispatch(reset())
       navigate('/')
+    }
+    dispatch(reset())
     })
   }
   return (

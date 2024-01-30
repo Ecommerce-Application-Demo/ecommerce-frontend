@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
+import Toast from '../small-components/GlobalToast';
+import ToastWrapper from '../small-components/GlobalToast';
 const Home = () => {
     const user =useSelector((state)=>state.user)
     const {
@@ -8,10 +10,9 @@ const Home = () => {
       loggedInUserName,
     } = user;
 
-    useEffect(()=>{
-
-    },[isLoggedIn]);
     const dispatch = useDispatch()
+ 
+  
   return (
    <div className='home'>hi
    {isLoggedIn ?

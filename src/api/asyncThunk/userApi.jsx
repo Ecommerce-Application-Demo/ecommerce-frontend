@@ -46,7 +46,8 @@ const login =createAsyncThunk(
         try {
             return await authService.login(data);
         } catch (error) {
-            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+            console.log('error',error);
+            const message = error.response.data || error.message || error.toString()
             return thunkAPI.rejectWithValue(message)
         }
     }
@@ -62,7 +63,7 @@ const logout =createAsyncThunk(
             console.log('jwt', jwtToken);
             return await authService.logout(data,jwtToken);
         } catch (error) {
-            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+            const message = error?.response?.data || error?.message || error?.toString()
             return thunkAPI.rejectWithValue(message)
         }
     }

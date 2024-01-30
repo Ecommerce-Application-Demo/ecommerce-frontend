@@ -95,6 +95,7 @@ const userSlice = createSlice({
       //login reducer
       .addCase(login.pending, (state) => {
         state.isLoading = true;
+        state.error = '';
       })
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
