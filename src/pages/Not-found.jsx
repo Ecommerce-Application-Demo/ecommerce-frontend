@@ -14,6 +14,7 @@ const NotFound = () => {
                 <p>Your visited page not found. You may go home page.</p>
                 <Link to='/'><button className='backBtn'>Back To Home Page</button></Link>
             </div>
+            
     </div>
   )
 }

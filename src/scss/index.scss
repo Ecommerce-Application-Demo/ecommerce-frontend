@@ -1,3 +1,5 @@
+@import 'utilites/variables';
+
 @import 'base/base';
 
 //components
@@ -22,8 +24,7 @@
 @import 'sections/login-signup';
 @import 'sections/notFound';
 @import 'sections/address';
+@import 'sections/footer-page';
 
 //nested component import
 @import 'nested_pages/account-imformation-page';
-
-@import 'utilites/variables';
