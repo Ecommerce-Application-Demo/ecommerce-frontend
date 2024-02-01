@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { AccountLogo, AccountLogoActive, Cart, DesiCartIcon, MyntraLogo, SearchLogo, Wishlist } from '../assets/icons'
+import { AccountLogo, AccountLogoActive, Cart, DesiCartIcon, SearchLogo, Wishlist } from '../assets/icons'
 import { Link,useLocation } from 'react-router-dom'
 import AccountDropdown from '../small-components/AccountDropdown';
 import { useSelector } from 'react-redux';

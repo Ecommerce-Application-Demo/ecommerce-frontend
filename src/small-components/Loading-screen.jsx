@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { DesiCartIconForLoading } from '../assets/icons';
 
 const LoadingScreen = () => {
-  const [dots, setDots] = useState("");
+  // const [dots, setDots] = useState("");
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setDots((prevDots) => {
-        if (prevDots === "...") return "";
-        return prevDots + ".";
-      });
-    }, 500);
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     setDots((prevDots) => {
+  //       if (prevDots === "...") return "";
+  //       return prevDots + ".";
+  //     });
+  //   }, 500);
 
-    return () => clearInterval(intervalId);
-  }, []);
+  //   return () => clearInterval(intervalId);
+  // }, []);
 
   return (
     <div className="loading-overlay">

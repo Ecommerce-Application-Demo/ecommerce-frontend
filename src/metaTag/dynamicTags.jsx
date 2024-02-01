@@ -1,6 +1,5 @@
 import React from "react";
 import {Helmet} from "react-helmet";
-import { DesiCartIcon } from "../assets/icons";
  
 const homeTag = () =>{
     return (

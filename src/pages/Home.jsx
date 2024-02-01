@@ -2,8 +2,6 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import tags from '../metaTag/dynamicTags';
-import { DesiCartIcon } from '../assets/icons';
-import LoadingScreen from '../small-components/Loading-screen';
 const Home = () => {
     const user =useSelector((state)=>state.user)
     const {
