@@ -1,52 +1,3 @@
-// .loading-screen-container {
-//     display: flex;
-//     flex-direction: row;
-//     text-align: center;
-//     vertical-align: middle;
-//     align-items: center;
-//     width: 100%;
-//     // background-color: white;
-//     height: 100%;
-//     // border: 1px solid black;
-//     justify-content: center;
-//     position: absolute;
-//     // top: 40%;
-//     &>.circle {
-//         height: 10%;
-//         width: 5%;
-//         border-radius: 50%;
-//         background-color:$Red;
-//         margin-right: 5%;
-//         animation: bounce 1s infinite;
-//     }
-      
-//       .circle:nth-child(2) {
-//         animation-delay: 0.25s;
-//         background-color: blue;
-//       }
-      
-//       .circle:nth-child(3) {
-//         animation-delay: 0.5s;
-//         background-color: yellow;
-//       }
-      
-//       .circle:nth-child(4) {
-//         animation-delay: 0.75s;
-//         background-color: black;
-//       }
-      
-//       @keyframes bounce {
-//         0%, 100% {
-//           transform: translateY(0);
-//         }
-//         50% {
-//           transform: translateY(-30%);
-//           background-color: aqua;
-//         }
-//       }
-// }
-
-
 .loading-overlay {
   position: fixed;
   top: 0;
@@ -55,44 +6,44 @@
   height: 100%;
   background-color: rgba(255, 255, 255, 0.7);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   z-index: 999;
 }
 
-.loading-spinner {
-  border: 6px solid #f3f3f3;
-  border-top: 6px solid #3498db;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 2s linear infinite;
+.loading-icon {
+  animation: blink 1s infinite alternate;
+  margin-bottom: 10px; /* Adjust this value as needed */
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); 
-  }
-  25% {
-    border-top: 6px solid yellow;
-  }
-  40% {
-    border-top: 6px solid red;
-  }
-  60% {
-    border-top: 6px solid green;
-  }
-  80% {
-    border-top: 6px solid black;
-  }
-
-  100% { transform: rotate(360deg); }
+@keyframes blink {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
-.disabled-content {
-  pointer-events: none;
-  opacity: 0.5;
-}
+// .loading-text {
+//   font-size: 24px;
+//   color: #3498db;
+//   animation: blinkText 1s infinite alternate;
+// }
 
+// @keyframes blinkText {
+//   0% { color: #3498db; }
+//   100% { color: #f00; } /* Change color as per your design */
+// }
 
+// .loading-dots {
+//   display: inline-block;
+//   font-size: 24px;
+// }
 
+// .dot-animation {
+//   animation: dotAppear 1.5s infinite;
+// }
 
+// @keyframes dotAppear {
+//   0% { opacity: 0; }
+//   50% { opacity: 1; }
+//   100% { opacity: 0; }
+// }

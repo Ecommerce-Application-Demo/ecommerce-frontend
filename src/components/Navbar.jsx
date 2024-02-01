@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { AccountLogo, AccountLogoActive, Cart, MyntraLogo, SearchLogo, Wishlist } from '../assets/icons'
+import { AccountLogo, AccountLogoActive, Cart, DesiCartIcon, SearchLogo, Wishlist } from '../assets/icons'
 import { Link,useLocation } from 'react-router-dom'
 import AccountDropdown from '../small-components/AccountDropdown';
 import { useSelector } from 'react-redux';
@@ -28,7 +28,7 @@ const accountLogoRoute = routeLocation ==='/login-signup' || routeLocation ==='/
 
   return (
     <div className='navbar-container'>
-      <Link className='navbar-logo-container' to='/'><MyntraLogo/></Link>
+      <Link className='navbar-logo-container' to='/'><DesiCartIcon/></Link>
       <div className='navbar-section-container'>
         <Link className='navbar-section-link'>HOME</Link>
         <Link className='navbar-section-link'>CONTACT</Link>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
+import tags from '../metaTag/dynamicTags';
 const Home = () => {
     const user =useSelector((state)=>state.user)
     const {
@@ -9,7 +10,10 @@ const Home = () => {
     } = user;
   
   return (
-   <div className='home'>hi
+   <div className='home'>
+    {tags.homeTag()}
+    {/* <DesiCartIcon/> */}
+    {/* <LoadingScreen/> */}
    {isLoggedIn ?
     <h1 style={{textAlign:'center', verticalAlign:'middle',marginTop:'100px'}}>Wecome {loggedInUserName}</h1>
     :

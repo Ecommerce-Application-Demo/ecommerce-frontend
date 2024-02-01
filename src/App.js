@@ -5,6 +5,7 @@ import LoginSignUp from './pages/Login-SignUp';
 import {Routes, BrowserRouter, Route} from 'react-router-dom';
 import NotFound from './pages/Not-found';
 import AccountImformation from './nested_pages/Account-imformation-page';
+import FooterPage from './pages/footer-page';
 function App() {
   return (
     <BrowserRouter>
@@ -25,6 +26,7 @@ function App() {
       <Route path='/my/payment' element={<AccountImformation/>}/>
       <Route path='*' element={<NotFound/>}/>
     </Routes>
+    <FooterPage/>
     </BrowserRouter>
   );
 }

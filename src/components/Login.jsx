@@ -18,6 +18,7 @@ const Login = () => {
     isLoggedIn,
     error,
     isLoading,
+    previousLogin,
   } = data;
 
   const location = useLocation();
@@ -36,9 +37,11 @@ const Login = () => {
 
   useEffect(() => {
     if (msg && isLoggedIn) {
+
+      localStorage.setItem('PREVIOUS_LOGIN', JSON.stringify(previousLogin));
       navigate('/');
     }
-  }, [msg, isLoggedIn, error, isLoading,navigate]);
+  }, [msg, isLoggedIn, error, isLoading,navigate,previousLogin]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
