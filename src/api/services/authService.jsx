@@ -1,5 +1,5 @@
 import axios from "axios";
-import { hostname } from "../utilites";
+import { hostname } from "../utilities/utilites";
 
 //email check
 const emailCheck=async(email)=>{
