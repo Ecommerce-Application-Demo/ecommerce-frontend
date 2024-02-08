@@ -169,7 +169,7 @@ const SignUp = () => {
     );
   };
   
-  const phoneNumberRegex = /^\d{10}$/
+  const phoneNumberRegex = /^(?=[6-9])\d{10}$/
 
   const validationSchema = Yup.object({
     name: Yup.string().required('name is required').max(15,'name should be between 5 to 15 charrecters').min(5,'mame should be between 5 to 15 charrecters'),

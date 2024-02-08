@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { GreenTick } from '../assets/icons';
 import classNames from 'classnames';
 
-const InputField = ({ label, name, type = 'text', value, onChange, error, disabled = false, isRequired = false, maxLength='' }) => {
+const InputField = ({ label, name, type = 'text', value, onChange, error, disabled = false, isRequired = false, maxLength='', readOnly=false }) => {
   const [focus, setFocus] = useState(false);
   const [hasContent, setHasContent] = useState(false);
+  const inputRef = useRef(null);
 
   const handleFocus = () => {
     setFocus(true);
@@ -23,6 +24,12 @@ const InputField = ({ label, name, type = 'text', value, onChange, error, disabl
     setFocus(false);
     if (!e.target.value) {
       setHasContent(false);
+    }
+  };
+
+  const handleClickLabel = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
     }
   };
 
@@ -50,12 +57,13 @@ const InputField = ({ label, name, type = 'text', value, onChange, error, disabl
   });
 
   return (
-    <div className="react-input-container">
+    <div className="react-input-container" onClick={handleClickLabel}>
       <label htmlFor={name} className={labelStyle}>
         {label} {isRequired && <span style={{ color: 'red' }}>*</span>}
       </label>
       <div className={inputWrapper}>
         <input
+          ref={inputRef}
           autoComplete="off"
           type={type}
           disabled={disabled}
@@ -67,6 +75,7 @@ const InputField = ({ label, name, type = 'text', value, onChange, error, disabl
           onBlur={handleBlur}
           onChange={onChange}
           className={inputStyle}
+          readOnly = {readOnly}
         />
         {successValidation && !disabled && <GreenTick height="20px" width="20px" className="greenTick" />}
       </div>
@@ -80,10 +89,11 @@ InputField.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   error: PropTypes.string,
   disabled: PropTypes.bool,
   isRequired: PropTypes.bool,
+  readOnly:PropTypes.bool,
 };
 
 export default InputField;

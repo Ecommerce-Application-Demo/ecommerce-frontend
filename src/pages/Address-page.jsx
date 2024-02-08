@@ -11,7 +11,7 @@ const handleClickAddAddress = () => {
   return (
     <div className='address-main-container'>
       <div className='address-title-container'>
-        <h3>Saved Addresses</h3>
+        <h2>Saved Addresses</h2>
         <div className='address-add-address-btn' onClick={handleClickAddAddress}>+ ADD NEW ADDRESS</div>
         {showAddModal && <AddAddress showAddModal={showAddModal} setShowAddModal={setShowAddModal} addressData={addressData} setAddressData={setAddressData}/>}
       </div>

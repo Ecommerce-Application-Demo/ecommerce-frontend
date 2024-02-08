@@ -4,7 +4,16 @@ import { createPortal } from 'react-dom';
 import { CrossSymbol } from '../assets/icons';
 import classNames from 'classnames';
 
-const Modal = ({ onClose, children, height, width, widthForMobile, widthForTab, title }) => {
+const Modal = ({
+  onClose,
+  children,
+  height,
+  width,
+  widthForMobile,
+  widthForTab,
+  title,
+  footer,
+}) => {
   const [dimensions, setDimensions] = useState({
     height: window.innerHeight,
     width: window.innerWidth,
@@ -28,28 +37,23 @@ const Modal = ({ onClose, children, height, width, widthForMobile, widthForTab, 
   }, []);
 
   useEffect(() => {
-    // Add event listener to close modal on click outside
-    const handleClickOutside = (event) => {
+    const handleClickOutside = event => {
       if (containerRef.current && !containerRef.current.contains(event.target)) {
         onClose();
       }
     };
 
-    // Attach the event listener
     document.addEventListener('mousedown', handleClickOutside);
 
-    // Clean up the event listener on component unmount
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [onClose]);
 
   useEffect(() => {
-    // Disable scrolling on the body when the modal is open
     document.body.style.overflow = 'hidden';
 
     return () => {
-      // Re-enable scrolling when modal is closed
       document.body.style.overflow = '';
     };
   }, []);
@@ -78,22 +82,25 @@ const Modal = ({ onClose, children, height, width, widthForMobile, widthForTab, 
     'modal-title-container-title-present': title,
   });
 
-  // Use createPortal to render the modal outside the normal DOM hierarchy
+  const footerStyle = classNames({
+    'modal-footer-container': true,
+  });
+
   return createPortal(
     <>
-      {/* Backdrop to disable background interactions */}
       <div className="modal-backdrop"></div>
-      <div style={divStyle} className='modal-container' ref={containerRef}>
+      <div style={divStyle} className="modal-container" ref={containerRef}>
         <div className={titleStyle}>
           {title && <p>{title}</p>}
-          <div className='close-button' onClick={onClose}>
+          <div className="close-button" onClick={onClose}>
             <CrossSymbol />
           </div>
         </div>
         <div className="modal-content">{children}</div>
+        {footer && <div className={footerStyle}>{footer}</div>}
       </div>
     </>,
-    document.body // Render the modal as a child of the body
+    document.body
   );
 };
 
@@ -107,6 +114,7 @@ Modal.propTypes = {
   widthForMobile: PropTypes.string,
   widthForTab: PropTypes.string,
   title: PropTypes.string.isRequired,
+  footer: PropTypes.node,
 };
 
 export default Modal;
