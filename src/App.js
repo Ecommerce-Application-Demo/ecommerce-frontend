@@ -17,6 +17,7 @@ function App() {
       axios.get(`${hostname}/api/auth/index`).then(()=>{}).catch(()=>{})
     }, 300000);
   },[setInterval]);
+  console.log('hii');
   return (
     <BrowserRouter>
     <Navbar/>
