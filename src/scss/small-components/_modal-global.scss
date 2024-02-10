@@ -1,54 +1,51 @@
 .modal-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 0px 20px 20px 20px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    box-shadow: 0 0 0 50vmax rgba(0, 0, 0, 0.8);
-    z-index: 1000;
-    border-radius: 6px;
-  
-    // Flex layout for title, content, and footer
+  position: fixed;
+  transform: translate(-50%, -50%);
+  padding: 0px 20px 20px 20px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  box-shadow: 0 0 0 50vmax rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  border-radius: 6px;
+
+  // Flex layout for title, content, and footer
+  display: flex;
+  flex-direction: column;
+  height: 80vh; // Adjust the height as needed
+
+  & > .modal-title-container-title-present {
+    border-bottom: 1px solid $Grey;
+  }
+
+  & > .modal-title-container {
     display: flex;
-    flex-direction: column;
-    height: 80vh; // Adjust the height as needed
-  
-    & > .modal-title-container-title-present {
-      border-bottom: 1px solid $Grey;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px;
+    padding-top: 16px;
+    margin-bottom: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1001; /* Higher than the modal content */
+
+    & > p {
+      color: $primary-btn-red;
+      font-size: 25px;
+      padding-left: 5px;
     }
-  
-    & > .modal-title-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #fff;
-      padding: 10px;
-      padding-top: 16px;
-      margin-bottom: 20px;
-      position: sticky;
-      top: 0;
-      z-index: 1001; /* Higher than the modal content */
-  
-      & > p {
-        color: $primary-btn-red;
-        font-size: 25px;
-        padding-left: 5px;
-      }
-  
-      & > .close-button {
-        cursor: pointer;
-      }
-    }
-  
-    & > .modal-content {
-      flex: 1; // Take up remaining space
-      overflow-y: auto; // Enable vertical scrolling
-    }
-  
-    & > .modal-footer-container {
-      margin-top: auto; // Stick the footer to the bottom
+
+    & > .close-button {
+      cursor: pointer;
     }
   }
-  
+
+  & > .modal-content {
+    flex: 1; // Take up remaining space
+    overflow-y: auto; // Enable vertical scrolling
+  }
+
+  & > .modal-footer-container {
+    margin-top: auto; // Stick the footer to the bottom
+  }
+}

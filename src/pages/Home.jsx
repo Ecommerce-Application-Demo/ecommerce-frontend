@@ -8,14 +8,16 @@ const Home = () => {
       isLoggedIn,
       loggedInUserName,
     } = user;
-  
+   const loggedinName = loggedInUserName?.includes('hiran','kaustab', 'hillol', 'bristi');
   return (
    <div className='home'>
     {tags.homeTag()}
-    {/* <DesiCartIcon/> */}
-    {/* <LoadingScreen/> */}
    {isLoggedIn ?
+    loggedinName ?  
+      <h1 style={{textAlign:'center', verticalAlign:'middle',marginTop:'100px'}}>Surprise Motherfucker {loggedInUserName}</h1>
+      :
     <h1 style={{textAlign:'center', verticalAlign:'middle',marginTop:'100px'}}>Wecome {loggedInUserName}</h1>
+   
     :
     <Link to='/login-signup' style={{textAlign:'center', verticalAlign:'middle',marginTop:'100px',textDecoration:'none'}}><h1 >KINDLY LOGIN</h1></Link>
    }

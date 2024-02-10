@@ -7,12 +7,14 @@ import OrderPage from '../pages/Order-page';
 import ReturnPage from '../pages/Return-page';
 import CancelationPage from '../pages/Cancelation-page';
 import PaymentPage from '../pages/Payment-page';
+import { useSelector } from 'react-redux';
 
 const AccountImformation = () => {
     // const [selectedDiv, setSelectedDiv]=useState(null);
     const [pageName,setPageName]=useState('Manage Your Account');
     const route = useLocation().pathname;
     const navigate=useNavigate();
+    const addressCount = useSelector(state=> state.address.address.length);
     
     useEffect(()=>{
         switch (route) {
@@ -92,7 +94,7 @@ const AccountImformation = () => {
             <dl className='account-imformation-sidebar-wrapper'>
                 <dt className={manageMyAccStyles}>Manage My Account</dt>
                 <dd className={subProfileChildStyles} name='profile' onClick={() => handleClick('profile')}>My Profile</dd>
-                <dd className={subAddressChildStyles} name='address' onClick={() => handleClick('address')}>Address Book</dd>
+                <dd className={subAddressChildStyles} name='address' onClick={() => handleClick('address')}>Address Book ({addressCount})</dd>
                 <dd className={subPaymentChildStyles} name='payment' onClick={() => handleClick('payment')}>My Payment Options</dd>
             </dl>
             <dl className='account-imformation-sidebar-wrapper'>

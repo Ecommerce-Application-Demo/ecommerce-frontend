@@ -22,6 +22,5 @@ export const getPincode = async(pincode) => {
         message: 'the pincode is not valid'
       }
     }
-    console.log(dataForReturn);
     return dataForReturn;
 }

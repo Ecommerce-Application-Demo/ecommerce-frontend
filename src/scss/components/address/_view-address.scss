@@ -48,6 +48,8 @@
                 margin-bottom: 10px;
                 cursor: pointer;
                 color: $primary-btn-red;
+                font-weight: bold;
+                width: fit-content;
             }
             &>.viewAddress-card-footer-btn {
                 display: flex;

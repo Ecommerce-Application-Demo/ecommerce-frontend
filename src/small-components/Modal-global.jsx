@@ -37,20 +37,6 @@ const Modal = ({
   }, []);
 
   useEffect(() => {
-    const handleClickOutside = event => {
-      if (containerRef.current && !containerRef.current.contains(event.target)) {
-        onClose();
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [onClose]);
-
-  useEffect(() => {
     document.body.style.overflow = 'hidden';
 
     return () => {
@@ -58,13 +44,10 @@ const Modal = ({
     };
   }, []);
 
-  const screenWidth_mobile = dimensions.width < 480;
-  const screenWidth_tab = dimensions.width < 768 && dimensions.width > 480;
-
   const handleWidth = () => {
-    if (screenWidth_mobile) {
+    if (dimensions.width < 480) {
       return widthForMobile || widthForTab || width;
-    } else if (screenWidth_tab) {
+    } else if (dimensions.width < 768 && dimensions.width > 480) {
       return widthForTab || width;
     } else {
       return width;
@@ -75,6 +58,21 @@ const Modal = ({
     height: height,
     width: handleWidth(),
     overflow: 'auto',
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    zIndex: 1000, // Ensure modal is above other content
+  };
+
+  const overlayStyle = {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent black overlay
+    zIndex: 999, // Ensure overlay is below modal but above other content
   };
 
   const titleStyle = classNames({
@@ -88,7 +86,7 @@ const Modal = ({
 
   return createPortal(
     <>
-      <div className="modal-backdrop"></div>
+      <div style={overlayStyle} onClick={onClose}></div>
       <div style={divStyle} className="modal-container" ref={containerRef}>
         <div className={titleStyle}>
           {title && <p>{title}</p>}
