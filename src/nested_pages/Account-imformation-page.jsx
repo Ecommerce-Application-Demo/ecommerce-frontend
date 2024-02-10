@@ -15,7 +15,7 @@ const AccountImformation = () => {
     const route = useLocation().pathname;
     const navigate=useNavigate();
     const addressCount = useSelector(state=> state.address.address.length);
-    
+    const loggedInUserName = useSelector(state=> state.user.loggedInUserName);
     useEffect(()=>{
         switch (route) {
             case '/my/profile':
@@ -86,7 +86,7 @@ const AccountImformation = () => {
             <Link to={`${route}`}  className='link-under-roadmap'><span>{pageName}</span></Link>
             </div>
             <div>
-              Welcome! <span className='login-account-name'>Kingshuk Roy</span>
+              Welcome! <span className='login-account-name'>{loggedInUserName}</span>
             </div>
         </div>
         <div className='account-imformation-main-container'>
@@ -94,7 +94,7 @@ const AccountImformation = () => {
             <dl className='account-imformation-sidebar-wrapper'>
                 <dt className={manageMyAccStyles}>Manage My Account</dt>
                 <dd className={subProfileChildStyles} name='profile' onClick={() => handleClick('profile')}>My Profile</dd>
-                <dd className={subAddressChildStyles} name='address' onClick={() => handleClick('address')}>Address Book ({addressCount})</dd>
+                <dd className={subAddressChildStyles} name='address' onClick={() => handleClick('address')}>Address Book {addressCount !==0 && `(${addressCount})`}</dd>
                 <dd className={subPaymentChildStyles} name='payment' onClick={() => handleClick('payment')}>My Payment Options</dd>
             </dl>
             <dl className='account-imformation-sidebar-wrapper'>
