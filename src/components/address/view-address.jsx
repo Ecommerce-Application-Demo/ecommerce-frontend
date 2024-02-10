@@ -21,7 +21,7 @@ const ViewAddress = (props) => {
     },[]);
 
     useEffect(()=>{
-        if (editDeleteAddAddressSuhccess) {
+        if (editDeleteAddAddressSuccess) {
         dispatch(viewAddress())
         }
     },[editDeleteAddAddressSuccess]);
