@@ -1,5 +1,4 @@
 import './app.scss';
-import { useEffect } from "react";
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import LoginSignUp from './pages/Login-SignUp';
@@ -8,16 +7,9 @@ import NotFound from './pages/Not-found';
 import AccountImformation from './nested_pages/Account-imformation-page';
 import FooterPage from './pages/footer-page';
 import ProtectedRoute from './api/utilities/ProtectedRoute';
-import axios from 'axios';
-import { hostname } from './api/utilities/utilites';
 
 function App() {
-  useEffect(()=>{
-    setInterval(() => {
-      axios.get(`${hostname}/api/auth/index`).then(()=>{}).catch(()=>{})
-    }, 300000);
-  },[setInterval]);
-  console.log('hii');
+
   return (
     <BrowserRouter>
     <Navbar/>

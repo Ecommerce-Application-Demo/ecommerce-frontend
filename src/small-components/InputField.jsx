@@ -93,6 +93,7 @@ InputField.propTypes = {
   error: PropTypes.string,
   disabled: PropTypes.bool,
   isRequired: PropTypes.bool,
+  maxLength: PropTypes.number,
   readOnly:PropTypes.bool,
 };
 

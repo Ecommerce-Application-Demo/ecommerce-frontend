@@ -1,47 +1,49 @@
-import React, { useEffect, useState, useRef } from 'react';
-import Modal from '../../small-components/Modal-global';
-import InputField from '../../small-components/InputField';
-import * as yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
-import addressThunk from '../../api/asyncThunk/addressAsyncThunk';
-import { getPincode } from '../../api/services/pincodeService';
-import { toast } from 'react-toastify';
+import React, { useEffect, useState, useRef } from "react";
+import Modal from "../../small-components/Modal-global";
+import InputField from "../../small-components/InputField";
+import * as yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import addressThunk from "../../api/asyncThunk/addressAsyncThunk";
+import { getPincode } from "../../api/services/pincodeService";
+import { toast } from "react-toastify";
 
 const AddAddress = (props) => {
-  const { setShowAddModal,showAddModal } = props;
-  const addressData = useSelector(state=> state.address);
+  const { setShowAddModal } = props;
+  const addressData = useSelector((state) => state.address);
   const dropdownRef = useRef(null);
- const firstDefault = addressData.address==='No Address registered.' || addressData.address.length===0;
+  const firstDefault =
+    addressData.address === "No Address registered." ||
+    addressData.address.length === 0;
   const [formData, setFormData] = useState({
-    name: '',
-    phoneNumber: '',
-    pincode: '',
-    state: '',
-    address: '',
-    locality: '',
-    city: '',
-    addressType: '',
+    name: "",
+    phoneNumber: "",
+    pincode: "",
+    state: "",
+    address: "",
+    locality: "",
+    city: "",
+    addressType: "",
     isDefault: false,
   });
 
   const [errors, setErrors] = useState({
-    name: '',
-    phoneNumber: '',
-    pincode: '',
-    state: '',
-    address: '',
-    locality: '',
-    city: '',
-    addressType: '',
+    name: "",
+    phoneNumber: "",
+    pincode: "",
+    state: "",
+    address: "",
+    locality: "",
+    city: "",
+    addressType: "",
   });
 
   const [allLocality, setAllLocality] = useState([]);
   const [selectedLocalityIndex, setSelectedLocalityIndex] = useState(0);
-  const [otherLocality, setOtherLocality] = useState('');
+  const [otherLocality, setOtherLocality] = useState("");
   const [isLocalityDropdownOpen, setIsLocalityDropdownOpen] = useState(false);
   const dispatch = useDispatch();
   const { addAddress } = addressThunk;
-  const {error} = addressData;
+  const { error } = addressData;
 
   useEffect(() => {
     if (formData.pincode.length === 6) {
@@ -52,7 +54,7 @@ const AddAddress = (props) => {
             if (!otherLocality) {
               setFormData((prevData) => ({
                 ...prevData,
-                locality: res?.locality[0]
+                locality: res?.locality[0],
               }));
             }
 
@@ -62,6 +64,7 @@ const AddAddress = (props) => {
               city: res.district,
             }));
           } else {
+            setAllLocality([]);
             setErrors((prevError) => ({
               ...prevError,
               pincode: res.message,
@@ -72,7 +75,7 @@ const AddAddress = (props) => {
           console.error("Error fetching state:", error);
         });
     }
-  }, [formData.pincode]);
+  }, [formData.pincode, otherLocality]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -86,20 +89,20 @@ const AddAddress = (props) => {
     };
   }, []);
 
-  useEffect(()=>{
-    if(error) {
-      toast.error(error)
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
     }
-  },[error]);
+  }, [error]);
 
-  useEffect(()=>{
+  useEffect(() => {
     if (firstDefault) {
-    setFormData((prevData)=>({
-      ...prevData,
-      isDefault:true
-    }))
-  }
-  },[firstDefault]);
+      setFormData((prevData) => ({
+        ...prevData,
+        isDefault: true,
+      }));
+    }
+  }, [firstDefault]);
 
   const handleOtherLocality = (e) => {
     setOtherLocality(e.target.value);
@@ -108,14 +111,14 @@ const AddAddress = (props) => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    const newValue = type === 'checkbox' ? checked : value;
-    
+    const newValue = type === "checkbox" ? checked : value;
+
     setFormData((prevData) => ({
       ...prevData,
       [name]: newValue,
     }));
 
-    if (name === 'otherLocality') {
+    if (name === "otherLocality") {
       setSelectedLocalityIndex(-1);
     }
 
@@ -125,7 +128,7 @@ const AddAddress = (props) => {
       .then(() => {
         setErrors((prevError) => ({
           ...prevError,
-          [name]: '',
+          [name]: "",
         }));
       })
       .catch((error) => {
@@ -176,8 +179,8 @@ const AddAddress = (props) => {
       .then(() => {
         const dataForDispatch = {
           name: formData.name,
-          phoneNumber:formData.phoneNumber,
-          addressLine1:formData.address,
+          phoneNumber: formData.phoneNumber,
+          addressLine1: formData.address,
           pincode: formData.pincode,
           state: formData.state,
           locality: formData.locality,
@@ -185,10 +188,10 @@ const AddAddress = (props) => {
           addressType: formData.addressType,
           default: formData.isDefault,
         };
-        dispatch(addAddress(dataForDispatch)).then(()=>{
-          toast.success('address added successfully');
+        dispatch(addAddress(dataForDispatch)).then(() => {
+          toast.success("address added successfully");
           setShowAddModal(false);
-        })
+        });
       })
       .catch((validationErrors) => {
         const newErrors = {};
@@ -196,20 +199,23 @@ const AddAddress = (props) => {
           newErrors[error.path] = error.message;
         });
         setErrors(newErrors);
-        toast.error('please fill the required field')
+        toast.error("please fill the required field");
       });
   };
-console.log(formData.isDefault);
   return (
-    <Modal width="500px" title="Add Address" onClose={onClose} height='500px'   
-    footer={
-      <div className="addAddress-btn-footer">
-      <div onClick={handleSubmit}>Save</div>
-      <div style={{ backgroundColor: 'grey' }} onClick={onClose}>
-        Cancel
-      </div>
-    </div>
-  }
+    <Modal
+      width="500px"
+      title="Add Address"
+      onClose={onClose}
+      height="500px"
+      footer={
+        <div className="addAddress-btn-footer">
+          <div onClick={handleSubmit}>Save</div>
+          <div style={{ backgroundColor: "grey" }} onClick={onClose}>
+            Cancel
+          </div>
+        </div>
+      }
     >
       <div className="addAddress-main-container">
         <InputField
@@ -232,10 +238,11 @@ console.log(formData.isDefault);
           <InputField
             label="Pincode"
             name="pincode"
-            type="number"
+            type="text"
             onChange={handleChange}
             value={formData.pincode}
             error={errors.pincode}
+            maxLength={6}
           />
           <InputField
             label="State"
@@ -255,7 +262,7 @@ console.log(formData.isDefault);
           value={formData.address}
           error={errors.address}
         />
-        <div onClick={handleLocalityClick} className='loyality-main-wrapper'>
+        <div onClick={handleLocalityClick} className="loyality-main-wrapper">
           <InputField
             label="Locality/Town"
             name="locality"
@@ -265,11 +272,15 @@ console.log(formData.isDefault);
             readOnly={true}
           />
           {isLocalityDropdownOpen && (
-            <div className='address-locality-dropdown' ref={dropdownRef} onClick={(e) => e.stopPropagation()}>
+            <div
+              className="address-locality-dropdown"
+              ref={dropdownRef}
+              onClick={(e) => e.stopPropagation()}
+            >
               <h4>Locality Selection</h4>
-              <div className='address-locality-mapFunc'>
+              <div className="address-locality-mapFunc">
                 {allLocality.map((option, index) => (
-                  <div key={index} >
+                  <div key={index}>
                     <label>
                       <input
                         type="radio"
@@ -282,15 +293,22 @@ console.log(formData.isDefault);
                 ))}
               </div>
               <InputField
-                label='Others'
-                name='otherLocality'
-                type='text'
+                label="Others"
+                name="otherLocality"
+                type="text"
                 value={otherLocality}
                 onChange={handleOtherLocality}
               />
-              <div className='btn-wrapper'>
-                <button onClick={handleConfirmLocality} className='confirm-btn'>Confirm</button>
-                <button onClick={() => setIsLocalityDropdownOpen(false)} className='cancel-btn'>Cancel</button>
+              <div className="btn-wrapper">
+                <button onClick={handleConfirmLocality} className="confirm-btn">
+                  Confirm
+                </button>
+                <button
+                  onClick={() => setIsLocalityDropdownOpen(false)}
+                  className="cancel-btn"
+                >
+                  Cancel
+                </button>
               </div>
             </div>
           )}
@@ -304,36 +322,43 @@ console.log(formData.isDefault);
           error={errors.city}
           disabled={true}
         />
-        <div className='addAddress-type'>
+        <div className="addAddress-type">
           <p>Type Of Address</p>
           <div>
             <label>
-              <input type='radio'
-                     value='HOME' name='addressType'
-                     checked={formData.addressType === 'HOME'}
-                     error={errors.addressType}
-                     onChange={handleChange}/>
+              <input
+                type="radio"
+                value="HOME"
+                name="addressType"
+                checked={formData.addressType === "HOME"}
+                error={errors.addressType}
+                onChange={handleChange}
+              />
               <span>HOME</span>
             </label>
             <label>
-              <input type='radio'
-                     value='OFFICE'
-                     name='addressType'
-                     checked={formData.addressType === 'OFFICE'}
-                     error={errors.addressType}
-                     onChange={handleChange}/>
+              <input
+                type="radio"
+                value="OFFICE"
+                name="addressType"
+                checked={formData.addressType === "OFFICE"}
+                error={errors.addressType}
+                onChange={handleChange}
+              />
               <span>OFFICE</span>
             </label>
           </div>
-          {errors.addressType && <p style={{ color: 'red' }}>{errors.addressType}</p>}
+          {errors.addressType && (
+            <p style={{ color: "red" }}>{errors.addressType}</p>
+          )}
         </div>
-        <label className='addAddress-Default-address'>
+        <label className="addAddress-Default-address">
           <input
-            type='checkbox'
-            name='isDefault'
+            type="checkbox"
+            name="isDefault"
             checked={formData.isDefault}
             disabled={firstDefault}
-            onChange={handleChange} // handle checkbox change
+            onChange={handleChange} 
           />
           <p>Make this as my default address</p>
         </label>
@@ -344,15 +369,27 @@ console.log(formData.isDefault);
 const phoneNumberRegex = /^(?=[6-9])\d{10}$/;
 
 const validationSchemaForAddAddress = yup.object({
-  name: yup.string().required('Name is required').min(5, 'Minimum 5 characters required'),
-  phoneNumber: yup.string().required('phone number is required').matches(phoneNumberRegex,'only 10 digit required'),
-  pincode: yup.string().required('Pincode is required').max(6, 'Maximum 6 characters required'),
+  name: yup
+    .string()
+    .required("Name is required")
+    .min(5, "Minimum 5 characters required"),
+  phoneNumber: yup
+    .string()
+    .required("phone number is required")
+    .matches(phoneNumberRegex, "only 10 digit required"),
+  pincode: yup
+    .string()
+    .required("Pincode is required")
+    .matches(/^.{6}$/, "6 characters required"),
   state: yup.string(),
-  address: yup.string().required('Address is required').min(5, 'Minimum 5 characters required'),
+  address: yup
+    .string()
+    .required("Address is required")
+    .min(5, "Minimum 5 characters required"),
   locality: yup.string(),
   city: yup.string(),
-  addressType: yup.string().required('it is required'),
-  isDefault:yup.bool(),
+  addressType: yup.string().required("it is required"),
+  isDefault: yup.bool(),
 });
 
 export default AddAddress;

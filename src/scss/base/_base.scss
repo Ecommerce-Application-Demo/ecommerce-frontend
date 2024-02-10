@@ -1,13 +1,18 @@
-// :root {
-//     --font-family:'inter', sans-serif;
-
-// }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     scrollbar-width: none;
+    font-family: 'Inconsolata', monospace;
+}
+
+input[type='checkbox'] {
+    accent-color: $primary-btn-red;
+}
+
+input[type='radio'] {
+    accent-color: $primary-btn-red;
 }
 
 ::-webkit-scrollbar {

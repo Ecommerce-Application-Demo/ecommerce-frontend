@@ -4,8 +4,11 @@ import addressThunk from '../../api/asyncThunk/addressAsyncThunk';
 import LoadingScreen from '../../small-components/Loading-screen';
 import { toast } from 'react-toastify';
 
-const ViewAddress = () => {
-    // const {addressData} = props;
+const ViewAddress = (props) => {
+  const {
+    setShowEditAddressModal,
+    setSelectedAddressForEdit,
+  } = props;
     const [hoverCard,setHoverCard] = useState(null);
     
     const dispatch = useDispatch();
@@ -39,6 +42,11 @@ const ViewAddress = () => {
         toast.warn('default address could not be deleted!!')
     }
     };
+
+    const handleEditAddress = (selectedAddress) => {
+      setSelectedAddressForEdit(selectedAddress)
+      setShowEditAddressModal(true);
+    }
 
     const handleDefaultLink =(item) =>{
       const  dataTobeDispatched = {
@@ -76,7 +84,7 @@ const ViewAddress = () => {
                         onMouseEnter={() => mouseEnterOnCard(defaultAddress?.addId)}
                         onMouseLeave={mouseRemoveFromCard}
                       >
-                        <p>{defaultAddress?.name}</p>
+                        <h4>{defaultAddress?.name}</h4>
                         <p className="viewAddress-address-type">{defaultAddress?.addressType}</p>
                         <div className="viewAddress-card-addressBar">
                           <p>{defaultAddress?.addressLine1}</p>
@@ -88,7 +96,7 @@ const ViewAddress = () => {
                             <p>{defaultAddress?.state}</p>
                             <p>Mobile: {defaultAddress?.phoneNumber}</p>
                             <div className="viewAddress-card-footer-btn">
-                              <div>Edit</div>
+                              <div onClick={()=>handleEditAddress(defaultAddress)}>Edit</div>
                               <div
                                 style={{
                                   border: "1px solid grey",
@@ -106,7 +114,9 @@ const ViewAddress = () => {
               </>
             )}
 
+            {address?.length > 1 &&
             <h4>OTHER ADDRESSES</h4>
+            }
             <div className="viewAddress-allCard-wrapper">
               {address?.map((item, index) => {
                 return (
@@ -117,7 +127,7 @@ const ViewAddress = () => {
                     onMouseEnter={() => mouseEnterOnCard(index)}
                     onMouseLeave={mouseRemoveFromCard}
                   >
-                    <p>{item?.name}</p>
+                    <h4>{item?.name}</h4>
                     <p className="viewAddress-address-type">{item?.addressType}</p>
                     <div className="viewAddress-card-addressBar">
                       <p>{item?.addressLine1}</p>
@@ -130,7 +140,7 @@ const ViewAddress = () => {
                         <p>Mobile: {item?.phoneNumber}</p>
                         <p className='viewAddress-defaultAddress-link' onClick={()=>handleDefaultLink(item)}>MAKE THIS A DEFAULT ADDRESS</p>
                         <div className="viewAddress-card-footer-btn">
-                          <div>Edit</div>
+                          <div onClick={()=>handleEditAddress(item)}>Edit</div>
                           <div
                             style={{ border: "1px solid grey", color: "grey" }}
                             onClick={() => handleRemoveBtn(item?.addId)}
