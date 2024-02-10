@@ -8,7 +8,11 @@ const Home = () => {
       isLoggedIn,
       loggedInUserName,
     } = user;
-   const loggedinName = loggedInUserName?.includes('hiran','kaustab', 'hillol', 'bristi');
+
+const pattern = /(hiran|kaustab|hillol|bristi)/i;
+
+ const loggedinName = pattern.test(loggedInUserName);
+
   return (
    <div className='home'>
     {tags.homeTag()}

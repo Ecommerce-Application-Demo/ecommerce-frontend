@@ -358,7 +358,7 @@ const AddAddress = (props) => {
             name="isDefault"
             checked={formData.isDefault}
             disabled={firstDefault}
-            onChange={handleChange} 
+            onChange={handleChange}
           />
           <p>Make this as my default address</p>
         </label>
@@ -376,7 +376,8 @@ const validationSchemaForAddAddress = yup.object({
   phoneNumber: yup
     .string()
     .required("phone number is required")
-    .matches(phoneNumberRegex, "only 10 digit required"),
+    .min(10, "only 10 digit required")
+    .matches(phoneNumberRegex, "this number is not valid"),
   pincode: yup
     .string()
     .required("Pincode is required")
