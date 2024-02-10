@@ -144,8 +144,8 @@ const SignUp = () => {
          <InputField
           label="Phone Number"
           name="phoneNumber"
-          type='number'
-          maxLength='10'
+          type='text'
+          maxLength={10}
           value={formData.phoneNumber}
           onChange={handleChange}
         //   onBlur={handleBlur}
@@ -175,7 +175,7 @@ const SignUp = () => {
     name: Yup.string().required('name is required').max(15,'name should be between 5 to 15 charrecters').min(5,'mame should be between 5 to 15 charrecters'),
     password: Yup.string().required('Password is required').matches( /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]/,'password required tleast one uppercase, one lowercase, one special charrecters and one number'),
     email: Yup.string().required('email is required').email('enter valid email'),
-    phoneNumber: Yup.string().required('phone number is required').matches(phoneNumberRegex,'only 10 digit required'),
+    phoneNumber: Yup.string().required('phone number is required').min(10,'only 10 digit required').matches(phoneNumberRegex,'this number is not valid'),
 
   });
   
