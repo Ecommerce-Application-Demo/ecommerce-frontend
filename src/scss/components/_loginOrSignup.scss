@@ -1,6 +1,13 @@
 .loginorsignup-container{
-    width: 371px;
+    // width: 500px;
     // margin-top: -150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & .loginorsignup-input-field {
+        width: 300px;
+    }
     &>h1{
         margin-bottom: 40px;
     }

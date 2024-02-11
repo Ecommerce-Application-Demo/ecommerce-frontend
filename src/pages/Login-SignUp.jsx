@@ -36,7 +36,6 @@ const LoginSignUp = () => {
     };
   return (
   <div className='login-signup-container'>
-  <img src={loginPicture} alt='login/signup' className='login-signup-image'/>
   <div className='loginSIgnup-component-container'>
     {routeParams==='/login-signup' && <LoginOrSignUp/>}
     {routeParams==='/otp-verification' && <Otp/>}

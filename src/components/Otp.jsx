@@ -1,12 +1,15 @@
 import React, { useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const Otp = () => {
   const inputRefs = [useRef(), useRef(), useRef(), useRef()];
   const [otp, setOtp] = useState(Array(4).fill(''));
-
+  const loggedInEmail = useSelector(state=>state.user.loggedInEmail);
   const [searchParams]=useSearchParams();
+
   const email=searchParams.get('email');
+
   const navigate=useNavigate();
   const handleInputChange = (index, e) => {
     const value = e.target.value;
@@ -33,12 +36,12 @@ const Otp = () => {
   if(getFullOtp().length===4){
     console.log('VALIDATE');
     navigate('/login',{state:{id:email}});
-
   }
+  // console.log(loggedInEmail);
   return (
     <div className='otp-main-container'>
       <h2>verify with OTP</h2>
-      <p>sent to {email}</p>
+      <p>sent to {email ? email : loggedInEmail}</p>
       <div className='otp-input-wrapper'>
       {inputRefs.map((ref, index) => (
         <input

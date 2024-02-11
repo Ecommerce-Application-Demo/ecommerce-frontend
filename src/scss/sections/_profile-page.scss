@@ -1,0 +1,164 @@
+.profile-main-container {
+    width: 100%;
+    height: fit-content;
+    margin: 20px;
+    margin-left: 100px;
+    background-color: #fff;
+    &>h2 {
+        margin-bottom: 40px;
+    }
+    .profile-details-container {
+        position: relative; 
+        
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        
+        .profile-forZindex {
+            background-color: transparent;
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        &>.profile-info-subWrapper {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            
+            & .profile-info-input {
+               width: 350px;
+            }
+            & .profile-info-radio {
+               width: 100%;
+                // margin: 0px 30px;
+            //    background-color: $Input-normal-background;
+            }
+
+        }
+        & .gender-container {
+            // margin-top: 20px;
+            display: flex;
+            // margin: 0px 30px;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 40px;
+            &>.gender-type-container {
+                width: 100%;
+                padding: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+            background-color: $Input-normal-background;
+                border: 1px solid $SearchBar-background;
+                color: $Grey;
+            }
+            &>.gender-type-container-active {
+                width: 100%;
+                padding: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+            background-color: $Input-success-background;
+                border: 1px solid $SearchBar-background;
+                color: $green;
+                font-size: 20px;
+                font-weight: 800;
+            }
+        }
+    }
+    &>.profile-Edit-btn {
+        margin: 40px 0px;
+        height: 40px;
+        color: $White;
+        background-color: $primary-btn-red;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    &>.saveChanges-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-top: 20px;
+
+        &>.cancel-btn {
+            margin: 10px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        cursor: pointer;
+            color: $Grey;
+            border-radius: 4px;
+        background-color: $Input-normal-background;
+        width: 20%;
+        border: 1px solid $Black;
+
+        }
+        &>.saveChanges-btn {
+        background-color: $primary-btn-red;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40px;
+        color: $White;
+        border-radius: 4px;
+        width: 20%;
+        cursor: pointer;
+        }
+    }
+   
+}
+
+.profile-password-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    &>.profile-password-wrapper {
+        display: flex;
+        gap: 40px;
+       & > div {
+        width: 100%;
+           &>.profile-password-input {
+               width: 100%;
+           }
+       } 
+       &>.profile-verify-btn-disabled {
+        color: $White;
+        background-color: $primary-btn-red-disabled;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 30px;
+        width: 200px;
+        border-radius: 4px;
+        cursor: not-allowed;
+       }
+       &>.profile-verify-btn {
+        color: $White;
+        background-color: $primary-btn-red;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 30px;
+        width: 200px;
+        border-radius: 4px;
+        cursor: pointer;
+       }
+    }
+    &>.forgot-password-text {
+        color: $primary-btn-red;
+        cursor: pointer;
+    }
+}

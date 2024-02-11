@@ -2,6 +2,8 @@
 .react-input-container {
     position: relative;
     height: 40px;
+    display: flex;
+    align-items: center;
   
     & > .label-text-focus-disabled {
       color:$White;
@@ -12,25 +14,38 @@
   
     & label {
       position: absolute;
-      font-family: "Poppins", sans-serif;
+      font-weight: 800;
       font-size: 16px;
       font-style: normal;
       font-weight: 400;
       line-height: 24px; 
     }
     & > .label-text {
-      color:$Black;
-      bottom: 6px;
-      left: 10px;
-      // z-index: 15;
-      transition: transform 0.2s ease-out;
+      color:$Grey;
+      left: 40px;
+      font-size: 20px;
+      transition: all 0.5s ease-in-out;
     }
   
     & > .label-text-focus {
       color:$Black;
+      font-size: 14px;
       top: -10px;
+      font-weight: 600;
       left: 10px;
+      letter-spacing: 1px;
+      transition: all 0.5s ease-in-out;
     }
+    & > .label-text-success {
+      color:$green;
+      font-size: 14px;
+      top: -10px;
+      font-weight: 600;
+      left: 10px;
+      letter-spacing: 1px;
+      transition: all 0.5s ease-in-out;
+    }
+    
     & > .label-text-disabled {
       color: $White;
       background-color: $Disabled-background;

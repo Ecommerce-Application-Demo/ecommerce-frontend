@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ViewAddress from "../components/address/view-address";
 import AddAddress from "../components/address/add-address";
 import EditAddress from "../components/address/edit-address";
+import tags from "../metaTag/dynamicTags";
 
 const AddreessPage = () => {
   const [showAddModal, setShowAddModal] = useState(false);
@@ -13,6 +14,7 @@ const AddreessPage = () => {
   };
   return (
     <div className="address-main-container">
+      {tags.AddressTag()}
       <div className="address-title-container">
         <h2>Saved Addresses</h2>
         <div

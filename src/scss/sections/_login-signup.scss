@@ -1,18 +1,20 @@
 .login-signup-container {
-margin-top: 150px;
-display: flex;
-// align-items: center;
-gap: 129px;
-&>.login-signup-image {
-    width: 800px;
-    height: 600px;
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+    height: fit-content;
+    margin-top: 120px;
+    // background-color: $Grey-text-color;
 }
-&>.loginSIgnup-component-container{
-    // max-height: 300px;
-    overflow-y: hidden;
-    scrollbar-width: none; 
-    -ms-overflow-style: none;
-    display: flex;flex-direction: column;
-    gap: 200px;
-}
-}
+
+.loginSIgnup-component-container {
+      box-shadow: 0px 0px 20px 2px $primary-box-shadow-2;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+    //   border-radius: 100px;
+      background-color: $White;
+
+    /* Your existing styles for the component container */
+  }
+  

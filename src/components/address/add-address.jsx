@@ -229,7 +229,8 @@ const AddAddress = (props) => {
         <InputField
           label="Phone No."
           name="phoneNumber"
-          type="number"
+          type="text"
+          maxLength={10}
           onChange={handleChange}
           value={formData.phoneNumber}
           error={errors.phoneNumber}
