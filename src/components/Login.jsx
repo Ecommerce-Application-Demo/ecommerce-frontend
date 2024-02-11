@@ -35,9 +35,14 @@ const Login = () => {
     email: '',
   });
 
+  const [containsNumber,setContainsNumber] = useState(false);
+  const [containsUppercase,setContainsUppercase] = useState(false);
+  const [containsLowercase,setContainsLowercase] = useState(false);
+  const [containsSpecial,setContainsSpecial] = useState(false);
+
   useEffect(() => {
     if (msg && isLoggedIn) {
-
+      toast.success('logged in successfully');
       localStorage.setItem('PREVIOUS_LOGIN', JSON.stringify(previousLogin));
       navigate('/');
     }
@@ -51,7 +56,12 @@ const Login = () => {
       ...prevData,
       [name]: value,
     }));
-
+    if (name === 'password') {
+      setContainsLowercase(/^(?=.*[a-z])/.test(value));
+      setContainsNumber(/\d/.test(value));
+      setContainsUppercase(/^(?=.*[A-Z])/.test(value));
+      setContainsSpecial(/^(?=.*[\W_])/.test(value));
+    }
     // Clear error state
     setErrors((prevErrors) => ({
       ...prevErrors,
@@ -99,12 +109,13 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className='createAccount-main-container'>
       <div className='createAccount-container'>
         <h1>Login to Myntra</h1>
         <p>Enter your details below</p>
       </div>
       <form onSubmit={handleSubmit} className='signup-form-container'>
+        <div>
         <InputField
           label="Email"
           name="email"
@@ -112,7 +123,10 @@ const Login = () => {
           value={formData.email}
           onChange={handleChange}
           error={errors.email}
+          classNameForError='error'
         />
+        </div>
+        <div>
         <InputField
           label="Password"
           name="password"
@@ -120,7 +134,16 @@ const Login = () => {
           value={formData.password}
           onChange={handleChange}
           error={errors.password}
+          classNameForError='error'
         />
+        </div>
+        <div className='signupPassword-validation'>
+          <div className={containsSpecial && 'special'}>Special</div>
+          <div className={containsNumber && 'number'}>1 Number</div>
+          <div className={containsUppercase && 'uppercase'}>1 Uppercase</div>
+          <div className={containsLowercase && 'lowercase'}>1 Lowercase</div>
+          <div className={formData.password.length>=8 && 'charrecters'}>8 Charrecters</div>
+        </div>
         <div>
           <button type="submit" className='create-acount-btn'>Login</button>
           {error && <p>{error}</p>}
@@ -136,7 +159,7 @@ const Login = () => {
 
 const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/;
 const validationSchema = Yup.object({
-  password: Yup.string().required('Password is required').matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]/, 'Password must contain at least one uppercase, one lowercase, one special character, and one number'),
+  password: Yup.string().required('Password is required').matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]{8,}/, 'check all the checkbox'),
   email: Yup.string().required('Email is required').matches(emailRegex, 'Enter a valid email address'),
 });
 

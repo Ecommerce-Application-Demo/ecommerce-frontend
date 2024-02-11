@@ -15,7 +15,7 @@ const pattern = /(hiran|kaustab|hillol|bristi)/i;
 
   return (
    <div className='home'>
-    {tags.homeTag()}
+    {tags.HomeTag()}
    {isLoggedIn ?
     loggedinName ?  
       <h1 style={{textAlign:'center', verticalAlign:'middle',marginTop:'100px'}}>Surprise Motherfucker {loggedInUserName}</h1>

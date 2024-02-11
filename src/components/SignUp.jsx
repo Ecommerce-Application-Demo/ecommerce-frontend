@@ -38,6 +38,10 @@ const SignUp = () => {
       phoneNumber:'',
       email:'',
     });
+    const [containsNumber,setContainsNumber] = useState(false);
+    const [containsUppercase,setContainsUppercase] = useState(false);
+    const [containsLowercase,setContainsLowercase] = useState(false);
+    const [containsSpecial,setContainsSpecial] = useState(false);
 
     useEffect(()=>{
       if(isLoggedIn) {
@@ -54,6 +58,12 @@ const SignUp = () => {
           [name]: value,
         }));
         
+        if (name === 'password') {
+          setContainsLowercase(/^(?=.*[a-z])/.test(value));
+          setContainsNumber(/\d/.test(value));
+          setContainsUppercase(/^(?=.*[A-Z])/.test(value));
+          setContainsSpecial(/^(?=.*[\W_])/.test(value));
+        }
         // Validate the field using Yup
         Yup
           .reach(validationSchema, name)
@@ -72,7 +82,8 @@ const SignUp = () => {
           });
       };
     
-  
+      
+
     const handleSubmit = (e) => {
       e.preventDefault();
       
@@ -117,30 +128,34 @@ const SignUp = () => {
     };
   
     return (
-        <div>
+        <div className='createAccount-main-container'>
           {isLoading && <LoadingScreen/>}
             <div className='createAccount-container'>
                 <h1>Create an account</h1>
-                <p>Already have account? <Link to='/login' style={{ color:'inherit'}}>log in</Link></p>
             </div>
       <form onSubmit={handleSubmit} className='signup-form-container'>
+        <div>
         <InputField
           label="Name"
           name="name"
           value={formData.name}
           onChange={handleChange}
-        //   onBlur={handleBlur}
+          classNameForError='error'
           error={errors.name}
         />
+        </div>
+        <div>
          <InputField
           label="Email"
           name="email"
           value={id || formData.email}
           onChange={handleChange}
           disabled={true}
-        //   onBlur={handleBlur}
+          classNameForError='error'
           error={errors.email}
         />
+        </div>
+        <div>
          <InputField
           label="Phone Number"
           name="phoneNumber"
@@ -148,18 +163,28 @@ const SignUp = () => {
           maxLength={10}
           value={formData.phoneNumber}
           onChange={handleChange}
-        //   onBlur={handleBlur}
+          classNameForError='error'
           error={errors.phoneNumber}
         />
+        </div>
+        <div>
         <InputField
           label="Password"
           name="password"
           type="password"
           value={formData.password}
           onChange={handleChange}
-        //   onBlur={handleBlur}
+          classNameForError='error'
           error={errors.password}
         />
+        </div>
+        <div className='signupPassword-validation'>
+          <div className={containsSpecial && 'special'}>Special</div>
+          <div className={containsNumber && 'number'}>1 Number</div>
+          <div className={containsUppercase && 'uppercase'}>1 Uppercase</div>
+          <div className={containsLowercase && 'lowercase'}>1 Lowercase</div>
+          <div className={formData.password.length>=8 && 'charrecters'}>8 Charrecters</div>
+        </div>
         <button type="submit" className='create-acount-btn'>Create Account</button>
       </form>
       <div>
@@ -172,8 +197,8 @@ const SignUp = () => {
   const phoneNumberRegex = /^(?=[6-9])\d{10}$/
 
   const validationSchema = Yup.object({
-    name: Yup.string().required('name is required').max(15,'name should be between 5 to 15 charrecters').min(5,'mame should be between 5 to 15 charrecters'),
-    password: Yup.string().required('Password is required').matches( /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]/,'password required tleast one uppercase, one lowercase, one special charrecters and one number'),
+    name: Yup.string().required('name is required').max(15,'name should be between 5 to 15 charrecters').min(5,'name should be between 5 to 15 charrecters'),
+    password: Yup.string().required('Password is required').matches( /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]{8,}/,'please check all the box'),
     email: Yup.string().required('email is required').email('enter valid email'),
     phoneNumber: Yup.string().required('phone number is required').min(10,'only 10 digit required').matches(phoneNumberRegex,'this number is not valid'),
 

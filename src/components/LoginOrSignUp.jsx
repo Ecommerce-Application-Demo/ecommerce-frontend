@@ -116,6 +116,7 @@ const LoginOrSignUp = () => {
   return (
     <div className='loginorsignup-container'>
       <h1>Login Or Signup</h1>
+      <div>
       <InputField
         label="Email"
         name="email"
@@ -124,7 +125,9 @@ const LoginOrSignUp = () => {
         error={errors.email}
         disabled={buttonText === 'sent'}
         className='loginorsignup-input-field'
+        classNameForError='error'
       />
+      </div>
       <button className={otpBtn} onClick={handleSubmit} disabled={buttonText === 'sent'}>{buttonText}</button>
       {isLoading && <LoadingScreen/>}
       {error && toast.error(error)}
