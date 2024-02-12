@@ -8,9 +8,15 @@ import AccountImformation from './nested_pages/Account-imformation-page';
 import FooterPage from './pages/footer-page';
 import ProtectedRoute from './api/utilities/ProtectedRoute';
 import ProtectedRouteLogin from './api/utilities/ProtectedRoute-loginFLow';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 function App() {
-
+  let isLoggedIn = useSelector(state=>state.user.isLoggedIn);
+  useEffect(()=>{
+    isLoggedIn && toast.success('logged in succesfully')
+  },[isLoggedIn])
   return (
     <BrowserRouter>
     <Navbar/>

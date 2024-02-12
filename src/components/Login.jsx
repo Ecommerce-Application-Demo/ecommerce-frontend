@@ -42,12 +42,15 @@ const Login = () => {
 
   useEffect(() => {
     if (msg && isLoggedIn) {
-      toast.success('logged in successfully');
       localStorage.setItem('PREVIOUS_LOGIN', JSON.stringify(previousLogin));
       navigate('/');
     }
   }, [msg, isLoggedIn, error, isLoading,navigate,previousLogin]);
-
+  useEffect(() => {
+    if (isSuccess && isLoggedIn) {
+      toast.success('Logged in successfully');
+    }
+  }, [isSuccess, isLoggedIn]);
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -149,8 +152,6 @@ const Login = () => {
           {error && <p>{error}</p>}
           <p>forget password?</p>
           {isLoading && <LoadingScreen />}
-        {isSuccess && toast.success(msg)}
-          {/* {(error) && toast.error(error)}  */}
         </div>
       </form>
     </div>

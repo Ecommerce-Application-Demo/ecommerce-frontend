@@ -13,4 +13,6 @@ export {default as LogoutLogo} from './logoutLogo';
 export {default as CrossSymbol} from './crossSymbol';
 export {default as DesiCartIcon} from './desiCartIcon';
 export {default as DesiCartIconForLoading} from './desiCartIconForLoading';
+export {default as EyeIcon} from './eyeIcon';
+export {default as EyeSlashIcon} from './eyeSlashIcon';
 

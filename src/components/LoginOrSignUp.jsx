@@ -92,17 +92,21 @@ const LoginOrSignUp = () => {
   
         setButtonText('Checking...');
         
-          dispatch(isEmailExist(data)).then(()=>{
+          dispatch(isEmailExist(data)).unwrap()
+          .then(()=>{
             setButtonText('Get OTP'); 
+          }).catch((err)=>{
+            toast.error(err);
           })
       })
       .catch((validationErrors) => {
         const newErrors = {};
         validationErrors.inner.forEach((error) => {
           newErrors[error.path] = error.message;
-          toast.error(error.message);
         });
         setErrors(newErrors);
+        toast.error(newErrors);
+
       });
   };
   
@@ -114,7 +118,7 @@ const LoginOrSignUp = () => {
   });
 
   return (
-    <div className='loginorsignup-container'>
+    <form className='loginorsignup-container'>
       <h1>Login Or Signup</h1>
       <div>
       <InputField
@@ -126,14 +130,14 @@ const LoginOrSignUp = () => {
         disabled={buttonText === 'sent'}
         className='loginorsignup-input-field'
         classNameForError='error'
+        autoFocus={true}
       />
       </div>
       <button className={otpBtn} onClick={handleSubmit} disabled={buttonText === 'sent'}>{buttonText}</button>
       {isLoading && <LoadingScreen/>}
       {error && toast.error(error)}
       {isSuccess && toast.success(msg)}
-
-    </div>
+    </form>
   );
 };
 

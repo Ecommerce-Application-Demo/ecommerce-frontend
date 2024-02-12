@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { GreenTick } from '../assets/icons';
+import { GreenTick, EyeIcon, EyeSlashIcon } from '../assets/icons'; // Assuming EyeIcon and EyeSlashIcon are provided as icons for show/hide password
 import classNames from 'classnames';
 
 const InputField = ({ 
-  label, name, type = 'text', value = '', onChange, error, disabled = false, isRequired = false, maxLength='', readOnly=false, className, classNameForError='', successFlag=true }) => {
+  label, name, type = 'text', value = '', onChange, error, disabled = false, isRequired = false, maxLength='', readOnly=false, className, classNameForError='', successFlag=true, autoFocus=false }) => {
   const [focus, setFocus] = useState(false);
   const [hasContent, setHasContent] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // State to manage showing/hiding password
   const inputRef = useRef(null);
 
   const handleFocus = () => {
@@ -78,11 +79,12 @@ const InputField = ({
         <input
           ref={inputRef}
           autoComplete="off"
-          type={type}
+          type={type === 'password' && !showPassword ? 'password' : 'text'} // Toggle between 'password' and 'text' based on showPassword state
           disabled={disabled}
           maxLength={maxLength}
           id={name}
           name={name}
+          autoFocus={autoFocus}
           onFocus={handleFocus}
           value={value}
           onBlur={handleBlur}
@@ -113,6 +115,7 @@ InputField.propTypes = {
   className: PropTypes.string ,
   classNameForError:PropTypes.string,
   successFlag:PropTypes.bool,
+  autoFocus:PropTypes.bool,
 };
 
 export default InputField;
