@@ -2,35 +2,58 @@
 .react-input-container {
   position: relative;
   height: 40px;
+  display: flex;
+  align-items: center;
 
   & > .label-text-focus-disabled {
     color:$White;
     background-color:$Disabled-background;
-    top: -10px;
-    left: 10px;
+    top: -12px;
+    left: 20px;
+    padding: 0px 5px 0px 5px;
+
   }
 
   & label {
     position: absolute;
-    font-family: "Poppins", sans-serif;
+    font-weight: 800;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
+    // border-radius: 20px;
     line-height: 24px; 
   }
   & > .label-text {
-    color:$Black;
-    bottom: 6px;
-    left: 10px;
-    // z-index: 15;
-    transition: transform 0.2s ease-out;
+    color:$Grey;
+    left: 40px;
+    font-size: 20px;
+    background-color: $Input-normal-background;
+    transition: all 0.5s ease-in-out;
   }
 
   & > .label-text-focus {
     color:$Black;
-    top: -10px;
-    left: 10px;
+    font-size: 14px;
+    top: -12px;
+    font-weight: 600;
+    left: 20px;
+    background-color: $Input-normal-background;
+    padding: 0px 5px 0px 5px;
+    letter-spacing: 1px;
+    transition: all 0.5s ease-in-out;
   }
+  & > .label-text-success {
+    color:$green;
+    font-size: 14px;
+    background-color: $Input-success-background;
+    top: -12px;
+    font-weight: 600;
+    padding: 0px 5px 0px 5px;
+    left: 20px;
+    letter-spacing: 1px;
+    transition: all 0.5s ease-in-out;
+  }
+  
   & > .label-text-disabled {
     color: $White;
     background-color: $Disabled-background;
@@ -41,17 +64,23 @@
   }
   & .react-input-wrapper--success {
     background-color: $Input-success-background;
+    border: 1px solid $green;
+    transition: all 0.2s ease-in-out;
+
   }
   & .react-input-wrapper--normal {
     background-color:$Input-normal-background;
-    
+    border: 1px solid $Disabled-background;
+    transition: all 0.2s ease-in-out;
+
   }
   & .react-input-wrapper--disabled {
     background-color:$Disabled-background;
     cursor: not-allowed;
-    color: $Black;
+    // color: $Black;
     &>.input-disabled {
           color: $White;
+          width: 50%;
           cursor:not-allowed;
           &:focus {
             outline: none;
@@ -65,11 +94,12 @@
     width: 100%;
     align-items: center;
     height: 100%;
+    border-radius: 20px;
 
     &>.input-basic {
-      margin-left: 10px;
+      margin-left: 25px;
           height: 32px;
-          width: 90%;
+          width: 85%;
           border: none;
           background-color: inherit;
           &:focus {
@@ -77,7 +107,8 @@
           }
         }
     &>.greenTick {
-       margin-right: 10px;
+      position: fixed;
+       margin-right: 20px;
     }
   }
   

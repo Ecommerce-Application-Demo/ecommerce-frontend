@@ -268,6 +268,8 @@ const EditAddress = (props) => {
           error={errors.phoneNumber}
         />
         <div className="addAdress-pincode-wrapper">
+          <div>
+
           <InputField
             label="Pincode"
             name="pincode"
@@ -276,8 +278,11 @@ const EditAddress = (props) => {
             value={formData.pincode}
             error={errors.pincode}
             maxLength={6}
+            classNameForError='error'
+            className='inputPincode'
           />
-
+          </div>
+          <div>
           <InputField
             label="State"
             disabled={true}
@@ -286,7 +291,9 @@ const EditAddress = (props) => {
             onChange={handleChange}
             value={formData.state}
             error={errors.state}
+            className='inputPincode'
           />
+          </div>
         </div>
         <InputField
           label="Address"

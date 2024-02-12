@@ -97,24 +97,7 @@ const SignUp = () => {
             phoneNumber:formData.phoneNumber,
             gender:'Male'
           }
-          
-          await toast.promise(
-            dispatch(register(dataToBePost)),
-            {
-              pending: {
-                render: 'Checking...', 
-                type: 'info'
-              },
-              success : {
-                render: () => 'User login successfully',
-                type: 'success'
-              },
-              error: {
-                render: () => 'some error occured',
-                type: 'error'
-              }
-            }
-          );
+            dispatch(register(dataToBePost))
 
         })
         .catch((validationErrors) => {

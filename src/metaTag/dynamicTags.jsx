@@ -15,7 +15,7 @@ const HomeTag = () =>{
 };
 
 const AddressTag = () =>{
-    const user = useSelector(state=>state.user.user);
+    const user = useSelector(state=>state.user.loggedInUserName);
 
 
     return (
@@ -30,19 +30,19 @@ const AddressTag = () =>{
 };
 
 const ProfileTag = () =>{
-    const user = useSelector(state=>state.user.user);
-
+    const user = useSelector(state=>state.user.loggedInUserName);
 
     return (
         <div className="application">
             <Helmet>
                 <meta charSet="utf-8" />
-                <title>{user.toUpperCase()} | Profile</title>
+                <title>{user} | Profile</title>
             </Helmet>
             ...
         </div>
     );
 };
+
 
 const tags = {
     HomeTag,

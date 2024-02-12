@@ -8,11 +8,13 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-
        &:only-child{
-        width: 70%;
+        width: 110%;
        }
     }
+}
+.inputPincode {
+    width: 200px;
 }
 .addAddress-btn-footer {
     display: flex;
