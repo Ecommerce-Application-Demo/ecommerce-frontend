@@ -11,12 +11,15 @@ import ProtectedRouteLogin from './api/utilities/ProtectedRoute-loginFLow';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import ValidateJWT from './api/utilities/ResetLogin';
 
 function App() {
-  let isLoggedIn = useSelector(state=>state.user.isLoggedIn);
-  useEffect(()=>{
-    isLoggedIn && toast.success('logged in succesfully')
-  },[isLoggedIn])
+  // let isLoggedIn = useSelector(state=>state.user.isLoggedIn);
+// const jwtToken = useSelector(state=>state.user.JWTtoken);
+//   useEffect(()=>{
+//     ValidateJWT(jwtToken);
+//   },[])
+  
   return (
     <BrowserRouter>
     <Navbar/>

@@ -24,12 +24,12 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
     const location = useLocation();
-    const {id} = location.state || {};
+    const {email} = location.state || {};
     const [formData, setFormData] = useState({
       name: '',
       password: '',
       phoneNumber:'',
-      email:id ? id : '',
+      email:email ? email : '',
     });
   
     const [errors, setErrors] = useState({
@@ -45,6 +45,7 @@ const SignUp = () => {
 
     useEffect(()=>{
       if(isLoggedIn) {
+        toast.success('login successfully.')
        navigate('/');
       }
     },[msg,isLoggedIn,isLoading,navigate]);
@@ -131,7 +132,7 @@ const SignUp = () => {
          <InputField
           label="Email"
           name="email"
-          value={id || formData.email}
+          value={email || formData.email}
           onChange={handleChange}
           disabled={true}
           classNameForError='error'
@@ -161,6 +162,7 @@ const SignUp = () => {
           error={errors.password}
         />
         </div>
+        { errors?.password &&
         <div className='signupPassword-validation'>
           <div className={containsSpecial && 'special'}>Special</div>
           <div className={containsNumber && 'number'}>1 Number</div>
@@ -168,6 +170,7 @@ const SignUp = () => {
           <div className={containsLowercase && 'lowercase'}>1 Lowercase</div>
           <div className={formData.password.length>=8 && 'charrecters'}>8 Charrecters</div>
         </div>
+}
         <button type="submit" className='create-acount-btn'>Create Account</button>
       </form>
       <div>

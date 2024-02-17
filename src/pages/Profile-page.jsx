@@ -142,6 +142,7 @@ const ProfilePage = () => {
   };
 
   const handleValidatePassword = () => {
+    console.log('hii');
     const dataForDispatch = {
       input: formData.currentPassword,
     };
@@ -268,6 +269,7 @@ const handleForgotPassword=()=>{
               label={editClicked ? "Email" : "Phone Number"}
               name={editClicked ? "email" : "phoneNumber"}
               type="text"
+              disabled={editClicked}
               onChange={handleChange}
               value={editClicked ? formData.email : formData.phoneNumber}
               error={editClicked ? errors.email : errors.phoneNumber}
@@ -308,8 +310,20 @@ const handleForgotPassword=()=>{
             </div>
           </div>
         )}
-
-        {editClicked && <div className="profile-password-container">
+      </div>
+      {!editClicked ? (
+        <div className="profile-Edit-btn" onClick={handleEditBtn}>
+          EDIT YOUR PROFILE
+        </div>
+      ) : (
+        <div className="saveChanges-container">
+          <div className="saveChanges-btn" onClick={handleSaveChange}>Save Changes</div>
+          <div className="cancel-btn" onClick={handleCancel}>Cancel</div>
+        </div>
+      )}
+      
+      {editClicked && 
+      <div className="profile-password-container">
           <h3>Password Changes</h3>
           {!isVerifiedPassword && 
           <>
@@ -370,17 +384,6 @@ const handleForgotPassword=()=>{
 }
         </div>
 }
-      </div>
-      {!editClicked ? (
-        <div className="profile-Edit-btn" onClick={handleEditBtn}>
-          EDIT YOUR PROFILE
-        </div>
-      ) : (
-        <div className="saveChanges-container">
-          <div className="saveChanges-btn" onClick={handleSaveChange}>Save Changes</div>
-          <div className="cancel-btn" onClick={handleCancel}>Cancel</div>
-        </div>
-      )}
     </div>
   );
 };

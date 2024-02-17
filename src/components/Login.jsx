@@ -22,12 +22,12 @@ const Login = () => {
   } = data;
 
   const location = useLocation();
-  const { id } = location.state || {};
+  const { email } = location.state || {};
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     password: '',
-    email: id ? id : '',
+    email: email ? email : 'kingshukr713@gmail.com',
   });
 
   const [errors, setErrors] = useState({
@@ -122,7 +122,7 @@ const Login = () => {
         <InputField
           label="Email"
           name="email"
-          disabled={id}
+          disabled={true}
           value={formData.email}
           onChange={handleChange}
           error={errors.email}
