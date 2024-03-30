@@ -54,9 +54,9 @@ const login =createAsyncThunk(
 //async thunk for logout
 const logout = createAsyncThunk(
     'LOGOUT',
-    async (data,thunkAPI) =>{
+    async (_,thunkAPI) =>{
         try {
-               return  authService.logout(data);
+               return  authService.logout();
            }
         catch (error) {
             const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()

@@ -21,7 +21,12 @@ const login = async(data)=>{
 }
 
 //logout
-const logout = async(data)=>{
+const logout = async()=>{
+    const refreshToken = localStorage.getItem("REFRESH_TOKEN");
+    const data = {
+     input: refreshToken,
+    } 
+        
     const response = await axiosInstanceProtected.post(`/api/my/logout`,data);
     return response.data;
 }
