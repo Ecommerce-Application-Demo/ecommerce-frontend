@@ -86,6 +86,20 @@ const Otp = () => {
     return otp.join(''); // Combine the OTP array into a string
   };
   // console.log(loggedInEmail);
+
+  const sendOtpAgain = () => {
+    let dataForDispatch = {
+      input: email
+    }
+    dispatch(generateOtp(dataForDispatch)).
+    unwrap()
+    .then(()=>{
+      toast.success('otp send successfully');
+    }).catch(()=>{
+      toast.error('an error occured during otp send');
+    })
+  }
+
   return (
     <div className='otp-main-container'>
       {isSending && <LoadingScreen/>}
@@ -105,7 +119,7 @@ const Otp = () => {
         />
       ))}
       </div>
-      <p className='resend-otp-text'>resend OTP</p>
+      <p className='resend-otp-text' onClick={ sendOtpAgain }>resend OTP</p>
       <p className="loginText">login with <span className="password">password</span></p>
     </div>
   );

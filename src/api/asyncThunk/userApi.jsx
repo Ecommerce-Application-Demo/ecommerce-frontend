@@ -1,5 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import authService from '../services/authService';
+import ValidateJWT from '../utilities/ResetLogin';
 
 // const Token =()=>{
 //     const data =useSelector((state)=>{
@@ -51,18 +52,16 @@ const login =createAsyncThunk(
 )
 
 //async thunk for logout
-const logout =createAsyncThunk(
+const logout = createAsyncThunk(
     'LOGOUT',
-    async(data,thunkAPI)=>{
+    async (data,thunkAPI) =>{
         try {
-            const jwtToken = thunkAPI.getState().user.JWTtoken;
-            console.log('data', data);
-            console.log('jwt', jwtToken);
-            return await authService.logout(data,jwtToken);
-        } catch (error) {
-            const message = error?.response?.data || error?.message || error?.toString()
+               return  authService.logout(data);
+           }
+        catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
             return thunkAPI.rejectWithValue(message)
-        }
+        } 
     }
 )
 

@@ -10,11 +10,14 @@ import { resetPasswordVerification } from "../redux/Slices/profileSlice";
 import { toast } from "react-toastify";
 import OtpVerificationModal from "../modals/OtpVerificationModal";
 import tags from "../metaTag/dynamicTags";
+import { setUnauthorizedError } from "../redux/Slices/errorSlice";
+import UnauthorizedComponent from "../error/UnauthorizedError";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
   const profileDetails = useSelector((state) => state.profile);
-  const { viewProfile, validatePassword } = profileThunk;
+  const errorAuthorized = useSelector((state)=>state.error?.unAuthorizedError);
+  const { viewProfile, validatePassword, editProfile } = profileThunk;
 
   const { profile, isProfileLoading,isVerifiedPassword,isPasswordLoading } = profileDetails;
 
@@ -43,12 +46,16 @@ const ProfilePage = () => {
   const [containsLowercase, setContainsLowercase] = useState(false);
   const [containsSpecial, setContainsSpecial] = useState(false);
   const [clickForgotPassword, setClickForgotPassword] = useState(false);
+  const [clickVerifyEmail, setClickVerifyEmail] = useState(false);
+  const [validateOtpEmailChange,setValidateOtpEmailChange] = useState(false);
+  const [validateOtpForgotPassword,setValidateOtpForgotPassword] = useState(false);
+
 
   const [editClicked, setEditCLicked] = useState(false);
 
   useEffect(() => {
     dispatch(viewProfile())
-      .unwrap()
+      .unwrap((res)=>{console.log();})
       .then((data) => {
         const nameArray = (data?.name || "").split(" ");
         const firstName = nameArray && nameArray.length > 0 ? nameArray[0] : "";
@@ -63,8 +70,12 @@ const ProfilePage = () => {
           lastName: lastName,
         });
       })
-      .catch((error) => {});
-  }, [dispatch, viewProfile]);
+      .catch((error) => {
+        if (error?.message === 'Invalid or missing JWT token' || error?.message !== 'Unauthorized') {
+          dispatch(setUnauthorizedError('UNAUTHORIZED'));
+         }
+      });
+  }, [dispatch, viewProfile ]);
 
   const handleEditBtn = () => {
     setEditCLicked(!editClicked);
@@ -144,7 +155,7 @@ const ProfilePage = () => {
   const handleValidatePassword = () => {
     console.log('hii');
     const dataForDispatch = {
-      input: formData.currentPassword,
+      input: formData.newPassword,
     };
     dispatch(validatePassword(dataForDispatch))
       .unwrap()
@@ -152,7 +163,7 @@ const ProfilePage = () => {
         if (!res) {
           setErrors((prevErrors) => ({
             ...prevErrors,
-            currentPassword: "Incorrect password. Please try again.",
+            newPassword: "Incorrect password. Please try again.",
           }));
         } else {
           toast.success('Verified');
@@ -162,6 +173,10 @@ const ProfilePage = () => {
         console.log(err);
       });
   };
+
+  const handleVerifyEmail =() =>{
+    setClickVerifyEmail(true);
+  }
 const handleCancel = () => {
   setEditCLicked(false);
   setFormData((prevData)=>({
@@ -187,6 +202,23 @@ const handleCancel = () => {
 
 const handleSaveChange =()=> {
   setEditCLicked(false);
+    const dataToDispatch = {
+      userId:profile?.userId,
+      email:formData?.email,
+      name:formData?.name,
+      phoneNumber: formData?.phoneNumber,
+      gender: formData?.gender,      
+    }
+    dispatch(editProfile(dataToDispatch))
+      .unwrap()
+      .then((response) => {
+        console.log("Profile edited successfully");
+        toast.success("Profile edited successfully");
+      })
+      .catch((error) => {
+        console.error("Error editing profile:", error);
+        toast.error("Error editing profile");
+      });
   console.log(formData.name);
   setFormData((prevData)=>({
     ...prevData,
@@ -226,10 +258,18 @@ const handleForgotPassword=()=>{
   return (
     <div className="profile-main-container">
       {tags.ProfileTag()}
+      {errorAuthorized && <UnauthorizedComponent/>}
       {isProfileLoading && <LoadingScreen />}
-      {clickForgotPassword && <OtpVerificationModal
+      {(clickForgotPassword || clickVerifyEmail) && 
+      <OtpVerificationModal
+      clickVerifyEmail={clickVerifyEmail}
+      setClickVerifyEmail={setClickVerifyEmail}
       clickForgotPassword={clickForgotPassword}
       setClickForgotPassword={setClickForgotPassword}
+      validateOtpEmailChange={validateOtpEmailChange}
+      validateOtpForgotPassword={validateOtpForgotPassword}
+      setValidateOtpEmailChange={setValidateOtpEmailChange}
+      setValidateOtpForgotPassword={setValidateOtpForgotPassword}
       />}
       <h2>{editClicked ? 'Edit Your Profile' :  'View Your Profile'}</h2>
       <div className="profile-details-container">
@@ -263,7 +303,7 @@ const handleForgotPassword=()=>{
           </div>
         </div>
         <div className="profile-info-subWrapper">
-          <div>
+          {!editClicked ? <div>
             <InputField
               className="profile-info-input"
               label={editClicked ? "Email" : "Phone Number"}
@@ -276,9 +316,9 @@ const handleForgotPassword=()=>{
               classNameForError="errorMsg"
               successFlag={editClicked}
             />
-          </div>
+          </div> : null}
           <div>
-            <div>
+            <div style={{width:'100%'}}>
               <InputField
                 className="profile-info-input"
                 label={editClicked ? "Phone Number" : "Gender"}
@@ -321,7 +361,31 @@ const handleForgotPassword=()=>{
           <div className="cancel-btn" onClick={handleCancel}>Cancel</div>
         </div>
       )}
-      
+      {editClicked &&
+      <div className="profile-password-container">
+        <h3>Email Changes</h3>
+        <div className="profile-password-wrapper">
+            <div>
+              <InputField
+                type="email"
+                className="profile-password-input"
+                label="Email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                disabled={true}
+                error={errors.currentPassword}
+              />
+            </div>
+            <div
+              className={verifyBtnStyle}
+              onClick={handleVerifyEmail}
+            >
+              VERIFY EMAIL
+            </div>
+      </div> 
+      </div>
+      }
       {editClicked && 
       <div className="profile-password-container">
           <h3>Password Changes</h3>
@@ -352,6 +416,7 @@ const handleForgotPassword=()=>{
 }
           {isVerifiedPassword && 
           <>
+          <div className="profile-password-wrapper">
           <div>
             <InputField
               type="password"
@@ -363,7 +428,14 @@ const handleForgotPassword=()=>{
               error={errors.newPassword}
             />
           </div>
-          <div style={{ width: "400px" }}>
+          <div
+              className='profile-verify-btn'
+              onClick={handleValidatePassword}
+            >
+              Change
+            </div>
+            </div>
+          <div style={{ width: "400px", marginTop:'20px' }}>
             <div className="signupPassword-validation">
               <div className={containsSpecial && "special"}>Special</div>
               <div className={containsNumber && "number"}>1 Number</div>

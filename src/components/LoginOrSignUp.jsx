@@ -119,7 +119,7 @@ const LoginOrSignUp = () => {
   const otpBtn = classNames({
     'getOtp-btn': true,
     'getOtp-btn--normal': buttonText !== 'sent',
-    // 'getOtp-btn--disabled':buttonText==='sent',
+    'getOtp-btn--disabled':buttonText==='sent' || buttonText === 'Checking...',
   });
 
   return (
@@ -138,7 +138,7 @@ const LoginOrSignUp = () => {
         autoFocus={true}
       />
       </div>
-      <button className={otpBtn} onClick={handleSubmit} disabled={buttonText === 'sent'}>{buttonText}</button>
+      <button className={otpBtn} onClick={handleSubmit} disabled={buttonText === 'sent' || buttonText === 'Checking...'}>{buttonText}</button>
       {isLoading && <LoadingScreen/>}
       {error && toast.error(error)}
       {isSuccess && toast.success(msg)}

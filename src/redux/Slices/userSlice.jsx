@@ -79,6 +79,8 @@ const userSlice = createSlice({
         localStorage.setItem("JWT", action.payload.accessToken);
         localStorage.setItem("REFRESH_TOKEN", action.payload.refreshToken);
         localStorage.setItem("USERNAME", action.payload.name);
+        localStorage.setItem("REFRESH_TOKEN_EXPIRY", action.payload.refreshTokenExpiration);
+        console.log(action.payload);
         localStorage.setItem("EMAIL", action.payload.email);
       })
       .addCase(register.rejected, (state, action) => {
@@ -112,6 +114,8 @@ const userSlice = createSlice({
         localStorage.setItem("REFRESH_TOKEN", action.payload.refreshToken);
         localStorage.setItem("USERNAME", action.payload.name);
         localStorage.setItem("EMAIL", action.payload.email);
+        localStorage.setItem("REFRESH_TOKEN_EXPIRY", action.payload.refreshTokenExpiration);
+        console.log(action.payload);
       })
       .addCase(login.rejected, (state, action) => {
         state.error = action.payload;

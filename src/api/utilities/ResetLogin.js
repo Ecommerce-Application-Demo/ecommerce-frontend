@@ -15,12 +15,15 @@ const ValidateJWT = async (jwtToken, dispatch) => {
           input: refreshToken
         });
         const newToken = response?.data;
+        localStorage.setItem('JWT');
         // dispatch(updateJwt(response?.data));
         return newToken;
       } catch (error) {
         // Handle token refresh failure, e.g., log the error or logout the user
         console.error("Token refresh failed:", error);
-        // You might consider logging the user out or displaying an error message
+        localStorage.removeItem('JWT');
+        localStorage.removeItem('REFRESH_TOKEN');
+        localStorage.removeItem('EXP_REFRESH');
         throw error; // Rethrow the error to propagate it further
       }
     } else {

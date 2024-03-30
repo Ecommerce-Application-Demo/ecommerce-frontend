@@ -15,7 +15,7 @@ const AccountImformation = () => {
     const route = useLocation().pathname;
     const navigate=useNavigate();
     // const address = useSelector(state=> state.address.address);
-    const loggedInUserName = useSelector(state=> state.user.loggedInUserName);
+    const loggedInUserName = useSelector(state=> state.profile.profile?.name);
     // const addressValidation = address.length !==0 || address === 'No address registered.';
     // const addressCount = addressValidation && address.length;
     useEffect(()=>{
