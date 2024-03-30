@@ -1,47 +1,30 @@
 import axios from "axios"
 import { hostname } from "../utilities/utilites"
+import axiosInstanceProtected from "../utilities/axiosInstanceProtected";
 
 
-const viewAddress = async (token) => {
-    const response = await axios.get(`${hostname}/api/my/addresses`,
-    {
-        headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }
+const viewAddress = async () => {
+    console.log('viewAddress');
+    const response = await axiosInstanceProtected.get(`api/my/addresses`,
     );
     return  response.data;
 }
 
-const addAddress = async (data,token) => {
-    const response = await axios.post(`${hostname}/api/my/address`, data,
-    {
-        headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }
+const addAddress = async (data) => {
+    const response = await axiosInstanceProtected.post(`api/my/address`, data
     );
     return  response.data;
 }
 
-const editAddress = async (data,token) => {
-  const response = await axios.put(`${hostname}/api/my/address`, data,
-  {
-      headers: {
-      Authorization: `Bearer ${token}`
-    }
-  }
+const editAddress = async (data) => {
+    console.log('edit');
+  const response = await axiosInstanceProtected.put(`api/my/address`, data
   );
   return  response.data;
 }
 
-const removeAddress = async (data,token) => {
-    const response = await axios.delete(`${hostname}/api/my/address/${data}`,
-    {
-        headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }
+const removeAddress = async (data) => {
+    const response = await axiosInstanceProtected.delete(`api/my/address/${data}`
     );
     return  response.data;
 }

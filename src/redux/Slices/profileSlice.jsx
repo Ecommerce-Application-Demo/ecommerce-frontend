@@ -7,7 +7,9 @@ import profileThunk from "../../api/asyncThunk/profileAsyncThnuk";
 const 
 {
    viewProfile,
+   editProfile,
    validatePassword,
+   changePassword,
 } = profileThunk;
 
 const initialState = {
@@ -18,7 +20,15 @@ const initialState = {
     isError:false,
     isVerifiedPassword:null,
     error:'',
+   editProfile: {
+    editProfileLoading: false,
+    editProfileMsg: null,
+    editProfileSuccess: false,
+    editProfileFail:false,
+    editProfileError:null,
+   },
     editDeleteProfileSuccess : false,
+    changePassword : false,
 }
 
 const profileSlice = createSlice({
@@ -49,6 +59,36 @@ const profileSlice = createSlice({
             state.isError = true;
             state.error = action.payload;
         })
+        .addCase(editProfile.pending, (state)=>{
+                state.editProfile = {
+                    ...state.editProfile,
+                    editProfileLoading: true,
+                    editProfileSuccess: false,
+                    editProfileFail: false,
+                    editProfileError: null,
+                };    
+        })
+        .addCase(editProfile.fulfilled, (state,action)=>{
+                state.profile = action.payload;
+                state.editProfile = {
+                    ...state.editProfile,
+                    editProfileLoading: false,
+                    editProfileSuccess: true,
+                    editProfileMsg: action.payload,
+                    editProfileFail: false,
+                    editProfileError: null,
+                };       
+        })
+        .addCase(editProfile.rejected, (state,action)=>{
+            state.editProfile = {
+                ...state.editProfile,
+                editProfileLoading: false,
+                editProfileSuccess: false,
+                editProfileMsg: null,
+                editProfileFail: true,
+                editProfileError: action.payload,
+            };       
+        })
         .addCase(validatePassword.pending, (state)=>{
             state.isPasswordLoading = true;
             state.editDeleteProfileSuccess = false;
@@ -64,6 +104,19 @@ const profileSlice = createSlice({
             state.successMsg = '';
             state.isError = true;
             state.isVerifiedPassword = false;
+            state.error = action.payload;
+        })
+        .addCase(changePassword.pending, (state)=>{
+            state.isPasswordLoading = true;
+        })
+        .addCase(changePassword.fulfilled, (state,action)=>{
+            state.isPasswordLoading = false;
+            state.changePassword = true;
+            state.editDeleteProfileSuccess = true;
+        })
+        .addCase(changePassword.rejected, (state,action)=>{
+            state.isPasswordLoading = false;
+            state.changePassword = false;
             state.error = action.payload;
         })
     }

@@ -1,33 +1,47 @@
 import axios from "axios"
 import { hostname } from "../utilities/utilites"
+import axiosInstanceProtected from "../utilities/axiosInstanceProtected";
+import { jwtDecode } from "jwt-decode";
+import dayjs from "dayjs";
 
 
-const viewProfile = async (token) => {
-    const response = await axios.get(`${hostname}/api/my/account`,
-    {
-        headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }
-    );
-    return  response.data;
+// const token = localStorage.getItem('JWT');
+
+const viewProfile = async () => {
+  console.log('profileService');
+  const response = await axiosInstanceProtected.get(`/api/my/account`);
+  return response.data;
+};
+
+const editProfile = async (formData) => {
+  console.log('profileService');
+  const response = await axiosInstanceProtected.put(`/api/my/account`,
+  formData,
+  );
+  return response.data;
+};
+
+
+
+const validatePassword = async (currentPasword) => {
+  const response = await axiosInstanceProtected.post(`${hostname}/api/my/relogin`,
+  currentPasword,
+  );
+  return  response.data;
 }
 
-const validatePassword = async (currentPasword,token) => {
-  const response = await axios.post(`${hostname}/api/my/relogin`,
-  currentPasword,
-  {
-      headers: {
-      Authorization: `Bearer ${token}`
-    }
-  }
+const changePassword = async (newPassword) => {
+  const response = await axios.post(`${hostname}/api/my/password`,
+  newPassword,
   );
   return  response.data;
 }
 
 const profileService = {
    viewProfile,
+   editProfile,
    validatePassword,
+   changePassword,
 }
 
 export default profileService;

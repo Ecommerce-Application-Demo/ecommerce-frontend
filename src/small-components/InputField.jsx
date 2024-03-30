@@ -96,7 +96,7 @@ const InputField = ({
       </div>
       {(error && !classNameForError) && <div style={{ color: 'red',marginLeft:'15px' }}>{error}</div>}
     </div>
-    {(error && classNameForError) && <div style={{ color: 'red' }}>{error}</div>}
+    {(error && classNameForError) && <div style={{ color: 'red', marginTop:'10px' }}>{error}</div>}
     </>
   );
 };

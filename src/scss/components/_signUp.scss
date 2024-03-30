@@ -63,6 +63,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin-top: -20px;
   & > div {
     width: fit-content;
     box-shadow: 0 8px 10px 0 $Box-shadow-blue;

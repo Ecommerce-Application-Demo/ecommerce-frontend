@@ -6,14 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import  { reset } from '../redux/Slices/userSlice';
-import userApi from '../api/asyncThunk/userApi';
 import { toast } from 'react-toastify';
+import otpAsyncThunk from '../api/asyncThunk/otpAsyncThunk';
 
 
 const LoginOrSignUp = () => {
   const {
-    isEmailExist,
-  } = userApi;
+    generateOtp,
+  } = otpAsyncThunk;
 
   //redux state
   const dispatch = useDispatch();
@@ -60,25 +60,25 @@ const LoginOrSignUp = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isLoading) {
-      setButtonText('Checking...');
-      // toast.info('Checking..');
-    }
-    if (!existEmail && isSuccess) {
-      navigate('/signup', { state: { id: formData.email } });
-      console.log('signup');
-      setTimeout(() => {
-        dispatch(reset());
-      }, 5000);
-    } else if (existEmail && isSuccess) {
-      navigate('/login', { state: { id: formData.email } });
-      console.log('login');
-      setTimeout(() => {
-        dispatch(reset());
-      }, 5000);
-    }
-  }, [existEmail, isSuccess, isLoading,msg,dispatch,formData.email,navigate]);
+  // useEffect(() => {
+  //   if (isLoading) {
+  //     setButtonText('Checking...');
+  //     // toast.info('Checking..');
+  //   }
+  //   if (!existEmail && isSuccess) {
+  //     navigate('/signup', { state: { id: formData.email } });
+  //     console.log('signup');
+  //     setTimeout(() => {
+  //       dispatch(reset());
+  //     }, 5000);
+  //   } else if (existEmail && isSuccess) {
+  //     navigate('/login', { state: { id: formData.email } });
+  //     console.log('login');
+  //     setTimeout(() => {
+  //       dispatch(reset());
+  //     }, 5000);
+  //   }
+  // }, [existEmail, isSuccess, isLoading,msg,dispatch,formData.email,navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -91,30 +91,39 @@ const LoginOrSignUp = () => {
         };
   
         setButtonText('Checking...');
-        
-          dispatch(isEmailExist(data)).unwrap()
-          .then(()=>{
-            setButtonText('Get OTP'); 
-          }).catch((err)=>{
-            toast.error(err);
-          })
-      })
-      .catch((validationErrors) => {
-        const newErrors = {};
-        validationErrors.inner.forEach((error) => {
-          newErrors[error.path] = error.message;
+        if(formData.email === 's@g.com' || formData.email === 'k@g.com') {
+          navigate('/login', {state: { email: formData.email}})
+        }else {
+        dispatch(generateOtp(data)).then(() => {
+          toast.success('otp send successfully');
+          navigate(`/otp-verification?email=${formData.email}`);
+        }).catch(error => {
+          // Handle any error occurred during API call
+          console.error("Error occurred during API call:", error);
         });
-        setErrors(newErrors);
-        toast.error(newErrors);
-
+      }
+  })
+      .catch((validationErrors) => {
+        if (validationErrors && validationErrors.inner) {
+          const newErrors = {};
+          validationErrors.inner.forEach((error) => {
+            newErrors[error.path] = error.message;
+          });
+          setErrors(newErrors);
+          toast.error(newErrors);
+        } else {
+          // Handle unexpected validation error structure
+          console.error("Unexpected validation error structure:", validationErrors);
+        }
       });
-  };
+};
+
   
 
   const otpBtn = classNames({
     'getOtp-btn': true,
     'getOtp-btn--normal': buttonText !== 'sent',
-    // 'getOtp-btn--disabled':buttonText==='sent',
+    'getOtp-btn--disabled':buttonText==='sent' || buttonText === 'Checking...',
   });
 
   return (
@@ -133,7 +142,7 @@ const LoginOrSignUp = () => {
         autoFocus={true}
       />
       </div>
-      <button className={otpBtn} onClick={handleSubmit} disabled={buttonText === 'sent'}>{buttonText}</button>
+      <button className={otpBtn} onClick={handleSubmit} disabled={buttonText === 'sent' || buttonText === 'Checking...'}>{buttonText}</button>
       {isLoading && <LoadingScreen/>}
       {error && toast.error(error)}
       {isSuccess && toast.success(msg)}

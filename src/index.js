@@ -7,11 +7,12 @@ import store from './redux/store/Store';
 import { ToastContainer } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
   import '@fortawesome/fontawesome-free/css/all.min.css';
+import ErrorBoundary from './error/ErrorBoundary';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <>
+  <ErrorBoundary>
     <Provider store={store}>
     <App />
     <ToastContainer
@@ -27,6 +28,6 @@ root.render(
         theme="colored"
 />
     </Provider>
-  </>
+  </ErrorBoundary>
 );
 

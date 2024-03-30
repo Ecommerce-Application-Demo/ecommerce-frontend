@@ -34,7 +34,7 @@ const addressSlice = createSlice({
         })
         .addCase(viewAddress.fulfilled, (state,action)=>{
             state.isAddressLoading = false;
-            state.address=action.payload;
+            state.address=action?.payload || [];
             console.log(action.payload);
             if ((action.payload !== 'No Address registered.')) {
                 action.payload?.forEach((element) => {

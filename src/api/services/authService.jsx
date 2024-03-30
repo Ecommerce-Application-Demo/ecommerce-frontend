@@ -1,5 +1,6 @@
 import axios from "axios";
 import { hostname } from "../utilities/utilites";
+import axiosInstanceProtected from "../utilities/axiosInstanceProtected";
 
 //email check
 const emailCheck=async(email)=>{
@@ -20,13 +21,13 @@ const login = async(data)=>{
 }
 
 //logout
-const logout = async(data,token)=>{
-    const response = await axios.post(`${hostname}/api/my/logout`,data,
-    {
-        headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+const logout = async()=>{
+    const refreshToken = localStorage.getItem("REFRESH_TOKEN");
+    const data = {
+     input: refreshToken,
+    } 
+        
+    const response = await axiosInstanceProtected.post(`/api/my/logout`,data);
     return response.data;
 }
 

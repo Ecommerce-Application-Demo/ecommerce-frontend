@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userSlice from '../Slices/userSlice';
+// import {use} from '../Slices/userSlice';
 import otpSlice from '../Slices/otpSlice';
 import addressSlice from '../Slices/addressSlice';
 import profileSlice from '../Slices/profileSlice';
+import userSlice from '../Slices/userSlice';
+import errorSlice from '../Slices/errorSlice';
 
 const store = configureStore({
     reducer:{
@@ -10,6 +12,7 @@ const store = configureStore({
         otp: otpSlice,
         address:addressSlice,
         profile:profileSlice,
+        error: errorSlice,
     }
 });
 

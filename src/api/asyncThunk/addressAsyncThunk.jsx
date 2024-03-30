@@ -1,15 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import addressService from "../services/addressService";
+import { toast } from "react-toastify";
+import ValidateJWT from "../utilities/ResetLogin";
+import userApi from "./userApi";
 
-
+const expireTImeForRefreshToken = localStorage.getItem("EXP_REFRESH");
+const currentTime = new Date();
 //async thunk for view address
 const viewAddress = createAsyncThunk(
     'VIEW_ADDRESS',
-    async (data,thunkAPI) =>{
+    async (_,thunkAPI) =>{
         try {
-            console.log(data);
-            const token = thunkAPI.getState().user.JWTtoken;
-            return await addressService.viewAddress(token);
+           return addressService.viewAddress(); 
+
         }
         catch (error) {
             const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
@@ -23,8 +26,7 @@ const addAddress = createAsyncThunk(
     'ADD_ADDRESS',
     async (data,thunkAPI) =>{
         try {
-            const token = thunkAPI.getState().user.JWTtoken;
-            return await addressService.addAddress(data,token);
+            return await addressService.addAddress(data);
         }
         catch (error) {
             const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
@@ -38,8 +40,7 @@ const editAddress = createAsyncThunk(
     'EDIT_ADDRESS',
     async (data,thunkAPI) =>{
         try {
-            const token = thunkAPI.getState().user.JWTtoken;
-            return await addressService.editAddress(data,token);
+            return await addressService.editAddress(data);
         }
         catch (error) {
             const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
@@ -52,8 +53,7 @@ const removeAddress = createAsyncThunk(
     'REMOVE_ADDRESS',
     async (data,thunkAPI) =>{
         try {
-            const token = thunkAPI.getState().user.JWTtoken;
-            return await addressService.removeAddress(data,token);
+            return await addressService.removeAddress(data);
         }
         catch (error) {
             const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()

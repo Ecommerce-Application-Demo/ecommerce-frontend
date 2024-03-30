@@ -106,7 +106,7 @@ const AddAddress = (props) => {
 
   const handleOtherLocality = (e) => {
     setOtherLocality(e.target.value);
-    setSelectedLocalityIndex(-1); // Uncheck radio button for locality
+    setSelectedLocalityIndex(-1); 
   };
 
   const handleChange = (e) => {
@@ -188,10 +188,12 @@ const AddAddress = (props) => {
           addressType: formData.addressType,
           default: formData.isDefault,
         };
-        dispatch(addAddress(dataForDispatch)).then(() => {
+        dispatch(addAddress(dataForDispatch)).unwrap().then(() => {
           toast.success("address added successfully");
           setShowAddModal(false);
-        });
+        }).catch((err)=>{
+          toast.error('an error occured.')
+        })
       })
       .catch((validationErrors) => {
         const newErrors = {};
@@ -210,7 +212,7 @@ const AddAddress = (props) => {
       height="500px"
       footer={
         <div className="addAddress-btn-footer">
-          <div onClick={handleSubmit}>Save</div>
+          <div onClick={handleSubmit} style={addressData.isAddressLoading ? {cursor:"not-allowed", backgroundColor:'grey'} : {}}>Save</div>
           <div style={{ backgroundColor: "grey" }} onClick={onClose}>
             Cancel
           </div>

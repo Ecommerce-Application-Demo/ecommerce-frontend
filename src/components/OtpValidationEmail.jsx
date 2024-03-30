@@ -1,30 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Modal from '../small-components/Modal-global';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import otpAsyncThunk from '../api/asyncThunk/otpAsyncThunk';
 import { toast } from 'react-toastify';
 import LoadingScreen from '../small-components/Loading-screen';
-const OtpVerificationModal = (props) => {
-    const {
-      clickForgotPassword,
-      setClickForgotPassword,
-      clickVerifyEmail,
-      setClickVerifyEmail,
-      validateOtpEmailChange,
-      validateOtpForgotPassword,
-      setValidateOtpEmailChange,
-      setValidateOtpForgotPassword,
-    } = props;
 
-    console.log('otp modal');
-
-    const onClose =()=>{
-        clickForgotPassword ? setClickForgotPassword(false) : setClickVerifyEmail(false);
-        clickVerifyEmail ? setClickVerifyEmail(false) : setClickForgotPassword(false);
-    }
-
-    const inputRefs = [useRef(), useRef(), useRef(), useRef()];
+const OtpForEmailChange = () => {
+  const inputRefs = [useRef(), useRef(), useRef(), useRef()];
   const [otp, setOtp] = useState(Array(4).fill(''));
   const loggedInEmail = useSelector(state=>state.user.loggedInEmail);
   const [searchParams]=useSearchParams();
@@ -116,21 +98,9 @@ const OtpVerificationModal = (props) => {
       toast.error('an error occured during otp send');
     })
   }
+
   return (
-    <Modal 
-    width="500px"
-    // title="Otp Verification"
-    onClose={onClose}
-    height="400px"
-    >
-        <div style={{display:'flex',alignItems:'center',justifyContent:'center', marginTop:'30px'}}>
-        {/* <OtpForEmailChange  
-        clickForgotPassword ={clickForgotPassword}
-        setClickForgotPassword={setClickForgotPassword}
-        clickVerifyEmail={clickVerifyEmail}
-        setClickVerifyEmail={setClickVerifyEmail}
-        /> */}
-         <div className='otp-main-container'>
+    <div className='otp-main-container'>
       {isSending && <LoadingScreen/>}
       <h2>verify with OTP</h2>
       <p>sent to {email ? email : loggedInEmail}</p>
@@ -151,9 +121,7 @@ const OtpVerificationModal = (props) => {
       <p className='resend-otp-text' onClick={ sendOtpAgain }>resend OTP</p>
       <p className="loginText">login with <span className="password">password</span></p>
     </div>
-        </div>
-    </Modal>
-  )
-}
+  );
+};
 
-export default OtpVerificationModal
+export default OtpForEmailChange;
