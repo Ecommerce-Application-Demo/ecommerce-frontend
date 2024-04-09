@@ -9,22 +9,17 @@ const Home = () => {
       loggedInUserName,
     } = user;
 
-const pattern = /(hiran|kaustab|hillol|bristi)/i;
-
- const loggedinName = pattern.test(loggedInUserName);
-
   return (
    <div className='home'>
     {tags.HomeTag()}
    {isLoggedIn ?
-    loggedinName ?  
-      <h1 style={{textAlign:'center', verticalAlign:'middle',marginTop:'100px'}}>Surprise Motherfucker {loggedInUserName}</h1>
-      :
     <h1 style={{textAlign:'center', verticalAlign:'middle',marginTop:'100px'}}>Wecome {loggedInUserName}</h1>
-   
     :
     <Link to='/login-signup' style={{textAlign:'center', verticalAlign:'middle',marginTop:'100px',textDecoration:'none'}}><h1 >KINDLY LOGIN</h1></Link>
    }
+   <Link to='/product'>
+   <button>View product</button>
+   </Link>
    </div>
   )
 }

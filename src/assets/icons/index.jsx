@@ -15,4 +15,9 @@ export {default as DesiCartIcon} from './desiCartIcon';
 export {default as DesiCartIconForLoading} from './desiCartIconForLoading';
 export {default as EyeIcon} from './eyeIcon';
 export {default as EyeSlashIcon} from './eyeSlashIcon';
+export {default as StarLogo} from './starLogo';
+export {default as AddToBag} from './addToBag';
+export {default as PayOnDelivery} from './payOnDelivery';
+export {default as ReturnDelivery} from './returnDelivery';
+export {default as FreeDelivery} from './freeDelivery';
 

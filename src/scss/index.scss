@@ -11,6 +11,10 @@
 @import 'components/address/view-address';
 @import 'components/unauthorizedError/unauthorizedError.scss';
 
+//components-----single product page
+@import 'components/single-product-page/product-image';
+@import 'components/single-product-page/single-product-details';
+
 
 //small components
 // @import 'small-components/inputField';
@@ -27,6 +31,7 @@
 @import 'sections/address';
 @import 'sections/footer-page';
 @import 'sections/profile-page';
+@import 'sections/single-product-page';
 
 //nested component import
 @import 'nested_pages/account-imformation-page';
