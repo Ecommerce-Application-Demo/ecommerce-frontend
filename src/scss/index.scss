@@ -1,7 +1,10 @@
+
+
+//utilities
 @import 'utilites/variables';
+@import 'utilites/mixins';
 
 @import 'base/base';
-
 //components
 @import 'components/navbar';
 @import 'components/signUp';
@@ -14,6 +17,8 @@
 //components-----single product page
 @import 'components/single-product-page/product-image';
 @import 'components/single-product-page/single-product-details';
+@import 'components/single-product-page/product-image-phone';
+
 
 
 //small components

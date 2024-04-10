@@ -1,3 +1,4 @@
+//-------------------------------------colors--------------------------------------->
 $Blue: blue;
 $Red: red;
 $White:#fff;
@@ -19,6 +20,15 @@ $Input-normal-background: rgb(247, 243, 243);
 $Box-shadow-blue:rgba( 31, 38, 135, 0.37 );
 $Black-opacity-0_5:rgba(0, 0, 0, 0.5);
 $highlighted-text:  #00FF66;
+
+
+//--------------------------------------breakpoints for responsiveness------------------------>
+
+$bp-small: 320px !default;
+$bp-medium: 768px !default;
+$bp-large: 1280px !default;
+$bp-max-small-only: 767px !default;
+
 
 .dark-mode {
 $Blue: blue;

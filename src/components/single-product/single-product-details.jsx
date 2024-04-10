@@ -3,6 +3,7 @@ import { AddToBag, FreeDelivery, GreenTick, PayOnDelivery, ReturnDelivery, StarL
 import { products } from "../../assets/pictures/productImageAddress";
 
 const SingleProductDetails = () => {
+
   return (
     <div className="singleproduct-details-container">
       <div className="singleProduct-details-price-container">
@@ -34,7 +35,7 @@ const SingleProductDetails = () => {
           <div className="more-color-image-wrapper">
           {products?.map(product=>{
             return (
-            <img src={product?.imgLink} alt='product-image' className="more-color-image"/>
+            <img src={product?.imgLink} alt='product' className="more-color-image"/>
             )
 })}
           </div>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { products } from '../../assets/pictures/productImageAddress';
-import ReactImageMagnify from 'react-image-magnify';
 
 const ProductImage = () => {
   const [singleImage, setSingleImage] = useState('');
@@ -28,7 +27,7 @@ const ProductImage = () => {
         ))}
       </div>
       <div className="single-big-image-wrapper">
-        <ReactImageMagnify
+        {/* <ReactImageMagnify
           {...{
             smallImage: {
               alt: 'product',
@@ -44,11 +43,12 @@ const ProductImage = () => {
             hoverOffDelayInMs: 100,
             lensStyle: { backgroundColor: 'rgba(0,0,0,.6)' },
 
-            renderMode: "inPlace", // Render zoomed section within same containe
-            zoomPosition: "lens", // Align zoomed section with lens position
-            enlargedImageContainerStyle: { display: 'none' }
+            renderMode: "inPlace", 
+            zoomPosition: "lens", 
+            // enlargedImageContainerStyle: { display: 'none' }
           }}
-        />
+        /> */}
+        <img src={singleImage} alt='single image'/>
       </div>
     </div>
   );

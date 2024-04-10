@@ -2,6 +2,9 @@
     .singleProduct-details-price-container {
         padding: 0px 0px 30px 0px;
         border-bottom: 1px solid $Grey;
+        @include breakpoint(small-only) {
+            border: none;
+        }
         .singleproduct-details-brandName {
             color: $Grey;
         }
@@ -47,6 +50,9 @@
     .singleProduct-details-size-container {
         padding: 30px 0px;
         border-bottom: 1px solid $Grey;
+        @include breakpoint(small-only) {
+            border: none;
+        }
         .color-container {
             padding: 10px 0px;
             display: flex;
@@ -56,6 +62,10 @@
                 font-size: 15px;
                 font-weight: 800;
                 letter-spacing: 4px;
+                @include breakpoint(small-only) {
+                font-size: 30px;
+                font-weight: 1000;
+                }
             }
             .more-color-image-wrapper {
                 display: flex;
@@ -112,6 +122,10 @@
             font-weight: 800;
             letter-spacing: 2px;
             // justify-content: space-between;
+            @include breakpoint(small-only) {
+                letter-spacing: normal;
+                font-size: 12px;
+            }
             &>.addToCart-btn {
                 padding: 20px 60px;
                 background-color: $primary-btn-red;
@@ -125,6 +139,11 @@
                 cursor: pointer;
                 &:hover {
                     background-color: $primary-btn-red-disabled;
+                }
+                @include breakpoint(small-only) {
+                padding: 0px auto;
+                text-wrap: nowrap;
+                border-radius: 30px;
                 }
             }
             &>.wishlist-btn {
@@ -143,6 +162,11 @@
                 &:hover {
                    border: 1px solid $Black; 
                 }
+                @include breakpoint(small-only) {
+                    padding: 0px auto;
+                    text-wrap: nowrap;
+                    border-radius: 30px;
+                    }
             }
         }
     }
@@ -152,6 +176,9 @@
         display: flex;
         flex-direction: column;
         gap: 25px;
+        @include breakpoint(small-only) {
+            border: none;
+        }
         .deliveryOption-text {
             font-size: 15px;
             font-weight: 800;
@@ -185,6 +212,10 @@
             border: 1px solid $Grey;
             border-radius: 4px;
             align-items: center;
+            @include breakpoint(small-only) {
+            width: 100%; 
+           }
+
             & span:first-child {
                 display: flex;
                 align-items: center;

@@ -1,0 +1,18 @@
+//-----------------respponsive brekpoints function------------------
+@mixin breakpoint($breakpoint) {
+    @if $breakpoint == 'medium' {
+        @media (min-width: $bp-medium) {
+            @content;
+        };
+    } @else if $breakpoint == 'large' {
+        @media (min-width: $bp-large) {
+            @content;
+        }
+    } @else if $breakpoint == 'small-only' {
+        @media (max-width : $bp-max-small-only) {
+            @content;
+        }
+    } @else {
+        @error 'No value could be retrived for ' + $breakpoint;
+    }
+}
