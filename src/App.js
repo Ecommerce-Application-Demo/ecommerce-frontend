@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import ValidateJWT from './api/utilities/ResetLogin';
+import SingleProductPage from './pages/Single-product-page';
 
 function App() {
   // let isLoggedIn = useSelector(state=>state.user.isLoggedIn);
@@ -37,6 +38,7 @@ function App() {
       <Route path='/my/cancelation' element={<ProtectedRoute><AccountImformation/></ProtectedRoute>}/>
       <Route path='/my/order' element={<ProtectedRoute><AccountImformation/></ProtectedRoute>}/>
       <Route path='/my/payment' element={<ProtectedRoute><AccountImformation/></ProtectedRoute>}/>
+      <Route path='/product' element={<SingleProductPage/>}/>
       <Route path='*' element={<NotFound/>}/>
     </Routes>
     <FooterPage/>

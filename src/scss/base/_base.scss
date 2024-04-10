@@ -5,6 +5,7 @@
     box-sizing: border-box;
     scrollbar-width: none;
     font-family: 'Inconsolata', monospace;
+    transition: all 0.3s linear;
 }
 
 input[type='checkbox'] {

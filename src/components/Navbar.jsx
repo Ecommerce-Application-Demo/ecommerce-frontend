@@ -3,8 +3,11 @@ import { AccountLogo, AccountLogoActive, Cart, DesiCartIcon, SearchLogo, Wishlis
 import { Link,useLocation } from 'react-router-dom'
 import AccountDropdown from '../small-components/AccountDropdown';
 import { useSelector } from 'react-redux';
+import useBreakpoints from '../api/utilities/responsive';
 const Navbar = () => {
   // const dispatch = useDispatch();
+
+  const {isMobile} = useBreakpoints();
   
   const isLoggedIn = useSelector((state)=>{
     return state.user.isLoggedIn;
@@ -29,6 +32,8 @@ const accountLogoRoute = routeLocation ==='/login-signup' || routeLocation ==='/
   return (
     <div className='navbar-container'>
       <Link className='navbar-logo-container' to='/'><DesiCartIcon/></Link>
+      {!isMobile &&
+      <>
       <div className='navbar-section-container'>
         <Link className='navbar-section-link'>HOME</Link>
         <Link className='navbar-section-link'>CONTACT</Link>
@@ -50,6 +55,8 @@ const accountLogoRoute = routeLocation ==='/login-signup' || routeLocation ==='/
         </div> 
         }
       </div>
+      </>
+}
     </div>
   )
 }

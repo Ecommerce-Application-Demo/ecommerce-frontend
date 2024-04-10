@@ -1,7 +1,10 @@
+
+
+//utilities
 @import 'utilites/variables';
+@import 'utilites/mixins';
 
 @import 'base/base';
-
 //components
 @import 'components/navbar';
 @import 'components/signUp';
@@ -10,6 +13,12 @@
 @import 'components/address/add-address';
 @import 'components/address/view-address';
 @import 'components/unauthorizedError/unauthorizedError.scss';
+
+//components-----single product page
+@import 'components/single-product-page/product-image';
+@import 'components/single-product-page/single-product-details';
+@import 'components/single-product-page/product-image-phone';
+
 
 
 //small components
@@ -27,6 +36,7 @@
 @import 'sections/address';
 @import 'sections/footer-page';
 @import 'sections/profile-page';
+@import 'sections/single-product-page';
 
 //nested component import
 @import 'nested_pages/account-imformation-page';
