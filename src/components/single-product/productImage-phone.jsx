@@ -19,18 +19,18 @@ const ProductImagePhone = () => {
       slidesPerView={1}
       pagination={{ clickable: true }}
       EffectFlip={true}
-    //   scrollbar={{ draggable: true }}
       onSwiper={(swiper) => console.log(swiper)}
       onSlideChange={() => console.log('slide change')}
     >
-        {/* <div className='product-image-phone-wrapper'> */}
         {products?.map(product=>{
             return (
                 <SwiperSlide><img src={product.imgLink} alt='product' className='single-product-image-phone'/></SwiperSlide>
             )
         })}
-        {/* </div> */}
-      </Swiper>
+      </Swiper> 
+      {/* <div style={{width:'100%'}}>
+      <img src='https://assets.myntassets.com/assets/images/19182178/2022/12/3/3e9fae85-912c-4034-aca3-ff615c471e381670067566360-U-S-Polo-Assn-Men-Tan-Slim-Fit-Wrinkle-Free-Corduroy-Trouser-4.jpg?im=Crop,rect=(368,706,302,576)' alt='product'/>
+      </div> */}
       </div>
   )
 };

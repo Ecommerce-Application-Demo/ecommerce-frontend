@@ -3,7 +3,6 @@
     flex-direction: column;
     margin-top: 20px;
     gap: 20px;
-
     @include breakpoint(medium) {
         flex-direction: row;
     gap: 40px;

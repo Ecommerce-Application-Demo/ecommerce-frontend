@@ -7,13 +7,11 @@ import ProductImagePhone from '../components/single-product/productImage-phone';
 const SingleProductPage = () => {
   const { isMobile } = useBreakpoints();
   return (
-    <div className='global-margin'>
-        <div className="single-product-container">
+        <div className="global-margin single-product-container" style={{whiteSpace:'discard'}}>
             {!isMobile && <ProductImage/>}
             {isMobile && <ProductImagePhone/>}
             <SingleProductDetails/>
         </div>
-    </div>
   )
 }
 
