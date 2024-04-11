@@ -1,5 +1,8 @@
 .singleproduct-details-container {
-    padding: 0px 20px;
+    padding: 0px;
+    @include breakpoint(small-only) {
+    padding: 0px 20px; 
+   }
     .singleProduct-details-price-container {
         padding: 0px 0px 30px 0px;
         border-bottom: 1px solid $Grey;
@@ -141,11 +144,11 @@
             margin-top: 30px;
             font-weight: 800;
             letter-spacing: 2px;
-            // justify-content: space-between;
+            justify-content: space-between;
+            width: 100%;
             @include breakpoint(small-only) {
                 letter-spacing: normal;
                 font-size: 12px;
-                flex-wrap: wrap;
                 width: 100%;
                 gap: 10px;
                 justify-content: space-between;
@@ -161,6 +164,7 @@
                 border-radius: 4px;
                 gap: 6px;
                 cursor: pointer;
+                width: 100%;
                 @include breakpoint(small-only) {
                 padding: 0px 40px !important;
                 text-wrap: nowrap;
@@ -184,6 +188,7 @@
                 border-radius: 4px;
                 gap: 6px;
                 transition: all 0s linear;
+                width: 100%;
                 &:hover {
                    border: 1px solid $Black; 
                 }
