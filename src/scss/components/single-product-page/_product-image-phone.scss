@@ -2,7 +2,8 @@
     width: 100%;
     position: relative;
     overflow: hidden;
-    border-radius: 50px;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
   }
   
   .single-product-image-phone {
@@ -10,12 +11,12 @@
     max-height: 300px; /* Adjust the maximum height as needed */
     height: auto; /* Ensure image height adjusts proportionally */
     @include breakpoint(small-only) {
-        max-height: 93vh;
+        max-height: 60vh;
     }
   }
   
   .swiper-container {
-    width: calc(100% - 40px); /* Adjust width to fit the screen with padding */
+    // width: calc(100% - 40px); /* Adjust width to fit the screen with padding */
     margin: 0 auto; /* Center the Swiper container horizontally */
   }
   

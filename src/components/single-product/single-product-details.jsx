@@ -7,7 +7,7 @@ const SingleProductDetails = () => {
   return (
     <div className="singleproduct-details-container">
       <div className="singleProduct-details-price-container">
-      <h2>U S Polo Assn Men Denver Slim Fit Chinos</h2>
+      <p className="singleProduct-product-name">U S Polo Assn Men Denver Slim Fit Chinos</p>
       <p className="singleproduct-details-brandName">U.S. Polo Assn.</p>
       <div className="rating-container">
         <div className="rating-wrapper">

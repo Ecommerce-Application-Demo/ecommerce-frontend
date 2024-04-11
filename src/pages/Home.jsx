@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import tags from '../metaTag/dynamicTags';
+import SingleProductPage from './Single-product-page';
 const Home = () => {
     const user =useSelector((state)=>state.user)
     const {
