@@ -1,15 +1,18 @@
 .single-product-container {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    margin-top: 80px;
     gap: 20px;
     @include breakpoint(medium) {
         flex-direction: row;
     gap: 40px;
-
+    margin-top: 20px;
+        
     }
     @include breakpoint(large) {
         flex-direction: row;
     gap: 40px;
+    margin-top: 20px;
+
     }
 }
