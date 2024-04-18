@@ -44,9 +44,24 @@ const addSubCategory = createAsyncThunk(
         } 
     }
 );
+
+//async thunk for add  brand
+const addBrand = createAsyncThunk(
+    'ADD_BRAND',
+    async (brand,thunkAPI) =>{
+        try {
+           return addCategoriesProduct.addBrand(brand); 
+        }
+        catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+            return thunkAPI.rejectWithValue(message)
+        } 
+    }
+);
 const addCategoriesProductThunk = {
    addMasterCategory,
    addCategory,
    addSubCategory,
+   addBrand,
 }
 export default addCategoriesProductThunk;

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import addCategoriesProductThunk from "../../../api/asyncThunk/product-thunk/addCategories-thunk";
 
-const { addMasterCategory,addCategory, addSubCategory } = addCategoriesProductThunk;
+const { addMasterCategory,addCategory, addSubCategory, addBrand } = addCategoriesProductThunk;
 
 const initialState = {
     addMasterCategory: {
@@ -15,6 +15,11 @@ const initialState = {
         FAIL: false,
     },
     addSubCategory: {
+        START: false,
+        SUCCESS: false,
+        FAIL: false,
+    },
+    addBrand: {
         START: false,
         SUCCESS: false,
         FAIL: false,
@@ -59,6 +64,17 @@ const addProductCategorySlice = createSlice({
     .addCase(addSubCategory.rejected, (state, action) => {
         state.addSubCategory.FAIL = true;
         state.addSubCategory.START = false;
+    })
+    .addCase(addBrand.pending, (state) => {
+        state.addBrand.START = true;
+    })
+    .addCase(addBrand.fulfilled, (state, action) => {
+        state.addBrand.SUCCESS = true;
+        state.addBrand.START = false;
+    })
+    .addCase(addBrand.rejected, (state, action) => {
+        state.addBrand.FAIL = true;
+        state.addBrand.START = false;
     });
     }
 });

@@ -4,9 +4,9 @@ import getCategoriesProduct from "../../services/product-service/getCategories-s
 //async thunk for add master category
 const getMasterCategory = createAsyncThunk(
     'GET_MASTER_CATEGORY',
-    async (_,thunkAPI) =>{
+    async (masterCategory,thunkAPI) =>{
         try {
-           return getCategoriesProduct.getMasterCategory(); 
+           return getCategoriesProduct.getMasterCategory(masterCategory); 
 
         }
         catch (error) {
@@ -18,9 +18,9 @@ const getMasterCategory = createAsyncThunk(
 //async thunk for add master category
 const getCategory = createAsyncThunk(
     'GET_CATEGORY',
-    async (_,thunkAPI) =>{
+    async (category,thunkAPI) =>{
         try {
-           return getCategoriesProduct.getCategory(); 
+           return getCategoriesProduct.getCategory(category); 
 
         }
         catch (error) {

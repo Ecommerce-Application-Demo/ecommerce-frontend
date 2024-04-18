@@ -1,7 +1,25 @@
 .admin-addCategories-container {
-    margin: 30px 100px;
+    margin: 30px 20px;
     width: 100%;
+    @include breakpoint(medium) {
+    margin: 30px 75px;
+    }
 
+    @include breakpoint(large) {
+    margin: 30px 300px;
+    }
+
+    .admin-addCategory-input-code {
+        width:  100%;
+        border: 1px solid $primary-btn-red;
+        height: 40px;
+        border-radius: 10px;
+        padding-left: 20px;
+        margin-bottom: 10px;
+        &:focus {
+            outline: none;
+        }
+    }
     .admin-addCategories-wrapper {
         width: 100%;
         padding-bottom: 40px;
@@ -17,6 +35,12 @@
             background-color: $primary-btn-red;
             color: $White;
             cursor: pointer;
+            &:hover>p {
+                    background-color: $White;
+                    color: $primary-btn-red;
+                    padding: 10px 20px;
+                    border-radius: 4px;
+                }
         }
 
         .active-category {
@@ -71,6 +95,9 @@
                     cursor: not-allowed;
                     background-color: $Disabled-background;
                     border: 1px solid $Grey;
+                    &::placeholder {
+                        color: $White;
+                    }
                 }
 
                 .admin-addCategory-textArea {

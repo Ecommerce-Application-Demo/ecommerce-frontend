@@ -9,9 +9,9 @@ const AddCategories = () => {
   const dispatch = useDispatch();
   const productCategories = useSelector((state) => state.getProductCategory);
   const { masterCategoryDetails, categoryDetails } = productCategories;
-  const { addMasterCategory, addCategory, addSubCategory } = addCategoriesProductThunk;
-  const { getMasterCategory,getCategory } = getCategoriesProductThunk;
-
+  const { addMasterCategory, addCategory, addSubCategory, addBrand } = addCategoriesProductThunk;
+  const { getMasterCategory, getCategory } = getCategoriesProductThunk;
+  const [code, setCode] = useState();
   const [clickCategory, setClickCategory] = useState("");
   const [masterCategoryForm, setMasterCategoryForm] = useState({
     masterCategoryName: "",
@@ -21,24 +21,67 @@ const AddCategories = () => {
   const [categoryForm, setCategoryForm] = useState({
     categoryName: "",
     categoryDescription: "",
-    selectedMasterCategoryOption: "select",
+    selectedMasterCategoryOption: "",
   });
 
   const [subCategoryForm, setSubCategoryForm] = useState({
     subCategoryName: "",
     subCategoryDescription: "",
-    selectedMasterCategoryOption: "select",
-    selectedCategoryOption: "select",
+    selectedMasterCategoryOption: "",
+    selectedCategoryOption: "",
   });
 
+  const [brandForm, setBrandForm] = useState({
+    brandName: "",
+    brandDescription: "",
+    brandAddress: '',
+  });
+  
+  const handleCode =(e)=> {
+    setCode(e.target.value);
+  };
+
+
   const handleClickCategory = (category) => {
+    setMasterCategoryForm({
+      masterCategoryName: "",
+      masterCategoryDescription: "",
+    });
+    setCategoryForm({
+      categoryName: "",
+      categoryDescription: "",
+      selectedMasterCategoryOption: "",
+    });
+    setSubCategoryForm({
+      subCategoryName: "",
+      subCategoryDescription: "",
+      selectedMasterCategoryOption: "",
+      selectedCategoryOption: "",
+    });
+    setBrandForm({
+      brandName: "",
+      brandDescription: "",
+      brandAddress: '',
+    });
+  
     setClickCategory((prevCategory) =>
       prevCategory === category ? "" : category
     );
+    console.log(category, 'category');
+    console.log(categoryForm?.selectedMasterCategoryOption, 'categoryForm');
+    console.log(subCategoryForm?.selectedMasterCategoryOption, 'subCategoryForm');
 
-    if (category === "category" || category === 'subCategory') {
-      dispatch(getMasterCategory());
-    };
+    if (category === "category") {
+      const dataToGetMasterCategory = {
+        masterCategoryName: categoryForm?.selectedMasterCategoryOption
+      }
+      dispatch(getMasterCategory(dataToGetMasterCategory));
+    } else if (category === "subCategory") {
+      const dataToGetMasterCategory = {
+        masterCategoryName: subCategoryForm?.selectedMasterCategoryOption
+      }
+      dispatch(getMasterCategory(dataToGetMasterCategory));
+    }
   };
 
   const handleAddMasterCategory = (e) => {
@@ -54,29 +97,24 @@ const AddCategories = () => {
       [e.target.name]: e.target.value,
     }));
   };
-  const handleMasterCategoryDropdownChange = (e) => {
+  const handleMasterCategoryDropdownCategory = (e) => {
     setCategoryForm((prevState) => ({
       ...prevState,
       selectedMasterCategoryOption: e.target.value,
     }));
+  };
+
+  const handleMasterCategoryDropdownSubCategory = (e) => {
     setSubCategoryForm((prevState) => ({
       ...prevState,
       selectedMasterCategoryOption: e.target.value,
     }));
-    if (clickCategory === 'subCategory') {
       const dataForSubCategory = {
-        subCategoryName: subCategoryForm?.subCategoryName,
-        subCategoryDescription: subCategoryForm?.subCategoryDescription,
-        masterCategoryDto: {
-          masterCategoryName: subCategoryForm?.selectedMasterCategoryOption,
-        },
-        categoryDto: {
-          categoryName: subCategoryForm?.selectedCategoryOption,
-        }
+        masterCategoryName: e.target.value,
+        categoryName: subCategoryForm?.selectedCategoryOption,
       };
       dispatch(getCategory(dataForSubCategory));
-    }
-  };
+  }
 
   // ---------------------------------------all submit function ----------------------------
   const submitAddMasterCategory = () => {
@@ -88,7 +126,7 @@ const AddCategories = () => {
       categoryName: categoryForm?.categoryName,
       categoryDescription: categoryForm?.categoryDescription,
       masterCategoryDto: {
-        masterCategoryName: categoryForm?.selectedCategoryOption,
+        masterCategoryName: categoryForm?.selectedMasterCategoryOption,
       },
     };
     dispatch(addCategory(dataForAddCategory));
@@ -112,12 +150,23 @@ const AddCategories = () => {
       subCategoryName: subCategoryForm?.subCategoryName,
       subCategoryDescription: subCategoryForm?.subCategoryDescription,
       categoryDto: {
-        categoryName: subCategoryForm?.selectedSubCategoryOption,
+        categoryName: subCategoryForm?.selectedCategoryOption,
       },
     };
     dispatch(addSubCategory(dataForAddSubCategory));
   };
 
+  const handleAddBrand = (e) => {
+    setBrandForm((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const submitAddBrand = () => {
+    dispatch(addBrand(brandForm));
+  };  
+  
   const subCategorySubmitBtn = classNames({
     "admin-addCategory-Btn": true,
     "admin-addCategory-Btn-disabled": subCategoryForm.subCategoryName === "",
@@ -125,7 +174,7 @@ const AddCategories = () => {
 
   const addSubCategoryInput = classNames({
     "admin-addCategory-input": true,
-    "admin-addCategory-input-disabled": subCategoryForm?.selectedMasterCategoryOption === "select" || subCategoryForm?.selectedCategoryOption === "select",
+    "admin-addCategory-input-disabled": subCategoryForm?.selectedMasterCategoryOption === "" || subCategoryForm?.selectedCategoryOption === "",
   });
 
   const masterCategorySubmitBtn = classNames({
@@ -136,16 +185,32 @@ const AddCategories = () => {
   const addCategoryInput = classNames({
     "admin-addCategory-input": true,
     "admin-addCategory-input-disabled":
-      categoryForm?.selectedCategoryOption === "select",
+      categoryForm?.selectedMasterCategoryOption === "",
   });
   const categorySubmitBtn = classNames({
     "admin-addCategory-Btn": true,
     "admin-addCategory-Btn-disabled": categoryForm.categoryName === "",
   });
-  console.log(categoryForm.selectedCategoryOption);
+
+  const brandSubmitBtn = classNames({
+    "admin-addCategory-Btn": true,
+    "admin-addCategory-Btn-disabled": brandForm?.brandName === "",
+  })
   return (
     <div className="global-margin">
-      <div className="admin-addCategories-container">
+     {code !== '1213' && (
+  <div className="admin-addCategories-container">
+    <input
+      id="code"
+      className="admin-addCategory-input-code"
+      placeholder="Type your secret code for add categories"
+      name="code"
+      value={code}
+      onChange={handleCode}
+    />
+  </div>
+)}
+      {code==='1213' && <div className="admin-addCategories-container">
         <div className="admin-addCategories-wrapper">
           <div
             className={`admin-addCategories-collaps-wrapper ${
@@ -206,10 +271,10 @@ const AddCategories = () => {
                 <select
                   id="categoryDropdown"
                   className="admin-addCategory-dropdown"
-                  onChange={handleMasterCategoryDropdownChange}
+                  onChange={handleMasterCategoryDropdownCategory}
                   value={categoryForm.selectedMasterCategoryOption}
                 >
-                  <option value="select">Select an master category</option>
+                  <option value="">Select an master category</option>
                   {masterCategoryDetails?.map((masterCategory) => {
                     return (
                       <option value={masterCategory?.masterCategoryName}>
@@ -223,7 +288,7 @@ const AddCategories = () => {
                   className={addCategoryInput}
                   placeholder="Type your category name"
                   name="categoryName"
-                  disabled={categoryForm.selectedMasterCategoryOption === "select"}
+                  disabled={categoryForm.selectedMasterCategoryOption === ""}
                   value={categoryForm.categoryName}
                   onChange={handleAddCategory}
                 />
@@ -259,13 +324,13 @@ const AddCategories = () => {
           {clickCategory === "subCategory" && (
             <div className="admin-addCategories-expand-wrapper">
               <div className="admin-category-option-wrapper">
-              <select
+                <select
                   id="subCategoryDropdown"
                   className="admin-addCategory-dropdown"
-                  onChange={handleMasterCategoryDropdownChange}
+                  onChange={handleMasterCategoryDropdownSubCategory}
                   value={subCategoryForm.selectedMasterCategoryOption}
                 >
-                  <option value="select">Select a master category</option>
+                  <option value="">Select a master category</option>
                   {masterCategoryDetails?.map((masterCategory) => {
                     return (
                       <option value={masterCategory?.masterCategoryName}>
@@ -280,12 +345,12 @@ const AddCategories = () => {
                   onChange={handleSubCategoryDropdownChange}
                   value={subCategoryForm.selectedCategoryOption}
                 >
-                  <option value="select">Select a category</option>
+                  <option value="">Select a category</option>
                   {categoryDetails?.map(category=>{
                     return (
                         <option value={category?.categoryName}>{category?.categoryName}</option>
                     )
-                })}
+                  })}
                 </select>
                 <input
                   id="subCategoryName"
@@ -293,9 +358,8 @@ const AddCategories = () => {
                   placeholder="Type your sub category name"
                   name="subCategoryName"
                   disabled={
-                    subCategoryForm.selectedMasterCategoryOption === "select" ||
-                    subCategoryForm.selectedCategoryOption === "select"
-
+                    subCategoryForm.selectedMasterCategoryOption === '' ||
+                    subCategoryForm.selectedCategoryOption === ''
                   }
                   value={subCategoryForm.subCategoryName}
                   onChange={handleAddSubCategory}
@@ -319,7 +383,55 @@ const AddCategories = () => {
             </div>
           )}
         </div>
-      </div>
+        <div className="admin-addCategories-wrapper">
+          <div
+            className={`admin-addCategories-collaps-wrapper ${
+              clickCategory === "brand" && "active-category"
+            }`}
+            onClick={() => handleClickCategory("brand")}
+          >
+            <p>ADD BRAND</p>
+            {clickCategory !== "brand" ? <SlArrowDown /> : <SlArrowUp />}
+          </div>
+          {clickCategory === "brand" && (
+            <div className="admin-addCategories-expand-wrapper">
+              <div className="admin-category-option-wrapper">
+                <input
+                  id="brandName"
+                  className="admin-addCategory-input"
+                  placeholder="Type your brand name"
+                  name="brandName"
+                  value={brandForm?.brandName}
+                  onChange={handleAddBrand}
+                /> 
+                <textarea
+                  id="brandDescription"
+                  placeholder="Write a description for your brand"
+                  className="admin-addCategory-textArea"
+                  name="brandDescription"
+                  value={brandForm?.brandDescription}
+                  onChange={handleAddBrand}
+                />
+                <textarea
+                  id="brandAddress"
+                  placeholder="Write an address for your brand"
+                  className="admin-addCategory-textArea"
+                  name="brandAddress"
+                  value={brandForm?.brandAddress}
+                  onChange={handleAddBrand}
+                />
+              </div>
+              <button
+                className={brandSubmitBtn}
+                onClick={submitAddBrand}
+                disabled={brandForm?.brandName === ""}
+              >
+                Submit
+              </button>
+            </div>
+          )}
+        </div>
+      </div>}
     </div>
   );
 };
