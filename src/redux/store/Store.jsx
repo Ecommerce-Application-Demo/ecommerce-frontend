@@ -5,6 +5,8 @@ import addressSlice from '../Slices/addressSlice';
 import profileSlice from '../Slices/profileSlice';
 import userSlice from '../Slices/userSlice';
 import errorSlice from '../Slices/errorSlice';
+import addCategoriesSlice from '../Slices/product/addCategoriesSlice';
+import getCategoriesSlice from '../Slices/product/getCategoriesSlice';
 
 const store = configureStore({
     reducer:{
@@ -13,6 +15,8 @@ const store = configureStore({
         address:addressSlice,
         profile:profileSlice,
         error: errorSlice,
+        addProductCategory: addCategoriesSlice,
+        getProductCategory: getCategoriesSlice,
     }
 });
 

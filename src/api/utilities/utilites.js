@@ -4,3 +4,4 @@
 export const hostname = 'https://ecommerce-backend-dev.onrender.com/user';
 
 export const pincode_hostname = 'https://api.postalpincode.in/pincode';
+export const product_hostname = 'https://ecommerce-backend-product-service.onrender.com/product';
