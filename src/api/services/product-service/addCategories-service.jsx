@@ -20,10 +20,18 @@ const addSubCategory = async (subCategory) => {
     return  response.data;
 }
 
+const addBrand = async (brand) => {
+    const response = await axiosInstanceProduct.post(`/add/brand`,
+    brand
+    );
+    return  response.data;
+}
+
 const addCategoriesProduct = {
    addMasterCategory,
    addCategory,
    addSubCategory,
+   addBrand,
 }
 
 export default addCategoriesProduct;
