@@ -45,9 +45,9 @@ const Modal = ({
   }, []);
 
   const handleWidth = () => {
-    if (dimensions.width < 480) {
+    if (dimensions.width < 768) {
       return widthForMobile || widthForTab || width;
-    } else if (dimensions.width < 768 && dimensions.width > 480) {
+    } else if (dimensions.width > 768 && dimensions.width < 1279) {
       return widthForTab || width;
     } else {
       return width;

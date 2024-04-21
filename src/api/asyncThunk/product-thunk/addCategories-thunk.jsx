@@ -53,15 +53,42 @@ const addBrand = createAsyncThunk(
            return addCategoriesProduct.addBrand(brand); 
         }
         catch (error) {
-            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
-            return thunkAPI.rejectWithValue(message)
+            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+            return thunkAPI.rejectWithValue(message);
         } 
     }
 );
+
+const addProduct = createAsyncThunk(
+    'ADD_PRODUCT',
+    async (product, thunkAPI) => {
+        try {
+            return addCategoriesProduct.addProduct(product); 
+        } catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+);
+
+const addProductSkuThunk = createAsyncThunk(
+    'ADD_PRODUCT_SKU',
+    async (productSku, thunkAPI) => {
+        try {
+            return addCategoriesProduct.addProductSkuService(productSku); 
+        } catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+);
+
 const addCategoriesProductThunk = {
    addMasterCategory,
    addCategory,
    addSubCategory,
    addBrand,
+   addProduct,
+   addProductSkuThunk,
 }
 export default addCategoriesProductThunk;

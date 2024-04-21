@@ -27,27 +27,6 @@ const ProductImage = () => {
         ))}
       </div>
       <div className="single-big-image-wrapper">
-        {/* <ReactImageMagnify
-          {...{
-            smallImage: {
-              alt: 'product',
-              isFluidWidth: true,
-              src: singleImage,
-            },
-            largeImage: {
-              src: singleImage,
-              width: 1200,
-              height: 1800, 
-            },
-            hoverDelayInMs: 100,
-            hoverOffDelayInMs: 100,
-            lensStyle: { backgroundColor: 'rgba(0,0,0,.6)' },
-
-            renderMode: "inPlace", 
-            zoomPosition: "lens", 
-            // enlargedImageContainerStyle: { display: 'none' }
-          }}
-        /> */}
         <img src={singleImage} alt='single image'/>
       </div>
     </div>

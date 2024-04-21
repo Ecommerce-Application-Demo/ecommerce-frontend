@@ -30,9 +30,40 @@ const getCategory = createAsyncThunk(
     }
 )
 
+//async thunk for get brand 
+const getSubCategory = createAsyncThunk(
+    'GET_SUBCATEGORY',
+    async (subCategory,thunkAPI) =>{
+        try {
+           return getCategoriesProduct.getSubCategory(subCategory); 
+
+        }
+        catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+            return thunkAPI.rejectWithValue(message)
+        } 
+    }
+)
+
+//async thunk for get brand 
+const getBrand = createAsyncThunk(
+    'GET_BRAND',
+    async (_,thunkAPI) =>{
+        try {
+           return getCategoriesProduct.getBrand(); 
+
+        }
+        catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+            return thunkAPI.rejectWithValue(message)
+        } 
+    }
+)
 
 const getCategoriesProductThunk = {
    getMasterCategory,
    getCategory,
+   getSubCategory,
+   getBrand,
 }
 export default getCategoriesProductThunk;

@@ -12,7 +12,6 @@ const getMasterCategory = async (masterCategory) => {
 }
 
 const getCategory = async (category) => {
-    console.log(category);
     const response = await axiosInstanceProduct.get(`/get/category`,{
     params: {
         masterCategoryName: category?.masterCategoryName || null,
@@ -21,11 +20,31 @@ const getCategory = async (category) => {
     }
     );
     return  response.data;
+};
+
+const getSubCategory = async (subCategory) => {
+    const response = await axiosInstanceProduct.get(`/get/sub-category`,{
+    params: {
+        subCategoryName: subCategory?.subCategoryName || null,
+        categoryName: subCategory?.categoryName || null,
+    }
+    }
+    );
+    return  response.data;
+}
+
+const getBrand = async () => {
+    const response = await axiosInstanceProduct.get(`/get/brand`,{
+    }
+    );
+    return  response.data;
 }
 
 const getCategoriesProduct = {
    getMasterCategory,
    getCategory,
+   getSubCategory,
+   getBrand,
 }
 
 export default getCategoriesProduct;
