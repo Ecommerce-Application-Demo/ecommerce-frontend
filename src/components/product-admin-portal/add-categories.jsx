@@ -1,17 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 import { useDispatch, useSelector } from "react-redux";
 import addCategoriesProductThunk from "../../api/asyncThunk/product-thunk/addCategories-thunk";
 import classNames from "classnames";
 import getCategoriesProductThunk from "../../api/asyncThunk/product-thunk/getCategories-thunk";
+import { toast } from "react-toastify";
+import { resetAddBrand, resetAddCategory, resetAddMasterCategory, resetAddSubCategory } from "../../redux/Slices/product/addCategoriesSlice";
 
 const AddCategories = () => {
   const dispatch = useDispatch();
-  const productCategories = useSelector((state) => state.getProductCategory);
-  const { masterCategoryDetails, categoryDetails } = productCategories;
+  const getProductCategories = useSelector((state) => state.getProductCategory);
+  const addProductCategories = useSelector((state) => state.addProductCategory);
+
+  const { masterCategoryDetails, categoryDetails, } = getProductCategories;
+  
   const { addMasterCategory, addCategory, addSubCategory, addBrand } = addCategoriesProductThunk;
   const { getMasterCategory, getCategory } = getCategoriesProductThunk;
-  const [code, setCode] = useState();
   const [clickCategory, setClickCategory] = useState("");
   const [masterCategoryForm, setMasterCategoryForm] = useState({
     masterCategoryName: "",
@@ -37,11 +41,30 @@ const AddCategories = () => {
     brandAddress: '',
   });
   
-  const handleCode =(e)=> {
-    setCode(e.target.value);
-  };
+  useEffect(()=>{
+    if (addProductCategories?.addMasterCategory?.SUCCESS) {
+      toast.success('master category added successfully.')
+    };
 
+    if (addProductCategories?.addCategory?.SUCCESS) {
+      toast.success('category added successfully.')
+    };
 
+    if (addProductCategories?.addSubCategory?.SUCCESS) {
+      toast.success('sub category added successfully.')
+    };
+
+    if (addProductCategories?.addBrand?.SUCCESS) {
+      toast.success('Brand added successfully.')
+    };
+
+  },[
+    addProductCategories?.addMasterCategory?.SUCCESS, 
+    addProductCategories?.addCategory?.SUCCESS, 
+    addProductCategories?.addSubCategory?.SUCCESS, 
+    addProductCategories?.addBrand?.SUCCESS
+  ])
+  
   const handleClickCategory = (category) => {
     setMasterCategoryForm({
       masterCategoryName: "",
@@ -118,7 +141,12 @@ const AddCategories = () => {
 
   // ---------------------------------------all submit function ----------------------------
   const submitAddMasterCategory = () => {
-    dispatch(addMasterCategory(masterCategoryForm));
+    dispatch(addMasterCategory(masterCategoryForm)).unwrap()
+    .then(()=>{
+      setTimeout(() => {
+        dispatch(resetAddMasterCategory());
+      }, 5000);
+    })
   };
 
   const submitAddCategory = () => {
@@ -129,7 +157,12 @@ const AddCategories = () => {
         masterCategoryName: categoryForm?.selectedMasterCategoryOption,
       },
     };
-    dispatch(addCategory(dataForAddCategory));
+    dispatch(addCategory(dataForAddCategory)).unwrap()
+    .then(()=>{
+      setTimeout(() => {
+        dispatch(resetAddCategory());
+      }, 5000);
+    })
   };
   const handleAddSubCategory = (e) => {
     setSubCategoryForm((prevState) => ({
@@ -153,7 +186,12 @@ const AddCategories = () => {
         categoryName: subCategoryForm?.selectedCategoryOption,
       },
     };
-    dispatch(addSubCategory(dataForAddSubCategory));
+    dispatch(addSubCategory(dataForAddSubCategory)).unwrap()
+    .then(()=>{
+      setTimeout(() => {
+        dispatch(resetAddSubCategory());
+      }, 5000);
+    })
   };
 
   const handleAddBrand = (e) => {
@@ -164,12 +202,17 @@ const AddCategories = () => {
   };
 
   const submitAddBrand = () => {
-    dispatch(addBrand(brandForm));
+    dispatch(addBrand(brandForm)).unwrap()
+    .then(()=>{
+      setTimeout(() => {
+        dispatch(resetAddBrand());
+      }, 5000);
+    })
   };  
   
   const subCategorySubmitBtn = classNames({
     "admin-addCategory-Btn": true,
-    "admin-addCategory-Btn-disabled": subCategoryForm.subCategoryName === "",
+    "admin-addCategory-Btn-disabled": subCategoryForm.subCategoryName === "" || addProductCategories?.addSubCategory?.START,
   });
 
   const addSubCategoryInput = classNames({
@@ -180,7 +223,7 @@ const AddCategories = () => {
   const masterCategorySubmitBtn = classNames({
     "admin-addCategory-Btn": true,
     "admin-addCategory-Btn-disabled":
-      masterCategoryForm.masterCategoryName === "",
+      masterCategoryForm.masterCategoryName === "" || addProductCategories?.addMasterCategory?.START,
   });
   const addCategoryInput = classNames({
     "admin-addCategory-input": true,
@@ -189,28 +232,15 @@ const AddCategories = () => {
   });
   const categorySubmitBtn = classNames({
     "admin-addCategory-Btn": true,
-    "admin-addCategory-Btn-disabled": categoryForm.categoryName === "",
+    "admin-addCategory-Btn-disabled": categoryForm.categoryName === "" ||  addProductCategories?.addCategory?.START,
   });
 
   const brandSubmitBtn = classNames({
     "admin-addCategory-Btn": true,
-    "admin-addCategory-Btn-disabled": brandForm?.brandName === "",
+    "admin-addCategory-Btn-disabled": brandForm?.brandName === ""||  addProductCategories?.addBrand?.START,
   })
   return (
-    <div className="global-margin">
-     {code !== '1213' && (
-  <div className="admin-addCategories-container">
-    <input
-      id="code"
-      className="admin-addCategory-input-code"
-      placeholder="Type your secret code for add categories"
-      name="code"
-      value={code}
-      onChange={handleCode}
-    />
-  </div>
-)}
-      {code==='1213' && <div className="admin-addCategories-container">
+<div className="admin-addCategories-container">
         <div className="admin-addCategories-wrapper">
           <div
             className={`admin-addCategories-collaps-wrapper ${
@@ -431,8 +461,7 @@ const AddCategories = () => {
             </div>
           )}
         </div>
-      </div>}
-    </div>
+      </div>
   );
 };
 

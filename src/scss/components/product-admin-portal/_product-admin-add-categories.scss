@@ -1,13 +1,4 @@
 .admin-addCategories-container {
-    margin: 30px 20px;
-    width: 100%;
-    @include breakpoint(medium) {
-    margin: 30px 75px;
-    }
-
-    @include breakpoint(large) {
-    margin: 30px 300px;
-    }
 
     .admin-addCategory-input-code {
         width:  100%;

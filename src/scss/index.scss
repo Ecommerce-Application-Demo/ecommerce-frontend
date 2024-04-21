@@ -21,7 +21,9 @@
 
 //components--------product admin portal page
 @import 'components/product-admin-portal/product-admin-add-categories';
-
+@import 'components/product-admin-portal/product-admin-add-product';
+@import 'components/product-admin-portal/all-products-admin';
+@import 'components/product-admin-portal/product-admin-edit-product';
 
 
 //small components
@@ -40,6 +42,7 @@
 @import 'sections/footer-page';
 @import 'sections/profile-page';
 @import 'sections/single-product-page';
+@import 'sections/product-admin-page';
 
 //nested component import
 @import 'nested_pages/account-imformation-page';

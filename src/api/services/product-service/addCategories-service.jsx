@@ -27,11 +27,28 @@ const addBrand = async (brand) => {
     return  response.data;
 }
 
+const addProduct = async (product) => {
+    const response = await axiosInstanceProduct.post(`/add/product`,
+    product
+    );
+    return  response.data;
+};
+
+const addProductSkuService = async (productSku) => {
+    const response = await axiosInstanceProduct.post(`/add/product/sku`,
+    productSku
+    );
+    return  response.data;
+};
+
+
 const addCategoriesProduct = {
    addMasterCategory,
    addCategory,
    addSubCategory,
    addBrand,
+   addProduct,
+   addProductSkuService,
 }
 
 export default addCategoriesProduct;

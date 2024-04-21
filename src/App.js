@@ -15,6 +15,9 @@ import SingleProductPage from './pages/Single-product-page';
 import ProductAdminPage from './pages/product-admin-portal-page';
 import NavbarProductAdmin from './components/navbar-product-admin';
 import AddCategories from './components/product-admin-portal/add-categories';
+import AddProduct from './components/product-admin-portal/add-product';
+import AddProductSku from './components/product-admin-portal/add-product-sku';
+import AllProducts from './components/product-admin-portal/get-all-products';
 
 function App() {
   // let isLoggedIn = useSelector(state=>state.user.isLoggedIn);
@@ -45,7 +48,6 @@ const routeParams=useLocation().pathname;
       <Route path='/my/payment' element={<ProtectedRoute><AccountImformation/></ProtectedRoute>}/>
       <Route path='/product' element={<SingleProductPage/>}/>
       <Route path='/product-admin' element={<ProductAdminPage/>}/>
-      <Route path='/product-admin/:id' element={<AddCategories/>}/>
       <Route path='*' element={<NotFound/>}/>
     </Routes>
     <FooterPage/>

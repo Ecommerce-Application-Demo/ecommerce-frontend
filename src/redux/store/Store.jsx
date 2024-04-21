@@ -7,6 +7,7 @@ import userSlice from '../Slices/userSlice';
 import errorSlice from '../Slices/errorSlice';
 import addCategoriesSlice from '../Slices/product/addCategoriesSlice';
 import getCategoriesSlice from '../Slices/product/getCategoriesSlice';
+import getProductsSlice from '../Slices/product/productSlice';
 
 const store = configureStore({
     reducer:{
@@ -17,6 +18,8 @@ const store = configureStore({
         error: errorSlice,
         addProductCategory: addCategoriesSlice,
         getProductCategory: getCategoriesSlice,
+        getProducts: getProductsSlice,
+
     }
 });
 
