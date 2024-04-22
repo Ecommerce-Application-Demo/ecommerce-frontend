@@ -1,0 +1,90 @@
+.side-navbar-container {
+    position: absolute;
+    height: 100vh;
+    width: 75vw;
+    min-width: 200px;
+    max-width: 500px;
+    background-color: $White;
+    left: 0;
+    top: 0;
+    border-top-right-radius: 30px;
+    display: flex;
+    overflow-y: scroll;
+    flex-direction: column;
+  box-shadow: $modal-primary-box-shadow;
+
+  animation: sidebarAnimation 0.8s;
+  .side-navbar-login-section {
+    width: 100%;
+    background-color:$primary-btn-red;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    flex-direction: column;
+    padding: 30px;
+    color:$White;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    .side-navbar-user-icon-wrapper {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        background-color: $White;
+        border-radius: 4px;
+        color: $Black;
+    }
+  }
+  .side-navbar-masterCategory-section {
+    padding: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-bottom: 1px solid $primary-btn-red;
+    &>div {
+        display: flex;
+        flex-direction: row;
+        padding: 15px 25px;
+        justify-content: space-between;
+        align-items: center;
+        letter-spacing: 3px;
+        font-weight: bold;
+        color: $primary-btn-red;
+    }
+  }
+  .side-navbar-account-section {
+    display: flex;
+    width: 100%;
+    padding: 20px 0px 0px;
+    // margin-bottom: 0;
+    flex-direction: column;
+    &>p {
+        padding: 15px 25px;
+        color: $Grey;
+        border-radius: 20px;
+        &:hover {
+            color: $White;
+            background-color: $Grey;
+        }
+    }
+    &>p:last-child {
+        background-color: $primary-btn-red;
+        color: $White;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+        &:hover {
+        background-color: $White;
+        color: $primary-btn-red;
+        }
+    }
+  }
+}
+
+@keyframes sidebarAnimation {
+    0% {
+        left: -100px;
+    }
+    100% {
+        left: 0;
+    }
+}
