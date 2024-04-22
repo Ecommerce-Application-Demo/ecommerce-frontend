@@ -1,11 +1,11 @@
 .navbar-container {
-    height: 80px;
+    height: 60px;
     width: 100%;
     background-color: $White;
     box-shadow:  0px 2px 8px 0px $boxShadow;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: start;
     position: fixed;
     z-index: 50;
     top: 0;
@@ -15,14 +15,21 @@
         width: 100%;
         margin-left: auto;
         margin-right: auto;
+    justify-content: space-evenly;
+    height: 80px;
     }
 
     @include breakpoint(large) {
         width: 100%;
-        // margin-left: auto;
-        // margin-right: auto;
+        justify-content: space-evenly;
+    height: 80px;
     }
-
+    .navbar-logo-container {
+        text-decoration: none;
+        color: $primary-btn-red;
+        font-size: 20px;
+        font-weight: bold;
+    }
     .navbar-section-container {
         display: flex;
         justify-content: space-evenly;
@@ -84,4 +91,29 @@
         //    cursor: pointer;
         }
     }
+    .navbar-section-mobile-container {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0px 20px;
+        width: 100%;
+
+        .left-side-mobile-navbar {
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+            align-items: center;
+            &>:first-child {
+                margin-top: 3px;
+            }
+        }
+        .right-side-mobile-navbar {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 5px;
+        }
+    }
+
 }
