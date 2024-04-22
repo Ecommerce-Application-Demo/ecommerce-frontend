@@ -68,14 +68,10 @@
         }
     }
     &>p:last-child {
-        background-color: $primary-btn-red;
-        color: $White;
-        border-bottom-right-radius: 0px;
-        border-bottom-left-radius: 0px;
-        &:hover {
-        background-color: $White;
-        color: $primary-btn-red;
-        }
+        font-size: 20px;
+        letter-spacing: 4px;
+        font-weight: bold;
+       border-radius: 0px;
     }
   }
 }
