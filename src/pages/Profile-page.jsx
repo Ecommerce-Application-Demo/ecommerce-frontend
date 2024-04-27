@@ -155,7 +155,7 @@ const ProfilePage = () => {
   const handleValidatePassword = () => {
     console.log('hii');
     const dataForDispatch = {
-      input: formData.newPassword,
+      input: formData.currentPassword,
     };
     dispatch(validatePassword(dataForDispatch))
       .unwrap()

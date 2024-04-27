@@ -1,14 +1,23 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from "react";
 import { BiSolidUserDetail } from "react-icons/bi";
 import { FaAngleRight } from "react-icons/fa6";
+import { toast } from "react-toastify";
+import { reset } from "../../redux/Slices/userSlice";
+import userApi from "../../api/asyncThunk/userApi";
 
 const SideNavbar = (props) => {
-  const {
-    sidebarOpen,
-    setSidebarOpen,
-  } = props;
+  const { 
+     dispatch,
+     isLoggedIn,
+     loggedInUserName,
+     navigate, 
+     setSidebarOpen, 
+     sidebarOpen ,
+    } = props;
 
-  const ref= useRef();
+    const {logout} = userApi;
+
+  const ref = useRef();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -17,47 +26,79 @@ const SideNavbar = (props) => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [sidebarOpen, setSidebarOpen]);
+
+  const handleClickSignup = () => {
+    setSidebarOpen(false);
+    navigate("/login-signup");
+  };
+
+    const handleLogout = () => {
+      dispatch(logout())
+      .unwrap()
+      .then((res)=>{
+        toast.success('your account has been logout successfully.');
+        console.log(res);
+        navigate('/');
+      })
+      .catch((error)=>{
+        toast.error('an error occured during logout.');
+        console.log(error);
+      });
+      dispatch(reset());
+    }
+  
   return (
-    <div className='side-navbar-container' ref={ref}>
-      <div className='side-navbar-login-section'>
-        <div className="side-navbar-user-icon-wrapper">
-          <BiSolidUserDetail size={60}/>
+    <div className="side-navbar-container" ref={ref}>
+      {isLoggedIn ? (
+        <div className="side-navbar-login-section">
+          <div className="side-navbar-user-icon-wrapper">
+            <BiSolidUserDetail size={60} />
+          </div>
+          {loggedInUserName}
         </div>
-          KINGSHUK ROY
+      ) : (
+        <div
+          className="side-navbar-login-section-withoutlogin"
+          onClick={handleClickSignup}
+        >
+          <p>SIGN UP | LOGIN</p>
         </div>
+      )}
       <div className="side-navbar-masterCategory-section">
         <div>
-        <p>MEN</p>
-        <FaAngleRight />
+          <p>MEN</p>
+          <FaAngleRight />
         </div>
         <div>
-        <p>WOMEN</p>
-        <FaAngleRight />
+          <p>WOMEN</p>
+          <FaAngleRight />
         </div>
         <div>
-        <p>KIDS</p>
-        <FaAngleRight />
+          <p>KIDS</p>
+          <FaAngleRight />
         </div>
         <div>
-        <p>FOOTWEAR</p>
-        <FaAngleRight />
+          <p>FOOTWEAR</p>
+          <FaAngleRight />
         </div>
       </div>
-      <div className="side-navbar-account-section">
-        <p>ACCOUNT</p>
-        <p>ORDERS</p>
-        <p>CANCELATIONS</p>
-        <p>CONTACT US</p>
-
-        <p>LOGOUT</p>
-      </div>
+      { isLoggedIn && 
+      (
+        <div className="side-navbar-account-section">
+          <p>ACCOUNT</p>
+          <p>ORDERS</p>
+          <p>CANCELATIONS</p>
+          <p>CONTACT US</p>
+          <p onClick={handleLogout}>LOGOUT</p>
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
 export default SideNavbar;

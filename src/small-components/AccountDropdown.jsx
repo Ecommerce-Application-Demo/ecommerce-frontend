@@ -7,31 +7,27 @@ import { toast } from 'react-toastify';
 import { reset } from '../redux/Slices/userSlice';
 
 const AccountDropdown = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const {logout} = userApi;
   const dispatch = useDispatch();
   const user = useSelector((state)=>{
     return state.user;
   })
   const {
-    refreshToken,
     isLoggedIn,
   }=user;
 
   const handleLogout = () => {
-    let data ={
-      input : refreshToken
-    } 
-    dispatch(logout(data)).then((unwrapResult)=>{
-      console.log(unwrapResult);
-      if(unwrapResult.type === 'LOGOUT/rejected'){
-      toast.error(unwrapResult.payload)
-      }else {
-      toast.success('User logged out successfully');
-      navigate('/')
-    }
-    dispatch(reset())
+    dispatch(logout())
+    .unwrap()
+    .then(()=>{
+      toast.success('your account has been logout successfully.');
+      navigate('/');
     })
+    .catch(()=>{
+      toast.error('an error occured during logout.');
+    });
+    dispatch(reset());
   }
   return (
     <div className='accountDropdown-container'>

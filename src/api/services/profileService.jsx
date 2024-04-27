@@ -24,14 +24,14 @@ const editProfile = async (formData) => {
 
 
 const validatePassword = async (currentPasword) => {
-  const response = await axiosInstanceProtected.post(`${hostname}/api/my/relogin`,
+  const response = await axiosInstanceProtected.post(`/api/my/relogin`,
   currentPasword,
   );
   return  response.data;
 }
 
 const changePassword = async (newPassword) => {
-  const response = await axios.post(`${hostname}/api/my/password`,
+  const response = await axios.post(`/api/my/password`,
   newPassword,
   );
   return  response.data;

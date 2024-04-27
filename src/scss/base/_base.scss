@@ -30,3 +30,22 @@ html,body {
         overflow-x: hidden;
     }
 }
+
+.Toastify__toast {
+    font-size: 16px;
+    max-width: 400px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+
+    @include breakpoint(small-only) {
+        font-size: 14px;
+        max-width: 300px;
+        border-radius: 4px;
+    }
+  }
+  
+  

@@ -1,0 +1,46 @@
+.popup-main-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: $White;
+    min-height: 200px;
+    animation: popupAnimation 0.8s;
+    box-shadow: $popup-primary-box-shadow;
+    z-index: $top-most-zIndex;
+  }
+  
+  .popup-main-container.closing {
+    animation-name: closeAnimation;
+  }
+  
+  .popup-children-wrapper {
+    padding: 10px;
+  }
+  
+  .login-image-container {
+    background-image: url('https://www.appmysite.com/blog/wp-content/uploads/2021/06/2-696x392.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100%;
+    background-position: center;
+    height: 150px;
+  }
+  
+  @keyframes popupAnimation {
+    0% {
+      bottom: -100px;
+    }
+    100% {
+      bottom: 0;
+    }
+  }
+  
+  @keyframes closeAnimation {
+    0% {
+      bottom: 0;
+    }
+    100% {
+      bottom: -100px;
+    }
+  }
+  
