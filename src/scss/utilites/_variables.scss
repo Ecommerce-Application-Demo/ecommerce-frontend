@@ -23,6 +23,13 @@ $highlighted-text:  #00FF66;
 
 //------------boxShadow-----------
 $modal-primary-box-shadow : 0 0 0 50vmax rgba(0, 0, 0, 0.8);
+$popup-primary-box-shadow : 0 0 0 80vmax rgba(0, 0, 0, 0.8);
+
+//------------z-indexes-------------------
+$top-most-zIndex: 1;
+$secondTop-zIndex: 0.9;
+
+
 
 //--------------------------------------breakpoints for responsiveness------------------------>
 

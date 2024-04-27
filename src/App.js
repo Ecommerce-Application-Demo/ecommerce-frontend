@@ -8,30 +8,37 @@ import AccountImformation from './nested_pages/Account-imformation-page';
 import FooterPage from './pages/footer-page';
 import ProtectedRoute from './api/utilities/ProtectedRoute';
 import ProtectedRouteLogin from './api/utilities/ProtectedRoute-loginFLow';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import SingleProductPage from './pages/Single-product-page';
 import ProductAdminPage from './pages/product-admin-portal-page';
 import NavbarProductAdmin from './components/navbar-product-admin';
-import AddCategories from './components/product-admin-portal/add-categories';
-import AddProduct from './components/product-admin-portal/add-product';
-import AddProductSku from './components/product-admin-portal/add-product-sku';
-import AllProducts from './components/product-admin-portal/get-all-products';
+import Popup from './small-components/Popup';
+import LoginPopupMobile from './components/navbar/login-popup-mobile';
+import useBreakpoints from './api/utilities/responsive';
 
 function App() {
-  // let isLoggedIn = useSelector(state=>state.user.isLoggedIn);
-// const jwtToken = useSelector(state=>state.user.JWTtoken);
-//   useEffect(()=>{
-//     ValidateJWT(jwtToken);
-//   },[])
-const routeParams=useLocation().pathname;
+  const routeParams=useLocation().pathname;
+  const { isMobile } = useBreakpoints();
+  const { isLoggedIn } = useSelector((state)=> state.user);
+  const [openLoginPopup, setOpenLoginPopup] = useState(false);
+  console.log(isLoggedIn, 'isLoggedIn');
+  console.log(isMobile, 'ismobile');
+  useEffect(()=>{
+    if (!isLoggedIn && isMobile && routeParams !=='/login-signup') {
+      setTimeout(() => {
+        setOpenLoginPopup(true);
+      }, 6000);
+    }
+  },[isMobile, isLoggedIn]);
+  console.log(openLoginPopup, 'setOpenLoginPopup');
 
-  console.log(routeParams);
   return (
     <>
     {!routeParams.includes('/product-admin') && <Navbar/>}
     {routeParams.includes('/product-admin') && <NavbarProductAdmin/>}
+    {openLoginPopup && <LoginPopupMobile setOpenLoginPopup = { setOpenLoginPopup }/>}
     <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/login-signup' element={<ProtectedRouteLogin><LoginSignUp /></ProtectedRouteLogin>}/>

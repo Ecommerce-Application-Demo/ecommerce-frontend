@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import AccountDropdown from "../small-components/AccountDropdown";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useBreakpoints from "../api/utilities/responsive";
 import {
   DesiCartIcon,
@@ -14,14 +14,27 @@ import {
 import SideNavbar from "./navbar/sidebar";
 import { FaBars } from "react-icons/fa";
 import Sidebar from "./navbar/sidebar";
+import userApi from "../api/asyncThunk/userApi";
 
 const Navbar = () => {
+  const user = useSelector((state)=>{
+    return state.user;
+  })
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const {logout} = userApi;
+  const {
+    isLoggedIn,
+    loggedInUserName,
+    refreshToken,
+  } = user;
+
   const { isMobile } = useBreakpoints();
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const [showDropDown, setShowDropdown] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const routeLocation = useLocation().pathname;
+
 
   const handleToggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -39,7 +52,7 @@ const Navbar = () => {
     routeLocation === "/login-signup" ||
     routeLocation === "/signup" ||
     routeLocation === "/login";
-
+  console.log(isMobile, 'isMobileNavbar');
   return (
     <div className="navbar-container">
       {isMobile && (
@@ -51,8 +64,13 @@ const Navbar = () => {
             />
             {sidebarOpen && (
               <SideNavbar
-                sidebarOpen={sidebarOpen}
-                setSidebarOpen={setSidebarOpen}
+                dispatch = { dispatch }
+                isLoggedIn = { isLoggedIn }
+                loggedInUserName = { loggedInUserName }
+                logout = { logout }
+                navigate = { navigate }
+                setSidebarOpen = { setSidebarOpen }
+                sidebarOpen = { sidebarOpen }
               />
             )}
             <Link className="navbar-logo-container" to="/">
