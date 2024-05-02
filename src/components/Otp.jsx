@@ -120,7 +120,7 @@ const Otp = () => {
       ))}
       </div>
       <p className='resend-otp-text' onClick={ sendOtpAgain }>resend OTP</p>
-      <p className="loginText">login with <span className="password">password</span></p>
+      {/* <p className="loginText">login with <span className="password">password</span></p> */}
     </div>
   );
 };

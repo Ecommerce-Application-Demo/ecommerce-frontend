@@ -173,9 +173,9 @@ const SignUp = () => {
 }
         <button type="submit" className='create-acount-btn'>Create Account</button>
       </form>
-      <div>
+      {/* <div>
         <div className='signupform-google-btn'><GoogleIcon/> sign up with Google</div>
-      </div>
+      </div> */}
         </div>
     );
   };
