@@ -11,6 +11,13 @@
             outline: none;
         }
     }
+
+    & ::placeholder {
+        @include breakpoint(small-only) {
+            font-size: 9px;
+           width: 100%;
+        }
+    }
     .admin-addCategories-wrapper {
         width: 100%;
         padding-bottom: 40px;

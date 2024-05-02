@@ -20,12 +20,14 @@ const AddCategories = () => {
   const [masterCategoryForm, setMasterCategoryForm] = useState({
     masterCategoryName: "",
     masterCategoryDescription: "",
+    masterCategoryDefaultImage: '',
   });
 
   const [categoryForm, setCategoryForm] = useState({
     categoryName: "",
     categoryDescription: "",
     selectedMasterCategoryOption: "",
+    categoryDefaultImage:'',
   });
 
   const [subCategoryForm, setSubCategoryForm] = useState({
@@ -33,12 +35,14 @@ const AddCategories = () => {
     subCategoryDescription: "",
     selectedMasterCategoryOption: "",
     selectedCategoryOption: "",
+    subCategoryDefaultImage:'',
   });
 
   const [brandForm, setBrandForm] = useState({
     brandName: "",
     brandDescription: "",
     brandAddress: '',
+    brandDefaultImage:'',
   });
   
   useEffect(()=>{
@@ -146,6 +150,8 @@ const AddCategories = () => {
       setTimeout(() => {
         dispatch(resetAddMasterCategory());
       }, 5000);
+    }).catch((error)=>{
+      console.log(error);
     })
   };
 
@@ -153,6 +159,7 @@ const AddCategories = () => {
     const dataForAddCategory = {
       categoryName: categoryForm?.categoryName,
       categoryDescription: categoryForm?.categoryDescription,
+      categoryDefaultImage: categoryForm?.categoryDefaultImage,
       masterCategoryDto: {
         masterCategoryName: categoryForm?.selectedMasterCategoryOption,
       },
@@ -182,6 +189,7 @@ const AddCategories = () => {
     const dataForAddSubCategory = {
       subCategoryName: subCategoryForm?.subCategoryName,
       subCategoryDescription: subCategoryForm?.subCategoryDescription,
+      subCategoryDefaultImage: subCategoryForm?.subCategoryDefaultImage,
       categoryDto: {
         categoryName: subCategoryForm?.selectedCategoryOption,
       },
@@ -261,9 +269,17 @@ const AddCategories = () => {
                 <input
                   id="masterCategoryName"
                   className="admin-addCategory-input"
-                  placeholder="Type your master category name"
+                  placeholder="your master category name"
                   name="masterCategoryName"
                   value={masterCategoryForm.masterCategoryName}
+                  onChange={handleAddMasterCategory}
+                />
+                 <input
+                  id="masterCategoryDefaultImage"
+                  className="admin-addCategory-input"
+                  placeholder="master category default image"
+                  name="masterCategoryDefaultImage"
+                  value={masterCategoryForm.masterCategoryDefaultImage}
                   onChange={handleAddMasterCategory}
                 />
                 <textarea
@@ -316,10 +332,19 @@ const AddCategories = () => {
                 <input
                   id="categoryName"
                   className={addCategoryInput}
-                  placeholder="Type your category name"
+                  placeholder="your category name"
                   name="categoryName"
                   disabled={categoryForm.selectedMasterCategoryOption === ""}
                   value={categoryForm.categoryName}
+                  onChange={handleAddCategory}
+                />
+                 <input
+                  id="categoryDefaultImage"
+                  className={addCategoryInput}
+                  placeholder="category default image"
+                  name="categoryDefaultImage"
+                  disabled={categoryForm.selectedMasterCategoryOption === ""}
+                  value={categoryForm.categoryDefaultImage}
                   onChange={handleAddCategory}
                 />
                 <textarea
@@ -385,13 +410,25 @@ const AddCategories = () => {
                 <input
                   id="subCategoryName"
                   className={addSubCategoryInput}
-                  placeholder="Type your sub category name"
+                  placeholder="your sub category name"
                   name="subCategoryName"
                   disabled={
                     subCategoryForm.selectedMasterCategoryOption === '' ||
                     subCategoryForm.selectedCategoryOption === ''
                   }
                   value={subCategoryForm.subCategoryName}
+                  onChange={handleAddSubCategory}
+                />
+                <input
+                  id="subCategoryDefaultImage"
+                  className={addSubCategoryInput}
+                  placeholder="sub category default image"
+                  name="subCategoryDefaultImage"
+                  disabled={
+                    subCategoryForm.selectedMasterCategoryOption === '' ||
+                    subCategoryForm.selectedCategoryOption === ''
+                  }
+                  value={subCategoryForm.subCategoryDefaultImage}
                   onChange={handleAddSubCategory}
                 />
                 <textarea
@@ -429,9 +466,17 @@ const AddCategories = () => {
                 <input
                   id="brandName"
                   className="admin-addCategory-input"
-                  placeholder="Type your brand name"
+                  placeholder="your brand name"
                   name="brandName"
                   value={brandForm?.brandName}
+                  onChange={handleAddBrand}
+                /> 
+                 <input
+                  id="brandDefaultImage"
+                  className="admin-addCategory-input"
+                  placeholder="brand default image"
+                  name="brandDefaultImage"
+                  value={brandForm?.brandDefaultImage}
                   onChange={handleAddBrand}
                 /> 
                 <textarea
