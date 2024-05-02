@@ -7,8 +7,8 @@ import getProductThunk from "../../api/asyncThunk/product-thunk/getProductThunk"
 
 const AddProductSku = () => {
   const dispatch = useDispatch();
-  const getProducts = useSelector((state)=> state.getProducts);
-    const { allProduct } = getProducts;
+  const getProducts = useSelector((state) => state.getProducts);
+  const { allProduct } = getProducts;
   const { addProductSkuThunk } = addCategoriesProductThunk;
   const { getAllProductThunk } = getProductThunk;
   const [formData, setFormData] = useState({
@@ -18,21 +18,22 @@ const AddProductSku = () => {
     mrp: "",
     discountPercentage: "",
     images: {
-    image1: "",
-    image2: "",
-    image3: "",
-    image4: "",
-    image5: "",
-    image6: "",
-    image7: "",
+      image1: "",
+      image2: "",
+      image3: "",
+      image4: "",
+      image5: "",
+      image6: "",
+      image7: "",
     },
+    sizeDetailsImageUrl:'',
     quantity: "",
     availablePincodes: "",
   });
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getAllProductThunk());
-  },[]);
+  }, []);
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name.startsWith("image")) {
@@ -41,7 +42,7 @@ const AddProductSku = () => {
         ...prevFormData,
         images: {
           ...prevFormData.images,
-          [`image${imageNumber}`]: value, 
+          [`image${imageNumber}`]: value,
         },
       }));
     } else {
@@ -50,10 +51,26 @@ const AddProductSku = () => {
         [name]: value,
       });
     }
+    console.log(formData);
   };
 
   const handleSubmitBtn = () => {
-    const dataToAddProductSku = { ...formData };
+    const dataToAddProductSku = {
+      productId: formData.productId,
+      colour: formData.colour,
+      mrp: formData.mrp,
+      discountPercentage: formData.discountPercentage,
+      images: { ...formData.images },
+      sizeVariantDetails: [
+        {
+          size: formData.size,
+          sizeDetailsImageUrl: formData.sizeDetailsImageUrl,
+          quantity: formData.quantity,
+          availablePincodes: formData.availablePincodes,
+        },
+      ],
+    };
+  
     dispatch(addProductSkuThunk(dataToAddProductSku))
       .unwrap()
       .then(() => {
@@ -63,205 +80,218 @@ const AddProductSku = () => {
         toast.error("There was an error while adding the product SKU.");
       });
   };
+  
 
   const submitBtnStyle = classNames({
     "admin-addCategory-Btn": true,
-    "admin-addCategory-Btn-disabled": Object.values(formData).some(
-      (value) => value === ""
+    "admin-addCategory-Btn-disabled": Object.values(formData).some((value) => value === "" ||  
+    Object.values(formData.images).filter(Boolean).length < 2
     ),
   });
-console.log(formData);
+  console.log(formData);
   return (
-      <div className="admin-addProduct-main-container">
-        <h2>ADD PRODUCT SKU</h2>
-        <div className="admin-addProducts-container">
-          <label htmlFor="productId">
-            Product name:
-            <select
-              id="productId"
-              name="productId"
-              className="admin-addCategory-dropdown"
-              value={formData.productId}
-              onChange={handleChange}
-            >
-              <option value="">Select a product name</option>
-              {allProduct?.map((product) => {
-                return (
-                  <option value={product?.productId}>
-                    {product?.productName}
-                  </option>
-                );
-              })}
-            </select>
-          </label>
+    <div className="admin-addProduct-main-container">
+      <h2>ADD PRODUCT SKU</h2>
+      <div className="admin-addProducts-container">
+        <label htmlFor="productId">
+          Product name:
+          <select
+            id="productId"
+            name="productId"
+            className="admin-addCategory-dropdown"
+            value={formData.productId}
+            onChange={handleChange}
+          >
+            <option value="">Select a product name</option>
+            {allProduct?.map((product) => {
+              return (
+                <option value={product?.productId}>
+                  {product?.productName}
+                </option>
+              );
+            })}
+          </select>
+        </label>
 
-          {/* Size */}
-          <label htmlFor="size">
-            Size:
-            <input
-              id="size"
-              name="size"
-              className="admin-addCategory-input-code"
-              placeholder="Enter the size"
-              value={formData.size}
-              onChange={handleChange}
-            />
-          </label>
+        {/* Size */}
+        <label htmlFor="size">
+          Size:
+          <input
+            id="size"
+            name="size"
+            className="admin-addCategory-input-code"
+            placeholder="Enter the size"
+            value={formData.size}
+            onChange={handleChange}
+          />
+        </label>
 
-          {/* Colour */}
-          <label htmlFor="colour">
-            Colour:
-            <input
-              id="colour"
-              name="colour"
-              className="admin-addCategory-input-code"
-              placeholder="Enter the colour"
-              value={formData.colour}
-              onChange={handleChange}
-            />
-          </label>
+        {/* Colour */}
+        <label htmlFor="colour">
+          Colour:
+          <input
+            id="colour"
+            name="colour"
+            className="admin-addCategory-input-code"
+            placeholder="Enter the colour"
+            value={formData.colour}
+            onChange={handleChange}
+          />
+        </label>
 
-          {/* MRP */}
-          <label htmlFor="mrp">
-            MRP:
-            <input
-              id="mrp"
-              name="mrp"
-              className="admin-addCategory-input-code"
-              placeholder="Enter the MRP"
-              value={formData.mrp}
-              onChange={handleChange}
-            />
-          </label>
+        {/* MRP */}
+        <label htmlFor="mrp">
+          MRP:
+          <input
+            id="mrp"
+            name="mrp"
+            className="admin-addCategory-input-code"
+            placeholder="Enter the MRP"
+            value={formData.mrp}
+            onChange={handleChange}
+          />
+        </label>
 
-          {/* Discount Percentage */}
-          <label htmlFor="discountPercentage">
-            Discount Percentage:
-            <input
-              id="discountPercentage"
-              name="discountPercentage"
-              className="admin-addCategory-input-code"
-              placeholder="Enter the discount percentage"
-              value={formData.discountPercentage}
-              onChange={handleChange}
-            />
-          </label>
+        {/* Discount Percentage */}
+        <label htmlFor="discountPercentage">
+          Discount Percentage:
+          <input
+            id="discountPercentage"
+            name="discountPercentage"
+            className="admin-addCategory-input-code"
+            placeholder="Enter the discount percentage"
+            value={formData.discountPercentage}
+            onChange={handleChange}
+          />
+        </label>
 
-          {/* Image 1 */}
-          <label htmlFor="image1">
-            Image 1:
-            <input
-              id="image1"
-              name="image1"
-              className="admin-addCategory-input-code"
-              placeholder="Enter the image URL"
-              value={formData.image1}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="image2">
-            Image 2:
-            <input
-              id="image2"
-              name="image2"
-              className="admin-addCategory-input-code"
-              placeholder="Enter the image URL"
-              value={formData.image2}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="image3">
-            Image 3:
-            <input
-              id="image3"
-              name="image3"
-              className="admin-addCategory-input-code"
-              placeholder="Enter the image URL"
-              value={formData.image3}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="image4">
-            Image 4:
-            <input
-              id="image4"
-              name="image4"
-              className="admin-addCategory-input-code"
-              placeholder="Enter the image URL"
-              value={formData.image4}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="image5">
-            Image 5:
-            <input
-              id="image5"
-              name="image5"
-              className="admin-addCategory-input-code"
-              placeholder="Enter the image URL"
-              value={formData.image5}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="image6">
-            Image 6:
-            <input
-              id="image6"
-              name="image6"
-              className="admin-addCategory-input-code"
-              placeholder="Enter the image URL"
-              value={formData.image6}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="image7">
-            Image 7:
-            <input
-              id="image7"
-              name="image7"
-              className="admin-addCategory-input-code"
-              placeholder="Enter the image URL"
-              value={formData.image7}
-              onChange={handleChange}
-            />
-          </label>
+        {/* Image 1 */}
+        <label htmlFor="image1">
+          Image 1:
+          <input
+            id="image1"
+            name="image1"
+            className="admin-addCategory-input-code"
+            placeholder="Enter the image URL"
+            value={formData.image1}
+            onChange={handleChange}
+          />
+        </label>
+        <label htmlFor="image2">
+          Image 2:
+          <input
+            id="image2"
+            name="image2"
+            className="admin-addCategory-input-code"
+            placeholder="Enter the image URL"
+            value={formData.image2}
+            onChange={handleChange}
+          />
+        </label>
+        <label htmlFor="image3">
+          Image 3:
+          <input
+            id="image3"
+            name="image3"
+            className="admin-addCategory-input-code"
+            placeholder="Enter the image URL"
+            value={formData.image3}
+            onChange={handleChange}
+          />
+        </label>
+        <label htmlFor="image4">
+          Image 4:
+          <input
+            id="image4"
+            name="image4"
+            className="admin-addCategory-input-code"
+            placeholder="Enter the image URL"
+            value={formData.image4}
+            onChange={handleChange}
+          />
+        </label>
+        <label htmlFor="image5">
+          Image 5:
+          <input
+            id="image5"
+            name="image5"
+            className="admin-addCategory-input-code"
+            placeholder="Enter the image URL"
+            value={formData.image5}
+            onChange={handleChange}
+          />
+        </label>
+        <label htmlFor="image6">
+          Image 6:
+          <input
+            id="image6"
+            name="image6"
+            className="admin-addCategory-input-code"
+            placeholder="Enter the image URL"
+            value={formData.image6}
+            onChange={handleChange}
+          />
+        </label>
+        <label htmlFor="image7">
+          Image 7:
+          <input
+            id="image7"
+            name="image7"
+            className="admin-addCategory-input-code"
+            placeholder="Enter the image URL"
+            value={formData.image7}
+            onChange={handleChange}
+          />
+        </label>
 
-          {/* Add more image inputs as needed */}
+        {/* Add more image inputs as needed */}
 
-          {/* Quantity */}
-          <label htmlFor="quantity">
-            Quantity:
-            <input
-              id="quantity"
-              name="quantity"
-              className="admin-addCategory-input-code"
-              placeholder="Enter the quantity"
-              value={formData.quantity}
-              onChange={handleChange}
-            />
-          </label>
+        {/* Quantity */}
+        <label htmlFor="quantity">
+          Quantity:
+          <input
+            id="quantity"
+            name="quantity"
+            className="admin-addCategory-input-code"
+            placeholder="Enter the quantity"
+            value={formData.quantity}
+            onChange={handleChange}
+          />
+        </label>
+        {/* Quantity */}
+        <label htmlFor="sizeDetailsImageUrl">
+          size details image url:
+          <input
+            id="sizeDetailsImageUrl"
+            name="sizeDetailsImageUrl"
+            className="admin-addCategory-input-code"
+            placeholder="Enter the sizeDetailsImageUrl"
+            value={formData.sizeDetailsImageUrl}
+            onChange={handleChange}
+          />
+        </label>
 
-          {/* Available Pincodes */}
-          <label htmlFor="availablePincodes">
-            Available Pincodes:
-            <input
-              id="availablePincodes"
-              name="availablePincodes"
-              className="admin-addCategory-input-code"
-              placeholder="Enter available pincodes"
-              value={formData.availablePincodes}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        <button
-          className={submitBtnStyle}
-          onClick={handleSubmitBtn}
-          disabled={Object.values(formData).some((value) => value === "")}
-        >
-          Submit
-        </button>
+        {/* Available Pincodes */}
+        <label htmlFor="availablePincodes">
+          Available Pincodes:
+          <input
+            id="availablePincodes"
+            name="availablePincodes"
+            className="admin-addCategory-input-code"
+            placeholder="Enter available pincodes"
+            value={formData.availablePincodes}
+            onChange={handleChange}
+          />
+        </label>
       </div>
+      <button
+        className={submitBtnStyle}
+        onClick={handleSubmitBtn}
+        disabled={Object.values(formData).some((value) => value === "")}
+      >
+        Submit
+      </button>
+    </div>
   );
 };
 
