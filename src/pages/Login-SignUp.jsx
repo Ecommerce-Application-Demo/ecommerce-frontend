@@ -35,6 +35,7 @@ const LoginSignUp = () => {
       }
     };
   return (
+    <div className='global-margin'>
   <div className='login-signup-container'>
   <div className='loginSIgnup-component-container'>
     {routeParams==='/login-signup' && <LoginOrSignUp/>}
@@ -43,6 +44,7 @@ const LoginSignUp = () => {
     {routeParams==='/login' && <Login/>}
   </div>
   </div>
+    </div>
   )
 }
 

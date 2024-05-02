@@ -114,7 +114,7 @@ const Login = () => {
   return (
     <div className='createAccount-main-container'>
       <div className='createAccount-container'>
-        <h1>Login to Myntra</h1>
+        <h1>Login to Desicart</h1>
         <p>Enter your details below</p>
       </div>
       <form onSubmit={handleSubmit} className='signup-form-container'>

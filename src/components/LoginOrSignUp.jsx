@@ -144,8 +144,8 @@ const LoginOrSignUp = () => {
       </div>
       <button className={otpBtn} onClick={handleSubmit} disabled={buttonText === 'sent' || buttonText === 'Checking...'}>{buttonText}</button>
       {isLoading && <LoadingScreen/>}
-      {error && toast.error(error)}
-      {isSuccess && toast.success(msg)}
+      {/* {error && toast.error(error)} */}
+      {/* {isSuccess && toast.success(msg)} */}
     </form>
   );
 };
