@@ -209,7 +209,6 @@ const AddProductSku = () => {
             />
           </label>
         ))}
-        {/* Add new size variant button */}
 
         {/* Render size variants */}
         {formData.sizeVariants?.map((sizeVariant, index) => (
@@ -246,7 +245,7 @@ const AddProductSku = () => {
               <input
                 id={`quantity_${index}`}
                 name="quantity"
-                className="admin-addCategory-input-code" // Add this class name
+                className="admin-addCategory-input-code" 
                 placeholder="Enter the quantity"
                 value={sizeVariant.quantity}
                 onChange={(e) => handleSizeVariantChange(index, e)}
@@ -257,7 +256,7 @@ const AddProductSku = () => {
               <input
                 id={`availablePincodes_${index}`}
                 name="availablePincodes"
-                className="admin-addCategory-input-code" // Add this class name
+                className="admin-addCategory-input-code" 
                 placeholder="Enter available pincodes"
                 value={sizeVariant.availablePincodes}
                 onChange={(e) => handleSizeVariantChange(index, e)}
