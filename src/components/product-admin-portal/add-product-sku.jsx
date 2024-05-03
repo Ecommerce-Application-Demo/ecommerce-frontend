@@ -13,31 +13,29 @@ const AddProductSku = () => {
   const { getAllProductThunk } = getProductThunk;
   const [formData, setFormData] = useState({
     productId: "",
-    size: "",
     colour: "",
     mrp: "",
     discountPercentage: "",
-    images: {
-      image1: "",
-      image2: "",
-      image3: "",
-      image4: "",
-      image5: "",
-      image6: "",
-      image7: "",
-    },
-    sizeDetailsImageUrl:'',
-    quantity: "",
-    availablePincodes: "",
+    images: [],
+    sizeVariants: [],
   });
 
   useEffect(() => {
     dispatch(getAllProductThunk());
   }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name.startsWith("image")) {
-      const imageNumber = name.slice(-1);
+    if (name === "defaultImage") {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        images: {
+          ...prevFormData.images,
+          defaultImage: value,
+        },
+      }));
+    } else if (name.startsWith("image")) {
+      const imageNumber = parseInt(name.replace("image", ""));
       setFormData((prevFormData) => ({
         ...prevFormData,
         images: {
@@ -51,7 +49,56 @@ const AddProductSku = () => {
         [name]: value,
       });
     }
-    console.log(formData);
+  };
+
+  const handleAddImage = () => {
+    const hasDefaultImage = Object.keys(formData.images).includes(
+      "defaultImage"
+    );
+    const nextImageName = hasDefaultImage
+      ? `image${Object.keys(formData.images).length + 1}`
+      : "defaultImage";
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      images: {
+        ...prevFormData.images,
+        [nextImageName]: "",
+      },
+    }));
+  };
+
+  const handleSizeVariantChange = (index, e) => {
+    const { name, value } = e.target;
+    const newSizeVariants = [...formData.sizeVariants];
+    newSizeVariants[index][name] = value;
+    setFormData({
+      ...formData,
+      sizeVariants: newSizeVariants,
+    });
+  };
+
+  const handleAddSizeVariant = () => {
+    setFormData({
+      ...formData,
+      sizeVariants: [
+        ...formData.sizeVariants,
+        {
+          size: "",
+          sizeDetailsImageUrl: "",
+          quantity: "",
+          availablePincodes: "",
+        },
+      ],
+    });
+  };
+  const handleRemoveSizeVariant = (index) => {
+    const newSizeVariants = [...formData.sizeVariants];
+    newSizeVariants.splice(index, 1); // Remove the size variant at the specified index
+    setFormData({
+      ...formData,
+      sizeVariants: newSizeVariants,
+    });
   };
 
   const handleSubmitBtn = () => {
@@ -60,17 +107,9 @@ const AddProductSku = () => {
       colour: formData.colour,
       mrp: formData.mrp,
       discountPercentage: formData.discountPercentage,
-      images: { ...formData.images },
-      sizeVariantDetails: [
-        {
-          size: formData.size,
-          sizeDetailsImageUrl: formData.sizeDetailsImageUrl,
-          quantity: formData.quantity,
-          availablePincodes: formData.availablePincodes,
-        },
-      ],
+      images: formData.images,
+      sizeVariantDetails: formData.sizeVariants,
     };
-  
     dispatch(addProductSkuThunk(dataToAddProductSku))
       .unwrap()
       .then(() => {
@@ -80,18 +119,22 @@ const AddProductSku = () => {
         toast.error("There was an error while adding the product SKU.");
       });
   };
-  
 
   const submitBtnStyle = classNames({
     "admin-addCategory-Btn": true,
-    "admin-addCategory-Btn-disabled": Object.values(formData).some((value) => value === "" ||  
-    Object.values(formData.images).filter(Boolean).length < 2
-    ),
-  });
-  console.log(formData);
+    'admin-addCategory-Btn-disabled' : Object.keys(formData.images).length < 2 || formData.sizeVariants.length === 0 || 
+    formData.sizeVariants.some((variant) => {
+      return Object.values(variant).some((value) => value === "");
+  }),
+});
+
   return (
     <div className="admin-addProduct-main-container">
-      <h2>ADD PRODUCT SKU</h2>
+      <p>ADD PRODUCT SKU</p>
+        <div className="admin-addProduct-buttons-container">
+      <button onClick={handleAddSizeVariant}>Add New Size Variant</button>
+      <button onClick={handleAddImage}>Add Image</button>
+        </div>
       <div className="admin-addProducts-container">
         <label htmlFor="productId">
           Product name:
@@ -105,25 +148,12 @@ const AddProductSku = () => {
             <option value="">Select a product name</option>
             {allProduct?.map((product) => {
               return (
-                <option value={product?.productId}>
+                <option value={product?.productId} key={product?.productId}>
                   {product?.productName}
                 </option>
               );
             })}
           </select>
-        </label>
-
-        {/* Size */}
-        <label htmlFor="size">
-          Size:
-          <input
-            id="size"
-            name="size"
-            className="admin-addCategory-input-code"
-            placeholder="Enter the size"
-            value={formData.size}
-            onChange={handleChange}
-          />
         </label>
 
         {/* Colour */}
@@ -165,130 +195,86 @@ const AddProductSku = () => {
           />
         </label>
 
-        {/* Image 1 */}
-        <label htmlFor="image1">
-          Image 1:
-          <input
-            id="image1"
-            name="image1"
-            className="admin-addCategory-input-code"
-            placeholder="Enter the image URL"
-            value={formData.image1}
-            onChange={handleChange}
-          />
-        </label>
-        <label htmlFor="image2">
-          Image 2:
-          <input
-            id="image2"
-            name="image2"
-            className="admin-addCategory-input-code"
-            placeholder="Enter the image URL"
-            value={formData.image2}
-            onChange={handleChange}
-          />
-        </label>
-        <label htmlFor="image3">
-          Image 3:
-          <input
-            id="image3"
-            name="image3"
-            className="admin-addCategory-input-code"
-            placeholder="Enter the image URL"
-            value={formData.image3}
-            onChange={handleChange}
-          />
-        </label>
-        <label htmlFor="image4">
-          Image 4:
-          <input
-            id="image4"
-            name="image4"
-            className="admin-addCategory-input-code"
-            placeholder="Enter the image URL"
-            value={formData.image4}
-            onChange={handleChange}
-          />
-        </label>
-        <label htmlFor="image5">
-          Image 5:
-          <input
-            id="image5"
-            name="image5"
-            className="admin-addCategory-input-code"
-            placeholder="Enter the image URL"
-            value={formData.image5}
-            onChange={handleChange}
-          />
-        </label>
-        <label htmlFor="image6">
-          Image 6:
-          <input
-            id="image6"
-            name="image6"
-            className="admin-addCategory-input-code"
-            placeholder="Enter the image URL"
-            value={formData.image6}
-            onChange={handleChange}
-          />
-        </label>
-        <label htmlFor="image7">
-          Image 7:
-          <input
-            id="image7"
-            name="image7"
-            className="admin-addCategory-input-code"
-            placeholder="Enter the image URL"
-            value={formData.image7}
-            onChange={handleChange}
-          />
-        </label>
+        {/* Image inputs */}
+        {Object.entries(formData.images).map(([key, value]) => (
+          <label htmlFor={key} key={key}>
+            {key}:
+            <input
+              id={key}
+              name={key}
+              className="admin-addCategory-input-code"
+              placeholder={`Enter the image URL for ${key}`}
+              value={value}
+              onChange={handleChange}
+            />
+          </label>
+        ))}
 
-        {/* Add more image inputs as needed */}
-
-        {/* Quantity */}
-        <label htmlFor="quantity">
-          Quantity:
-          <input
-            id="quantity"
-            name="quantity"
-            className="admin-addCategory-input-code"
-            placeholder="Enter the quantity"
-            value={formData.quantity}
-            onChange={handleChange}
-          />
-        </label>
-        {/* Quantity */}
-        <label htmlFor="sizeDetailsImageUrl">
-          size details image url:
-          <input
-            id="sizeDetailsImageUrl"
-            name="sizeDetailsImageUrl"
-            className="admin-addCategory-input-code"
-            placeholder="Enter the sizeDetailsImageUrl"
-            value={formData.sizeDetailsImageUrl}
-            onChange={handleChange}
-          />
-        </label>
-
-        {/* Available Pincodes */}
-        <label htmlFor="availablePincodes">
-          Available Pincodes:
-          <input
-            id="availablePincodes"
-            name="availablePincodes"
-            className="admin-addCategory-input-code"
-            placeholder="Enter available pincodes"
-            value={formData.availablePincodes}
-            onChange={handleChange}
-          />
-        </label>
+        {/* Render size variants */}
+        {formData.sizeVariants?.map((sizeVariant, index) => (
+          <div>
+          <div className="sizeVariants-btn-wrapper">
+          <h3>add size variant {index+1}</h3>
+          <button onClick={() => handleRemoveSizeVariant(index)}>Remove</button>
+          </div>
+          <div className="sizeVariants-wrapper">
+            <label htmlFor={`size_${index}`}>
+              Size:
+              <input
+                id={`size_${index}`}
+                name="size"
+                className="admin-addCategory-input-code" 
+                placeholder="Enter the size"
+                value={sizeVariant.size}
+                onChange={(e) => handleSizeVariantChange(index, e)}
+              />
+            </label>
+            <label htmlFor={`sizeDetailsImageUrl_${index}`}>
+              Size Details Image URL:
+              <input
+                id={`sizeDetailsImageUrl_${index}`}
+                name="sizeDetailsImageUrl"
+                className="admin-addCategory-input-code" // Add this class name
+                placeholder="Enter the size details image URL"
+                value={sizeVariant.sizeDetailsImageUrl}
+                onChange={(e) => handleSizeVariantChange(index, e)}
+              />
+            </label>
+            <label htmlFor={`quantity_${index}`}>
+              Quantity:
+              <input
+                id={`quantity_${index}`}
+                name="quantity"
+                className="admin-addCategory-input-code" 
+                placeholder="Enter the quantity"
+                value={sizeVariant.quantity}
+                onChange={(e) => handleSizeVariantChange(index, e)}
+              />
+            </label>
+            <label htmlFor={`availablePincodes_${index}`}>
+              Available Pincodes:
+              <input
+                id={`availablePincodes_${index}`}
+                name="availablePincodes"
+                className="admin-addCategory-input-code" 
+                placeholder="Enter available pincodes"
+                value={sizeVariant.availablePincodes}
+                onChange={(e) => handleSizeVariantChange(index, e)}
+              />
+            </label>
+          </div>
+          </div>
+        ))}
       </div>
       <button
         className={submitBtnStyle}
         onClick={handleSubmitBtn}
-        disabled={Object.values(formData).some((value) => value === "")}
-      >
+        disabled={
+          Object.keys(formData.images).length < 2 ||
+          formData.sizeVariants.length === 0 ||  formData.sizeVariants.some((variant) => {
+            return Object.values(variant).some((value) => value === "");
+        })
+        }>
         Submit
       </button>
     </div>

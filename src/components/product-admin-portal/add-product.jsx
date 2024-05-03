@@ -80,7 +80,7 @@ const AddProduct = () => {
   })
   return (
       <div className="admin-addProduct-main-container">
-        <h2>Add Product</h2>
+        <p>Add Product</p>
         <div className="admin-addProducts-container">
           <label htmlFor="masterCategory">
             Select a master category:
