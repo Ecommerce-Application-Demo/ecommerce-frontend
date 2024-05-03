@@ -19,13 +19,42 @@
         // justify-content: space-between;
     
         }
-        &>h2 {
+        &>p {
+            margin-top: 10px;
             text-align: center;
             font-size: 30px;
+            font-weight: bold;
             color: $primary-btn-red;
+            @include breakpoint(small-only) {
+                font-size: 14px;
+            }
+        }
+
+        .admin-addProduct-buttons-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px 0px;
+            & button {
+                width: 100%;
+                margin-top: auto;
+                background-color: $primary-btn-red;
+                color: $White;
+                border: none;
+                border-radius: 10px;
+                cursor: pointer;
+                margin: 10px 0px 0px;
+                padding: 20px;
+                margin-bottom: 0px;
+                @include breakpoint(small-only) {
+                    font-size: 10px;
+                    padding: 10px;
+                }
+            }
         }
     &>.admin-addProducts-container {
-        // margin: 30px 20px;
         width: 100%;
         display: flex;
         flex-direction: row;
@@ -34,6 +63,7 @@
         flex-wrap: wrap;
         justify-content: center;
         overflow-y: scroll;
+        max-height: 65%;
         @include breakpoint(medium) {
         // margin: 30px 75px;
         justify-content: center;
@@ -48,6 +78,7 @@
         }
         &>label {
             width: 100%;
+            height: fit-content;
     @include breakpoint(medium) {
         width: 45%;
     }
@@ -73,9 +104,58 @@
             border: 1px solid $primary-btn-red;
             border-radius: 10px;
             padding-left: 10px;
-            background-color: white;
+            background-color: $White;
             &:focus {
                 outline: none;
+            }
+        }
+        .sizeVariants-btn-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0px 10px;
+        }
+        .sizeVariants-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            column-gap: 20px;
+            row-gap: 20px;
+            flex-wrap: wrap;
+            border: 1px solid $primary-btn-red;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: $Box-shadow-blue;
+            &>label {
+                width: 100%;
+        @include breakpoint(medium) {
+            width: 45%;
+        }
+        
+            @include breakpoint(large) {
+            width: 40%;
+            }
+        }
+            .admin-addCategory-input-code {
+                width:  100%;
+                border: 1px solid $primary-btn-red;
+                height: 40px;
+                border-radius: 10px;
+                padding-left: 20px;
+                margin-bottom: 10px;
+                &:focus {
+                    outline: none;
+                }
+            }
+        
+            & ::placeholder {
+                @include breakpoint(small-only) {
+                    font-size: 9px;
+                   width: 100%;
+                }
             }
         }
     }
@@ -89,6 +169,7 @@
         cursor: pointer;
         margin: 10px 0px 0px;
         padding: 20px;
+        margin-bottom: 0px;
     }
     .admin-addCategory-Btn-disabled {
         cursor: not-allowed;
