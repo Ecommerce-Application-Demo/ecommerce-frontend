@@ -1,0 +1,28 @@
+.splash-screen-container {
+    background-color: $White;
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: $splash-zIndex;
+
+    .splashScreen-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        @include breakpoint(medium) {
+            flex-direction: row;
+        }
+
+        @include breakpoint(large) {
+            flex-direction: row;
+        }
+
+        .text-container {
+            color: $primary-btn-red;
+            font-size: 30px;
+        }
+    }
+}
