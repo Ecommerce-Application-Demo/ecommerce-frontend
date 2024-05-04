@@ -9,7 +9,6 @@ const HomeTag = () =>{
                 <meta charSet="utf-8" />
               <title>Desi Cart | Home</title>
             </Helmet>
-            ...
         </div>
     );
 };
@@ -24,7 +23,6 @@ const AddressTag = () =>{
                 <meta charSet="utf-8" />
                 <title>{user.toUpperCase()} | Address</title>
             </Helmet>
-            ...
         </div>
     );
 };
@@ -38,7 +36,6 @@ const ProfileTag = () =>{
                 <meta charSet="utf-8" />
                 <title>{user} | Profile</title>
             </Helmet>
-            ...
         </div>
     );
 };
