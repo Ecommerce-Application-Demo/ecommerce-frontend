@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import tags from '../metaTag/dynamicTags';
 import SingleProductPage from './Single-product-page';
+import useBreakpoints from '../api/utilities/responsive';
+import { mensTitleImageDesktop, mensTitleImageMobile, womensTitleImageDesktop, womensTitleImageMobile } from '../assets/pictures/homePage/TitleImages';
 const Home = () => {
     const user =useSelector((state)=>state.user)
     const {
@@ -10,17 +12,31 @@ const Home = () => {
       loggedInUserName,
     } = user;
 
+    const {isMobile} = useBreakpoints();
+
   return (
-   <div className='home'>
+   <div className='global-margin'>
     {tags.HomeTag()}
-   {isLoggedIn ?
-    <h1 style={{textAlign:'center', verticalAlign:'middle',marginTop:'100px'}}>Wecome {loggedInUserName}</h1>
-    :
-    <Link to='/login-signup' style={{textAlign:'center', verticalAlign:'middle',marginTop:'100px',textDecoration:'none'}}><h1 >KINDLY LOGIN</h1></Link>
-   }
-   <Link to='/product'>
-   <button>View product</button>
-   </Link>
+    <div className='homepage-main-container'>
+      {isMobile ?
+      <div className="homePage-titleImages-mobile-wrapper">
+      <Link to={mensTitleImageMobile.navigationLink}>
+      <img src={mensTitleImageMobile.src} alt={mensTitleImageMobile.alt}/>
+      </Link>
+      <Link to={womensTitleImageMobile.navigationLink}>
+      <img src={womensTitleImageMobile.src} alt={womensTitleImageMobile.alt}/>
+      </Link>
+    </div> :
+      <div className="homePage-titleImages-desktop-wrapper">
+        <Link to={mensTitleImageDesktop.navigationLink}>
+        <img src={mensTitleImageDesktop.src} alt={mensTitleImageDesktop.alt}/>
+        </Link>
+        <Link to={womensTitleImageDesktop.navigationLink}>
+        <img src={womensTitleImageDesktop.src} alt={womensTitleImageDesktop.alt}/>
+        </Link>
+      </div>
+    }
+    </div>
    </div>
   )
 }
