@@ -1,34 +1,41 @@
-import React from 'react'
-import { Routes, Route } from 'react-router-dom';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import CustomRoute from './api/utilities/CustomRoute';
 import Home from './pages/Home';
 import LoginSignUp from './pages/Login-SignUp';
 import NotFound from './pages/Not-found';
-import AccountImformation from './nested_pages/Account-imformation-page';
+import AccountInformation from './nested_pages/Account-imformation-page';
 import ProductAdminPage from './pages/product-admin-portal-page';
-import ProtectedRoute from './api/utilities/ProtectedRoute';
-import ProtectedRouteLogin from './api/utilities/ProtectedRoute-loginFLow';
 import SingleProductPage from './pages/Single-product-page';
+import PageTransition from './uiHelper/general-page-transition';
+import ProtectedRouteLogin from './api/utilities/ProtectedRoute-loginFLow';
+import ProtectedRoute from './api/utilities/ProtectedRoute';
+
 const Router = () => {
   return (
     <Routes>
-    <Route path='/' element={<Home />} />
-    <Route path='/login-signup' element={<ProtectedRouteLogin><LoginSignUp /></ProtectedRouteLogin>} />
-    <Route path="/signup" element={<ProtectedRouteLogin><LoginSignUp /></ProtectedRouteLogin>} />
-    <Route path="/otp-verification" element={<ProtectedRouteLogin><LoginSignUp /></ProtectedRouteLogin>} />
-    <Route path='/login' element={<ProtectedRouteLogin><LoginSignUp /></ProtectedRouteLogin>} />
-    <Route path='/loading' element={<ProtectedRouteLogin><LoginSignUp /></ProtectedRouteLogin>} />
-    <Route path='/my' element={<ProtectedRoute><AccountImformation /></ProtectedRoute>} />
-    <Route path='/my/address' element={<ProtectedRoute><AccountImformation /></ProtectedRoute>} />
-    <Route path='/my/profile' element={<ProtectedRoute><AccountImformation /></ProtectedRoute>} />
-    <Route path='/my/return' element={<ProtectedRoute><AccountImformation /></ProtectedRoute>} />
-    <Route path='/my/cancelation' element={<ProtectedRoute><AccountImformation /></ProtectedRoute>} />
-    <Route path='/my/order' element={<ProtectedRoute><AccountImformation /></ProtectedRoute>} />
-    <Route path='/my/payment' element={<ProtectedRoute><AccountImformation /></ProtectedRoute>} />
-    <Route path='/product' element={<SingleProductPage />} />
-    <Route path='/product-admin' element={<ProductAdminPage />} />
-    <Route path='*' element={<NotFound />} />
-  </Routes>
-  )
-}
+      {/* <CustomRoute path='/' component={Home} />
+      <CustomRoute path='/login-signup' component={LoginSignUp} />
+      <CustomRoute path='/signup' component={LoginSignUp} />
+      <CustomRoute path='/otp-verification' component={LoginSignUp} />
+      <CustomRoute path='/login' component={LoginSignUp} />
+      <CustomRoute path='/loading' component={LoginSignUp} />
+      <CustomRoute path='/my/*' component={AccountInformation} isPrivate />
+      <CustomRoute path='/product' component={SingleProductPage} />
+      <CustomRoute path='/product-admin' component={ProductAdminPage} isPrivate />
+      <CustomRoute path='*' component={NotFound} /> */}
+      <Route path='/' element={<PageTransition><Home /></PageTransition>} />
+      <Route path='/login-signup' element={<ProtectedRouteLogin><PageTransition><LoginSignUp /></PageTransition></ProtectedRouteLogin>} />
+      <Route path="/signup" element={<ProtectedRouteLogin><PageTransition><LoginSignUp /></PageTransition></ProtectedRouteLogin>} />
+      <Route path="/otp-verification" element={<ProtectedRouteLogin><PageTransition><LoginSignUp /></PageTransition></ProtectedRouteLogin>} />
+      <Route path='/login' element={<ProtectedRouteLogin><PageTransition><LoginSignUp /></PageTransition></ProtectedRouteLogin>} />
+      <Route path='/loading' element={<ProtectedRouteLogin><PageTransition><LoginSignUp /></PageTransition></ProtectedRouteLogin>} />
+      <Route path='/my/*' element={<ProtectedRoute><PageTransition><AccountInformation /></PageTransition></ProtectedRoute>} />
+      <Route path='/product' element={<PageTransition><SingleProductPage /></PageTransition>} />
+      <Route path='/product-admin' element={<PageTransition><ProductAdminPage /></PageTransition>} />
+      <Route path='*' element={<PageTransition><NotFound /></PageTransition>} />
+    </Routes>
+  );
+};
 
 export default Router;

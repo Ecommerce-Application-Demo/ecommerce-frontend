@@ -26,6 +26,11 @@
 @import 'components/product-admin-portal/product-admin-edit-product';
 @import 'components/navbar/sideNavbar';
 
+//components-------- home pages
+@import 'components/home/brand-section';
+@import 'components/home/category-section';
+
+
 
 //small components
 // @import 'small-components/inputField';
@@ -36,6 +41,8 @@
 @import 'small-components/inputFIeld';
 @import 'small-components/popup';
 @import 'small-components/splash-screen';
+@import 'small-components/reactSwiper';
+
 
 //pages import
 @import 'sections/home';
