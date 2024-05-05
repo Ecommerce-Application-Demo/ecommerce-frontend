@@ -20,10 +20,18 @@ $Input-normal-background: rgb(247, 243, 243);
 $Box-shadow-blue:rgba( 31, 38, 135, 0.37 );
 $Black-opacity-0_5:rgba(0, 0, 0, 0.5);
 $highlighted-text:  #00FF66;
+$text-color-blue:rgb(19, 22, 56);
+
+
+//-----------linear background----------------
+$homepage-background: rgb(34,193,195);
+$homepage-background: linear-gradient(180deg, #a49696 0%, rgb(235, 234, 230) 100%);;
 
 //------------boxShadow-----------
 $modal-primary-box-shadow : 0 0 0 50vmax rgba(0, 0, 0, 0.8);
 $popup-primary-box-shadow : 0 0 0 80vmax rgba(0, 0, 0, 0.8);
+$card-box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+$circular-boxShadow-primary: 2px 0 10px 2px #db4444;
 
 //------------z-indexes-------------------
 $top-most-zIndex: 100;

@@ -8,7 +8,7 @@ import FooterPage from "./pages/footer-page";
 import LoginPopupMobile from "./components/navbar/login-popup-mobile";
 import SplashScreen from "./small-components/Splash-screen";
 import Router from "./Router";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 function App() {
   const routeParams = useLocation().pathname;
@@ -43,11 +43,10 @@ function App() {
   }, []);
 
   return (
-    <>
-      <AnimatePresence>
-        {splashVisible && <SplashScreen />}
-      </AnimatePresence>
-      {!splashVisible && ( // Render content once it's ready
+    <AnimatePresence mode='wait'>
+      {splashVisible ? (
+        <SplashScreen />
+      ) : (
         <>
           {!routeParams.includes("/product-admin") && <Navbar />}
           {routeParams.includes("/product-admin") && <NavbarProductAdmin />}
@@ -58,7 +57,7 @@ function App() {
           <FooterPage />
         </>
       )}
-    </>
+    </AnimatePresence>
   );
 }
 

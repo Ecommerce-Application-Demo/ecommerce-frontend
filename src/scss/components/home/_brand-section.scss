@@ -1,0 +1,109 @@
+.brandSection-main-container {
+    position: relative;
+    margin: -180px 10px 0px;
+  
+  @include breakpoint(medium) {
+      margin:-200px 80px 0px;
+  }
+  
+  @include breakpoint(large) {
+      margin: -200px 140px 0px;
+  }
+  
+  .ourBrands-text {
+    text-align: center;
+    font-size: 50px;
+    background: linear-gradient(to right, #f32170, #ff6b08, #cf23cf, #eedd44);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    text-shadow: $primary-btn-red;
+    margin-bottom: 20px;
+  }
+  
+  .homePage-category-section {
+    display: flex;
+    align-items: center;
+    background-color: $White;
+    height: fit-content;
+    min-height: 200px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 2px -19.5px 26px -13px #989898;
+  
+    .brandSection-cardSlides-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
+      .brandSection-cardSlide {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin: 10px;
+  
+        .brandSection-cardSlide-image-wrapper {
+          height: 120px;
+          width: 120px;
+          box-shadow: $circular-boxShadow-primary;
+          background-color: $White;
+          margin: 10px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          @include breakpoint(small-only) {
+              height: 80px;
+              width: 80px;
+          }
+  
+          &>img {
+            height: 80px;
+            width: 80px;
+            @include breakpoint(small-only) {
+              height: 60px;
+              width: 60px;
+          }
+          }
+        }
+  
+        .brandSection-brandName {
+          text-align: center;
+          font-weight: bold;
+          padding-bottom: 5px;
+          font-size: 25px;
+          @include breakpoint(small-only) {
+           font-size: 14px;
+        }
+        }
+  
+        &:hover {
+          border-radius: 4px;
+          box-shadow: 1px 19px 26px -15.5px #db4444;
+          transition: all 0.3s ease;
+          cursor: pointer;
+  
+          .brandSection-cardSlide-image-wrapper {
+            border: none;
+            transition: border-radius 0.3s ease; 
+            box-shadow: none;
+  
+            &>img {
+              transition: scale 0.3s ease; 
+              scale: 1.2;
+            }
+          }
+  
+          .brandSection-brandName {
+            color: $primary-btn-red;
+            transition: color 0.3s ease; 
+            font-size: 30px;
+          }
+        }
+      }
+    }
+  }
+}

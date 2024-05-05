@@ -7,7 +7,7 @@ const ProtectedRouteLogin = ({children}) => {
     const isLoggedIn = useSelector(state=>state.user.isLoggedIn);
     if (isLoggedIn) {
         return <Navigate to='/'/>
-    } 
+    }  
       return children;
     
 }

@@ -13,14 +13,14 @@
     @include breakpoint(small-only) {
         max-height: 60vh;
     }
+    .swiper-container {
+      // width: calc(100% - 40px); /* Adjust width to fit the screen with padding */
+      margin: 0 auto; /* Center the Swiper container horizontally */
+    }
+    
+    .swiper-slide {
+      width: 100% !important; /* Set slide width to 100% */
+    }
   }
   
-  .swiper-container {
-    // width: calc(100% - 40px); /* Adjust width to fit the screen with padding */
-    margin: 0 auto; /* Center the Swiper container horizontally */
-  }
-  
-  .swiper-slide {
-    width: 100% !important; /* Set slide width to 100% */
-  }
   
