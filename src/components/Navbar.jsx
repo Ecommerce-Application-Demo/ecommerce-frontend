@@ -18,17 +18,12 @@ import userApi from "../api/asyncThunk/userApi";
 import ThemeToggle from "../small-components/ThemeToggle";
 
 const Navbar = () => {
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const savedTheme = JSON.parse(localStorage.getItem('isDarkMode')) || false;
-    return savedTheme;
-  });
+  const user = useSelector((state)=>{return state.user});
+  const { isDarkMode } = useSelector((state)=>state.theme);
 
-  const user = useSelector((state)=>{
-    return state.user;
-  })
-  
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const {logout} = userApi;
   const {
     isLoggedIn,
@@ -46,18 +41,7 @@ const Navbar = () => {
     routeLocation === "/signup" ||
     routeLocation === "/login";
   console.log(isMobile, 'isMobileNavbar');
-  // useEffect(()=>{
-  //   const handleStorageChange = () => {
-  //     const savedTheme = JSON.parse(localStorage.getItem('isDarkMode')) || false;
-  //     setIsDarkMode(savedTheme);
-  //   };
 
-  //   window.addEventListener('storage', handleStorageChange);
-
-  //   return () => {
-  //     window.removeEventListener('storage', handleStorageChange);
-  //   };
-  // }, []);
 
   const handleToggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -96,9 +80,10 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="right-side-mobile-navbar">
-              <SearchLogo/>
-              <Wishlist isDarkMode={isDarkMode}/>
-              <Cart/>
+              {/* <SearchLogo/> */}
+                <Wishlist stroke={isDarkMode ? 'white' : 'black'}/>
+              <Cart stroke={isDarkMode ? 'white' : 'black'}/>
+            <ThemeToggle />
           </div>
         </div>
       )}
@@ -116,12 +101,12 @@ const Navbar = () => {
           <div className="navbar-right-container">
             <Link to="/wishlist">
               <div>
-                {isDarkMode ? <Wishlist stroke="white"/> : <Wishlist/>}
+                <Wishlist stroke={isDarkMode ? 'white' : 'black'}/>
               </div>
             </Link>
             <Link to="/cart">
               <div>
-                <Cart />
+              <Cart stroke={isDarkMode ? 'white' : 'black'}/>
               </div>
             </Link>
 
@@ -131,7 +116,7 @@ const Navbar = () => {
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
               >
-                {!showDropDown ? <AccountLogo /> : <AccountLogoActive />}
+                {!showDropDown ? <AccountLogo color={isDarkMode ? 'white': 'black'}/> : <AccountLogoActive />}
                 {showDropDown && (
                   <div
                     className="navbar-account-dropdown-wrapper"
@@ -142,7 +127,7 @@ const Navbar = () => {
                 )}
               </div>
             )}
-            <ThemeToggle setIsDarkMode={setIsDarkMode} isDarkMode={isDarkMode}/>
+            <ThemeToggle />
           </div>
         </>
       )}

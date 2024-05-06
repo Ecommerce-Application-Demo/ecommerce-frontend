@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { FaSun, FaMoon } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
+import { updateThemeFromLocalStorage } from '../redux/Slices/Theme/themeSlice';
+import { useDispatch } from 'react-redux';
 
 const ThemeToggle = () => {
+  const dispatch = useDispatch();
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   // Function to toggle dark mode
   const toggleDarkMode = () => {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
-    // Save theme preference in localStorage
     localStorage.setItem('isDarkMode', JSON.stringify(newMode));
-    // Update class on body for global styling
     document.body.classList.toggle('dark-mode', newMode);
+    dispatch(updateThemeFromLocalStorage());
   };
-
+  
   // Load theme preference from localStorage on component mount
   useEffect(() => {
     const savedTheme = JSON.parse(localStorage.getItem('isDarkMode')) || false;

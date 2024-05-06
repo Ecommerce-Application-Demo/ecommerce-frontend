@@ -22,7 +22,7 @@
       .categorySection-cards-wrapper {
         display: flex;
         flex-direction: row;
-        gap: 20px;
+        gap: 30px;
         flex-wrap: wrap;
         justify-content: center;
         height: max-content;
@@ -61,13 +61,13 @@
                         font-size: 12px;
                     }                    
                 }
-                    .categorySection-card-titleText {
-                       font-size: 30px;
-                       @include breakpoint(small-only) {
+                    // .categorySection-card-titleText {
+                    //    font-size: 30px;
+                    //    @include breakpoint(small-only) {
                     
-                        font-size: 20px;
-                    }    
-                    }
+                    //     font-size: 20px;
+                    // }    
+                    // }
             }
             .categorySection-card-image {
                border-radius: 6px;

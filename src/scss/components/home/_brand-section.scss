@@ -48,7 +48,7 @@
           height: 120px;
           width: 120px;
           box-shadow: $circular-boxShadow-primary;
-          background-color: $White;
+          background-color: $fixed-white;
           margin: 10px;
           border-radius: 50%;
           display: flex;
@@ -74,22 +74,23 @@
           text-align: center;
           font-weight: bold;
           padding-bottom: 5px;
-          font-size: 25px;
+          font-size: 22px;
+          color: $brandTitleText;
           @include breakpoint(small-only) {
            font-size: 14px;
         }
         }
   
         &:hover {
-          border-radius: 4px;
-          box-shadow: 1px 19px 26px -15.5px #db4444;
-          transition: all 0.3s ease;
+          // border-radius: 4px;
+          // transition: all 0.3s ease;
           cursor: pointer;
   
           .brandSection-cardSlide-image-wrapper {
-            border: none;
-            transition: border-radius 0.3s ease; 
-            box-shadow: none;
+            // border: none;
+            // transition: border-radius 0.3s ease; 
+            // box-shadow: none;
+            box-shadow: $circular-boxShadow-primary;
   
             &>img {
               transition: scale 0.3s ease; 

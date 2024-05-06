@@ -2,7 +2,7 @@
     height: 60px;
     width: 100%;
     background-color: $White;
-    box-shadow:  0px 2px 8px 0px $boxShadow;
+    box-shadow:  $circular-boxShadow-primary;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -106,6 +106,7 @@
             align-items: center;
             &>:first-child {
                 margin-top: 3px;
+                color: $Black;
             }
         }
         .right-side-mobile-navbar {

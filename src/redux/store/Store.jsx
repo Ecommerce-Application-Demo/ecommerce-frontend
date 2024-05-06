@@ -8,6 +8,7 @@ import errorSlice from '../Slices/errorSlice';
 import addCategoriesSlice from '../Slices/product/addCategoriesSlice';
 import getCategoriesSlice from '../Slices/product/getCategoriesSlice';
 import getProductsSlice from '../Slices/product/productSlice';
+import themeSlice from '../Slices/Theme/themeSlice';
 
 const store = configureStore({
     reducer:{
@@ -19,7 +20,7 @@ const store = configureStore({
         addProductCategory: addCategoriesSlice,
         getProductCategory: getCategoriesSlice,
         getProducts: getProductsSlice,
-
+        theme: themeSlice,
     }
 });
 

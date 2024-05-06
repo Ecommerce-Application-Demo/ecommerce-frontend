@@ -16,20 +16,6 @@ function App() {
   const { isLoggedIn } = useSelector((state) => state.user);
   const [openLoginPopup, setOpenLoginPopup] = useState(false);
   const [splashVisible, setSplashVisible] = useState(true);
-  const [darkMode, setDarkMode] = useState(false);
-
-  // Load theme preference from localStorage on initial render
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      setDarkMode(savedTheme === "dark");
-    }
-  }, []);
-
-  // Save theme preference to localStorage whenever it's toggled
-  useEffect(() => {
-    localStorage.setItem("theme", darkMode ? "dark" : "light");
-  }, [darkMode]);
 
   const routeValidationForLoginPopup = [
     "/login-signup",
@@ -56,12 +42,6 @@ function App() {
     }, 2500);
   }, []);
 
-  const handleDarkMode = () => {
-    const newDarkMode = !darkMode;
-    setDarkMode(newDarkMode);
-    document.body.classList.toggle("dark-mode", newDarkMode);
-  };
-
   return (
     <AnimatePresence mode="wait">
       {splashVisible ? (
@@ -74,7 +54,6 @@ function App() {
             <LoginPopupMobile setOpenLoginPopup={setOpenLoginPopup} />
           )}
           <Router />
-          <p onClick={handleDarkMode}>toggle</p>
           <FooterPage />
         </div>
       )}
