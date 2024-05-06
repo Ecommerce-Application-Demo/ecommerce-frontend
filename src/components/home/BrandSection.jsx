@@ -31,7 +31,7 @@ const BrandSection = () => {
             <div key={index} className="brandSection-cardSlide">
               <div className="brandSection-cardSlide-image-wrapper">
                 <img
-                  alt={brand?.brandDescription}
+                  alt={brand?.brandName}
                   src={brand?.brandDefaultImage}
                 />
               </div>

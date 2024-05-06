@@ -3,12 +3,14 @@
     height: 300px;
     background-color: $Black;
     margin-bottom: 0px;
-    margin-top: 40px;
-    color: $White;
+    // margin-top: 40px;
+    background-color: $White;
+    color: $Black;
     justify-content: center; 
     align-items: center;
     justify-content: center;
     align-items: center;
+    background-color: $White;
    
     &>.footer-row-wrapper {
         display: flex;
