@@ -3,7 +3,9 @@
 //utilities
 @import 'utilites/variables';
 @import 'utilites/mixins';
-
+// @if $dark-mode {
+//     @import 'utilites/variables-dark'; 
+//   }
 @import 'base/base';
 //components
 @import 'components/navbar';
@@ -42,6 +44,7 @@
 @import 'small-components/popup';
 @import 'small-components/splash-screen';
 @import 'small-components/reactSwiper';
+@import 'small-components/theme-toggle';
 
 
 //pages import

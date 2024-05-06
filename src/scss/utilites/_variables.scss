@@ -1,44 +1,38 @@
 //-------------------------------------colors--------------------------------------->
-$Blue: blue;
-$Red: red;
-$White:#fff;
-$boxShadow:rgba(99, 99, 99, 0.2);
-$Black:black;
-$SearchBar-background: #F5F5F5;
-$primary-btn-red:#DB4444;
-$primary-btn-red-disabled:#f26868d1;
-$primary-box-shadow-2:#f30e0e60;
-$primary-box-shadow:#db444498;
-$Grey: grey;
-$green: green;
-$Grey-text-color: rgb(90, 77, 77);
-$Button-text-color: #FAFAFA;
-$Button-border-black-shadow:rgba(0, 0, 0, 0.40);
-$Disabled-background:rgb(169, 160, 160);
-$Input-success-background:rgb(211, 254, 211);
-$Input-normal-background: rgb(247, 243, 243);
-$Box-shadow-blue:rgba( 31, 38, 135, 0.37 );
-$Black-opacity-0_5:rgba(0, 0, 0, 0.5);
-$highlighted-text:  #00FF66;
-$text-color-blue:rgb(19, 22, 56);
+$Blue: var(--Blue);
+$Red: var(--Red);
+$White: var(--White);
+$boxShadow: var(--boxShadow);
+$Black: var(--Black);
+$SearchBar-background: var(--SearchBar-background);
+$primary-btn-red: var(--primary-btn-red);
+$primary-btn-red-disabled: var(--primary-btn-red-disabled);
+$primary-box-shadow-2: var(--primary-box-shadow-2);
+$primary-box-shadow: var(--primary-box-shadow);
+$Grey: var(--Grey);
+$green: var(--green);
+$Grey-text-color: var(--Grey-text-color);
+$Button-text-color: var(--Button-text-color);
+$Button-border-black-shadow: var(--Button-border-black-shadow);
+$Disabled-background: var(--Disabled-background);
+$Input-success-background: var(--Input-success-background);
+$Input-normal-background: var(--Input-normal-background);
+$Box-shadow-blue: var(--Box-shadow-blue);
+$Black-opacity-0_5: var(--Black-opacity-0_5);
+$highlighted-text: var(--highlighted-text);
+$text-color-blue: var(--text-color-blue);
+$homepage-background: var(--homepage-background);
+$modal-primary-box-shadow: var(--modal-primary-box-shadow);
+$popup-primary-box-shadow: var(--popup-primary-box-shadow);
+$card-box-shadow: var(--card-box-shadow);
+$circular-boxShadow-primary: var(--circular-boxShadow-primary);
 
-
-//-----------linear background----------------
-$homepage-background: rgb(34,193,195);
-$homepage-background: linear-gradient(180deg, #a49696 0%, rgb(235, 234, 230) 100%);;
-
-//------------boxShadow-----------
-$modal-primary-box-shadow : 0 0 0 50vmax rgba(0, 0, 0, 0.8);
-$popup-primary-box-shadow : 0 0 0 80vmax rgba(0, 0, 0, 0.8);
-$card-box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-$circular-boxShadow-primary: 2px 0 10px 2px #db4444;
 
 //------------z-indexes-------------------
 $top-most-zIndex: 100;
 $secondTop-zIndex: 99;
 $general-zIndex: 1;
 $splash-zIndex: 101;
-
 
 
 //--------------------------------------breakpoints for responsiveness------------------------>
@@ -49,25 +43,39 @@ $bp-large: 1280px !default;
 $bp-max-small-only: 767px !default;
 
 
+:root {
+    --Blue: blue;
+    --Red: red;
+    --White: #fff;
+    --boxShadow: rgba(99, 99, 99, 0.2);
+    --Black: black;
+    --SearchBar-background: #F5F5F5;
+    --primary-btn-red: #DB4444;
+    --primary-btn-red-disabled: #f26868d1;
+    --primary-box-shadow-2: #f30e0e60;
+    --primary-box-shadow: #db444498;
+    --Grey: grey;
+    --green: green;
+    --Grey-text-color: rgb(90, 77, 77);
+    --Button-text-color: #FAFAFA;
+    --Button-border-black-shadow: rgba(0, 0, 0, 0.40);
+    --Disabled-background: rgb(169, 160, 160);
+    --Input-success-background: rgb(211, 254, 211);
+    --Input-normal-background: rgb(247, 243, 243);
+    --Box-shadow-blue: rgba(31, 38, 135, 0.37);
+    --Black-opacity-0_5: rgba(0, 0, 0, 0.5);
+    --highlighted-text: #00FF66;
+    --text-color-blue: rgb(19, 22, 56);
+    --homepage-background: linear-gradient(180deg, #a49696 0%, rgb(235, 234, 230) 100%);
+    --modal-primary-box-shadow: 0 0 0 50vmax rgba(0, 0, 0, 0.8);
+    --popup-primary-box-shadow: 0 0 0 80vmax rgba(0, 0, 0, 0.8);
+    --card-box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    --circular-boxShadow-primary: 2px 0 10px 2px #db4444;
+}
+
 .dark-mode {
-$Blue: blue;
-$Red: red;
-$White:#fff;
-$boxShadow:rgba(99, 99, 99, 0.2);
-$Black:white;
-$SearchBar-background: #F5F5F5;
-$primary-btn-red:yellow;
-$primary-btn-red-disabled:#f26868d1;
-$primary-box-shadow-2:#f30e0e60;
-$primary-box-shadow:#db444498;
-$Grey: grey;
-$green: green;
-$Grey-text-color: rgb(90, 77, 77);
-$Button-text-color: #FAFAFA;
-$Button-border-black-shadow:rgba(0, 0, 0, 0.40);
-$Disabled-background:rgb(169, 160, 160);
-$Input-success-background:rgb(211, 254, 211);
-$Input-normal-background: rgb(247, 243, 243);
-$Box-shadow-blue:rgba( 31, 38, 135, 0.37 );
-$Black-opacity-0_5:rgba(0, 0, 0, 0.5);
+    --primary-btn-red: white;
+    --Black: white;
+    --White: black;
+    --homepage-background:linear-gradient(180deg, #1c1919 0%, rgb(0, 0, 0) 100%);
 }

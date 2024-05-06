@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import AccountDropdown from "../small-components/AccountDropdown";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,11 +15,18 @@ import SideNavbar from "./navbar/sidebar";
 import { FaBars } from "react-icons/fa";
 import Sidebar from "./navbar/sidebar";
 import userApi from "../api/asyncThunk/userApi";
+import ThemeToggle from "../small-components/ThemeToggle";
 
 const Navbar = () => {
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const savedTheme = JSON.parse(localStorage.getItem('isDarkMode')) || false;
+    return savedTheme;
+  });
+
   const user = useSelector((state)=>{
     return state.user;
   })
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {logout} = userApi;
@@ -34,12 +41,28 @@ const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const routeLocation = useLocation().pathname;
+  const accountLogoRoute =
+    routeLocation === "/login-signup" ||
+    routeLocation === "/signup" ||
+    routeLocation === "/login";
+  console.log(isMobile, 'isMobileNavbar');
+  // useEffect(()=>{
+  //   const handleStorageChange = () => {
+  //     const savedTheme = JSON.parse(localStorage.getItem('isDarkMode')) || false;
+  //     setIsDarkMode(savedTheme);
+  //   };
 
+  //   window.addEventListener('storage', handleStorageChange);
+
+  //   return () => {
+  //     window.removeEventListener('storage', handleStorageChange);
+  //   };
+  // }, []);
 
   const handleToggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
-
+  console.log(isDarkMode);
   const handleMouseEnter = () => {
     setShowDropdown(true);
   };
@@ -48,11 +71,6 @@ const Navbar = () => {
     setShowDropdown(false);
   };
 
-  const accountLogoRoute =
-    routeLocation === "/login-signup" ||
-    routeLocation === "/signup" ||
-    routeLocation === "/login";
-  console.log(isMobile, 'isMobileNavbar');
   return (
     <div className="navbar-container">
       {isMobile && (
@@ -79,7 +97,7 @@ const Navbar = () => {
           </div>
           <div className="right-side-mobile-navbar">
               <SearchLogo/>
-              <Wishlist/>
+              <Wishlist isDarkMode={isDarkMode}/>
               <Cart/>
           </div>
         </div>
@@ -95,14 +113,10 @@ const Navbar = () => {
             <Link className="navbar-section-link">KIDS</Link>
             <Link className="navbar-section-link">FOOTWEAR</Link>
           </div>
-          <div className="navbar-search-container">
-            <input type="text" placeholder="what are you looking for?" />
-            <SearchLogo />
-          </div>
           <div className="navbar-right-container">
             <Link to="/wishlist">
               <div>
-                <Wishlist />
+                {isDarkMode ? <Wishlist stroke="white"/> : <Wishlist/>}
               </div>
             </Link>
             <Link to="/cart">
@@ -128,6 +142,7 @@ const Navbar = () => {
                 )}
               </div>
             )}
+            <ThemeToggle setIsDarkMode={setIsDarkMode} isDarkMode={isDarkMode}/>
           </div>
         </>
       )}
