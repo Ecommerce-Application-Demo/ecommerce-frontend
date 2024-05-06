@@ -1,0 +1,35 @@
+.toggle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .toggle-button {
+    background-color: #ddd; /* Default background color */
+    border: none;
+    border-radius: 20px;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .toggle-button.light {
+    background-color: #f8f8f8; /* Light mode background color */
+    color: #333; /* Light mode text color */
+  }
+  
+  .toggle-button.dark {
+    background-color: #333; /* Dark mode background color */
+    color: #f8f8f8; /* Dark mode text color */
+  }
+  
+  .toggle-button:focus {
+    outline: none;
+  }
+  
+  .toggle-button svg {
+    margin-right: 5px;
+  }
+  

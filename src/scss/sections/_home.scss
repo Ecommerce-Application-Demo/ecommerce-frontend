@@ -1,7 +1,7 @@
 .homepage-main-container {
     display: flex;
     width: 100%;
-    // gap: 50px;
+    background-color: $White;
     flex-direction: column;
     @include breakpoint(small-only) {
     }
