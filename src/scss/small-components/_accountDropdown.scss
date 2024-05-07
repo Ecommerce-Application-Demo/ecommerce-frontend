@@ -24,7 +24,7 @@
 
     &>.accountDropdown-link-wrapper-nologgedin {
         text-align: center;
-        color: $White;
+        color: $fixed-white;
         display: flex;
         flex-direction: column;
         gap: 20px;
@@ -41,7 +41,7 @@
             width: 80%;
             border: 1px solid $primary-btn-red;
             border-radius: 4px;
-            color: white;
+            color: $fixed-white;
             background-color: $primary-btn-red;
             padding: 10px;
             transition: all 0.3s linear;

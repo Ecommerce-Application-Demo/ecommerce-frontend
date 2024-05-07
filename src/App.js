@@ -16,6 +16,7 @@ function App() {
   const { isLoggedIn } = useSelector((state) => state.user);
   const [openLoginPopup, setOpenLoginPopup] = useState(false);
   const [splashVisible, setSplashVisible] = useState(true);
+  const {isDarkMode} = useSelector((state)=>state.theme);
 
   const routeValidationForLoginPopup = [
     "/login-signup",
@@ -37,6 +38,9 @@ function App() {
   }, [routeParams]);
 
   useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add('dark-mode');
+    }
     setTimeout(() => {
       setSplashVisible(false);
     }, 2500);

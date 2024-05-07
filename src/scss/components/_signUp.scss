@@ -10,8 +10,12 @@
   gap: 10px;
   margin-bottom: 48px;
   width: fit-content;
+
+  & > h1 {
+    color: $Black;
+  }
   & > p {
-    color: $Grey-text-color;
+    color: $brandTitleText;
     font-family: Poppins;
     font-size: 16px;
     font-style: normal;
@@ -71,6 +75,8 @@
     font-size: 13px;
     border-radius: 3px;
     padding: 3px;
+    color: $Black;
+    background-color: $White;
   }
   & .number,
   .special,
@@ -78,6 +84,6 @@
   .lowercase,
   .charrecters {
     background-color: $green;
-    color: $White;
+    color: $fixed-white;
   }
 }

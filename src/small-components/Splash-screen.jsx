@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { DesiCartIconForLoading } from "../assets/icons";
 import { AnimatePresence, motion } from "framer-motion";
 import useBreakpoints from "../api/utilities/responsive";
+import { useSelector } from "react-redux";
 
 const SplashScreen = () => {
-    const {isMobile} = useBreakpoints()
+    const {isMobile} = useBreakpoints();
+    const {isDarkMode} = useSelector((state)=>state.theme);
+    console.log(isDarkMode, 'dark?');
     return (
       <motion.div
         className="splash-screen-container"
@@ -23,7 +26,7 @@ const SplashScreen = () => {
               animate={{ rotate: 360 }}
               transition={{ ease: "anticipate", duration: 1, repeat: 0, delay:0.3 }}
             >
-              <DesiCartIconForLoading />
+              <DesiCartIconForLoading color={isDarkMode ? '#ee1717' : '#DB4444'}/>
             </motion.div>
           </motion.div>
           <motion.h2

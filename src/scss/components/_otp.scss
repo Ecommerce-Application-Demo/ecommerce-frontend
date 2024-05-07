@@ -11,7 +11,12 @@
 // box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 // backdrop-filter: blur(11.2px);
 // -webkit-backdrop-filter: blur(11.2px);
-
+  &>h2 {
+    color: $Black;
+  }
+  &>p {
+    color: $Black;
+  }
     &>.otp-input-wrapper {
         display: flex;
         // margin: 20px 0px;
@@ -24,6 +29,7 @@
            caret-color: $primary-btn-red;
            text-align: center;
            border: 0.5px solid $Grey;
+           font-weight: bold;
             border-radius: 3px;
            &:focus {
             outline: none;

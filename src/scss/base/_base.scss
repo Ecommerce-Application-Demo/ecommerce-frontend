@@ -12,7 +12,6 @@
 }
 
 .global-margin {
-    margin-top: 80px;
     display: flex;
     justify-content: center;
     margin: 80px auto 0px;
@@ -21,6 +20,10 @@
     position: relative;
     box-sizing: border-box;
     background-color: $White;
+
+     @include breakpoint(small-only) {
+      margin: 60px auto 0px;
+     }
 }
 
 // input[type='checkbox'] {
