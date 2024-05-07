@@ -10,6 +10,7 @@
     }
     &>h1{
         margin-bottom: 40px;
+        color: $Black;
     }
     &>.getOtp-btn {
         display: inline-flex;
@@ -21,7 +22,7 @@
         border: none;
         margin-top: 40px;
         position: relative;
-        color: $White;
+        color: $fixed-white;
        width: 150px;
         height: 60px;
     }

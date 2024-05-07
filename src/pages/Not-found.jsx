@@ -5,8 +5,8 @@ const NotFound = () => {
   return (
     <div className='not-found-container'>
             <div className='not-found-roadmap'>
-                <p style={{color:'grey'}}>Home</p>
-                <p style={{color:'grey'}}>/</p>
+                <p>Home</p>
+                <p>/</p>
                 <p>404 Error</p>
             </div>
             <div className='not-found-main-text'>
