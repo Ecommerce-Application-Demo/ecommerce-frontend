@@ -4,6 +4,7 @@ import { FaAngleRight } from "react-icons/fa6";
 import { toast } from "react-toastify";
 import { reset } from "../../redux/Slices/userSlice";
 import userApi from "../../api/asyncThunk/userApi";
+import { Link } from "react-router-dom";
 
 const SideNavbar = (props) => {
   const { 
@@ -90,11 +91,11 @@ const SideNavbar = (props) => {
       { isLoggedIn && 
       (
         <div className="side-navbar-account-section">
-          <p>ACCOUNT</p>
-          <p>ORDERS</p>
-          <p>CANCELATIONS</p>
-          <p>CONTACT US</p>
-          <p onClick={handleLogout}>LOGOUT</p>
+          <Link to={'/my/dashboard'} className="side-navbar-account-link"><p>ACCOUNT</p></Link>
+          <Link to={'/my/dashboard'} className="side-navbar-account-link"><p>ORDERS</p></Link>
+          <Link to={'/my/dashboard'} className="side-navbar-account-link"><p>CANCELATIONS</p></Link>
+          <Link to={'/my/dashboard'} className="side-navbar-account-link"><p>CONTACT US</p></Link>
+          <p className="side-navbar-account-link" onClick={handleLogout}>LOGOUT</p>
         </div>
       )}
     </div>

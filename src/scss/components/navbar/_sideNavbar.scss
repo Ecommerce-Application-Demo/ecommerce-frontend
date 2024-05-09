@@ -75,10 +75,11 @@
     padding: 20px 0px 0px;
     border-top: 1px solid $primary-btn-red;
     flex-direction: column;
-    &>p {
+    &>.side-navbar-account-link {
         padding: 15px 25px;
         color: $Grey;
         border-radius: 20px;
+        text-decoration: none;
         &:hover {
             color: $White;
             background-color: $Grey;

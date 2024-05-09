@@ -13,7 +13,7 @@
       .ourBrands-text {
         text-align: center;
         font-size: 50px;
-        background: linear-gradient(to right, #f32170, #ff6b08, #cf23cf, #eedd44);
+        background: $brand-gradient;
         -webkit-text-fill-color: transparent;
         -webkit-background-clip: text;
         text-shadow: $primary-btn-red;

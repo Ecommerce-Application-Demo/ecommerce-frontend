@@ -1,0 +1,45 @@
+.dashboard-main-container {
+    padding: 0px;
+    width: 100%;
+    background: $White;
+
+    .dashboard-top-background {
+        background: $secondary-background;
+        height: 20vh;
+        width: 100%;
+    }
+    .dashboard-user-icon-wrapper {
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: -50px;
+        align-items: center;
+        justify-content: center;
+        height: 120px;
+        width: 120px;
+        border-radius: 6px;
+        position: relative;
+        background: $brand-gradient;
+        &>div {
+            padding: 10px;
+            // background: $White;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .dashboard-user-icon {
+           height: 105px;
+           width: 116px;
+           border-radius: 6px;
+           background: $White;
+           color: $Black;
+        }
+    }
+    .dashboard-user-email {
+        margin-top: 15px;
+        color: $Black;
+        text-align: center;
+    }
+}
