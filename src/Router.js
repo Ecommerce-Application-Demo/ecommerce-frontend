@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import LoginSignUp from './pages/Login-SignUp';
 import NotFound from './pages/Not-found';
 import AccountInformation from './nested_pages/Account-imformation-page';
+import Dashboard from './pages/Dashboard-page';
 import ProductAdminPage from './pages/product-admin-portal-page';
 import SingleProductPage from './pages/Single-product-page';
 import PageTransition from './uiHelper/general-page-transition';
@@ -33,6 +34,7 @@ const Router = () => {
       <Route path='/my/*' element={<ProtectedRoute><PageTransition><AccountInformation /></PageTransition></ProtectedRoute>} />
       <Route path='/product' element={<PageTransition><SingleProductPage /></PageTransition>} />
       <Route path='/product-admin' element={<PageTransition><ProductAdminPage /></PageTransition>} />
+      <Route path='/my/dashboard' element={<ProtectedRoute><PageTransition><Dashboard /></PageTransition></ProtectedRoute>} />
       <Route path='*' element={<PageTransition><NotFound /></PageTransition>} />
     </Routes>
   );

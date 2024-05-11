@@ -28,6 +28,7 @@ $card-box-shadow: var(--card-box-shadow);
 $circular-boxShadow-primary: var(--circular-boxShadow-primary);
 $brandTitleText: var(--brand-title-text);
 $secondary-background: var(--secondary-background);
+$hover-grey: var(--hover-grey);
 
 
 //------------z-indexes-------------------
@@ -74,7 +75,8 @@ $bp-max-small-only: 767px !default;
     --card-box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     --circular-boxShadow-primary: 2px 0 10px 2px #db4444;
     --brand-title-text:rgb(17, 14, 14);
-    --secondary-background: radial-gradient(circle, rgba(236,232,234,1) 0%, rgba(115,119,125,1) 100%);;
+    --secondary-background: radial-gradient(circle, rgba(236,232,234,1) 0%, rgba(115,119,125,1) 100%);
+    --hover-grey:rgb(208, 204, 204);
 }
 
 .dark-mode {
@@ -86,9 +88,11 @@ $bp-max-small-only: 767px !default;
     --brand-title-text:#00FF66;
     --circular-boxShadow-primary: 2px 0 10px 2px #00FF66;
     --primary-btn-red:#ee1717;
+    --hover-grey:rgb(51, 49, 49);
 }
 
 //-------------------------fixed colors------------------
 
 $fixed-white: white;
 $fixed-black: black;
+$brand-gradient: linear-gradient(to right, #f32170, #ff6b08, #cf23cf, #eedd44);

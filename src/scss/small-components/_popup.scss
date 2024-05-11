@@ -1,18 +1,40 @@
 .popup-main-container {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background-color: $White;
-    min-height: 200px;
-    animation: popupAnimation 0.8s;
-    box-shadow: $popup-primary-box-shadow;
-    z-index: $top-most-zIndex;
+  position: absolute;
+  bottom: 0;
+  z-index: $top-most-zIndex;
+  width: 100%;
+  animation: popupAnimation 0.8s;
+
+  .popup-overlay {
+      background-color: $modal-primary-box-shadow;
+      height: 100vh; 
+      width: 100%;
   }
-  
-  .popup-main-container.closing {
-    animation-name: closeAnimation;
-  }
-  
+  .popup-container {
+      width: 100%;
+      background-color: $White;
+      min-height: 200px;
+      box-shadow: $popup-primary-box-shadow;
+
+      .popup-title-wrapper {
+        width: 100%;
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+        color: $Black;
+        &>div:first-child {
+          width: 85%;
+        }
+        &>div:last-child {
+          cursor: pointer;
+        }
+      }
+    }
+    
+}
+.popup-main-container.closing {
+  animation-name: closeAnimation;
+}
   .popup-children-wrapper {
     padding: 10px;
   }
