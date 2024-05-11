@@ -1,99 +1,110 @@
-.side-navbar-container {
-    position: absolute;
-    height: 100vh;
-    width: 75vw;
-    min-width: 200px;
-    max-width: 500px;
-    background-color: $White;
-    left: 0;
-    top: 0;
-    border-top-right-radius: 30px;
-    display: flex;
-    overflow-y: scroll;
-    flex-direction: column;
-  box-shadow: $modal-primary-box-shadow;
+.side-navbar-main-container {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  top: 0;
+  left: 0;
   animation: sidebarAnimation 0.8s;
-  
-  .side-navbar-login-section-withoutlogin {
-    background-image: url('https://www.appmysite.com/blog/wp-content/uploads/2021/06/2-696x392.png');
-    width: 100%;
-    height: 150px;
-    background-size: contain;
-    background-position: top;
-    background-repeat: no-repeat;
-    padding-bottom: 110px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    color: $primary-btn-red;
-    font-size: 14px;
-    text-shadow: 2px 2px 4px rgba(255, 255, 255);
-    align-items: center;
-    font-weight: bold;
-    border-bottom: 1px solid $primary-btn-red;
-  }
-  .side-navbar-login-section {
-    width: 100%;
-    background-color:$primary-btn-red;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    justify-content: center;
-    flex-direction: column;
-    padding: 30px;
-    color:$White;
-    border-bottom-right-radius: 30px;
-    border-bottom-left-radius: 30px;
-    .side-navbar-user-icon-wrapper {
-        display: flex;
-        align-items: center;
-        padding: 10px;
-        background-color: $White;
-        border-radius: 4px;
-        color: $Black;
+  z-index: $top-most-zIndex;
+  .side-navbar-container {
+      // position: absolute;
+      height: 100vh;
+      width: 75%;
+      min-width: 200px;
+      // max-width: 500px;
+      background-color: $White;
+      border-top-right-radius: 30px;
+      display: flex;
+      overflow-y: scroll;
+      flex-direction: column;
+    box-shadow: $modal-primary-box-shadow;
+    
+    .side-navbar-login-section-withoutlogin {
+      background-image: url('https://www.appmysite.com/blog/wp-content/uploads/2021/06/2-696x392.png');
+      width: 100%;
+      height: 150px;
+      background-size: contain;
+      background-position: top;
+      background-repeat: no-repeat;
+      padding-bottom: 110px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      color: $primary-btn-red;
+      font-size: 14px;
+      text-shadow: 2px 2px 4px rgba(255, 255, 255);
+      align-items: center;
+      font-weight: bold;
+      border-bottom: 1px solid $primary-btn-red;
+    }
+    .side-navbar-login-section {
+      width: 100%;
+      background-color:$primary-btn-red;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+      flex-direction: column;
+      padding: 30px;
+      color:$White;
+      border-bottom-right-radius: 30px;
+      border-bottom-left-radius: 30px;
+      .side-navbar-user-icon-wrapper {
+          display: flex;
+          align-items: center;
+          padding: 10px;
+          background-color: $White;
+          border-radius: 4px;
+          color: $Black;
+      }
+    }
+    .side-navbar-masterCategory-section {
+      padding: 20px 0px;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      &>div {
+          display: flex;
+          flex-direction: row;
+          padding: 15px 25px;
+          justify-content: space-between;
+          align-items: center;
+          letter-spacing: 3px;
+          font-weight: bold;
+          color: $primary-btn-red;
+      }
+    }
+    .side-navbar-account-section {
+      display: flex;
+      width: 100%;
+      padding: 20px 0px 0px;
+      border-top: 1px solid $primary-btn-red;
+      flex-direction: column;
+      &>.side-navbar-account-link {
+          padding: 15px 25px;
+          color: $Grey;
+          border-radius: 20px;
+          text-decoration: none;
+          &:hover {
+              color: $White;
+              background-color: $Grey;
+          }
+      }
+      &>p:last-child {
+          font-size: 20px;
+          letter-spacing: 4px;
+          font-weight: bold;
+         border-radius: 0px;
+      }
     }
   }
-  .side-navbar-masterCategory-section {
-    padding: 20px 0px;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    &>div {
-        display: flex;
-        flex-direction: row;
-        padding: 15px 25px;
-        justify-content: space-between;
-        align-items: center;
-        letter-spacing: 3px;
-        font-weight: bold;
-        color: $primary-btn-red;
-    }
-  }
-  .side-navbar-account-section {
-    display: flex;
-    width: 100%;
-    padding: 20px 0px 0px;
-    border-top: 1px solid $primary-btn-red;
-    flex-direction: column;
-    &>.side-navbar-account-link {
-        padding: 15px 25px;
-        color: $Grey;
-        border-radius: 20px;
-        text-decoration: none;
-        &:hover {
-            color: $White;
-            background-color: $Grey;
-        }
-    }
-    &>p:last-child {
-        font-size: 20px;
-        letter-spacing: 4px;
-        font-weight: bold;
-       border-radius: 0px;
-    }
+  .sidebar-overlay {
+    background-color: $modal-primary-box-shadow;
+    height: 100vh;
+    width: 25%;
   }
 }
-
 @keyframes sidebarAnimation {
     0% {
         left: -100px;
