@@ -42,7 +42,7 @@ const AddCategories = () => {
     brandName: "",
     brandDescription: "",
     brandAddress: '',
-    brandDefaultImage:'',
+    brandLogoImage:'',
   });
   
   useEffect(()=>{
@@ -472,11 +472,11 @@ const AddCategories = () => {
                   onChange={handleAddBrand}
                 /> 
                  <input
-                  id="brandDefaultImage"
+                  id="brandLogoImage"
                   className="admin-addCategory-input"
                   placeholder="brand default image"
-                  name="brandDefaultImage"
-                  value={brandForm?.brandDefaultImage}
+                  name="brandLogoImage"
+                  value={brandForm?.brandLogoImage}
                   onChange={handleAddBrand}
                 /> 
                 <textarea

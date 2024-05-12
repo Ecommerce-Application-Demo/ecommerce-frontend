@@ -32,7 +32,7 @@ const BrandSection = () => {
               <div className="brandSection-cardSlide-image-wrapper">
                 <img
                   alt={brand?.brandName}
-                  src={brand?.brandDefaultImage}
+                  src={brand?.brandLogoImage}
                 />
               </div>
               <p className="brandSection-brandName">
