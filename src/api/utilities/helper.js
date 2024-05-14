@@ -6,7 +6,7 @@ import { resetUserDetails } from "../../redux/Slices/userSlice";
 export const authenticateErrorHandler = (dispatch, error) => {
     console.log(error, 'from error handler');
     const error403 = error?.message?.includes('code 403') || false;
-    const error500 = error?.message?.includes('code 500') || false;
+    const error500 = error?.message?.includes('401') || false;
     const typeError = error?.name === 'TypeError';
     console.log(error403);
     if (error403 || error500 || typeError) {
