@@ -8,8 +8,13 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+
+        @include breakpoint(small-only) {
+            flex-direction: column;
+            gap: 30px;
+        }
        &:only-child{
-        width: 110%;
+        width: 100%;
        }
     }
 }
@@ -29,8 +34,8 @@
         align-items: center;
         gap: 10px;
         border-radius: 4px;
-        background: var(--Button2, #DB4444);
-        color: white;
+        background: $primary-btn-red;
+        color: $fixed-white;
         cursor: pointer;
     }
 }
@@ -39,6 +44,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    color: $fixed-white;
     & div {
         display: flex;
         flex-direction: row;
@@ -60,6 +66,7 @@
     display: flex;
     gap: 20px;
     margin-bottom: 20px;
+    color: $fixed-white;
     width: fit-content;
     &>input {
         height: 20px;

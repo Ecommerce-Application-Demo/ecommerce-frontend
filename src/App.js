@@ -58,7 +58,7 @@ function App() {
             <LoginPopupMobile setOpenLoginPopup={setOpenLoginPopup} />
           )}
           <Router />
-          <FooterPage />
+          {(!routeParams.includes('/my/dashboard')) && <FooterPage />}
         </div>
       )}
     </AnimatePresence>

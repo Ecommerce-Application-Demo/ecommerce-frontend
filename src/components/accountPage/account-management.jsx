@@ -32,9 +32,6 @@ const AccountManagement = () => {
     <div className="delete-account-btn" onClick={()=>{setClickDeleteAccount(true)}}>
       Delete Account
     </div>
-    <div className="logout-account-btn">
-      Log Out
-    </div>
     <div className="logoutAll-account-btn" onClick={handleLogoutAllDevice}>
      Log Out For All Device
     </div>

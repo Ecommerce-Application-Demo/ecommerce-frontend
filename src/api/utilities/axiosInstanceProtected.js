@@ -62,14 +62,12 @@ async function refreshToken() {
 
     return response.data?.accessToken;
   } catch (error) {
-    if (error?.response?.status === 500) {
       localStorage.removeItem("JWT");
       localStorage.removeItem("REFRESH_TOKEN");
       localStorage.removeItem("USERNAME");
       localStorage.removeItem("EMAIL");
       localStorage.removeItem("REFRESH_TOKEN_EXPIRY");
-    }
-    // throw new CustomError("Error refreshing token", "REFRESH_ERROR");
+    throw new CustomError("Error refreshing token", "REFRESH_ERROR");
   }
 }
 

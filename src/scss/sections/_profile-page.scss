@@ -59,6 +59,7 @@
                     padding: 16px;
                     border: 2px solid $purple-pain;
                     color: $purple-pain;
+                    font-weight: bold;
 
                     @include breakpoint(small-only) {
                         font-size: 12px;
@@ -71,6 +72,7 @@
                     border-radius: 4px;
                     font-size: 15px;
                     padding: 12px;
+                    font-weight: bold;
                     // background: $secondary-background;
                     box-shadow: $heavy-purple;
                     @include breakpoint(small-only) {
