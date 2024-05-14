@@ -98,6 +98,19 @@ const authenticateCall = createAsyncThunk(
     }
 )
 
+//async thunk for logout
+const deleteAccount = createAsyncThunk(
+    'INDEX',
+    async (_,thunkAPI) =>{
+        try {
+               return  authService.deleteAccount();
+           }
+        catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+            return thunkAPI.rejectWithValue(message);
+        } 
+    }
+)
 const userApi = {
     isEmailExist,
     authenticateCall,
@@ -105,5 +118,6 @@ const userApi = {
     login,
     logout,
     logoutAllDevice,
+    deleteAccount,
 }
 export default userApi;

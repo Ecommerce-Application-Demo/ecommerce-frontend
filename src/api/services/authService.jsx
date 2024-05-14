@@ -36,6 +36,13 @@ const logoutAllDevice = async()=>{
     return response.data;
 }
 
+//delete account 
+const deleteAccount = async()=>{
+    const response = await axiosInstanceProtected.delete(`/api/my/delete-acc`
+    );
+    return response.data;
+}
+
 const authenticateCall = async () => {
     try {
       const response = await axiosInstanceProtected.get(`/api/auth/index`);
@@ -49,6 +56,7 @@ const authenticateCall = async () => {
 
 const authService ={
     authenticateCall,
+    deleteAccount,
     emailCheck,
     register,
     login,

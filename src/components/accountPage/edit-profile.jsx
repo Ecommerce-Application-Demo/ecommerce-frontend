@@ -15,6 +15,7 @@ import UnauthorizedComponent from "../../error/UnauthorizedError";
 import { Navigate, useNavigate } from "react-router-dom";
 import AccountManagement from "./account-management";
 import { authenticateErrorHandler } from "../../api/utilities/helper";
+import { resetUserDetails } from "../../redux/Slices/userSlice";
 
 const EditProfile = () => {
   const dispatch = useDispatch();
@@ -246,12 +247,15 @@ const EditProfile = () => {
       }
       dispatch(changePassword(changePasswordDispatch)).unwrap()
       .then(()=>{
+        dispatch(resetUserDetails());
+        dispatch(resetUserDetails());
         toast.success('password changes successfully, you have to login again.');
        setTimeout(() => { 
          navigate('/login-signup');
        }, 1000);
       }).catch(error=>{
         console.log(error);
+        authenticateErrorHandler(dispatch, error);
         toast.error('error in password changes');
       })
   };
