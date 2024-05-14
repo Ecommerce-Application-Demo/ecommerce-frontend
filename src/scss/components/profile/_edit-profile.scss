@@ -191,6 +191,7 @@
         color: $primary-btn-red;
         font-weight: bold;
         background: $primary-background;
+        cursor: pointer;
     }
     .logout-account-btn {
         width: 100%;
@@ -201,6 +202,8 @@
         color: $fixed-white;
         font-weight: bold;
         background: $primary-btn-red-disabled;
+        cursor: pointer;
+
     }
     .logoutAll-account-btn {
         width: 100%;
@@ -211,5 +214,6 @@
         font-weight: bold;
         background: $primary-btn-red;
         color: $fixed-white;
+        cursor: pointer;
     }
 }
