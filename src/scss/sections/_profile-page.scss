@@ -1,20 +1,29 @@
 .profile-main-container {
     width: 100%;
     height: fit-content;
-    margin: 20px;
-    margin-left: 100px;
-    background-color: #fff;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: $White;
+    gap: 20px;
     &>h2 {
-        margin-bottom: 40px;
+       color: $primary-btn-red;
+       font-size: 32px;
     }
     .profile-details-container {
         position: relative; 
-        
+        padding: 20px 40px;
         width: 100%;
+        max-width: 650px;
+        min-width: 460px;
         height: 100%;
+        background: $primary-background;
+        color: $Black;
+        border-radius: 5px;
         display: flex;
         flex-direction: column;
         gap: 30px;
+        font-size: 25px;
         
         .profile-forZindex {
             background-color: transparent;
@@ -25,13 +34,16 @@
             right: 0;
             bottom: 0;
         }
-        &>.profile-info-subWrapper {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            
+
+            &> .profile-info-wrapper {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                align-items: center;
+                justify-content: space-between;
+            }
             & .profile-info-input {
-               width: 350px;
+               width: 100%;
             }
             & .profile-info-radio {
                width: 100%;
@@ -39,7 +51,6 @@
             //    background-color: $Input-normal-background;
             }
 
-        }
         & .gender-container {
             // margin-top: 20px;
             display: flex;
@@ -72,19 +83,7 @@
                 font-weight: 800;
             }
         }
-    }
-    &>.profile-Edit-btn {
-        margin: 40px 0px;
-        height: 40px;
-        color: $White;
-        background-color: $primary-btn-red;
-        border-radius: 4px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-    }
-
+    }      
     &>.saveChanges-container {
         display: flex;
         align-items: center;
@@ -117,7 +116,18 @@
         cursor: pointer;
         }
     }
-   
+    .profile-edit-btn {
+        width: 100%;
+        max-width: 650px;
+        padding: 12px;
+        color: $fixed-white;
+        background-color: $primary-btn-red;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
 }
 
 .profile-password-container {

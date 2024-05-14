@@ -1,10 +1,14 @@
 .address-main-container {
     width: 60vw;
+
 .address-title-container {
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    color: $primary-btn-red;
+
     &> .address-add-address-btn {
         height: 50px;
         width: 200px;

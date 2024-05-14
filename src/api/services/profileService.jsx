@@ -31,7 +31,7 @@ const validatePassword = async (currentPasword) => {
 }
 
 const changePassword = async (newPassword) => {
-  const response = await axios.post(`/api/my/password`,
+  const response = await axiosInstanceProtected.put(`/api/my/password`,
   newPassword,
   );
   return  response.data;

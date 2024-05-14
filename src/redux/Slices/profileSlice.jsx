@@ -1,8 +1,7 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 import profileThunk from "../../api/asyncThunk/profileAsyncThnuk";
-
-
+// import { resetUserDetails } from "./userSlice";
 
 const 
 {
@@ -38,6 +37,14 @@ const profileSlice = createSlice({
         resetPasswordVerification: (state) => {
            state.isVerifiedPassword = null;
           },
+          resetProfileDetails: (state)=>{
+            Object.assign(state, initialState);
+            localStorage.removeItem("JWT");
+            localStorage.removeItem("REFRESH_TOKEN");
+            localStorage.removeItem("USERNAME");
+            localStorage.removeItem("EMAIL");
+            localStorage.removeItem("REFRESH_TOKEN_EXPIRY");
+          }
     },
     extraReducers:(builder)=>{
         builder
@@ -110,9 +117,10 @@ const profileSlice = createSlice({
             state.isPasswordLoading = true;
         })
         .addCase(changePassword.fulfilled, (state,action)=>{
-            state.isPasswordLoading = false;
+            Object.assign(state, initialState);
             state.changePassword = true;
-            state.editDeleteProfileSuccess = true;
+            localStorage.clear();
+            
         })
         .addCase(changePassword.rejected, (state,action)=>{
             state.isPasswordLoading = false;
@@ -123,4 +131,4 @@ const profileSlice = createSlice({
 })
 
 export default profileSlice.reducer;
-export const { resetPasswordVerification } = profileSlice.actions;
+export const { resetPasswordVerification, resetProfileDetails } = profileSlice.actions;

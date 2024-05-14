@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import addressThunk from '../../api/asyncThunk/addressAsyncThunk';
 import LoadingScreen from '../../small-components/Loading-screen';
 import { toast } from 'react-toastify';
+import { authenticateErrorHandler } from '../../api/utilities/helper';
 
 const ViewAddress = (props) => {
   const {
@@ -17,12 +18,18 @@ const ViewAddress = (props) => {
     const {viewAddress, removeAddress, editAddress} = addressThunk;
 
     useEffect(()=>{
-        dispatch(viewAddress());
+        dispatch(viewAddress()).unwrap().then()
+        .catch((error)=> {
+          authenticateErrorHandler(dispatch, error);
+        })
     },[]);
 
     useEffect(()=>{
         if (editDeleteAddAddressSuccess) {
-        dispatch(viewAddress())
+        dispatch(viewAddress()).unwrap().then()
+        .catch((error)=> {
+          authenticateErrorHandler(dispatch, error);
+        })
         }
     },[editDeleteAddAddressSuccess]);
 
@@ -35,8 +42,10 @@ const ViewAddress = (props) => {
 
     const handleRemoveBtn = (addId) => {
         if (addId !==defaultAddress?.addId) {
-        dispatch(removeAddress(addId)).then(()=>{
+        dispatch(removeAddress(addId)).unwrap().then(()=>{
             toast.success('address deleted successfully')
+        }).catch(error=> {
+          authenticateErrorHandler(dispatch, error);
         })
     } else {
         toast.warn('default address could not be deleted!!')
@@ -61,8 +70,10 @@ const ViewAddress = (props) => {
             addressType: item?.addressType,
             default: true,
         };
-        dispatch(editAddress(dataTobeDispatched)).then(()=>{
+        dispatch(editAddress(dataTobeDispatched)).unwrap().then(()=>{
             toast.success('default address changed successfully.')
+        }).catch(error=>{
+          authenticateErrorHandler(dispatch, error);
         })
     }
   return (

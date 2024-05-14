@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import addressThunk from "../../api/asyncThunk/addressAsyncThunk";
 import { getPincode } from "../../api/services/pincodeService";
 import { toast } from "react-toastify";
+import { authenticateErrorHandler } from "../../api/utilities/helper";
 
 const AddAddress = (props) => {
   const { setShowAddModal } = props;
@@ -193,6 +194,7 @@ const AddAddress = (props) => {
           setShowAddModal(false);
         }).catch((err)=>{
           toast.error('an error occured.')
+          authenticateErrorHandler(dispatch, error);
         })
       })
       .catch((validationErrors) => {

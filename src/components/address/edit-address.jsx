@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import addressThunk from "../../api/asyncThunk/addressAsyncThunk";
 import { getPincode } from "../../api/services/pincodeService";
 import { toast } from "react-toastify";
+import { authenticateErrorHandler } from "../../api/utilities/helper";
 
 const EditAddress = (props) => {
   const {
@@ -233,6 +234,7 @@ const EditAddress = (props) => {
         });
         setErrors(newErrors);
         toast.error("please fill the required field");
+        authenticateErrorHandler(dispatch, error);
       });
   };
   return (

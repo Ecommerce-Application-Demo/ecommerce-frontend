@@ -17,8 +17,6 @@ const OtpVerificationModal = (props) => {
       setValidateOtpForgotPassword,
     } = props;
 
-    console.log('otp modal');
-
     const onClose =()=>{
         clickForgotPassword ? setClickForgotPassword(false) : setClickVerifyEmail(false);
         clickVerifyEmail ? setClickVerifyEmail(false) : setClickForgotPassword(false);

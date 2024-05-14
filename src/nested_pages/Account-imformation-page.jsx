@@ -37,6 +37,9 @@ const AccountImformation = () => {
                 case '/my/payment':
                     setPageName('Payment')
                 break;
+                case '/my/profile/edit':
+                    setPageName('profileEdit')
+                break;
             default:
                 break;
         }
@@ -80,6 +83,7 @@ const AccountImformation = () => {
     });
 
   return (
+    <div className='global-margin'>
     <div className='account-imformation-container'>
         <div className='account-imformation-roadmap-wrapper'>
             <div className='account-imformation-roadmap'>
@@ -109,6 +113,7 @@ const AccountImformation = () => {
         <div className="account-imformation-right-sidebar-container">
         {route==='/my/address' && <AddreessPage/>}
         {route==='/my/profile' && <ProfilePage/>}
+        {route==='/my/profile/edit' && <ProfilePage/>}
         {route==='/my/order' && <OrderPage/>}
         {route==='/my/cancelation' && <CancelationPage/>}
         {route==='/my/return' && <ReturnPage/>}
@@ -116,6 +121,7 @@ const AccountImformation = () => {
         </div>
         </div>
         </div>
+    </div>
   )
 }
 

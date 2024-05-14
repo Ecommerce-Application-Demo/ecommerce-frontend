@@ -1,6 +1,8 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import authService from '../services/authService';
 import ValidateJWT from '../utilities/ResetLogin';
+// import { resetUserDetails } from '../../redux/Slices/userSlice';
+import { resetProfileDetails } from '../../redux/Slices/profileSlice';
 
 // const Token =()=>{
 //     const data =useSelector((state)=>{
@@ -65,10 +67,57 @@ const logout = createAsyncThunk(
     }
 )
 
+//async thunk for logout
+const logoutAllDevice = createAsyncThunk(
+    'LOGOUT_ALL_DEVICE',
+    async (_,thunkAPI) =>{
+        try {
+               return  authService.logoutAllDevice()
+               .then(()=>{
+                thunkAPI.dispatch(resetProfileDetails());
+               })
+           }
+        catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+            return thunkAPI.rejectWithValue(message)
+        } 
+    }
+)
+
+//async thunk for logout
+const authenticateCall = createAsyncThunk(
+    'INDEX',
+    async (_,thunkAPI) =>{
+        try {
+               return  authService.authenticateCall();
+           }
+        catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+            return thunkAPI.rejectWithValue(message);
+        } 
+    }
+)
+
+//async thunk for logout
+const deleteAccount = createAsyncThunk(
+    'INDEX',
+    async (_,thunkAPI) =>{
+        try {
+               return  authService.deleteAccount();
+           }
+        catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+            return thunkAPI.rejectWithValue(message);
+        } 
+    }
+)
 const userApi = {
     isEmailExist,
+    authenticateCall,
     register,
     login,
     logout,
+    logoutAllDevice,
+    deleteAccount,
 }
 export default userApi;
