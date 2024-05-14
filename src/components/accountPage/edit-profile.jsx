@@ -418,7 +418,6 @@ const EditProfile = () => {
           </>
         )}
       </div>
-      <AccountManagement/>
     </div>
   );
 };

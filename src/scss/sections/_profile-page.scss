@@ -7,23 +7,29 @@
     background: $White;
     gap: 20px;
     &>h2 {
-       color: $primary-btn-red;
+       @include primaryGradientText;
        font-size: 32px;
     }
+    .profile-background-details-container {
+        width: 100%;
+        max-width: 650px;
+
+    }
     .profile-details-container {
+        // @include modalGlassBackground;
         position: relative; 
         padding: 20px 40px;
         width: 100%;
+        // background: $gradient-card-background;
+        box-shadow: $inside-box-shadow-card;
         max-width: 650px;
-        min-width: 460px;
         height: 100%;
-        background: $primary-background;
         color: $Black;
         border-radius: 5px;
         display: flex;
         flex-direction: column;
         gap: 30px;
-        font-size: 25px;
+        font-size: 20px;
         
         .profile-forZindex {
             background-color: transparent;
@@ -40,7 +46,39 @@
                 flex-direction: row;
                 width: 100%;
                 align-items: center;
-                justify-content: space-between;
+                justify-content: center;
+
+                .profile-info-divider {
+                    width: 30%;
+                    background: $purple-pain;
+                    height: 2px;
+                    
+                }
+                .profile-info-label {
+                    border-radius: 50%;
+                    padding: 16px;
+                    border: 2px solid $purple-pain;
+                    color: $purple-pain;
+
+                    @include breakpoint(small-only) {
+                        font-size: 12px;
+                        text-wrap: nowrap;
+                    padding: 8px;
+                    }
+                }
+                .profile-info-value {
+                    border: 2px solid $purple-pain;
+                    border-radius: 4px;
+                    font-size: 15px;
+                    padding: 12px;
+                    // background: $secondary-background;
+                    box-shadow: $heavy-purple;
+                    @include breakpoint(small-only) {
+                        font-size: 12px;
+                        text-wrap: nowrap;
+                    padding: 4px;
+                    }
+                }
             }
             & .profile-info-input {
                width: 100%;
@@ -127,6 +165,7 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
+        text-decoration: none;
     }
 }
 
