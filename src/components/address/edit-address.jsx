@@ -240,9 +240,11 @@ const EditAddress = (props) => {
   return (
     <Modal
       width="500px"
-      title="Add Address"
+      title="Edit Address"
       onClose={onClose}
       height="500px"
+      heightForMobile='400px'
+      widthForMobile='100%'
       footer={
         <div className="addAddress-btn-footer">
           <div onClick={handleSubmit}>Save</div>

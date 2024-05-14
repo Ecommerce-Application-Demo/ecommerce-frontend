@@ -56,7 +56,7 @@ const DashboardPage = () => {
           <FaAngleRight size={20} />
         </div>
         <div className='dashboard-divider-line'></div>
-        <div className='dashboard-sections'>
+        <Link className='dashboard-sections' to='/my/address'>
           <div className='dashboard-section-leftside-wrapper'>
           <LiaAddressCardSolid size={28}/>
           <div className='dashboard-section-content-wrapper'>
@@ -65,17 +65,17 @@ const DashboardPage = () => {
           </div>
           </div>
           <FaAngleRight size={20} />
-        </div>
-        <div className='dashboard-sections'>
+        </Link>
+        <Link className='dashboard-sections' to='/my/profile'>
           <div className='dashboard-section-leftside-wrapper'>
           <AiFillCopy size={28}/>
-          <Link className='dashboard-section-content-wrapper' to='/my/profile'>
+          <div className='dashboard-section-content-wrapper'>
               <p>Profile</p>
               <p>Change your profile details</p>
-          </Link>
+          </div>
           </div>
           <FaAngleRight size={20} />
-        </div>
+        </Link>
         <div className='dashboard-sections'>
           <div className='dashboard-section-leftside-wrapper'>
           <PiContactlessPaymentLight size={28}/>

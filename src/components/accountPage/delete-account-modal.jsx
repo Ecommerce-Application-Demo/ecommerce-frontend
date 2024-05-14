@@ -45,6 +45,8 @@ const DeleteAccountModal = (props) => {
     <Modal
     height='fit-content'
     width='fit-content'
+    heightForMobile='fit-content'
+    widthForMobile='100vw'
     onClose={onClose}
     title='Are you sure?'
     >

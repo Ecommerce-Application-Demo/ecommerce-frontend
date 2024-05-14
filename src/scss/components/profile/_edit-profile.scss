@@ -10,7 +10,6 @@
         padding: 20px 40px;
         width: 100%;
         max-width: 650px;
-        min-width: 460px;
         height: 100%;
         background: $primary-background;
         color: $Black;
@@ -21,10 +20,14 @@
         font-size: 25px;
         justify-content: center;
 
+        @include breakpoint(small-only) {
+            padding: 10px 20px;
+        }
         .profile-info-email {
             width: 100%;
-            padding: 4px 6px;
-            border-radius: 4px;
+            padding: 5px 10px;
+            border-radius: 50px;
+            font-size: 14px;
             border: 1px solid $Grey;
             background: $fixed-white;
             display: flex;
@@ -37,7 +40,9 @@
                 color: $fixed-white;
                 border-radius: 5px;
                 display: flex;
-                padding: 10px;
+                 font-size: 12px; 
+                padding: 5px;
+                border-radius: 20px;
             }
         }
         
@@ -52,6 +57,7 @@
                 width: 100%;
                 padding: 10px;
                 display: flex;
+                border-radius: 30px;
                 align-items: center;
                 justify-content: center;
                 gap: 10px;
@@ -66,6 +72,7 @@
                 align-items: center;
                 justify-content: center;
                 gap: 10px;
+                border-radius: 30px;
             background-color: $Input-success-background;
                 border: 1px solid $SearchBar-background;
                 color: $green;
@@ -132,6 +139,12 @@
         &>.edit-profile-password-wrapper {
             display: flex;
             gap: 40px;
+            flex-direction: row;
+
+            @include breakpoint(small-only) {
+                flex-direction: column;
+                align-items: center;
+            }
            & > div {
             width: 100%;
                &>.edit-profile-password-input {
@@ -174,6 +187,7 @@
 }
 .logout-or-delete-account-container {
     width: 100%;
+    margin-top: 20px;
     max-width: 650px;
     display: flex;
     gap: 20px;

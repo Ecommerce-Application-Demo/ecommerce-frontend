@@ -1,5 +1,5 @@
 .address-main-container {
-    width: 60vw;
+    width: 100%;
 
 .address-title-container {
     margin-top: 20px;
@@ -9,9 +9,13 @@
     align-items: center;
     color: $primary-btn-red;
 
+    @include breakpoint(small-only) {
+        flex-direction: column;
+        gap: 20px;
+    }
+
     &> .address-add-address-btn {
-        height: 50px;
-        width: 200px;
+        padding: 10px 20px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -20,6 +24,11 @@
         border-radius: 4px;
         transition: all 0.3s linear;
         cursor: pointer;
+
+        @include breakpoint(small-only) {
+            font-size: 12px;
+            padding: 6px 14px;
+        }
         &:hover {
             background-color: $primary-btn-red;
             color: $White;

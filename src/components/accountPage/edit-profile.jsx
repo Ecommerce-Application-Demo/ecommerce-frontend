@@ -190,7 +190,7 @@ const EditProfile = () => {
       currentPassword: "",
       newPassword: "",
     });
-
+    window.history.back();
     dispatch(resetPasswordVerification());
   };
 
@@ -208,6 +208,7 @@ const EditProfile = () => {
       .then((response) => {
         console.log("Profile edited successfully");
         toast.success("Profile edited successfully");
+        window.history.back();
       })
       .catch((error) => {
         console.error("Error editing profile:", error);

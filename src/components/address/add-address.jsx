@@ -192,7 +192,7 @@ const AddAddress = (props) => {
         dispatch(addAddress(dataForDispatch)).unwrap().then(() => {
           toast.success("address added successfully");
           setShowAddModal(false);
-        }).catch((err)=>{
+        }).catch((error)=>{
           toast.error('an error occured.')
           authenticateErrorHandler(dispatch, error);
         })
@@ -212,6 +212,8 @@ const AddAddress = (props) => {
       title="Add Address"
       onClose={onClose}
       height="500px"
+      heightForMobile='400px'
+      widthForMobile='100%'
       footer={
         <div className="addAddress-btn-footer">
           <div onClick={handleSubmit} style={addressData.isAddressLoading ? {cursor:"not-allowed", backgroundColor:'grey'} : {}}>Save</div>

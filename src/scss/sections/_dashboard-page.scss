@@ -64,6 +64,7 @@
             justify-content: space-between;
             align-items: center;
             color: $Grey;
+            text-decoration: none;
             
             &:hover {
                 background: $hover-grey;
@@ -77,7 +78,6 @@
                 width: 70%;
 
                 .dashboard-section-content-wrapper {
-                    text-decoration: none;
                     &>:first-child {
                         color: $Black;
                         font-weight: 600;
