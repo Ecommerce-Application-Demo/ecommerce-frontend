@@ -30,8 +30,13 @@ $brandTitleText: var(--brand-title-text);
 $secondary-background: var(--secondary-background);
 $hover-grey: var(--hover-grey);
 $primary-background: var(--primary-background);
-
-
+$ice-cold: var(--ice-Cold);
+$freeze-purple:var(--freeze-purple);
+$medium-purple : var(--medium-purple);
+$purple-pain: var(--purple-pain);
+$heavy-purple:var(--heavy-purple);
+$gradient-card-background : radial-gradient(circle, $freeze-purple, $medium-purple);
+$inside-box-shadow-card: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 //------------z-indexes-------------------
 $top-most-zIndex: 100;
 $secondTop-zIndex: 99;
@@ -79,6 +84,11 @@ $bp-max-small-only: 767px !default;
     --secondary-background: radial-gradient(circle, rgba(236,232,234,1) 0%, rgba(115,119,125,1) 100%);
     --hover-grey:rgb(208, 204, 204);
     --primary-background: rgb(232, 229, 229);
+    --ice-Cold: #a0d2eb;
+   --freeze-purple: #e5eaf5;
+   --medium-purple: #d0bdf4;
+   --purple-pain: #8458B3;
+   --heavy-purple: #a28089;
 }
 
 .dark-mode {

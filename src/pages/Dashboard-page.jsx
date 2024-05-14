@@ -10,6 +10,7 @@ import { PiContactlessPaymentLight } from "react-icons/pi";
 import { AiFillCopy } from "react-icons/ai";
 import { FcAbout } from "react-icons/fc";
 import { TbInfoSquareFilled } from "react-icons/tb";
+import { Link } from 'react-router-dom';
 
 const DashboardPage = () => {
   return (
@@ -68,10 +69,10 @@ const DashboardPage = () => {
         <div className='dashboard-sections'>
           <div className='dashboard-section-leftside-wrapper'>
           <AiFillCopy size={28}/>
-          <div className='dashboard-section-content-wrapper'>
+          <Link className='dashboard-section-content-wrapper' to='/my/profile'>
               <p>Profile</p>
               <p>Change your profile details</p>
-          </div>
+          </Link>
           </div>
           <FaAngleRight size={20} />
         </div>

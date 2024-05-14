@@ -171,45 +171,49 @@
         }
     }
 
-    .logout-or-delete-account-container {
-        width: 100%;
-        max-width: 650px;
-        display: flex;
-        gap: 20px;
-        flex-direction: column;
+}
+.logout-or-delete-account-container {
+    width: 100%;
+    max-width: 650px;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
 
-        &>h3 {
-            color: $Black;
-        }
-        .delete-account-btn {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            padding: 20px;
-            justify-content: center;
-            color: $primary-btn-red;
-            font-weight: bold;
-            background: $primary-background;
-        }
-        .logout-account-btn {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            padding: 20px;
-            justify-content: center;
-            color: $fixed-white;
-            font-weight: bold;
-            background: $primary-btn-red-disabled;
-        }
-        .logoutAll-account-btn {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            padding: 20px;
-            justify-content: center;
-            font-weight: bold;
-            background: $primary-btn-red;
-            color: $fixed-white;
-        }
+    &>h3 {
+        color: $Black;
+    }
+    .delete-account-btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        justify-content: center;
+        color: $primary-btn-red;
+        font-weight: bold;
+        background: $primary-background;
+        cursor: pointer;
+    }
+    .logout-account-btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        justify-content: center;
+        color: $fixed-white;
+        font-weight: bold;
+        background: $primary-btn-red-disabled;
+        cursor: pointer;
+
+    }
+    .logoutAll-account-btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        justify-content: center;
+        font-weight: bold;
+        background: $primary-btn-red;
+        color: $fixed-white;
+        cursor: pointer;
     }
 }

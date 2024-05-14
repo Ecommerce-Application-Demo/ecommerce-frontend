@@ -32,25 +32,31 @@ const ViewProfile = () => {
 
 
   return (
+    <div className= 'profile-background-details-container'>
       <div className="profile-details-container">
             {isProfileLoading && <LoadingScreen />}
           <div className="profile-info-wrapper">
             <div className="profile-info-label">Full Name</div>
+            <div className='profile-info-divider'></div>
             <div className="profile-info-value">{profile?.name || '--Not Added--'}</div>
           </div>
           <div className="profile-info-wrapper">
             <div className="profile-info-label">Email</div>
+            <div className='profile-info-divider'></div>
             <div className="profile-info-value">{profile?.email || '--Not Added--'}</div>
           </div>
           <div className="profile-info-wrapper">
             <div className="profile-info-label">Phone Number</div>
+            <div className='profile-info-divider'></div>
             <div className="profile-info-value">{profile?.phoneNumber || '--Not Added--'}</div>
           </div>
           <div className="profile-info-wrapper">
             <div className="profile-info-label">Gender</div>
+            <div className='profile-info-divider'></div>
             <div className="profile-info-value">{profile?.gender || '--Not Added--'}</div>
           </div>
       </div>
+    </div>
   );
 };
 

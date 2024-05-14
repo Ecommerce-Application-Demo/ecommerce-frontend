@@ -30,3 +30,11 @@ backdrop-filter: blur( 11.5px );
 border-radius: 10px;
 border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
+
+@mixin primaryGradientText {
+    background: $brand-gradient;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    text-shadow: $primary-btn-red;
+}
+

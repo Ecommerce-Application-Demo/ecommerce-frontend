@@ -8,16 +8,17 @@ import ReturnPage from '../pages/Return-page';
 import CancelationPage from '../pages/Cancelation-page';
 import PaymentPage from '../pages/Payment-page';
 import { useSelector } from 'react-redux';
+import useBreakpoints from '../api/utilities/responsive';
 
 const AccountImformation = () => {
     // const [selectedDiv, setSelectedDiv]=useState(null);
     const [pageName,setPageName]=useState('Manage Your Account');
     const route = useLocation().pathname;
     const navigate=useNavigate();
+    const {isMobile} =useBreakpoints();
     // const address = useSelector(state=> state.address.address);
     const loggedInUserName = useSelector(state=> state.profile.profile?.name);
-    // const addressValidation = address.length !==0 || address === 'No address registered.';
-    // const addressCount = addressValidation && address.length;
+    console.log(isMobile, 'account');
     useEffect(()=>{
         switch (route) {
             case '/my/profile':
@@ -85,7 +86,7 @@ const AccountImformation = () => {
   return (
     <div className='global-margin'>
     <div className='account-imformation-container'>
-        <div className='account-imformation-roadmap-wrapper'>
+        {!isMobile && <div className='account-imformation-roadmap-wrapper'>
             <div className='account-imformation-roadmap'>
             <Link to='/' className='link-under-roadmap'><span>Home</span></Link>
             <span>/</span>
@@ -94,9 +95,9 @@ const AccountImformation = () => {
             <div>
               Welcome! <span className='login-account-name'>{loggedInUserName}</span>
             </div>
-        </div>
+        </div>}
         <div className='account-imformation-main-container'>
-        <div className='account-imformation-sidebar-container'>
+        {!isMobile && <div className='account-imformation-sidebar-container'>
             <dl className='account-imformation-sidebar-wrapper'>
                 <dt className={manageMyAccStyles}>Manage My Account</dt>
                 <dd className={subProfileChildStyles} name='profile' onClick={() => handleClick('profile')}>My Profile</dd>
@@ -109,7 +110,7 @@ const AccountImformation = () => {
                 <dd className={subReturnChildStyles} name='return' onClick={() => handleClick('return')}>My Returns</dd>
                 <dd className={subCancelationChildStyles} name='cancelation' onClick={() => handleClick('cancelation')}>My Cancelations</dd>
             </dl>
-        </div>
+        </div>}
         <div className="account-imformation-right-sidebar-container">
         {route==='/my/address' && <AddreessPage/>}
         {route==='/my/profile' && <ProfilePage/>}

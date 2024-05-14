@@ -3,6 +3,7 @@ import ViewProfile from '../components/accountPage/view-profile';
 import tags from '../metaTag/dynamicTags';
 import { Link, useLocation } from 'react-router-dom';
 import EditProfile from '../components/accountPage/edit-profile';
+import AccountManagement from '../components/accountPage/account-management';
 
 const ProfilePage = () => {
   const route = useLocation().pathname;
@@ -18,6 +19,7 @@ const ProfilePage = () => {
       {viewProfileRoute && <Link className='profile-edit-btn' to='/my/profile/edit'>
         EDIT PROFILE
       </Link>}
+      {viewProfileRoute && <AccountManagement/>}
     </div>
   )
 }
