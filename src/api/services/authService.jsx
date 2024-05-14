@@ -29,10 +29,30 @@ const logout = async()=>{
     return response.data;
 }
 
+//logout all device
+const logoutAllDevice = async()=>{
+    const response = await axiosInstanceProtected.get(`/api/my/logout/allDevice`
+    );
+    return response.data;
+}
+
+const authenticateCall = async () => {
+    try {
+      const response = await axiosInstanceProtected.get(`/api/auth/index`);
+      return response.data;
+    } catch (error) {
+      // Handle errors
+      console.error("Error:", error);
+      throw error;
+    }
+  };
+
 const authService ={
+    authenticateCall,
     emailCheck,
     register,
     login,
     logout,
+    logoutAllDevice,
 }
 export default authService;

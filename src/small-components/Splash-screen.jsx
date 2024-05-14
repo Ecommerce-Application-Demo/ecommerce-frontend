@@ -2,12 +2,25 @@ import React, { useEffect } from "react";
 import { DesiCartIconForLoading } from "../assets/icons";
 import { AnimatePresence, motion } from "framer-motion";
 import useBreakpoints from "../api/utilities/responsive";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import userApi from "../api/asyncThunk/userApi";
+import { authenticateErrorHandler } from "../api/utilities/helper";
 
 const SplashScreen = () => {
+    const dispatch = useDispatch();
     const {isMobile} = useBreakpoints();
     const {isDarkMode} = useSelector((state)=>state.theme);
-    console.log(isDarkMode, 'dark?');
+    const jwt = localStorage.getItem("JWT") || null;
+    useEffect(()=>{
+      if (jwt) {
+        dispatch(userApi.authenticateCall()).unwrap()
+        .then(()=>{})
+        .catch((error)=>{
+          authenticateErrorHandler(dispatch, error);
+        })
+      }
+    },[]);
+
     return (
       <motion.div
         className="splash-screen-container"

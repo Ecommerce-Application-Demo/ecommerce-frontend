@@ -3,15 +3,16 @@ import { hostname } from "./utilites";
 import { jwtDecode } from "jwt-decode";
 import dayjs from "dayjs";
 import { Navigate } from "react-router-dom";
-// import store from "../../redux/store/Store";
 
 class CustomError extends Error {
   constructor(message, type) {
     super(message);
     this.name = this.constructor.name;
     this.type = type;
+
   }
 }
+
 
 const axiosInstanceProtected = axios.create({
   baseURL: hostname,
@@ -31,9 +32,11 @@ axiosInstanceProtected.interceptors.request.use(async (req) => {
     req.headers.Authorization = `Bearer ${localStorage.getItem("JWT")}`;
     return req;
   } catch (error) {
-    if(error?.type !== 'UNAUTHORIZED') {
+    console.log(error, 'error from interceptor caall');
+
+    // if (error.includes('InvalidTokenError')) {
+    // }
     throw new CustomError("Invalid or missing JWT token", "INVALID_JWT")
-    }
   }
 });
 
@@ -59,8 +62,14 @@ async function refreshToken() {
 
     return response.data?.accessToken;
   } catch (error) {
-    console.error("Error refreshing token:", error);
-    throw new CustomError("Error refreshing token", "REFRESH_ERROR");
+    if (error?.response?.status === 500) {
+      localStorage.removeItem("JWT");
+      localStorage.removeItem("REFRESH_TOKEN");
+      localStorage.removeItem("USERNAME");
+      localStorage.removeItem("EMAIL");
+      localStorage.removeItem("REFRESH_TOKEN_EXPIRY");
+    }
+    // throw new CustomError("Error refreshing token", "REFRESH_ERROR");
   }
 }
 

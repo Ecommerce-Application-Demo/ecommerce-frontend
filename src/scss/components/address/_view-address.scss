@@ -4,6 +4,9 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
+    &>h4 {
+        color: $Grey;
+    }
     &>.viewAddress-empty-wrapper {
         display: flex;
         align-items: center;
@@ -21,7 +24,8 @@
             padding: 20px;
             // border: 1px solid $Grey;
             border-radius: 4px;
-            background-color: $White;
+            background: $primary-background;
+            color: $Black;
             box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
             transition: 0.3s;
             &:hover {

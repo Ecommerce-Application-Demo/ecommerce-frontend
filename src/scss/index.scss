@@ -16,6 +16,11 @@
 @import 'components/address/view-address';
 @import 'components/unauthorizedError/unauthorizedError.scss';
 
+//profile page components-----
+@import 'components/profile/edit-profile';
+@import 'components/profile/delete-account-modal';
+
+
 //components-----single product page
 @import 'components/single-product-page/product-image';
 @import 'components/single-product-page/single-product-details';

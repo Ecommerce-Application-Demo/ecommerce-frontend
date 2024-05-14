@@ -29,6 +29,7 @@ $circular-boxShadow-primary: var(--circular-boxShadow-primary);
 $brandTitleText: var(--brand-title-text);
 $secondary-background: var(--secondary-background);
 $hover-grey: var(--hover-grey);
+$primary-background: var(--primary-background);
 
 
 //------------z-indexes-------------------
@@ -77,10 +78,12 @@ $bp-max-small-only: 767px !default;
     --brand-title-text:rgb(17, 14, 14);
     --secondary-background: radial-gradient(circle, rgba(236,232,234,1) 0%, rgba(115,119,125,1) 100%);
     --hover-grey:rgb(208, 204, 204);
+    --primary-background: rgb(232, 229, 229);
 }
 
 .dark-mode {
     // --primary-btn-red: white;
+    --primary-background: rgb(33, 32, 32);
     --secondary-background:rgb(21, 27, 26);
     --Black: white;
     --White: black;
