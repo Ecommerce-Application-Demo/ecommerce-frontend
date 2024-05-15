@@ -75,6 +75,7 @@ const EditProfile = () => {
         });
       })
       .catch((error) => {
+         authenticateErrorHandler(dispatch, error);
         if (error?.message === "Invalid or missing JWT token" || error?.message !== "Unauthorized") {
           dispatch(setUnauthorizedError("UNAUTHORIZED"));
         }
