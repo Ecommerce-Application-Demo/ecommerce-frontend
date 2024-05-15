@@ -91,7 +91,7 @@ const LoginOrSignUp = () => {
         };
   
         setButtonText('Checking...');
-        if(formData.email === 's@g.com' || formData.email === 'k@g.com') {
+        if(formData.email === 's@g.com' || formData.email === 'k@g.com' || formData.email === 'x@g.com' || formData.email === 'y@g.com' || formData.email === 'z@g.com' {
           navigate('/login', {state: { email: formData.email}})
         }else {
         dispatch(generateOtp(data)).then(() => {
