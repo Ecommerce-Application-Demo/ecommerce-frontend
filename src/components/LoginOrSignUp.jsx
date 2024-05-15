@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import  { reset } from '../redux/Slices/userSlice';
 import { toast } from 'react-toastify';
 import otpAsyncThunk from '../api/asyncThunk/otpAsyncThunk';
+import { GetPreviousLogin } from '../api/utilities/helper';
+import PreviousLogin from './previousLogin';
 
 
 const LoginOrSignUp = () => {
@@ -22,7 +24,7 @@ const LoginOrSignUp = () => {
   });
   const { isLoading, existEmail, error, isSuccess,msg } = data;
 
-
+  const [filteredEmails, setFilteredEmails] = useState([]);
   const [formData, setFormData] = useState({
     email: '',
   });
@@ -119,14 +121,21 @@ const LoginOrSignUp = () => {
 };
 
   
+useEffect(() => {
+  async function fetchFilteredEmails() {
+    const emails = await GetPreviousLogin(dispatch);
+    setFilteredEmails(emails);
+  }
 
+  fetchFilteredEmails();
+}, [dispatch]);
   const otpBtn = classNames({
     'getOtp-btn': true,
     'getOtp-btn--normal': buttonText !== 'sent',
     'getOtp-btn--disabled':buttonText==='sent' || buttonText === 'Checking...',
   });
-
   return (
+    <>
     <form className='loginorsignup-container'>
       <h1>Login Or Signup</h1>
       <div>
@@ -146,7 +155,9 @@ const LoginOrSignUp = () => {
       {isLoading && <LoadingScreen/>}
       {/* {error && toast.error(error)} */}
       {/* {isSuccess && toast.success(msg)} */}
+      {filteredEmails?.length > 0 && <PreviousLogin filteredEmails = {filteredEmails}/>}
     </form>
+    </>
   );
 };
 

@@ -119,7 +119,11 @@ const profileSlice = createSlice({
         .addCase(changePassword.fulfilled, (state,action)=>{
             Object.assign(state, initialState);
             state.changePassword = true;
-            localStorage.clear();
+            localStorage.removeItem("JWT");
+            localStorage.removeItem("REFRESH_TOKEN");
+            localStorage.removeItem("USERNAME");
+            localStorage.removeItem("EMAIL");
+            localStorage.removeItem("REFRESH_TOKEN_EXPIRY");
             
         })
         .addCase(changePassword.rejected, (state,action)=>{

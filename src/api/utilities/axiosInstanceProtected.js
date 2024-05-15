@@ -45,9 +45,13 @@ async function refreshToken() {
   const refreshTokenExpiry = localStorage.getItem("REFRESH_TOKEN_EXPIRY")?.toString() || null;
 
   if (refreshTokenExpiry && (dayjs().isAfter(dayjs.unix(refreshTokenExpiry)))) {
-    localStorage.clear();
+    localStorage.removeItem("JWT");
+    localStorage.removeItem("REFRESH_TOKEN");
+    localStorage.removeItem("USERNAME");
+    localStorage.removeItem("EMAIL");
+    localStorage.removeItem("REFRESH_TOKEN_EXPIRY");
     Navigate('/login-signup');
-    throw new CustomError('Unauthorized', 'UNAUTHORIZED');
+    throw new CustomError("Error refreshing token", "REFRESH_ERROR");
   }
   try {
     const response = await axios.post(`${hostname}/api/auth/jwt-token`, {

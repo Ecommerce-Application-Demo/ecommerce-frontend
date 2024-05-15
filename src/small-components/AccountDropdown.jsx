@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import userApi from '../api/asyncThunk/userApi';
 import { toast } from 'react-toastify';
 import { reset } from '../redux/Slices/userSlice';
+import { authenticateErrorHandler } from '../api/utilities/helper';
 
 const AccountDropdown = () => {
   const navigate = useNavigate();
@@ -24,8 +25,9 @@ const AccountDropdown = () => {
       toast.success('your account has been logout successfully.');
       navigate('/');
     })
-    .catch(()=>{
+    .catch((error)=>{
       toast.error('an error occured during logout.');
+      authenticateErrorHandler(dispatch, error);
     });
     dispatch(reset());
   }

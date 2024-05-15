@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import userApi from '../api/asyncThunk/userApi';
 import { toast } from 'react-toastify';
 import LoadingScreen from '../small-components/Loading-screen';
+import { addNewPreviousLogin } from '../api/utilities/helper';
 
 const Login = () => {
   const { login } = userApi;
@@ -42,7 +43,6 @@ const Login = () => {
 
   useEffect(() => {
     if (msg && isLoggedIn) {
-      localStorage.setItem('PREVIOUS_LOGIN', JSON.stringify(previousLogin));
       navigate('/');
     }
   }, [msg, isLoggedIn, error, isLoading,navigate,previousLogin]);
@@ -95,6 +95,10 @@ const Login = () => {
         console.log(unwrapResult);
         if(unwrapResult.type === 'LOGIN/rejected'){
         toast.error(unwrapResult.payload)
+        }
+        else if(unwrapResult?.type === "LOGIN/fulfilled") {
+          toast.success('logged in successfully.')
+          addNewPreviousLogin(email);
         }
       })
     } catch (error) {
