@@ -65,9 +65,7 @@ const ChangeEmailModal = (props) => {
           setCompleteStep1(true);
           setOtp(Array(4).fill(''));
           console.log(res);
-        }).catch((error) => {
-          toast.error('invalid otp: ', error);
-        });
+        })
     }
   }, [otp, dispatch, email]);
 
@@ -100,8 +98,6 @@ const ChangeEmailModal = (props) => {
       } else {
         toast.error('email is already in use.')
       }
-    }).catch((error)=>{
-      toast.error('some error occured.')
     })
   };
 

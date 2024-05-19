@@ -1,22 +1,24 @@
 import axios from "axios";
 import { hostname } from "../utilities/utilites";
 import axiosInstanceProtected from "../utilities/axiosInstanceProtected";
+import axiosInstanceNotProtected from "../utilities/axiosInstanceNotProtected";
+
 
 //email check
 const emailCheck=async(email)=>{
-    const response = await axios.post(`${hostname}/api/auth/email`,email);
+    const response = await axiosInstanceNotProtected.post(`/api/auth/email`,email);
     return response.data;
 }
 
 //register
 const register = async(data)=>{
-    const response = await axios.post(`${hostname}/api/auth/register`,data);
+    const response = await axiosInstanceNotProtected.post(`/api/auth/register`,data);
     return response.data;
 }
 
 //login
 const login = async(data)=>{
-    const response = await axios.post(`${hostname}/api/auth/login`,data);
+    const response = await axiosInstanceNotProtected.post(`/api/auth/login`,data);
     return response.data;
 }
 
