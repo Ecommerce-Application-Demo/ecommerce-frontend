@@ -63,7 +63,6 @@ export const reduxInitialState = (successName, errorName) => {
             [errorName]: null,
     }
 }
-
 //actionname=name of the state, payload=actual success or error response of api
 export const updateState = (state, actionName, actionType, successName, errorName, payload=null) => {
     switch (actionType) {

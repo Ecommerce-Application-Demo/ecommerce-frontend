@@ -4,9 +4,10 @@ import classNames from 'classnames';
 import { toast } from 'react-toastify';
 import Popup from '../../small-components/Popup';
 import LoadingScreen from '../../small-components/Loading-screen';
-import ViewAddress from '../address/view-address';
 import { resetAuthGenerateOtp } from '../../redux/Slices/otpSlice';
 import ChangeEmailModal from './change-email-modal';
+import otpAsyncThunk from '../../api/asyncThunk/otpAsyncThunk';
+import { authenticateErrorHandler } from '../../api/utilities/helper';
 
 const ChangeEmailPopup = (props) => {
     const {
@@ -37,24 +38,23 @@ const ChangeEmailPopup = (props) => {
     }, []);
 
     const handleRequestOtp = () => {
-        if (!selectEmail) {
-            toast.error('Please select an email.');
-            return;
+        const dataToRequestOtp = {
+          input: email
         }
-        // const dataToRequestOtp = {
-        //   input: email
-        // }
-        // dispatch(otpAsyncThunk.authGenerateOtp(dataToRequestOtp)).unwrap()
-        // .catch((error) => {
-        //   authenticateErrorHandler(dispatch, error);
-        //   if (error?.errorCode === 122) {
-        //     toast.info('Your session has expired. Please login again.');
-        //   } else {
-        //     toast.error('Error in sending OTP.');
-        //   }
-        // });
-        setOpenEmailPopup(false);
-        setOpenEmailModal(true);
+        dispatch(otpAsyncThunk.authGenerateOtp(dataToRequestOtp)).unwrap()
+        .then(()=>{
+            toast.success('otp send successfully.')
+            setOpenEmailPopup(false);
+            setOpenEmailModal(true);
+        })
+        .catch((error) => {
+          authenticateErrorHandler(dispatch, error);
+          if (error?.errorCode === 122) {
+            toast.info('Your session has expired. Please login again.');
+          } else {
+            toast.error('Error in sending OTP.');
+          }
+        });
     };
 
 
@@ -66,8 +66,6 @@ const ChangeEmailPopup = (props) => {
                 titleClassName='change-email-popup-title'
             >
                 {generateOtp.START && <LoadingScreen />}
-                {/* {generateOtp.FAIL && !generateOtp.START && toast.error('Error in sending OTP.')} */}
-                {generateOtp.SUCCESS && <ViewAddress />}
                 <div className='change-email-popup-container'>
                     <p>For better security, OTP is sent to a previously used number on your account.</p>
                     <h3>Select Your Email.</h3>

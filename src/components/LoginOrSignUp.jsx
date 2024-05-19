@@ -22,7 +22,7 @@ const LoginOrSignUp = () => {
   const data = useSelector((state) => {
     return state.user;
   });
-  const { isLoading, existEmail, error, isSuccess,msg } = data;
+  const { isLoading, existEmail, error, isSuccess, msg } = data;
 
   const [filteredEmails, setFilteredEmails] = useState([]);
   const [formData, setFormData] = useState({

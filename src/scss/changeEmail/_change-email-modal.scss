@@ -9,14 +9,13 @@
 
     @include breakpoint(small-only) {
       flex-direction: column;
-      justify-content: start;
     }
 
   .old-otp-card {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    height: 100%;
+    height: 500px;
     width: 100%;
     border: 1px solid $Grey;
     padding: 20px;
@@ -100,7 +99,23 @@
       font-weight: bold;
       cursor: pointer;
     }
+    & .change-email-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $fixed-white;
+      padding: 10px;
+
+      &:not([disabled]) {
+        background: $primary-btn-red;
+        cursor: pointer;
+    }
+      &[disabled] {
+        background: $primary-btn-red-disabled;
+        cursor: not-allowed;
+    }
   }
+}
 
   .new-email-card {
     display: flex;

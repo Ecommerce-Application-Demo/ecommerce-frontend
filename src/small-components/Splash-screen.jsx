@@ -5,14 +5,16 @@ import useBreakpoints from "../api/utilities/responsive";
 import { useDispatch, useSelector } from "react-redux";
 import userApi from "../api/asyncThunk/userApi";
 import { authenticateErrorHandler } from "../api/utilities/helper";
+import { useLocation } from "react-router-dom";
 
 const SplashScreen = () => {
     const dispatch = useDispatch();
+    const route = useLocation().pathname;
     const {isMobile} = useBreakpoints();
     const {isDarkMode} = useSelector((state)=>state.theme);
     const jwt = localStorage.getItem("JWT") || null;
     useEffect(()=>{
-      if (jwt) {
+      if (jwt && route=== '/') {
         dispatch(userApi.authenticateCall()).unwrap()
         .then(()=>{})
         .catch((error)=>{

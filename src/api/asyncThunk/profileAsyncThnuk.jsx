@@ -61,10 +61,25 @@ const changePassword = createAsyncThunk(
     }
 )
 
+//async thunk for change password 
+const changeEmail = createAsyncThunk(
+    'CHANGE_EMAIL',
+    async (newEmail,thunkAPI) =>{
+        try {
+            return await profileService.changeEmail(newEmail);
+        }
+        catch (error) {
+            // const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+            return thunkAPI.rejectWithValue(error)
+        } 
+    }
+)
+
 const profileThunk = {
   viewProfile,
   editProfile,
   validatePassword,
   changePassword,
+  changeEmail,
 }
 export default profileThunk;

@@ -1,6 +1,7 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 import profileThunk from "../../api/asyncThunk/profileAsyncThnuk";
+import {reduxProfileInitialState, reduxProfileUpdateState } from "../../api/utilities/stateHelper";
 // import { resetUserDetails } from "./userSlice";
 
 const 
@@ -9,6 +10,7 @@ const
    editProfile,
    validatePassword,
    changePassword,
+   changeEmail,
 } = profileThunk;
 
 const initialState = {
@@ -28,6 +30,12 @@ const initialState = {
    },
     editDeleteProfileSuccess : false,
     changePassword : false,
+    changeEmailredux: reduxProfileInitialState('changeEmailSuccess', 'changeEmailError'),
+    // changeEmail:{
+    //     START:false,
+    //     SUCCESS:false,
+    //     FAIL:false,
+    // }
 }
 
 const profileSlice = createSlice({
@@ -130,6 +138,15 @@ const profileSlice = createSlice({
             state.isPasswordLoading = false;
             state.changePassword = false;
             state.error = action.payload;
+        })
+        .addCase(changeEmail.pending, (state,action)=>{
+            reduxProfileUpdateState(state, 'changeEmailredux', 'pending', 'changeEmailSuccess', 'changeEmailError', action.payload);
+        })
+        .addCase(changeEmail.fulfilled, (state,action)=>{
+            reduxProfileUpdateState(state, 'changeEmailredux', 'fulfilled', 'changeEmailSuccess', 'changeEmailError', action.payload);
+        })
+        .addCase(changeEmail.rejected, (state,action)=>{
+            reduxProfileUpdateState(state, 'changeEmailredux', 'rejected', 'changeEmailSuccess', 'changeEmailError', action.payload);
         })
     }
 })
