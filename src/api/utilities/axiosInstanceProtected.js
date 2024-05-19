@@ -3,6 +3,8 @@ import { hostname } from "./utilites";
 import { jwtDecode } from "jwt-decode";
 import dayjs from "dayjs";
 import { Navigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import axiosInstanceNotProtected from "./axiosInstanceNotProtected";
 
 class CustomError extends Error {
   constructor(message, type) {
@@ -24,8 +26,8 @@ const axiosInstanceProtected = axios.create({
 axiosInstanceProtected.interceptors.request.use(async (req) => {
 
   try {
-    const decodeJwt = jwtDecode(localStorage.getItem("JWT"));
-    const isJwtExpired = dayjs.unix(decodeJwt.exp).diff(dayjs()) < 1;
+    const decodeJwt = jwtDecode(localStorage.getItem("JWT")) || null;
+    const isJwtExpired = dayjs.unix(decodeJwt.exp).diff(dayjs()) < 1 || null;
     if (isJwtExpired) {
       await refreshToken(); 
     } 
@@ -33,9 +35,13 @@ axiosInstanceProtected.interceptors.request.use(async (req) => {
     return req;
   } catch (error) {
     console.log(error, 'error from interceptor caall');
-
-    // if (error.includes('InvalidTokenError')) {
-    // }
+      localStorage.removeItem("JWT");
+      localStorage.removeItem("REFRESH_TOKEN");
+      localStorage.removeItem("USERNAME");
+      localStorage.removeItem("EMAIL");
+      localStorage.removeItem("REFRESH_TOKEN_EXPIRY");
+      Navigate('/login-signup.');
+      toast.error('seems something went wrong. please login again.')
     throw new CustomError("Invalid or missing JWT token", "INVALID_JWT")
   }
 });
@@ -54,7 +60,7 @@ async function refreshToken() {
     throw new CustomError("Error refreshing token", "REFRESH_ERROR");
   }
   try {
-    const response = await axios.post(`${hostname}/api/auth/jwt-token`, {
+    const response = await axiosInstanceNotProtected.post(`/api/auth/jwt-token`, {
       input: refreshToken,
     });
     console.log(response);
@@ -66,13 +72,18 @@ async function refreshToken() {
 
     return response.data?.accessToken;
   } catch (error) {
-      localStorage.removeItem("JWT");
-      localStorage.removeItem("REFRESH_TOKEN");
-      localStorage.removeItem("USERNAME");
-      localStorage.removeItem("EMAIL");
-      localStorage.removeItem("REFRESH_TOKEN_EXPIRY");
     throw new CustomError("Error refreshing token", "REFRESH_ERROR");
   }
 }
+
+// axiosInstanceProtected.interceptors.response.use(
+//   (response)=> {
+//       return response;
+//   },
+//   (error)=>{
+//       console.log(error);
+//      toast.error(error?.response?.data?.errorMessage || 'something went wrong');
+//   }
+// )
 
 export default axiosInstanceProtected;

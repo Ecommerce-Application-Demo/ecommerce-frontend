@@ -19,16 +19,9 @@ class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.hasError) {
-      if (this.state.errorType === 'Unauthorized') {
-        // Render the unauthorized component
-        return <UnauthorizedComponent />;
-      } else {
-        // Render the generic error message
         return <div>Something went wrong.</div>;
       }
-    }
 
-    // If there's no error, render the children
     return this.props.children;
   }
 }

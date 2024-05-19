@@ -1,16 +1,17 @@
 import axios from "axios";
 import { hostname } from "../utilities/utilites";
 import axiosInstanceProtected from "../utilities/axiosInstanceProtected";
+import axiosInstanceNotProtected from "../utilities/axiosInstanceNotProtected";
 
 //email check
 const generateOtp = async(email)=>{
-    const response = await axios.post(`${hostname}/api/auth/generate`,email);
+    const response = await axiosInstanceNotProtected.post(`/api/auth/generate`,email);
     return response.data;
 };
 
 //email check
 const validateOtp = async(email)=>{
-    const response = await axios.post(`${hostname}/api/auth/validate`,email);
+    const response = await axiosInstanceNotProtected.post(`/api/auth/validate`,email);
     return response.data;
 };
 
