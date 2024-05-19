@@ -34,6 +34,7 @@
             align-items: center;
             justify-content: space-between;
             color: $fixed-black;
+            cursor: pointer;
 
             .profile-info-email-change {
                 background: $primary-btn-red;
@@ -61,9 +62,13 @@
                 align-items: center;
                 justify-content: center;
                 gap: 10px;
-            background-color: $Input-normal-background;
+                background-color: $Input-normal-background;
                 border: 1px solid $SearchBar-background;
                 color: $Grey;
+
+                @include breakpoint(small-only) {
+                    font-size: 12px;
+                }
             }
             &>.edit-profile-gender-type-container-active {
                 width: 100%;
@@ -73,11 +78,15 @@
                 justify-content: center;
                 gap: 10px;
                 border-radius: 30px;
-            background-color: $Input-success-background;
+                background-color: $Input-success-background;
                 border: 1px solid $SearchBar-background;
                 color: $green;
                 font-size: 20px;
                 font-weight: 800;
+
+                @include breakpoint(small-only) {
+                    font-size: 15px;
+                }
             }
         }
     }
@@ -101,6 +110,7 @@
         gap: 20px;
         width: 100%;
 
+
         &>.edit-profile-cancel-btn {
             padding: 20px;
             display: flex;
@@ -113,6 +123,11 @@
             width: 100%;
             border: 1px solid $Black;
 
+            @include breakpoint(small-only) {
+                font-size: 12px;
+                padding: 14px;
+            }
+
         }
         &>.edit-profile-saveChanges-btn {
         background-color: $primary-btn-red;
@@ -124,6 +139,11 @@
         border-radius: 4px;
         width: 100%;
         cursor: pointer;
+
+        @include breakpoint(small-only) {
+            font-size: 12px;
+            padding: 14px;
+        }
         }
     }
     .edit-profile-password-container {

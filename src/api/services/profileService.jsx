@@ -37,11 +37,22 @@ const changePassword = async (newPassword) => {
   return  response.data;
 }
 
+const changeEmail = async (newEmail) => {
+  const response = await axiosInstanceProtected.put(`/api/my/account/email`, null, {
+  params:{ 
+    newEmail
+  }
+}
+);
+  return  response.data;
+}
+
 const profileService = {
    viewProfile,
    editProfile,
    validatePassword,
    changePassword,
+   changeEmail,
 }
 
 export default profileService;

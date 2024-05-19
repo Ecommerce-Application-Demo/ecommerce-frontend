@@ -6,6 +6,12 @@ import { SiTicktick } from "react-icons/si";
 import { motion } from 'framer-motion';
 import useBreakpoints from '../../api/utilities/responsive';
 import { oldOtpCardVariants, newEmailCardVariants, newOtpCardVariants } from '../../uiHelper/change-email-transitions';
+import otpAsyncThunk from '../../api/asyncThunk/otpAsyncThunk';
+import userApi from '../../api/asyncThunk/userApi';
+import profileThunk from '../../api/asyncThunk/profileAsyncThnuk';
+import { resetProfileDetails } from '../../redux/Slices/profileSlice';
+import { resetUserDetails } from '../../redux/Slices/userSlice';
+import { addNewPreviousLogin, authenticateErrorHandler } from '../../api/utilities/helper';
 
 const ChangeEmailModal = (props) => {
   const { dispatch, email, setOpenEmailModal, closePage } = props;
@@ -54,28 +60,16 @@ const ChangeEmailModal = (props) => {
         email: email,
         otp: fullOtp,
       };
-      // dispatch(validateOtp(dataForDispatch)).unwrap()
-      //   .then((res) => {
-      //     console.log(res);
-      //   }).catch((error) => {
-      //   });
-      setCompleteStep1(true);
+      dispatch(otpAsyncThunk.authValidateOtp(dataForDispatch)).unwrap()
+        .then((res) => {
+          setCompleteStep1(true);
+          setOtp(Array(4).fill(''));
+          console.log(res);
+        }).catch((error) => {
+          toast.error('invalid otp: ', error);
+        });
     }
   }, [otp, dispatch, email]);
-
-  useEffect(() => {
-    const fullNewOtp = getFullOtp('new');
-    if (fullNewOtp.length === 4 && !fullNewOtp.includes('')) {
-      let dataForDispatch = {
-        email: newEmailInput,
-        otp: fullNewOtp,
-      };
-      // dispatch(validateNewEmailOtp(dataForDispatch)).unwrap()
-      //   .then((res) => {
-      //   }).catch((error) => {
-      //   });
-    }
-  }, [newOtp, dispatch]);
 
   const sendOtpAgain = () => {
     let dataForDispatch = {
@@ -95,8 +89,53 @@ const ChangeEmailModal = (props) => {
     const dataToCheckEmail = {
       input: newEmailInput,
     };
-    setCompleteStep2(true);
+    dispatch(userApi.isEmailExist(dataToCheckEmail)).unwrap()
+    .then((res)=>{
+      console.log(res);
+      if(!res) {
+        dispatch(otpAsyncThunk.authGenerateOtp(dataToCheckEmail)).unwrap()
+        .then(()=>{
+          setCompleteStep2(true);
+        })
+      } else {
+        toast.error('email is already in use.')
+      }
+    }).catch((error)=>{
+      toast.error('some error occured.')
+    })
   };
+
+  const handleChangeEmail =()=> {
+    const fullNewOtp = getFullOtp('new');
+    if (fullNewOtp.length === 4) {
+      let dataForValidOtp = {
+        email: newEmailInput,
+        otp: fullNewOtp,
+      };
+      dispatch(otpAsyncThunk.authValidateOtp(dataForValidOtp)).unwrap()
+        .then((res) => {
+          const dataForChangeEmail = {
+            newEmail: newEmailInput,
+          }
+          dispatch(profileThunk.changeEmail(newEmailInput)).unwrap()
+          .then(()=>{
+            toast.success('email change successfully. please login again.');
+            addNewPreviousLogin(newEmailInput);
+            dispatch(resetProfileDetails());
+            dispatch(resetUserDetails());
+          }).catch((error)=>{
+            if (error?.errorCode===122) {
+              toast.info('your session is expired, try to login again.')
+            } else {
+              toast.error('some error occured.');
+            }
+            authenticateErrorHandler(dispatch, error);
+          })
+        }).catch((error) => {
+          toast.error('invalid otp.')
+        });
+    }
+  }
 
   const onClose = () => {
     setOpenEmailModal(false);
@@ -117,8 +156,6 @@ const ChangeEmailModal = (props) => {
     'new-email-card-overlay--success': completeStep2 && completeStep1,
   });
 
-  console.log(isMobile, 'mobile?');
-  console.log(isDesktopOrLaptop, 'laptop');
   return (
     <Modal
       height="fit-content"
@@ -192,7 +229,7 @@ const ChangeEmailModal = (props) => {
             value={newEmailInput}
             onChange={(e) => setNewEmailInput(e.target.value)}
           />
-          <div className="request-otp-btn" onClick={handleNewEmail}>
+          <div className="request-otp-btn" onClick={handleNewEmail} disabled={!emailRegex.test(newEmailInput) || (newEmailInput === email)}>
             REQUEST OTP
           </div>
         </motion.div>
@@ -206,7 +243,7 @@ const ChangeEmailModal = (props) => {
             <div className={step3StyleOverlay}></div>
           )}
           <h2>Verify with OTP</h2>
-          <p>Sent to new email</p>
+          <p>Sent to {newEmailInput}</p>
           <div className="otp-input-wrapper">
             {newOtpRefs.map((ref, index) => (
               <input
@@ -225,10 +262,19 @@ const ChangeEmailModal = (props) => {
           <p className="resend-otp-text" onClick={sendOtpAgain}>
             Resend OTP
           </p>
+          <div className='change-email-btn' onClick={handleChangeEmail}>
+            CHANGE EMAIL
+          </div>
         </motion.div>
       </div>
     </Modal>
   );
 };
+
+const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/;
+
+// const validationSchema = Yup.object({
+//   email: Yup.string().required('email is required').matches(emailRegex, 'Enter a valid email address'),
+// });
 
 export default ChangeEmailModal;

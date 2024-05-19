@@ -16,7 +16,7 @@ const validateOtp = async(email)=>{
 
 //authenticate generate otp
 const authenticateGenerateOtp = async(email)=>{
-    const response = await axiosInstanceProtected.post(`/api/auth/generate`,email);
+    const response = await axiosInstanceProtected.post(`/api/my/generate`,email);
     return response.data;
 };
 

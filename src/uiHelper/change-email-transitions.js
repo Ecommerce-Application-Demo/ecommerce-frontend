@@ -11,7 +11,7 @@ export const oldOtpCardVariants = (completeStep1) => ({
       zIndex: completeStep1 ? 0 : 300,
     },
     mobile: {
-      scale: completeStep1 ? 0.6 : 1,
+      scale: completeStep1 ? 0.8 : 1,
       y: completeStep1 ? 100 : '100%',
       zIndex: completeStep1 ? 0 : 300,
     }
@@ -29,8 +29,8 @@ export const oldOtpCardVariants = (completeStep1) => ({
       zIndex: completeStep1 && !completeStep2 ? 300 : 1,
     },
     mobile: {
-      scale: completeStep1 && !completeStep2 ? 1 : 0.6,
-      y: completeStep1 && !completeStep2 ? 0 : 0,
+      scale: completeStep1 && !completeStep2 ? 1 : 0.9,
+      y: completeStep1 && !completeStep2 ? 0 : -10,
       zIndex: completeStep1 && !completeStep2 ? 300 : 1,
     }
   });
@@ -47,8 +47,8 @@ export const oldOtpCardVariants = (completeStep1) => ({
       zIndex: completeStep1 && completeStep2 ? 300 : 0,
     },
     mobile: {
-      scale: completeStep1 && completeStep2 ? 1 : 0.6,
-      y: completeStep1 && completeStep2 ? -100 : -250,
+      scale: completeStep1 && completeStep2 ? 1 : 0.5,
+      y: completeStep1 && completeStep2 ? -125 : -220,
       zIndex: completeStep1 && completeStep2 ? 300 : 1,
     }
   });
