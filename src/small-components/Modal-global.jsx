@@ -11,6 +11,8 @@ const Modal = ({
   width,
   widthForMobile,
   widthForTab,
+  heightForMobile,
+  heightForTab,
   title,
   footer,
 }) => {
@@ -47,15 +49,25 @@ const Modal = ({
   const handleWidth = () => {
     if (dimensions.width < 768) {
       return widthForMobile || widthForTab || width;
-    } else if (dimensions.width > 768 && dimensions.width < 1279) {
+    } else if (dimensions.width >= 768 && dimensions.width <= 1279) {
       return widthForTab || width;
     } else {
       return width;
     }
   };
 
+  const handleHeight = () => {
+    if (dimensions.width < 768) {
+      return heightForMobile || heightForTab || height;
+    } else if (dimensions.width >= 768 && dimensions.width <= 1279) {
+      return heightForTab || height;
+    } else {
+      return height;
+    }
+  };
+
   const divStyle = {
-    height: height,
+    height: handleHeight(),
     width: handleWidth(),
     overflow: 'auto',
     position: 'fixed',

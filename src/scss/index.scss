@@ -3,9 +3,7 @@
 //utilities
 @import 'utilites/variables';
 @import 'utilites/mixins';
-// @if $dark-mode {
-//     @import 'utilites/variables-dark'; 
-//   }
+
 @import 'base/base';
 //components
 @import 'components/navbar';
@@ -16,10 +14,13 @@
 @import 'components/address/view-address';
 @import 'components/unauthorizedError/unauthorizedError.scss';
 @import 'authFlow/previous-login';
+
+
 //profile page components-----
 @import 'components/profile/edit-profile';
 @import 'components/profile/delete-account-modal';
-
+@import 'changeEmail/change-email-popup';
+@import 'changeEmail/change-email-modal';
 
 //components-----single product page
 @import 'components/single-product-page/product-image';

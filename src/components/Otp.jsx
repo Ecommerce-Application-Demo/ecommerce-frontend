@@ -83,9 +83,8 @@ const Otp = () => {
   };
 
   const getFullOtp = () => {
-    return otp.join(''); // Combine the OTP array into a string
+    return otp.join(''); 
   };
-  // console.log(loggedInEmail);
 
   const sendOtpAgain = () => {
     let dataForDispatch = {
