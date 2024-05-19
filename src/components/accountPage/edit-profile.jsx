@@ -16,6 +16,8 @@ import { Navigate, useNavigate } from "react-router-dom";
 import AccountManagement from "./account-management";
 import { authenticateErrorHandler } from "../../api/utilities/helper";
 import { resetUserDetails } from "../../redux/Slices/userSlice";
+import ChangeEmailPopup from "./change-email-popup";
+import ChangeEmailPage from "./change-email-page";
 
 const EditProfile = () => {
   const dispatch = useDispatch();
@@ -26,6 +28,7 @@ const EditProfile = () => {
 
   const { profile, isProfileLoading, isVerifiedPassword, isPasswordLoading } = profileDetails;
 
+  //-------------------all states---------------
   const [formData, setFormData] = useState({
     name: profile?.name,
     phoneNumber: profile?.phoneNumber,
@@ -54,6 +57,7 @@ const EditProfile = () => {
   const [clickVerifyEmail, setClickVerifyEmail] = useState(false);
   const [validateOtpEmailChange, setValidateOtpEmailChange] = useState(false);
   const [validateOtpForgotPassword, setValidateOtpForgotPassword] = useState(false);
+  const [openChangeEmailPage, setOpenChangeEmailPage] = useState(false);
 
   useEffect(() => {
     dispatch(viewProfile())
@@ -177,6 +181,9 @@ const EditProfile = () => {
   const handleVerifyEmail = () => {
     setClickVerifyEmail(true);
   };
+  const handleChangeEmail = () => {
+    setOpenChangeEmailPage(true);
+  }
   const handleCancel = () => {
     setFormData((prevData) => ({
       ...prevData,
@@ -265,6 +272,14 @@ const EditProfile = () => {
   return (
     <div className="edit-profile-main-container">
       {tags.ProfileTag()}
+      {openChangeEmailPage && (
+        <ChangeEmailPage
+          dispatch = { dispatch }
+          email = {profile?.email}
+          openChangeEmailPage={openChangeEmailPage}
+          setOpenChangeEmailPage={setOpenChangeEmailPage}
+        />
+      )}
       {/* {errorAuthorized && <UnauthorizedComponent />} */}
       {isProfileLoading && <LoadingScreen />}
       {(clickForgotPassword || clickVerifyEmail) && (
@@ -280,65 +295,57 @@ const EditProfile = () => {
         />
       )}
       <div className="edit-profile-details-container">
-          <div
-              className="profile-info-email"
-              label="Email"
-              name="email"
-              type="text"
-              value={formData.email}
-              error={errors.email}
-              classNameForError="errorMsg">
-                {formData.email || '--not added--'}
-                <div className="profile-info-email-change">
-                  CHANGE
-                </div>
-                </div>
+        <div className="profile-info-email" onClick={handleChangeEmail}>
+          {formData.email || "--not added--"}
+          <div className="profile-info-email-change">CHANGE</div>
+        </div>
 
-          <div>
-            <InputField
-              className="edit-profile-info-input"
-              label="First Name"
-              name="firstName"
-              type="text"
-              onChange={handleChange}
-              value={formData.firstName}
-              error={errors.name}
-              classNameForError="errorMsg"
-              successFlag={true}
-            />
-          </div>
-          <div>
-            <InputField
-              className="edit-profile-info-input"
-              label="Last Name"
-              name="lastName"
-              type="text"
-              onChange={handleChange}
-              value={formData.lastName}
-              error={errors.lastName}
-              classNameForError="errorMsg"
-              successFlag={true}
-            />
-          </div>
-          <div>
-            <InputField
-              className="edit-profile-info-input"
-              label="Phone Number"
-              name="phoneNumber"
-              type="text"
-              maxLength={10}
-              onChange={handleChange}
-              value={formData.phoneNumber}
-              error={errors.phoneNumber}
-              classNameForError="errorMsg"
-              successFlag={true}
-            />
+        <div>
+          <InputField
+            className="edit-profile-info-input"
+            label="First Name"
+            name="firstName"
+            type="text"
+            onChange={handleChange}
+            value={formData.firstName}
+            error={errors.name}
+            classNameForError="errorMsg"
+            successFlag={true}
+          />
+        </div>
+        <div>
+          <InputField
+            className="edit-profile-info-input"
+            label="Last Name"
+            name="lastName"
+            type="text"
+            onChange={handleChange}
+            value={formData.lastName}
+            error={errors.lastName}
+            classNameForError="errorMsg"
+            successFlag={true}
+          />
+        </div>
+        <div>
+          <InputField
+            className="edit-profile-info-input"
+            label="Phone Number"
+            name="phoneNumber"
+            type="text"
+            maxLength={10}
+            onChange={handleChange}
+            value={formData.phoneNumber}
+            error={errors.phoneNumber}
+            classNameForError="errorMsg"
+            successFlag={true}
+          />
         </div>
         <div className="edit-profile-gender-container">
           <div
             className={classNames({
               "edit-profile-gender-type-container": formData.gender !== "Male",
-              "edit-profile-gender-type-container-active": formData.gender === "Male",
+              "edit-profile-gender-type-container-active":
+                formData.gender === "Male",
             })}
             onClick={() => handleGenderSelection("Male")}
           >
@@ -346,8 +353,10 @@ const EditProfile = () => {
           </div>
           <div
             className={classNames({
-              "edit-profile-gender-type-container": formData.gender !== "Female",
-              "edit-profile-gender-type-container-active": formData.gender === "Female",
+              "edit-profile-gender-type-container":
+                formData.gender !== "Female",
+              "edit-profile-gender-type-container-active":
+                formData.gender === "Female",
             })}
             onClick={() => handleGenderSelection("Female")}
           >
@@ -356,7 +365,10 @@ const EditProfile = () => {
         </div>
       </div>
       <div className="edit-profile-saveChanges-container">
-        <div className="edit-profile-saveChanges-btn" onClick={handleSaveChange}>
+        <div
+          className="edit-profile-saveChanges-btn"
+          onClick={handleSaveChange}
+        >
           Save Changes
         </div>
         <div className="edit-profile-cancel-btn" onClick={handleCancel}>
@@ -384,7 +396,10 @@ const EditProfile = () => {
               </div>
             </div>
             {isVerifiedPassword !== null && !isVerifiedPassword && (
-              <h4 className="edit-profile-forgot-password-text" onClick={handleForgotPassword}>
+              <h4
+                className="edit-profile-forgot-password-text"
+                onClick={handleForgotPassword}
+              >
                 Forgot Password?
               </h4>
             )}
@@ -404,7 +419,10 @@ const EditProfile = () => {
                   error={errors.newPassword}
                 />
               </div>
-              <div className="edit-profile-verify-btn" onClick={handleChangePassword}>
+              <div
+                className="edit-profile-verify-btn"
+                onClick={handleChangePassword}
+              >
                 Change
               </div>
             </div>
@@ -412,9 +430,19 @@ const EditProfile = () => {
               <div className="signupPassword-validation">
                 <div className={containsSpecial && "special"}>Special</div>
                 <div className={containsNumber && "number"}>1 Number</div>
-                <div className={containsUppercase && "uppercase"}>1 Uppercase</div>
-                <div className={containsLowercase && "lowercase"}>1 Lowercase</div>
-                <div className={formData?.newPassword?.length >= 8 && "charrecters"}>8 Charrecters</div>
+                <div className={containsUppercase && "uppercase"}>
+                  1 Uppercase
+                </div>
+                <div className={containsLowercase && "lowercase"}>
+                  1 Lowercase
+                </div>
+                <div
+                  className={
+                    formData?.newPassword?.length >= 8 && "charrecters"
+                  }
+                >
+                  8 Charrecters
+                </div>
               </div>
             </div>
           </>

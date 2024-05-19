@@ -37,6 +37,11 @@ $purple-pain: var(--purple-pain);
 $heavy-purple:var(--heavy-purple);
 $gradient-card-background : radial-gradient(circle, $freeze-purple, $medium-purple);
 $inside-box-shadow-card: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+$success-tick: var(--success-tick);
+$success-modal-background: var(--success-modal-background);
+$disabled-modal-background: var(--disabled-modal-background);
+
+
 //------------z-indexes-------------------
 $top-most-zIndex: 100;
 $secondTop-zIndex: 99;
@@ -49,7 +54,7 @@ $splash-zIndex: 101;
 $bp-small: 320px !default;
 $bp-medium: 768px !default;
 $bp-large: 1280px !default;
-$bp-max-small-only: 767px !default;
+$bp-max-small-only: 767.98px !default;
 
 
 :root {
@@ -89,6 +94,9 @@ $bp-max-small-only: 767px !default;
    --medium-purple: #d0bdf4;
    --purple-pain: #8458B3;
    --heavy-purple: #a28089;
+   --success-tick: rgb(5, 196, 5);
+   --success-modal-background: #084408d0;
+   --disabled-modal-background:#8c8686a0;
 }
 
 .dark-mode {
@@ -102,6 +110,8 @@ $bp-max-small-only: 767px !default;
     --circular-boxShadow-primary: 2px 0 10px 2px #00FF66;
     --primary-btn-red:#ee1717;
     --hover-grey:rgb(51, 49, 49);
+    --freeze-purple: #8458B3;
+    --medium-purple: black;
 }
 
 //-------------------------fixed colors------------------
