@@ -38,3 +38,19 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
     text-shadow: $primary-btn-red;
 }
 
+@mixin productListingCardBackground {
+    background: rgba(146, 144, 144, 0.4);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 50px );
+    -webkit-backdrop-filter: blur( 9px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+@mixin ratingGlassMorphism {
+background: rgba(8, 225, 30, 0.57);
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 11.5px );
+-webkit-backdrop-filter: blur( 11.5px );
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+}

@@ -40,13 +40,17 @@ $inside-box-shadow-card: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(
 $success-tick: var(--success-tick);
 $success-modal-background: var(--success-modal-background);
 $disabled-modal-background: var(--disabled-modal-background);
-
+$product-card-background: var(--product-card-background);
 
 //------------z-indexes-------------------
 $top-most-zIndex: 100;
 $secondTop-zIndex: 99;
 $general-zIndex: 1;
 $splash-zIndex: 101;
+
+
+// box shadowsss------
+$product-card-box-shadow: var(--product-card-box-shadow);
 
 
 //--------------------------------------breakpoints for responsiveness------------------------>
@@ -97,6 +101,8 @@ $bp-max-small-only: 767.98px !default;
    --success-tick: rgb(5, 196, 5);
    --success-modal-background: #084408d0;
    --disabled-modal-background:#8c8686a0;
+   --product-card-background: #ffff;
+   --product-card-box-shadow: 10px 0 20px -20px rgba(0, 0, 0, 0.45), -10px 0 20px -20px rgba(0, 0, 0, 0.45);
 }
 
 .dark-mode {
@@ -112,6 +118,8 @@ $bp-max-small-only: 767.98px !default;
     --hover-grey:rgb(51, 49, 49);
     --freeze-purple: #8458B3;
     --medium-purple: black;
+    --product-card-background:rgb(21, 27, 26);
+    --product-card-box-shadow:10px 0 20px -20px rgba(255, 246, 246, 0.723), -10px 0 20px -20px rgba(255, 246, 246, 0.723);
 }
 
 //-------------------------fixed colors------------------

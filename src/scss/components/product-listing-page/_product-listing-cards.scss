@@ -1,0 +1,12 @@
+.product-listing-cards-container {
+  width: 90%;
+  
+  .product-listing-cards-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 80px;
+    column-gap: 60px;
+  }
+}
