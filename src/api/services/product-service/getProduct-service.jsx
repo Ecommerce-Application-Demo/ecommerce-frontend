@@ -7,8 +7,14 @@ const getAllProductService = async (masterCategory) => {
     return  response.data;
 }
 
+const getSearchedProducts = async () => {
+    const response = await axiosInstanceProduct.get();
+
+    return response.data;
+}
 const getProductMainService = {
     getAllProductService,
+    getSearchedProducts,
  }
  
  export default getProductMainService;

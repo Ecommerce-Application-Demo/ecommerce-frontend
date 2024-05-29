@@ -7,8 +7,8 @@ const ProductListingCards = () => {
     <div className='product-listing-cards-container'>
       <div className='product-listing-cards-wrapper'>
        <ProductListingNewCard color='rgb(5, 196, 5)' />
-       <ProductListingNewCard color='#ee1717' />
-       <ProductListingNewCard color='#000' />
+       <ProductListingNewCard color='#CCB898' />
+       <ProductListingNewCard color='#8007af' />
 
        {/* <ProductListingNewCard color='#DB4444' />
        <ProductListingNewCard color='#DB4444' />
