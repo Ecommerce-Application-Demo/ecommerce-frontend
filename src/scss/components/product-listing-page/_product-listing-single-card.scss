@@ -138,20 +138,23 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  &:hover .product-card-courosel-main-container{
-    border: 5px solid transparent;
-    border-image: linear-gradient(45deg, #cfaeda, #e5cff3, #fbfbfb) 5;
-    background-clip: padding-box;
+  &:hover {
+    box-shadow: $product-card-box-shadow;
   }
+  // &:hover .product-card-courosel-main-container{
+  //   border: 5px solid transparent;
+  //   border-image: linear-gradient(45deg, #DB4444, #cf9292, #fbfbfb) 5;
+  //   background-clip: padding-box;
+  // }
   .product-card-courosel-main-container{
     width: 100%;
   }
   &:hover .product-cardBrand {
     background: $White;
-    color: $primary-btn-red;
+    color: $product-brand-text;
   }
   &:hover .product-card-price-breakdown:only-child {
-    color: white !important;
+    color: $White !important;
   }
 
 .product-listing-newcard-image {
@@ -165,16 +168,21 @@
   margin-top: 5px;
   width: 100%;
   padding: 10px 20px;
-  color: white;
   display: flex;
-  background: $medium-purple;
+  background: $product-card-content-background;
   flex-direction: column;
+  gap: 5px;
   align-items: center;
   position: relative;
   z-index: 1;
-  // overflow: hidden;
   border-top-right-radius: 30px;
   border-bottom-left-radius: 30px;
+
+  &>p {
+    font-weight: bold;
+    font-size: 20px;
+    color: $Black;
+  }
 }
 
 .product-newCard-content::before {
@@ -184,7 +192,7 @@
   // right: -50px;
   width: 10px;
   height: 10px;
-  background-color: var(--card-color, #DB4444); /* Fallback color */
+  background-color: var(--card-color, $primary-btn-red); /* Fallback color */
   border-radius: 50px;
   transition: all 0.5s ease;
   z-index: -1;
@@ -200,10 +208,11 @@
 }
 
 .product-cardBrand {
-  margin-top: -30px;
+  margin-top: -35px;
   font-size: 20px;
   padding: 10px;
-  background: $primary-btn-red;
+  background: $product-brand-text;
+  color: $White;
   border-radius: 30px;
 }
 
@@ -212,7 +221,7 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
-  color: black;
+  color: $Black;
 
   .actual-price {
     font-size: 25px;
@@ -220,12 +229,14 @@
   }
 
   .discount {
-    color: orangered;
+    color: $primary-btn-red;
+    font-weight: 600;
   }
 
   .mrp-price {
     text-decoration: line-through;
-    color: grey;
+    color: $Grey-text-color;
+    font-weight: 600;
   }
 }
 }
@@ -233,12 +244,6 @@
   width: 100%;
   height: 320px;
   position:relative;
-  // border-top-right-radius: 20px;
-  // border-top-left-radius: 20px;
-// transition: all 0.3s ease-in-out;
-// background: $freeze-purple;
-// border: 1px solid black;
-
 }
 .product-courosel-swiper-container {
   border-top-right-radius: 20px;
@@ -250,13 +255,10 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  // height: 80%;
   position: relative;
 }
 .carousel-image {
-  width: fit-content;
+  width: 100%;
+  object-fit: contain;
   height: 100%;
-  // border-top-right-radius: 20px;
-  // border-top-left-radius: 20px;
 }
-// }

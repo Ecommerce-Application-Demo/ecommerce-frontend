@@ -8,16 +8,15 @@ const ProductListingPage = () => {
   return (
     <div className='global-margin '>
       <div className='product-listing-container'>
-      <div className="product-listing-breadcrump-container">
+      {/* <div className="product-listing-breadcrump-container">
         <ProductListingBreadcrump />
         <ProductListingSortBy />
-      </div>
+      </div> */}
       <div className='product-listing-content-section'>
-        <ProductListingFilter />
+        {/* <ProductListingFilter /> */}
         <ProductListingCards />
       </div>
       </div>
-
     </div>
   )
 }

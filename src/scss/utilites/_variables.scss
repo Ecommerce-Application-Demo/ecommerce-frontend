@@ -41,6 +41,8 @@ $success-tick: var(--success-tick);
 $success-modal-background: var(--success-modal-background);
 $disabled-modal-background: var(--disabled-modal-background);
 $product-card-background: var(--product-card-background);
+$product-brand-text: var(--product-brand-text);
+$product-card-content-background: var(--product-card-content-background);
 
 //------------z-indexes-------------------
 $top-most-zIndex: 100;
@@ -102,7 +104,9 @@ $bp-max-small-only: 767.98px !default;
    --success-modal-background: #084408d0;
    --disabled-modal-background:#8c8686a0;
    --product-card-background: #ffff;
-   --product-card-box-shadow: 10px 0 20px -20px rgba(0, 0, 0, 0.45), -10px 0 20px -20px rgba(0, 0, 0, 0.45);
+   --product-card-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+   --product-brand-text:rgb(19, 22, 56);
+   --product-card-content-background: #e5eaf5;
 }
 
 .dark-mode {
@@ -119,7 +123,10 @@ $bp-max-small-only: 767.98px !default;
     --freeze-purple: #8458B3;
     --medium-purple: black;
     --product-card-background:rgb(21, 27, 26);
-    --product-card-box-shadow:10px 0 20px -20px rgba(255, 246, 246, 0.723), -10px 0 20px -20px rgba(255, 246, 246, 0.723);
+    --product-card-box-shadow: rgba(255, 254, 254, 0.1) 0px 10px 50px;
+    --product-brand-text:white;
+   --product-card-content-background: rgb(33, 32, 32);
+
 }
 
 //-------------------------fixed colors------------------
