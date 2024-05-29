@@ -38,6 +38,12 @@
 @import 'components/home/brand-section';
 @import 'components/home/category-section';
 
+//components ------------- product-listing-pages
+@import 'components/product-listing-page/product-listing-breadcrump';
+@import 'components/product-listing-page/product-listing-cards';
+@import 'components/product-listing-page/product-listing-filter';
+@import 'components/product-listing-page/product-listing-sortBy';
+@import 'components/product-listing-page/product-listing-single-card';
 
 
 //small components
@@ -63,6 +69,7 @@
 @import 'sections/single-product-page';
 @import 'sections/product-admin-page';
 @import 'sections/dashboard-page';
+@import 'sections/product-listing-page';
 
 
 //nested component import

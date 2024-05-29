@@ -11,6 +11,7 @@ import SingleProductPage from './pages/Single-product-page';
 import PageTransition from './uiHelper/general-page-transition';
 import ProtectedRouteLogin from './api/utilities/ProtectedRoute-loginFLow';
 import ProtectedRoute from './api/utilities/ProtectedRoute';
+import ProductListingPage from './pages/product-listing-page';
 
 const Router = () => {
   return (
@@ -35,6 +36,7 @@ const Router = () => {
       <Route path='/product' element={<PageTransition><SingleProductPage /></PageTransition>} />
       <Route path='/product-admin' element={<PageTransition><ProductAdminPage /></PageTransition>} />
       <Route path='/my/dashboard' element={<ProtectedRoute><PageTransition><Dashboard /></PageTransition></ProtectedRoute>} />
+      <Route path='/product-listing' element={<PageTransition><ProductListingPage /></PageTransition>} />
       <Route path='*' element={<PageTransition><NotFound /></PageTransition>} />
     </Routes>
   );
