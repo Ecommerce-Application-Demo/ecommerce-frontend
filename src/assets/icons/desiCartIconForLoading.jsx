@@ -1,6 +1,6 @@
-const desiCartIcon=({color='#DB4444'})=>{
+const desiCartIcon=({color='#DB4444', size ="150px"})=>{
     return(
-        <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="150px" height="150px" viewBox="50 20 100 200" preserveAspectRatio="xMidYMid meet">
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width={size} height={size} viewBox="50 20 100 200" preserveAspectRatio="xMidYMid meet">
 
         <g transform="translate(0.000000,242.000000) scale(0.100000,-0.100000)" fill={color} stroke="none">
         <path d="M915 1915 c-248 -55 -465 -266 -530 -513 -22 -86 -21 -92 18 -92 32 0 33 2 45 56 25 121 114 259 227 354 54 45 189 114 245 125 68 13 70 15 70 51 0 19 -3 34 -7 33 -5 0 -35 -7 -68 -14z"/>

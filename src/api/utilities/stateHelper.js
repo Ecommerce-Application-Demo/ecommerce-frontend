@@ -1,9 +1,9 @@
-export const reduxProfileInitialState = (successName, errorName) => {
+export const reduxProfileInitialState = (successName, errorName, successNameType) => {
     return {
             START: false,
             SUCCESS: false,
             FAIL: false,
-            [successName]: null,
+            [successName]: successNameType || null,
             [errorName]: null,
     }
 }

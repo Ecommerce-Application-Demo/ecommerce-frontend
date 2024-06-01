@@ -7,9 +7,8 @@ import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import { Pagination, Autoplay } from 'swiper/modules';
 
-const ProductCarousel = () => {
-
-
+const ProductCarousel = ({images}) => {
+  const imagesArray = Object.values(images)?.filter((image)=> (image !==null));
   return (
     <div className="product-carousel">
       <Swiper
@@ -21,11 +20,11 @@ const ProductCarousel = () => {
         loop={true}
         className='product-courosel-swiper-container'
       >
-        {products.map((product) => (
-          <SwiperSlide key={product.id} className='courosel-image-wrapper'>
+        {imagesArray?.map((image, index) => (
+          <SwiperSlide key={index} className='courosel-image-wrapper'>
             <img
-              src={product.imgLink}
-              alt={`Product ${product.id}`}
+              src={image}
+              alt={`Product image ${index}`}
               className="carousel-image"
             />
           </SwiperSlide>
