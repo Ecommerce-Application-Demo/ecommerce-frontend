@@ -36,7 +36,7 @@ const Router = () => {
       <Route path='/product' element={<PageTransition><SingleProductPage /></PageTransition>} />
       <Route path='/product-admin' element={<PageTransition><ProductAdminPage /></PageTransition>} />
       <Route path='/my/dashboard' element={<ProtectedRoute><PageTransition><Dashboard /></PageTransition></ProtectedRoute>} />
-      <Route path='/product-listing' element={<PageTransition><ProductListingPage /></PageTransition>} />
+      <Route path='/products' element={<PageTransition><ProductListingPage /></PageTransition>} />
       <Route path='*' element={<PageTransition><NotFound /></PageTransition>} />
     </Routes>
   );

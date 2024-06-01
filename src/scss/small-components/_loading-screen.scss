@@ -14,7 +14,7 @@
 
 .loading-icon {
   animation: blink 1s infinite alternate;
-  margin-bottom: 10px; /* Adjust this value as needed */
+  margin-bottom: 10px;
 }
 
 @keyframes blink {
@@ -22,28 +22,11 @@
   100% { opacity: 0; }
 }
 
-// .loading-text {
-//   font-size: 24px;
-//   color: #3498db;
-//   animation: blinkText 1s infinite alternate;
-// }
-
-// @keyframes blinkText {
-//   0% { color: #3498db; }
-//   100% { color: #f00; } /* Change color as per your design */
-// }
-
-// .loading-dots {
-//   display: inline-block;
-//   font-size: 24px;
-// }
-
-// .dot-animation {
-//   animation: dotAppear 1.5s infinite;
-// }
-
-// @keyframes dotAppear {
-//   0% { opacity: 0; }
-//   50% { opacity: 1; }
-//   100% { opacity: 0; }
-// }
+.LoadingComponent {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}

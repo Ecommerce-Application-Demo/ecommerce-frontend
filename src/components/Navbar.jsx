@@ -16,6 +16,7 @@ import { FaBars } from "react-icons/fa";
 import Sidebar from "./navbar/sidebar";
 import userApi from "../api/asyncThunk/userApi";
 import ThemeToggle from "../small-components/ThemeToggle";
+import SearchBar from "./SearchBar";
 
 const Navbar = () => {
   const user = useSelector((state)=>{return state.user});
@@ -98,6 +99,7 @@ const Navbar = () => {
             <Link className="navbar-section-link">KIDS</Link>
             <Link className="navbar-section-link">FOOTWEAR</Link>
           </div>
+          <SearchBar />
           <div className="navbar-right-container">
             <Link to="/wishlist">
               <div>

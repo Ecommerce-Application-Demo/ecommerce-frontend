@@ -2,16 +2,19 @@ import React, { useState } from "react";
 import { products } from "../../assets/pictures/productImageAddress";
 import { motion } from "framer-motion";
 import ProductCarousel from "./product-listing-courosel";
-import { createOverlay, isColorLight } from "../../uiHelper/uiHelper";
+import { convertDiscountText, convertStringToRupees, createOverlay, isColorLight } from "../../uiHelper/uiHelper";
+import { DesiCartIconForLoading } from "../../assets/icons";
 
-const ProductListingNewCard = ({ color }) => {
+const ProductListingNewCard = ({ product }) => {
   const [openCourosel, setOpenCourosel] = useState(false);
   const [imageError, setImageError] = useState(false);
 
   const hoveredTextColor = {
-    color: openCourosel ? (isColorLight(color) ? "black" : "white") : "",
+    color: openCourosel ? (isColorLight(product?.colourHexCode) ? "black" : "white") : "",
   };
-
+const handleClick =()=>{
+  console.log(product,'selected product');
+};
   return (
     <motion.div
       className="product-new-card-container"
@@ -20,14 +23,15 @@ const ProductListingNewCard = ({ color }) => {
       initial={{ scale: 1 }}
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 300 }}
-      style={{ "--card-color": createOverlay(color) }}
+      style={{ "--card-color": createOverlay(product?.colourHexCode) }}
+      onClick={handleClick}
     >
       {!openCourosel ? (
           <motion.img
             key="productImage"
             alt={'DesiCartIconForLoading'}
             className="product-listing-newcard-image"
-            src={products?.[0]?.imgLink}
+            src={product?.defaultImage || <DesiCartIconForLoading />}
             initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -42,25 +46,19 @@ const ProductListingNewCard = ({ color }) => {
           transition={{ duration: 0.3 }}
           className="product-card-courosel-main-container"
         >
-          <ProductCarousel />
+          <ProductCarousel images = {product?.images}/>
         </motion.div>
       )}
       <motion.div
         className={`product-newCard-content ${openCourosel ? "hovered" : ""}`}
         transition={{ duration: 0.5 }}
       >
-        <h3 className="product-cardBrand">PUMA</h3>
-        <p style={hoveredTextColor}>Men Black Tshirt</p>
+        <h3 className="product-cardBrand">{product?.brandName}</h3>
+        <p style={hoveredTextColor}>{product?.styleName}</p>
         <div className="product-card-price-breakdown" style={hoveredTextColor}>
-          <p className="actual-price" style={hoveredTextColor}>
-            Rs. 899
-          </p>
-          <p className="mrp-price" style={hoveredTextColor}>
-            Rs. 1599
-          </p>
-          <p className="discount" style={hoveredTextColor}>
-            (45% off)
-          </p>
+          <p className="actual-price" style={hoveredTextColor}>{convertStringToRupees(product?.finalPrice)}</p>
+          <p className="mrp-price" style={hoveredTextColor}>{convertStringToRupees(product?.mrp)}</p>
+          <p className="discount" style={hoveredTextColor}>{convertDiscountText(product?.discountPercentage)}</p>
         </div>
       </motion.div>
     </motion.div>

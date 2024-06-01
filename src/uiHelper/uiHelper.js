@@ -46,3 +46,17 @@ export const createOverlay = (color, opacity = 0.7) => {
   }
   return overlayColor;
 };
+
+export const convertStringToRupees = (rupees) => {
+  if(!rupees) {
+    return;
+  }
+  return `Rs.${rupees}`;
+};
+
+export const convertDiscountText = (discount) => {
+  if(!discount) {
+    return;
+  }
+  return `(${discount}% off)`;
+};
