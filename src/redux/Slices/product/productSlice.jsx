@@ -22,15 +22,23 @@ const initialState = {
   ),
   searchedInfinityData: {
     START: false,
-    SUCCESS:false,
-    FAIL:false,
+    SUCCESS: false,
+    FAIL: false,
   }
 };
 
 const getProductsSlice = createSlice({
   name: "PRODUCT",
   initialState,
-  reducers: {},
+  reducers: {
+    resetSearchedProduct: (state) => {
+      state.searchedProductsData = reduxProfileInitialState(
+        "searchedProducts",
+        "searchedProductsError",
+        []
+      )
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getAllProductThunk.pending, (state) => {
@@ -80,9 +88,11 @@ const getProductsSlice = createSlice({
         state.searchedProductsData.searchedProductsError = null;
       })
       .addCase(getInfinitySearchedProductsThunk.fulfilled, (state, action) => {
-        const {productList} = state.searchedProductsData.searchedProducts;
+        const { productList } = state.searchedProductsData.searchedProducts;
         state.searchedInfinityData.START = false;
-        state.searchedProductsData.searchedProducts.productList = [...productList,...action?.payload?.productList];
+        state.searchedProductsData.searchedProducts.productList = [...productList, ...action?.payload?.productList];
+        state.searchedProductsData.searchedProducts.currentPage = action?.payload?.currentPage;
+        state.searchedProductsData.searchedProducts.hasNextPage = action?.payload?.hasNextPage;
         state.searchedProductsData.searchedProductsError = null;
       })
       .addCase(getInfinitySearchedProductsThunk.rejected, (state, action) => {
@@ -92,4 +102,5 @@ const getProductsSlice = createSlice({
   },
 });
 
+export const {resetSearchedProduct} = getProductsSlice.actions;
 export default getProductsSlice.reducer;
