@@ -9,6 +9,9 @@ import LoginPopupMobile from "./components/navbar/login-popup-mobile";
 import SplashScreen from "./small-components/Splash-screen";
 import Router from "./Router";
 import { AnimatePresence, motion } from "framer-motion";
+import CustomHeadroom from "./small-components/CustomHeadroom";
+import Headroom from "react-headroom";
+import SearchBar from "./components/SearchBar";
 
 function App() {
   const routeParams = useLocation().pathname;
@@ -54,6 +57,12 @@ function App() {
         <div>
           {!routeParams.includes("/product-admin") && <Navbar />}
           {routeParams.includes("/product-admin") && <NavbarProductAdmin />}
+          {isMobile && 
+          <Headroom>
+          <div className="mobile-search-bar-container">
+            <SearchBar />
+          </div>
+          </Headroom>}
           {openLoginPopup && (
             <LoginPopupMobile setOpenLoginPopup={setOpenLoginPopup} />
           )}

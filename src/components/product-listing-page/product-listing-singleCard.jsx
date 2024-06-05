@@ -36,7 +36,7 @@ const ProductLisitngSingleCard = (props) => {
       <p className={openCourosel ? 'brandName' : 'brandName-hover'}>PUMA</p>
       <div className="rating-wrapper">
         4.5 &nbsp;
-        <StarLogo color="white" size={12} />
+        <StarLogo size={12} />
         &nbsp; |&nbsp; 12
       </div>
       <div className="product-card-content" style={{ background: color }}>

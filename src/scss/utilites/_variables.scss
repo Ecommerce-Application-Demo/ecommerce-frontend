@@ -43,6 +43,7 @@ $disabled-modal-background: var(--disabled-modal-background);
 $product-card-background: var(--product-card-background);
 $product-brand-text: var(--product-brand-text);
 $product-card-content-background: var(--product-card-content-background);
+$product-ratings-background: var(--product-ratings-background);
 
 //------------z-indexes-------------------
 $top-most-zIndex: 100;
@@ -58,7 +59,9 @@ $product-card-box-shadow: var(--product-card-box-shadow);
 //--------------------------------------breakpoints for responsiveness------------------------>
 
 $bp-small: 320px !default;
+$bp-small-medium: 650px !default;
 $bp-medium: 768px !default;
+$bp-medium-large: 950px !default;
 $bp-large: 1280px !default;
 $bp-max-small-only: 767.98px !default;
 
@@ -107,6 +110,7 @@ $bp-max-small-only: 767.98px !default;
    --product-card-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
    --product-brand-text:rgb(19, 22, 56);
    --product-card-content-background: #e5eaf5;
+   --product-ratings-background:rgba(255, 255, 255, 0.696);
 }
 
 .dark-mode {
@@ -126,6 +130,7 @@ $bp-max-small-only: 767.98px !default;
     --product-card-box-shadow: rgba(255, 254, 254, 0.1) 0px 10px 50px;
     --product-brand-text:white;
    --product-card-content-background: rgb(33, 32, 32);
+   --product-ratings-background:rgba(34, 32, 32, 0.696);
 
 }
 

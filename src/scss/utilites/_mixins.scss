@@ -16,6 +16,14 @@
         @media (min-width : $bp-max-small-only) and (max-width: $bp-max-small-only) {
             @content;
         } 
+    } @else if $breakpoint == 'small-medium' {
+        @media (min-width : $bp-small-medium) {
+            @content;
+        } 
+    }  @else if $breakpoint == 'medium-large' {
+        @media (min-width : $bp-medium-large) {
+            @content;
+        } 
     } 
      @else {
         @error 'No value could be retrived for ' + $breakpoint;

@@ -6,6 +6,10 @@ import ProductListingCards from '../components/product-listing-page/product-list
 import LoadingScreen from '../small-components/Loading-screen';
 import getProductThunk from '../api/asyncThunk/product-thunk/getProductThunk';
 import LoadingComponent from '../small-components/loading-component';
+import ProductListingBreadcrump from '../components/product-listing-page/product-listing-breadcrunp';
+import ProductListingSortBy from '../components/product-listing-page/product-listing-sortBy';
+import ProductListingFilter from '../components/product-listing-page/product-listing-filters';
+import useBreakpoints from '../api/utilities/responsive';
 
 const ProductListingPage = () => {
   const searchedProductsData = useSelector((state) => state.getProducts.searchedProductsData);
@@ -13,30 +17,42 @@ const ProductListingPage = () => {
 
   const dispatch = useDispatch();
   const location = useLocation();
+  const isFetching = useRef(false);
+  const { isMobile } = useBreakpoints();
+
   const searchParams = new URLSearchParams(location.search);
   const searchQuery = searchParams.get('search');
   const { getSearchedProductsThunk, getInfinitySearchedProductsThunk } = getProductThunk;
   const { searchedProducts, START } = searchedProductsData;
   const productList = searchedProducts?.productList || [];
-  
-  const isFetching = useRef(false); // Use a ref to track the fetching status
+  const hasNextPage = searchedProducts?.hasNextPage;
+  const currentPage = searchedProducts?.currentPage || 1;
 
   useEffect(() => {
-    dispatch(getSearchedProductsThunk(searchQuery));
-  }, [dispatch, getSearchedProductsThunk, searchQuery]);
+    if ((searchQuery && (!productList || productList.length === 0)) && !isFetching.current) {
+      isFetching.current = true;
+      dispatch(getSearchedProductsThunk(searchQuery)).finally(() => {
+        isFetching.current = false;
+      });
+    }
+  }, [dispatch, getSearchedProductsThunk, searchQuery, productList]);
 
   const handleInfinityScroll = useCallback(() => {
     const scrollHeight = document.documentElement.scrollHeight;
     const scrollTop = document.documentElement.scrollTop;
     const windowHeight = window.innerHeight;
 
-    if (windowHeight + scrollTop >= scrollHeight - 50 && !isFetching.current) {
+    if (windowHeight + scrollTop >= scrollHeight - 50 && !isFetching.current && hasNextPage) {
       isFetching.current = true;
-      dispatch(getInfinitySearchedProductsThunk(searchQuery)).finally(() => {
-        isFetching.current = false; 
+      const searchedData = {
+        query: searchQuery,
+        pageNo: currentPage + 1,
+      };
+      dispatch(getInfinitySearchedProductsThunk(searchedData)).finally(() => {
+        isFetching.current = false;
       });
     }
-  }, [dispatch, getInfinitySearchedProductsThunk, searchQuery]);
+  }, [dispatch, getInfinitySearchedProductsThunk, searchQuery, hasNextPage, currentPage]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleInfinityScroll);
@@ -46,16 +62,34 @@ const ProductListingPage = () => {
   }, [handleInfinityScroll]);
 
   return (
-    <div className='global-margin'>
+    <div className="global-margin">
       {START ? (
         <LoadingScreen />
       ) : (
-        <div className='product-listing-container'>
-          <div className='product-listing-content-section'>
+        <>
+          {!isMobile && 
+          <div className="product-listing-breadcrump-container">
+            <div className="product-listing-breadcrump-wrapper">
+            <ProductListingBreadcrump />
+            <ProductListingSortBy />
+            </div>
+          <div className="divider--horizontal" />
+          </div>}
+        <div className="product-listing-container">
+          <div className="product-listing-content-section">
+            {!isMobile ? (
+              <>
+                <ProductListingFilter />
+                <div className="divider--verticle" />
+              </>
+            ) : (
+              null
+            )}
             <ProductListingCards products={productList} />
           </div>
-      {showInfinityLoader && <LoadingComponent size='50px'/>}
+          {showInfinityLoader && <LoadingComponent size="50px" />}
         </div>
+        </>
       )}
     </div>
   );
