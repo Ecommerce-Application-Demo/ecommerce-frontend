@@ -2,6 +2,8 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-grow: 1;
+  padding-top: 40px;
 
   .product-listing-cards-wrapper {
     display: grid;

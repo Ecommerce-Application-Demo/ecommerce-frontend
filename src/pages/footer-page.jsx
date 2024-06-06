@@ -1,40 +1,11 @@
 import React from 'react';
 
 const FooterPage = () => {
+    const currentYear = new Date().getFullYear();
   return (
-    <div>
-        <div className="main-content">
-            {/* Your main content goes here */}
-        </div>
         <footer className='footer-main-container'>
-            <div className="footer-row-wrapper">
-                <div className="footer-column-wrapper">
-                    <p>lorem</p>
-                    <p>lorem</p>
-                    <p>lorem</p>
-                    <p>lorem</p>
-                </div>
-                <div className="footer-column-wrapper">
-                    <p>lorem</p>
-                    <p>lorem</p>
-                    <p>lorem</p>
-                    <p>lorem</p>
-                </div>
-                <div className="footer-column-wrapper">
-                    <p>lorem</p>
-                    <p>lorem</p>
-                    <p>lorem</p>
-                    <p>lorem</p>
-                </div>
-                <div className="footer-column-wrapper">
-                    <p>lorem</p>
-                    <p>lorem</p>
-                    <p>lorem</p>
-                    <p>lorem</p>
-                </div>
-            </div>
+            Copyright © {currentYear} Desicart. All rights reserved.
         </footer>
-    </div>
   );
 };
 

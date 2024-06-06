@@ -12,7 +12,7 @@ const ProductListingCards = (props) => {
       <div className='product-listing-cards-wrapper'>
        {products?.map((product)=>{
         return <ProductListingNewCard product = { product } />;
-       })};
+       })}
       </div>
     </div>
   )
