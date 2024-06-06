@@ -3,7 +3,6 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
     padding: 20px;
     position: relative;
   
@@ -23,8 +22,8 @@
       }
       &--verticle {
         background: $primary-btn-red;
-        width: 4px;
-        height: 100%;
+        width: 1px;
+        height: 1;
       }
     }
   
@@ -34,7 +33,6 @@
       flex-direction: row;
       gap: 10px;
       justify-content: center;
-      margin-top: 60px;
       height: max-content;
       overflow-y: scroll;
 
@@ -50,51 +48,35 @@
         z-index: 900; // Adjust to your needs
       }
   
-      .product-listing-cards-container {
-        flex-grow: 1;
-        display: flex;
-        justify-content: center;
-      }
     }
   }
 
   .product-listing-breadcrump-container {
-      position: fixed;
       width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       background-color: $White;
-      z-index: 52;
-      padding: 60px 20px 0px 20px;
-      margin-top: 0px;
-      overflow: hidden;
-
+      
       .divider {
         &--horizontal {
           background: $primary-btn-red;
           width: 100%;
-          height: 4px;
+          height: 1px;
         }
         &--verticle {
           background: $primary-btn-red;
-          width: 4px;
-          height: 100%;
+          width: 1px;
+          height: 200px;
         }
       }
 
-    @include breakpoint(medium) {
-        padding: 20px 60px 0px 60px;
-    }
-    @include breakpoint(large) {
-        padding: 20px 160px 0px 160px;
-    }
       .product-listing-breadcrump-wrapper {
         display: flex;
         justify-content: space-between;
         width: 100%;
         flex-direction: row;
-        margin-bottom: 20px;
+        margin-bottom: 40px;
       }
     }
   

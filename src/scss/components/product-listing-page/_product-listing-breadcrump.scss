@@ -1,0 +1,43 @@
+.product-list-breadcrump-container {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    justify-content: center;
+    gap: 12px;
+    font-size: 22px;
+
+    .home-breadcrump {
+        cursor: pointer;
+        color: $Black;
+        font-weight: bold;
+    }
+    .product-list-breadcrump-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        color: $Black;
+        
+        & p:last-child {
+            color: $primary-btn-red;
+            font-weight: bold;
+        }
+    }
+    .totalProduct-breadcrump {
+        color: $Grey;
+    }
+
+    .home-breadcrump-loading {
+       @include loadingSkeletonAnimation;
+       width: 80px;
+       height: 30px;
+       border-radius: 4px;
+    }
+
+    .totalProduct-breadcrump-loading {
+        @include loadingSkeletonAnimation;
+        width: 40px;
+        height: 30px;
+       border-radius: 4px;
+    }
+}
