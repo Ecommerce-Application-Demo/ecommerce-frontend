@@ -131,4 +131,5 @@ const ProductListingPage = () => {
     </div>
   );
 };
+
 export default ProductListingPage;
