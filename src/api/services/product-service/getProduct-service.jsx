@@ -23,14 +23,14 @@ const getSearchedProducts = async (searchingData) => {
 }
 
 const getInfinitySearchedProducts = async (searchedData) => {
-    const { query, pageNo } = searchedData;
+    const { query, pageNo, sortBy } = searchedData;
     console.log(searchedData);
     const response = await axiosInstanceProduct.get(`/get/search/product/listing/${query}`,
     {
         params:{
             productsPerPage: 6,
             pageNumber:pageNo,
-            sortBy: 'popularity',
+            sortBy,
         }
     }
     );

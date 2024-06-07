@@ -61,6 +61,7 @@ const ProductListingPage = () => {
         const searchedData = {
           query: searchQuery,
           pageNo: currentPage + 1,
+          sortBy: sortBy==='Price: Low to High' ? 'lowToHigh' : sortBy==='Price: High to Low' ?  'highTOLow': sortBy,
         };
         dispatch(getInfinitySearchedProductsThunk(searchedData)).finally(() => {
           isFetching.current = false;
