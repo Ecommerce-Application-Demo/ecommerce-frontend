@@ -3,7 +3,7 @@ import StickyBox from "react-sticky-box";
 
 const ProductListingFilter = () => {
   return (
-    <StickyBox offsetTop={100} offsetBottom={20}>
+    <StickyBox offsetTop={100} offsetBottom={20} style={{width:'300px'}}>
       <div>prpoduct filter</div>
     </StickyBox>
   )

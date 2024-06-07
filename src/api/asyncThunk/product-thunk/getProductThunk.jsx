@@ -19,9 +19,9 @@ const getAllProductThunk = createAsyncThunk(
 //async thunk for get searched products
 const getSearchedProductsThunk = createAsyncThunk(
     'GET_SEARCHED_PRODUCTS',
-    async (searchString,thunkAPI) =>{
+    async (searchingData,thunkAPI) =>{
         try {
-           return getProductMainService.getSearchedProducts(searchString); 
+           return getProductMainService.getSearchedProducts(searchingData); 
 
         }
         catch (error) {
@@ -31,7 +31,7 @@ const getSearchedProductsThunk = createAsyncThunk(
     }
 );
 
-//async thunk for get searched products
+//async thunk for infinity searched products
 const getInfinitySearchedProductsThunk = createAsyncThunk(
     'GET_INFINITY_SEARCHED_PRODUCTS',
     async (searchedData,thunkAPI) =>{

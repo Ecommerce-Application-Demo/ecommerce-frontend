@@ -1,0 +1,70 @@
+.product-list-sortBy-container {
+  position: relative;
+  display: inline-block;
+
+  .dropdown-loading {
+    @include loadingSkeletonAnimation;
+    width: 200px;
+    height: 30px;
+    border-radius: 4px;
+  }
+
+  .dropdown {
+    position: relative;
+    transition: all 0.3s linear;
+
+    .dropdown-toggle {
+      background: $White;
+      color: $Black;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      font-size: 20px;
+    }
+    & .toggleopen {
+      color: $primary-btn-red;
+    }
+
+    .dropdown-toggle:hover {
+      color: $primary-btn-red;
+    }
+
+    .arrow-icon {
+      display: flex;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+
+    .arrow-icon.open {
+      transform: rotate(180deg);
+    }
+    .dropdown-menu {
+      display: block;
+      position: absolute;
+      background: $White;
+      min-width: 160px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      z-index: 1;
+      border-radius: 4px;
+      margin-top: 5px;
+    }
+
+    .dropdown-menu li {
+      padding: 10px 20px;
+      cursor: pointer;
+      color: $Black;
+      list-style: none;
+      text-wrap: nowrap;
+    }
+
+    .dropdown-menu li:hover {
+      color: $Grey;
+    }
+  }
+}
