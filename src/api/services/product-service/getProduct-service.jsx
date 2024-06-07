@@ -7,13 +7,14 @@ const getAllProductService = async (masterCategory) => {
     return  response.data;
 }
 
-const getSearchedProducts = async (searchString) => {
-    const response = await axiosInstanceProduct.get(`/get/search/product/listing/${searchString}`,
+const getSearchedProducts = async (searchingData) => {
+   const { searchQuery, sortBy } = searchingData;
+    const response = await axiosInstanceProduct.get(`/get/search/product/listing/${searchQuery}`,
     {
         params:{
             productsPerPage: 6,
             pageNumber:1,
-            sortBy: 'popularity',
+            sortBy: sortBy,
         }
     }
     );

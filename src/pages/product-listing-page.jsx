@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useRef } from "react";
+import React, { useEffect, useCallback, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import ProductListingCards from "../components/product-listing-page/product-listing-cards";
@@ -14,14 +14,19 @@ import ProductListingCardLoading from "./loadingPage/productListingPage/prduct-l
 import ProductListingCardsLoading from "./loadingPage/productListingPage/product-listing-cards-loading";
 
 const ProductListingPage = () => {
+  //------------------redux states access----------------
   const searchedProductsData = useSelector((state) => state.getProducts.searchedProductsData);
   const showInfinityLoader = useSelector((state) => state.getProducts.searchedInfinityData.START);
 
+  // --------------------hooks----------------------------
   const dispatch = useDispatch();
   const location = useLocation();
   const isFetching = useRef(false);
   const { isMobile } = useBreakpoints();
   const loader = useRef(null);
+
+  //----------state declaration---------------------
+  const [sortBy, setSortBy] = useState('popularity');
 
   const searchParams = new URLSearchParams(location.search);
   const searchQuery = searchParams.get("search");
@@ -35,17 +40,18 @@ const ProductListingPage = () => {
   const totalProduct = searchedProducts?.totalProductCount;
 
   useEffect(() => {
-    if (
-      searchQuery &&
-      (!productList || productList.length === 0) &&
-      !isFetching.current
-    ) {
+    if (searchQuery && (!productList || productList.length === 0) && !isFetching.current) {
       isFetching.current = true;
-      dispatch(getSearchedProductsThunk(searchQuery)).finally(() => {
+      const dataForSerach = {
+        searchQuery: searchQuery,
+        sortBy: sortBy==='Price: Low to High' ? 'lowToHigh' : sortBy==='Price: High to Low' ?  'highTOLow': sortBy,
+      };
+      console.log(dataForSerach);
+      dispatch(getSearchedProductsThunk(dataForSerach)).finally(() => {
         isFetching.current = false;
       });
     }
-  }, [dispatch, getSearchedProductsThunk, searchQuery, productList]);
+  }, [dispatch, getSearchedProductsThunk, searchQuery, productList, sortBy]);
 
   const handleObserver = useCallback(
     (entities) => {
@@ -69,7 +75,6 @@ const ProductListingPage = () => {
       currentPage,
     ]
   );
-console.log(searchedProducts);
   useEffect(() => {
     const option = {
       root: null,
@@ -83,6 +88,7 @@ console.log(searchedProducts);
       if (loader.current) observer.unobserve(loader.current);
     };
   }, [handleObserver]);
+
   return (
     <div className="global-margin">
       <div className="product-listing-container">
@@ -94,7 +100,12 @@ console.log(searchedProducts);
                 loading = { START }
                 totalProduct = { totalProduct }
               />
-              <ProductListingSortBy />
+              <ProductListingSortBy 
+                dispatch = { dispatch }
+                loading = { START }
+                sortBy = { sortBy }
+                setSortBy = { setSortBy }
+              />
             </div>
             <div className="divider--horizontal" />
           </div>

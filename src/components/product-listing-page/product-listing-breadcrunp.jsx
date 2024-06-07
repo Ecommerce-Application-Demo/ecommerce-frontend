@@ -28,7 +28,7 @@ const ProductListingBreadcrump = (props) => {
 <div className='product-list-breadcrump-container'>
       <p className='home-breadcrump-loading'></p>  
       <p className='home-breadcrump-loading'></p>  
-      <p className='totalProduct-breadcrump-loading'> {totalProductText}</p>
+      <p className='totalProduct-breadcrump-loading'>{totalProductText}</p>
     </div>  )
 }
 
