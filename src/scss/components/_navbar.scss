@@ -1,128 +1,133 @@
 .navbar-container {
-    height: 60px;
-    width: 100%;
-    background-color: $White;
-    box-shadow:  $product-card-box-shadow;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    position: fixed;
-    z-index: $secondTop-zIndex;
-    top: 0;
-    margin-bottom: 20px;
+  height: 60px;
+  width: 100%;
+  background-color: $White;
+  box-shadow: $product-card-box-shadow;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: fixed;
+  z-index: $secondTop-zIndex;
+  top: 0;
+  margin-bottom: 20px;
 
-    @include breakpoint(medium) {
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
+  @include breakpoint(medium) {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
     justify-content: space-evenly;
     height: 80px;
-    }
+  }
 
-    @include breakpoint(large) {
-        width: 100%;
-        justify-content: space-evenly;
+  @include breakpoint(large) {
+    width: 100%;
+    justify-content: space-evenly;
     height: 80px;
-    }
-    .navbar-logo-container {
-        text-decoration: none;
-        color: $primary-btn-red;
-        font-size: 20px;
-        font-weight: bold;
-    }
-    .navbar-section-container {
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        gap: 20px;
+  }
+  .navbar-logo-container {
+    text-decoration: none;
+    color: $primary-btn-red;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .navbar-section-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 20px;
 
-        &>.navbar-section-link {
-        // padding-bottom: 0px;
-        height: 80px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        color: $Black;
-        text-decoration: none;
-        &:hover {
-            border-bottom: 2px solid $Black;
-        }
-        } 
+    & > .navbar-section-link {
+      // padding-bottom: 0px;
+      height: 80px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      color: $Black;
+      text-decoration: none;
+      &:hover {
+        border-bottom: 2px solid $Black;
+      }
     }
-    .navbar-right-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 16px;
-        &>div{
-            cursor: pointer;
-        }
-
-        &>.navbar-account-logo-wrapper {
-        //    border: 1px solid black;
-           position: relative;
-        //    cursor: pointer;
-        }
-    }
-    .navbar-section-mobile-container {
-        display: flex;
-        align-items: center;
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 0px 20px;
-        width: 100%;
-
-        .left-side-mobile-navbar {
-            display: flex;
-            flex-direction: row;
-            gap: 15px;
-            align-items: center;
-            &>:first-child {
-                margin-top: 3px;
-                color: $Black;
-            }
-        }
-        .right-side-mobile-navbar {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 5px;
-        }
-    }
-
-}
-.navbar-search-container {
+  }
+  .navbar-right-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 34px;
-    padding: 7px 12px 7px 20px;
-    background:$SearchBar-background;
-    border-radius: 4px;
-    &>input {
-    background:$SearchBar-background;
+    gap: 16px;
+    & > div {
+      cursor: pointer;
+    }
+
+    & > .navbar-account-logo-wrapper {
+      //    border: 1px solid black;
+      position: relative;
+      //    cursor: pointer;
+    }
+  }
+  .navbar-section-mobile-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 20px;
+    width: 100%;
+
+    .left-side-mobile-navbar {
+      display: flex;
+      flex-direction: row;
+      gap: 15px;
+      align-items: center;
+      & > :first-child {
+        margin-top: 3px;
+        color: $Black;
+      }
+    }
+    .right-side-mobile-navbar {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 5px;
+    }
+  }
+}
+.navbar-search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 34px;
+  padding: 7px 12px 7px 20px;
+  background: $SearchBar-background;
+  border-radius: 4px;
+  color: $Black;
+  position: relative;
+  z-index: inherit;
+
+  @include breakpoint(small-only) {
+    justify-content: space-between;
+  }
+  & > input {
+    background: $SearchBar-background;
     border: none;
+    color: $Black;
+    width: 100%;
     &:focus {
-        outline: none;
+      outline: none;
     }
     &::placeholder {
-    color:$Black;
-   font-family: 'Poppins', sans-serif;
-   font-size: 12px;
-   font-style: normal;
-   font-weight: 400;
-   line-height: 18px;
-opacity: 0.5;
-
+      color: $Black;
+      font-family: "Poppins", sans-serif;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 18px;
+      opacity: 0.8;
     }
-    }
-
+  }
 }
 .mobile-search-bar-container {
-    margin-top: 60px;
-    width: 100%;
-    background-color: $White;
-    padding: 10px 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-  }
-  
+  margin-top: 60px;
+  width: 100%;
+  background-color: $White;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}

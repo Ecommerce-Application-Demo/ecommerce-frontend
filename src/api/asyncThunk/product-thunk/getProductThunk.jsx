@@ -46,9 +46,24 @@ const getInfinitySearchedProductsThunk = createAsyncThunk(
     }
 );
 
+//async thunk for infinity searched products
+const getSearchedProductFilterThunk = createAsyncThunk(
+    'GET_SEARCHED_PRODUCTS_FILTER',
+    async (searchedData,thunkAPI) =>{
+        try {
+           return getProductMainService.getSearchedProductFilter(searchedData); 
+        }
+        catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+            return thunkAPI.rejectWithValue(message)
+        } 
+    }
+);
+
 const getProductThunk = {
    getAllProductThunk,
    getSearchedProductsThunk,
    getInfinitySearchedProductsThunk,
+   getSearchedProductFilterThunk,
 }
 export default getProductThunk;

@@ -13,25 +13,16 @@ const LoginSignUp = () => {
     const location=useLocation();
 
     useEffect(() => {
-      // Check the current route and scroll to the corresponding component
       if (location.pathname === '/login-signup') {
         scrollToComponent(loginSignUpRef);
       } else if (location.pathname === '/signup') {
         scrollToComponent(signUpRef);
       }
-      // } else if (location.pathname === '/component3') {
-      //   scrollToComponent(component3Ref);
-      // }
     }, [location.pathname]);
 
     const scrollToComponent = (ref, path) => {
       if (ref && ref.current) {
         ref.current.scrollIntoView({ behavior: 'smooth' });
-  
-        // // Update the route
-        // if (location.pathname !== path) {
-        //   window.history.pushState({}, null, path);
-        // }
       }
     };
   return (

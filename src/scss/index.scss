@@ -44,6 +44,7 @@
 @import 'components/product-listing-page/product-listing-filter';
 @import 'components/product-listing-page/product-listing-sortBy';
 @import 'components/product-listing-page/product-listing-single-card';
+@import 'components/product-listing-page/noproduct-found';
 
 //components-------------- loading pages----
 @import 'sections/loadingPages/product-listing-loading-page';
@@ -62,6 +63,8 @@
 @import 'small-components/reactSwiper';
 @import 'small-components/theme-toggle';
 @import 'small-components/custom-headroom';
+@import 'small-components/scrollToTop';
+
 
 
 //pages import

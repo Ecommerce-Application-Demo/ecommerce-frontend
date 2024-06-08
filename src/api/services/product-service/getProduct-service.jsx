@@ -6,7 +6,7 @@ const getAllProductService = async (masterCategory) => {
 
     return  response.data;
 }
-
+//get searched product for profuct listing
 const getSearchedProducts = async (searchingData) => {
    const { searchQuery, sortBy } = searchingData;
     const response = await axiosInstanceProduct.get(`/get/search/product/listing/${searchQuery}`,
@@ -22,9 +22,9 @@ const getSearchedProducts = async (searchingData) => {
     return response.data;
 }
 
+//get searched product for profuct listing infinity search
 const getInfinitySearchedProducts = async (searchedData) => {
     const { query, pageNo, sortBy } = searchedData;
-    console.log(searchedData);
     const response = await axiosInstanceProduct.get(`/get/search/product/listing/${query}`,
     {
         params:{
@@ -38,10 +38,19 @@ const getInfinitySearchedProducts = async (searchedData) => {
     return response.data;
 }
 
+//get searched product for profuct listing infinity search
+const getSearchedProductFilter = async (searchString) => {
+    // const { query, pageNo, sortBy } = searchedData;
+    const response = await axiosInstanceProduct.get(`/get/search/product/filters/${searchString}`);
+
+    return response.data;
+}
+
 const getProductMainService = {
     getAllProductService,
     getSearchedProducts,
     getInfinitySearchedProducts,
+    getSearchedProductFilter,
  }
  
  export default getProductMainService;

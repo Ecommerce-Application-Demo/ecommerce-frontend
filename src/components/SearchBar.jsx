@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { SearchLogo } from '../assets/icons';
 import { useNavigate } from 'react-router-dom';
 import { resetSearchedProduct } from '../redux/Slices/product/productSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const SearchBar = () => {
+  const {isDarkMode} = useSelector((state)=>state.theme);
+
   const navigate = useNavigate();
   const [searchedText, setSearchedText] = useState('');
   const dispatch = useDispatch();
@@ -14,9 +16,10 @@ const SearchBar = () => {
 
   const handleSearchSubmit = (e) =>{
     e.preventDefault();
-    dispatch(resetSearchedProduct());
-    console.log('reset');
-    navigate(`/products?search=${searchedText}`);
+    if(searchedText !== '') {
+      dispatch(resetSearchedProduct());
+      navigate(`/products?search=${searchedText}`);
+    }
   }
   return (
     <form className='navbar-search-container' onSubmit={handleSearchSubmit}>
@@ -25,7 +28,7 @@ const SearchBar = () => {
          value={searchedText}
          onChange={handleSearchBar}
         />
-        <div><SearchLogo /></div>
+        <div onClick={handleSearchSubmit}><SearchLogo color={isDarkMode ? 'white' : 'black'}/></div>
     </form>
   )
 }
