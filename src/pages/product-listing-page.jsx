@@ -151,7 +151,6 @@ const ProductListingPage = () => {
                 productsFilter={productsFilter}
               />
             </div>
-              <div className="divider--verticle" />
             </>
             : null}
           <div className="product-listing-cards-container">

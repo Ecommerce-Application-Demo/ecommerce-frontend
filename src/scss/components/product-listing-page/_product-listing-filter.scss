@@ -3,14 +3,14 @@
     padding: 30px 0px;
 
     @include breakpoint(medium) {
-        width: 45%
+        width: 50%
     }
     @include breakpoint(medium-large) {
         width: 35%
     }
 
     @include breakpoint(large) {
-        width: 45%;
+        width: 40%;
     }
 }
 .product-filter-container {
@@ -22,6 +22,7 @@
         height: 40px;
         width: 100%;
         margin-bottom: 30px;
+        border-radius: 4px;
     }
     .filter-dropdown-wrapper {
         width: 100%;
@@ -36,6 +37,14 @@
             align-items: center;
             color: $Black;
             cursor: pointer;
+
+            @include breakpoint(medium) {
+                font-size: 22px;
+            }
+
+            @include breakpoint(large) {
+                font-size: 24px;
+            }
 
             .filterDropdownArrow {
                 display: flex;
