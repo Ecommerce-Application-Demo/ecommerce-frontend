@@ -15,36 +15,21 @@ const Popup = ({ onClose, children, title=null, titleClassName='' }) => {
     };
 
     document.body.addEventListener('click', handleOutsideClick);
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    document.body.style.overflow = 'hidden';
 
     return () => {
       document.body.removeEventListener('click', handleOutsideClick);
-      document.body.style.overflow = ''; // Restore background scrolling
+      document.body.style.overflow = ''; 
     };
   }, []);
 
-  // useEffect(() => {
-  //   const updateOverlayHeight = () => {
-  //     if (popupContainerRef.current) {
-  //       const popupHeight = popupContainerRef.current.offsetHeight;
-  //       setOverlayHeight(`calc(100% - ${popupHeight}px)`);
-  //     }
-  //   };
-
-  //   updateOverlayHeight();
-  //   window.addEventListener('resize', updateOverlayHeight);
-
-  //   return () => {
-  //     window.removeEventListener('resize', updateOverlayHeight);
-  //   };
-  // }, [children]);
 
   const handleClose = () => {
     setClosing(true);
     setTimeout(() => {
       onClose();
-      document.body.style.overflow = ''; // Restore background scrolling after animation
-    }, 800); // Adjust the timeout to match the animation duration
+      document.body.style.overflow = ''; 
+    }, 800);
   };
 
   useEffect(() => {

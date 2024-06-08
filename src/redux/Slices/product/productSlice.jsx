@@ -5,7 +5,7 @@ import {
   reduxProfileUpdateState,
 } from "../../../api/utilities/stateHelper";
 
-const { getAllProductThunk, getSearchedProductsThunk, getInfinitySearchedProductsThunk } = getProductThunk;
+const { getAllProductThunk, getSearchedProductsThunk, getInfinitySearchedProductsThunk, getSearchedProductFilterThunk } = getProductThunk;
 
 const initialState = {
   getAllProduct: {
@@ -24,11 +24,15 @@ const initialState = {
     START: false,
     SUCCESS: false,
     FAIL: false,
-  }
+  },
+  searchProductsFilterData: reduxProfileInitialState(
+    "searchProductsFilter",
+    "searchProductsFilterError"
+  ),
 };
 
 const getProductsSlice = createSlice({
-  name: "PRODUCT",
+  name: "PRODUCTS",
   initialState,
   reducers: {
     resetSearchedProduct: (state) => {
@@ -98,7 +102,36 @@ const getProductsSlice = createSlice({
       .addCase(getInfinitySearchedProductsThunk.rejected, (state, action) => {
         state.searchedProductsData.searchedProductsError = action?.payload;
         state.searchedInfinityData.START = false;
-      });
+      })
+      .addCase(getSearchedProductFilterThunk.pending, (state) => {
+        reduxProfileUpdateState(
+          state,
+          "searchProductsFilterData",
+          "pending",
+          "searchProductsFilter",
+          "searchedProductsError"
+        );
+      })
+      .addCase(getSearchedProductFilterThunk.fulfilled, (state, action) => {
+        reduxProfileUpdateState(
+          state,
+          "searchProductsFilterData",
+          "fulfilled",
+          "searchProductsFilter",
+          "searchedProductsError",
+          action?.payload
+        );
+      })
+      .addCase(getSearchedProductFilterThunk.rejected, (state, action) => {
+        reduxProfileUpdateState(
+          state,
+          "searchProductsFilterData",
+          "rejected",
+          "searchProductsFilter",
+          "searchedProductsError",
+          action?.payload
+        );
+      })
   },
 });
 

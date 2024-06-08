@@ -45,11 +45,15 @@ html,body {
         height: 100%;
         margin: 0;
         padding: 0;
-        overflow-x: hidden;
+        // overflow-x: hidden;
         background: $White;
     }
 }
 
+.headroom-wrapper {
+    position: relative;
+    z-index: 60; 
+  }
 .Toastify__toast {
     font-size: 16px;
     max-width: 400px;

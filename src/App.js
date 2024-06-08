@@ -26,7 +26,10 @@ function App() {
     "/login",
     "/signup",
     "/otp-verification",
+    '/products',
+    '/my/dashboard'
   ].includes(routeParams);
+  const footerValidation = (routeParams.includes('/my/dashboard') || routeParams.includes('/products')) && isMobile; 
 
   useEffect(() => {
     if (!isLoggedIn && isMobile && !routeValidationForLoginPopup) {
@@ -67,7 +70,7 @@ function App() {
             <LoginPopupMobile setOpenLoginPopup={setOpenLoginPopup} />
           )}
           <Router />
-          {(!routeParams.includes('/my/dashboard')) && <FooterPage />}
+          {!footerValidation && <FooterPage />}
         </div>
       )}
     </AnimatePresence>

@@ -17,12 +17,6 @@ const useBreakpoints = () => {
       const isPortrait = window.matchMedia('(orientation: portrait)').matches;
       const isRetina = window.matchMedia('(min-resolution: 2dppx)').matches;
 
-      console.log('isDesktopOrLaptop:', isDesktopOrLaptop);
-      console.log('isTablet:', isTablet);
-      console.log('isMobile:', isMobile);
-      console.log('isPortrait:', isPortrait);
-      console.log('isRetina:', isRetina);
-
       setBreakpoints({
         isDesktopOrLaptop,
         isTablet,

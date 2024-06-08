@@ -1,0 +1,66 @@
+.product-filter-main-container {
+    width: 100%;
+    padding: 30px 0px;
+
+    @include breakpoint(medium) {
+        width: 45%
+    }
+    @include breakpoint(medium-large) {
+        width: 35%
+    }
+
+    @include breakpoint(large) {
+        width: 45%;
+    }
+}
+.product-filter-container {
+    width: 100%;
+    padding: 30px 0px;
+
+    .filter-dropdown-loading {
+        @include loadingSkeletonAnimation;
+        height: 40px;
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    .filter-dropdown-wrapper {
+        width: 100%;
+        padding-bottom: 30px;
+
+        .filter-dropdown-collaps {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 6px 10px;
+            font-size: 24px;
+            align-items: center;
+            color: $Black;
+            cursor: pointer;
+
+            .filterDropdownArrow {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: transform 0.3s ease-in-out;
+                &--open {
+                    transform: rotate(-180deg);
+                transition: transform 0.3s ease-in-out;
+                }
+            }
+        }
+        .filter-dropdown-expand {
+            padding-left: 40px;
+            list-style: none;
+            color: $Grey;
+            & li {
+                padding: 10px;
+
+                &:hover {
+                    background: $SearchBar-background;
+                    color: $Black;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
