@@ -8,11 +8,11 @@ const SingleProductDetails = (props) => {
   return (
     <div className="singleproduct-details-container">
       <div className="singleProduct-details-price-container">
-      <p className="singleProduct-product-name">U S Polo Assn Men Denver Slim Fit Chinos</p>
-      <p className="singleproduct-details-brandName">U.S. Polo Assn.</p>
+      <p className="singleproduct-details-brandName">{productDetails?.color}</p>
+      <p className="singleProduct-product-name">{productDetails?.styleName}</p>
       <div className="rating-container">
         <div className="rating-wrapper">
-          <span>4.2</span> {' '}
+          <span>{productDetails?.productAvgRating}</span>
           <span>
             <StarLogo />
           </span>{' '}
