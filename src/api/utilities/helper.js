@@ -92,3 +92,6 @@ export const updateState = (state, actionName, actionType, successName, errorNam
     }
 };
 
+export const objectToArrayConverter = (obj) => {
+    return Object.values(obj)?.filter((image)=> (image !==null));
+}

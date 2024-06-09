@@ -2,8 +2,9 @@ import React from "react";
 import { AddToBag, FreeDelivery, GreenTick, PayOnDelivery, ReturnDelivery, StarLogo, Wishlist } from "../../assets/icons";
 import { products } from "../../assets/pictures/productImageAddress";
 
-const SingleProductDetails = () => {
-
+const SingleProductDetails = (props) => {
+  const { dispatch, productDetails } = props;
+  
   return (
     <div className="singleproduct-details-container">
       <div className="singleProduct-details-price-container">

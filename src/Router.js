@@ -33,7 +33,7 @@ const Router = () => {
       <Route path='/login' element={<ProtectedRouteLogin><PageTransition><LoginSignUp /></PageTransition></ProtectedRouteLogin>} />
       <Route path='/loading' element={<ProtectedRouteLogin><PageTransition><LoginSignUp /></PageTransition></ProtectedRouteLogin>} />
       <Route path='/my/*' element={<ProtectedRoute><PageTransition><AccountInformation /></PageTransition></ProtectedRoute>} />
-      <Route path='/product' element={<PageTransition><SingleProductPage /></PageTransition>} />
+      <Route path='/product/:productId/:styleId/buy' element={<PageTransition><SingleProductPage /></PageTransition>} />
       <Route path='/product-admin' element={<PageTransition><ProductAdminPage /></PageTransition>} />
       <Route path='/my/dashboard' element={<ProtectedRoute><PageTransition><Dashboard /></PageTransition></ProtectedRoute>} />
       <Route path='/products' element={<ProductListingPage />} />
