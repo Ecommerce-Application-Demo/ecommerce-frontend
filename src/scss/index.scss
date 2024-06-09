@@ -50,6 +50,13 @@
 @import 'sections/loadingPages/product-listing-loading-page';
 
 
+//components---------------cartpages
+@import 'components/cart/address-section';
+@import 'components/cart/cart-section';
+@import 'components/cart/moveToWishlist-section';
+@import 'components/cart/priceDetails-section';
+
+
 
 //small components
 // @import 'small-components/inputField';
@@ -64,7 +71,7 @@
 @import 'small-components/theme-toggle';
 @import 'small-components/custom-headroom';
 @import 'small-components/scrollToTop';
-
+@import 'small-components/offline-component';
 
 
 //pages import
@@ -78,7 +85,10 @@
 @import 'sections/product-admin-page';
 @import 'sections/dashboard-page';
 @import 'sections/product-listing-page';
+@import 'sections/cart-page';
+@import 'sections/payment-page';
 
 
 //nested component import
 @import 'nested_pages/account-imformation-page';
+@import 'nested_pages/order-section';

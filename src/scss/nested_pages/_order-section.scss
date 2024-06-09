@@ -1,0 +1,33 @@
+.orderSection-main-container {
+    width: 100vw;
+    height: 100vh;
+    background: $White;
+    .ordersectionNavbar {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 5px 30px;
+        border-bottom: 1px solid $freeze-purple;
+        align-items: center;
+
+        .orderSection-nav-mid {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            align-items: center;
+            color: $Grey;
+
+            .notSelected {
+                cursor: pointer;
+                &:hover {
+                    color: $Black;
+                }
+            }
+            .selected {
+                cursor: default;
+                color: $primary-btn-red;
+            }
+        }
+    }
+}

@@ -99,7 +99,7 @@ const Navbar = () => {
                   <Wishlist stroke={isDarkMode ? 'white' : 'black'} />
                 </div>
               </Link>
-              <Link to="/cart">
+              <Link to="/checkout/cart">
                 <div>
                   <Cart stroke={isDarkMode ? 'white' : 'black'} />
                 </div>
