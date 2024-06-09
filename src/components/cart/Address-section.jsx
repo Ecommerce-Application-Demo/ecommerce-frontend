@@ -1,6 +1,7 @@
 import React from 'react'
 
 const AddressSection = () => {
+  
   return (
     <div className='addresssection-container'>
       <div className='addresssection-leftside'>

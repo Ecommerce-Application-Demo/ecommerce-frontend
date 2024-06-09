@@ -6,7 +6,9 @@
   border: 1px solid $freeze-purple;
   border-radius: 4px;
   align-items: center;
-
+  color: $Black;
+  font-size: 14px;
+  
   .addresssection-leftside {
     @include ellipsisText;
     display: flex;
