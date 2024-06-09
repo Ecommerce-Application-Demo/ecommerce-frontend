@@ -5,7 +5,8 @@ const getAllProductService = async (masterCategory) => {
     const response = await axiosInstanceProduct.get(`/get/product`);
 
     return  response.data;
-}
+};
+
 //get searched product for profuct listing
 const getSearchedProducts = async (searchingData) => {
    const { searchQuery, sortBy } = searchingData;

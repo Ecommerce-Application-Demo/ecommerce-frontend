@@ -10,11 +10,12 @@
             border: none;
         }
         .singleProduct-product-name {
-            font-size: 20px;
-            font-weight: bold;
+            color: $Grey;
         }
         .singleproduct-details-brandName {
-            color: $Grey;
+            font-size: 20px;
+            font-weight: bold;
+            color: $Black;
         }
         .rating-container {
             display: flex;

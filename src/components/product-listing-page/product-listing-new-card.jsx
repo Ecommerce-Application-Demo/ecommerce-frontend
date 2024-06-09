@@ -8,8 +8,10 @@ import {
   isColorLight,
 } from "../../uiHelper/uiHelper";
 import { DesiCartIconForLoading, StarLogo } from "../../assets/icons";
+import { useNavigate } from "react-router";
 
 const ProductListingNewCard = ({ product }) => {
+  const navigate = useNavigate();
   const [openCourosel, setOpenCourosel] = useState(false);
 
   const hoveredTextColor = {
@@ -21,6 +23,7 @@ const ProductListingNewCard = ({ product }) => {
   };
   const handleClick = () => {
     console.log(product, "selected product");
+    navigate(`/product/${product?.productId}/${product?.styleId}/buy`,);
   };
   return (
     <motion.div
