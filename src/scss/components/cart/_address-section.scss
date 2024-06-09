@@ -1,0 +1,36 @@
+.addresssection-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid $freeze-purple;
+  border-radius: 4px;
+  align-items: center;
+
+  .addresssection-leftside {
+    @include ellipsisText;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 75%;
+
+    &>p {
+      @include ellipsisText;
+      width: 100%;
+      .address-pincode {
+        white-space: pre;
+      }
+    }
+    .addressholder-name {
+      @include ellipsisText;
+    }
+  }
+  .addresssection-right {
+    display: flex;
+    align-items: center;
+    color: $primary-btn-red;
+    border: 1px solid $primary-btn-red;
+    border-radius: 4px;
+    padding: 8px 20px;
+  }
+}

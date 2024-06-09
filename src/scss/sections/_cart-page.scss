@@ -1,0 +1,17 @@
+.cartpage-main-container {
+    padding: 10px 180px;
+    display: flex;
+    flex-direction: row;
+    gap: 1%;
+
+    .cartpage-leftsection {
+        width: 64%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .cartpage-rightsection {
+        width: 35%;
+        border: 1px solid $freeze-purple;
+    }
+}

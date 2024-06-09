@@ -12,6 +12,7 @@ import PageTransition from './uiHelper/general-page-transition';
 import ProtectedRouteLogin from './api/utilities/ProtectedRoute-loginFLow';
 import ProtectedRoute from './api/utilities/ProtectedRoute';
 import ProductListingPage from './pages/product-listing-page';
+import OrderSection from './nested_pages/OrderSection';
 
 const Router = () => {
   return (
@@ -37,6 +38,8 @@ const Router = () => {
       <Route path='/product-admin' element={<PageTransition><ProductAdminPage /></PageTransition>} />
       <Route path='/my/dashboard' element={<ProtectedRoute><PageTransition><Dashboard /></PageTransition></ProtectedRoute>} />
       <Route path='/products' element={<ProductListingPage />} />
+      <Route path='/checkout/cart' element={<PageTransition><OrderSection /></PageTransition>} />
+      <Route path='/checkout/payment' element={<ProtectedRoute><PageTransition><OrderSection /></PageTransition></ProtectedRoute>} />
       <Route path='*' element={<PageTransition><NotFound /></PageTransition>} />
     </Routes>
   );

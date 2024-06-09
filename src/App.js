@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useBreakpoints from "./api/utilities/responsive";
 import Navbar from "./components/Navbar";
 import NavbarProductAdmin from "./components/navbar-product-admin";
@@ -12,14 +12,17 @@ import { AnimatePresence, motion } from "framer-motion";
 import CustomHeadroom from "./small-components/CustomHeadroom";
 import Headroom from "react-headroom";
 import SearchBar from "./components/SearchBar";
+import { enableFooterAction, enableNavbarAction, enableSearchbarAction } from "./redux/Slices/Theme/themeSlice";
+import NetworkStatus from "./small-components/NetworkStatus";
 
 function App() {
   const routeParams = useLocation().pathname;
+  const dispatch = useDispatch();
   const { isMobile } = useBreakpoints();
   const { isLoggedIn } = useSelector((state) => state.user);
   const [openLoginPopup, setOpenLoginPopup] = useState(false);
   const [splashVisible, setSplashVisible] = useState(true);
-  const {isDarkMode} = useSelector((state)=>state.theme);
+  const {isDarkMode, enableFooter, enableNavbar, enableSearchbar} = useSelector((state)=>state.theme);
 
   const routeValidationForLoginPopup = [
     "/login-signup",
@@ -29,7 +32,13 @@ function App() {
     '/products',
     '/my/dashboard'
   ].includes(routeParams);
-  const footerValidation = (routeParams.includes('/my/dashboard') || routeParams.includes('/products')) && isMobile; 
+  const footerValidation = (routeParams.includes('/my/dashboard') || routeParams.includes('/products')) && isMobile;
+  const navbarValidation = ["/product-admin", "/checkout/cart", '/checkout/payment'] .includes(routeParams);
+  useEffect(()=>{
+    dispatch(enableFooterAction(!footerValidation));
+    dispatch(enableNavbarAction(!navbarValidation));
+    dispatch(enableSearchbarAction(isMobile));
+  },[footerValidation, routeParams, isMobile]);
 
   useEffect(() => {
     if (!isLoggedIn && isMobile && !routeValidationForLoginPopup) {
@@ -57,10 +66,10 @@ function App() {
       {splashVisible ? (
         <SplashScreen />
       ) : (
-        <div>
-          {!routeParams.includes("/product-admin") && <Navbar />}
+        <NetworkStatus>
+          {enableNavbar && <Navbar />}
           {routeParams.includes("/product-admin") && <NavbarProductAdmin />}
-          {isMobile && 
+          {enableSearchbar && 
           <Headroom>
           <div className="mobile-search-bar-container">
             <SearchBar />
@@ -70,8 +79,8 @@ function App() {
             <LoginPopupMobile setOpenLoginPopup={setOpenLoginPopup} />
           )}
           <Router />
-          {!footerValidation && <FooterPage />}
-        </div>
+          {enableFooter && <FooterPage />}
+        </NetworkStatus>
       )}
     </AnimatePresence>
   );
