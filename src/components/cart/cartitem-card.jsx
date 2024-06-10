@@ -5,7 +5,7 @@ import { TbTruckReturn } from "react-icons/tb";
 import { BiSolidDownArrow } from "react-icons/bi";
 import { SiTicktick } from "react-icons/si";
 import { RxCross1 } from "react-icons/rx";
-
+import {products} from '../../assets/pictures/productImageAddress';
 const CartItemCard = (props) => {
     const {
         Checkbox2,
@@ -18,7 +18,7 @@ const CartItemCard = (props) => {
             <RxCross1 size={25}/>
         </div>
       <div className='card-leftside'>
-        <img src={productImages} alt='product' />
+        <img src={products?.[2]?.imgLink} alt='product' />
         <div>
             <Checkbox 
              checked={Checkbox2}

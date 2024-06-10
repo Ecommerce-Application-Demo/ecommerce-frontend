@@ -1,0 +1,26 @@
+.moreWishlist-container {
+    width: 100%;
+    border: 1px solid $freeze-purple;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+    color: $Black;
+    cursor: pointer;
+
+    &>div {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        align-items: center;
+        &>p {
+            font-size: 16px;
+            &:hover {
+                color: $Grey;
+                text-decoration: underline;
+            }
+        } 
+    }
+}

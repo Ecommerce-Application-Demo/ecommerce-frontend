@@ -37,6 +37,22 @@ const CartSection = () => {
         checkbox2 = {checkboxState.checkbox2}
         handleCheckboxChange ={ handleCheckboxChange }
         />
+        <CartItemCard 
+        checkbox2 = {checkboxState.checkbox2}
+        handleCheckboxChange ={ handleCheckboxChange }
+        />
+        <CartItemCard 
+        checkbox2 = {checkboxState.checkbox2}
+        handleCheckboxChange ={ handleCheckboxChange }
+        />
+        <CartItemCard 
+        checkbox2 = {checkboxState.checkbox2}
+        handleCheckboxChange ={ handleCheckboxChange }
+        />
+        <CartItemCard 
+        checkbox2 = {checkboxState.checkbox2}
+        handleCheckboxChange ={ handleCheckboxChange }
+        />
       </div>
     </div>
   )

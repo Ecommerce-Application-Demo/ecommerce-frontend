@@ -7,6 +7,7 @@ import PaymentPage from '../pages/Payment-page';
 import { DesiCartIconForLoading, Wishlist } from '../assets/icons';
 import classNames from 'classnames';
 import ThemeToggle from '../small-components/ThemeToggle';
+import { Link } from 'react-router-dom';
 
 const OrderSection = () => {
     const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const OrderSection = () => {
   return (
     <div className='orderSection-main-container'>
       <div className='ordersectionNavbar'>
-        <div><DesiCartIconForLoading size='40px'/></div>
+        <Link to='/'><DesiCartIconForLoading size='40px'/></Link>
         <div className='orderSection-nav-mid'>
           <span className={`${cartParams ? 'selected' : 'notSelected'}`}>BAG</span>
           <span>-----------</span>

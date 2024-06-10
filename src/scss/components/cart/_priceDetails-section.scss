@@ -1,0 +1,54 @@
+.price-details-container {
+    display: flex;
+    padding: 20px 10px;
+    flex-direction: column;
+    gap: 25px;
+    border: 1px solid $freeze-purple;
+    border-radius: 4px;
+    font-size: 16px;
+    color: $Black;
+
+    @include breakpoint(small-only) {
+        margin-bottom: 80px;
+    }
+    &>p {
+        color: $text-color-blue;
+        font-weight: bold;
+    }
+
+    .priceBreakage-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      
+      &>div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .totalAmount-wrapper {
+        color: $text-color-blue;
+        font-weight: bold;
+      }
+    }
+    .place-order-btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $fixed-white;
+        background: $primary-btn-red;
+        border-radius: 5px;
+        padding: 14px;
+        cursor: pointer;
+
+        @include breakpoint(small-only) {
+            position: fixed;
+            bottom: 0;
+            right: 10px;
+            left: 0.1px;
+            border-radius: 0px;
+        }
+    }
+}
