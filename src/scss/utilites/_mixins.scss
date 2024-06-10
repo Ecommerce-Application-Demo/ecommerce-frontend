@@ -25,6 +25,11 @@
             @content;
         } 
     } 
+    @else if $breakpoint == 'small-mobile' {
+        @media (max-width : $bp-small-small) {
+            @content;
+        } 
+    } 
      @else {
         @error 'No value could be retrived for ' + $breakpoint;
     }
@@ -73,6 +78,7 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    width: 90%;
 }
 
 @keyframes shimmer {

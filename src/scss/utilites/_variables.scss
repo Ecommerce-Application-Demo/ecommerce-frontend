@@ -44,6 +44,7 @@ $product-card-background: var(--product-card-background);
 $product-brand-text: var(--product-brand-text);
 $product-card-content-background: var(--product-card-content-background);
 $product-ratings-background: var(--product-ratings-background);
+$orangeRed: orangered;
 
 //------------z-indexes-------------------
 $top-most-zIndex: 100;
@@ -64,6 +65,7 @@ $bp-medium: 768px !default;
 $bp-medium-large: 950px !default;
 $bp-large: 1280px !default;
 $bp-max-small-only: 767.98px !default;
+$bp-small-small: 450px !default;
 
 
 :root {
@@ -132,7 +134,7 @@ $bp-max-small-only: 767.98px !default;
    --product-card-content-background: rgb(33, 32, 32);
    --product-ratings-background:rgba(34, 32, 32, 0.696);
    --SearchBar-background: rgb(33, 32, 32);
-
+   --text-color-blue: rgb(245, 166, 166);
 }
 
 //-------------------------fixed colors------------------

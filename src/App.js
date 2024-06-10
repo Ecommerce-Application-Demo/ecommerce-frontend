@@ -32,12 +32,19 @@ function App() {
     '/products',
     '/my/dashboard'
   ].includes(routeParams);
-  const footerValidation = (routeParams.includes('/my/dashboard') || routeParams.includes('/products')) && isMobile;
+  
+  const footerRoute = [
+    '/my/dashboard',
+    '/products',
+    '/checkout/cart'
+  ].includes(routeParams);
+
+  const footerValidation = footerRoute && isMobile;
   const navbarValidation = ["/product-admin", "/checkout/cart", '/checkout/payment'] .includes(routeParams);
   useEffect(()=>{
     dispatch(enableFooterAction(!footerValidation));
     dispatch(enableNavbarAction(!navbarValidation));
-    dispatch(enableSearchbarAction(isMobile));
+    dispatch(enableSearchbarAction(isMobile && !navbarValidation));
   },[footerValidation, routeParams, isMobile]);
 
   useEffect(() => {
@@ -75,9 +82,9 @@ function App() {
             <SearchBar />
           </div>
           </Headroom>}
-          {openLoginPopup && (
+          {/* {openLoginPopup && (
             <LoginPopupMobile setOpenLoginPopup={setOpenLoginPopup} />
-          )}
+          )} */}
           <Router />
           {enableFooter && <FooterPage />}
         </NetworkStatus>

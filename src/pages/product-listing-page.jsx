@@ -153,6 +153,7 @@ const ProductListingPage = () => {
             </div>
             </>
             : null}
+            <div className="divider--verticle" />
           <div className="product-listing-cards-container">
             {START ?
               <ProductListingCardsLoading />

@@ -76,7 +76,9 @@ const Navbar = () => {
             </div>
             <div className="right-side-mobile-navbar">
               <Wishlist stroke={isDarkMode ? 'white' : 'black'} />
+              <Link to="/checkout/cart">
               <Cart stroke={isDarkMode ? 'white' : 'black'} />
+              </Link>
               <ThemeToggle />
             </div>
           </div>
