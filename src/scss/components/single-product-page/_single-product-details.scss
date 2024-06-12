@@ -2,10 +2,13 @@
     padding: 0px;
     @include breakpoint(small-only) {
     padding: 0px 20px; 
+    color: $Black;
    }
     .singleProduct-details-price-container {
         padding: 0px 0px 30px 0px;
-        border-bottom: 1px solid $Grey;
+        border-bottom: 1px solid $freeze-purple;
+        color: $Black;
+
         @include breakpoint(small-only) {
             border: none;
         }
@@ -21,24 +24,38 @@
             display: flex;
             flex-direction: row;
             margin-top: 20px;
+            padding: 4px;
+            align-items: center;
+            width: fit-content;
+            
             .singleproduct-details-instock {
                 color: $highlighted-text;
-                padding-left: 10px;
-                border-left: 2px solid $Grey-text-color;
+                padding-left: 15px;
             }
             .rating-wrapper {
                 display: flex;
                 align-items: center;
                gap: 6px;
-               padding-right: 10px;
+               padding: 6px 10px;
+               justify-content: center;
+               align-items: center;
+               border: 1.5px solid $freeze-purple;
+               border-radius: 4px;
+               cursor: pointer;
+
+
+               &:hover {
+                border: 1.5px solid $purple-pain;
+            }
             }
         }
         .price-container {
             margin-top: 15px;
             display: flex;
-            gap: 10px;
+            gap: 12px;
             align-items: center;
             font-size: 18px;
+
             &>.mrp-wrapper {
                 color: $Grey;
                 font-weight: 600;
@@ -48,7 +65,7 @@
             }
             &>div:last-child {
                 font-weight: 600;
-                color: orange;
+                color: $orangeRed;
             }
         }
         .allTaxes-text {
@@ -58,7 +75,8 @@
     }
     .singleProduct-details-size-container {
         padding: 30px 0px;
-        border-bottom: 1px solid $Grey;
+        border-bottom: 1px solid $freeze-purple;
+        color: $Black;
         @include breakpoint(small-only) {
             border: none;
             padding: 10px 0px;
@@ -116,15 +134,20 @@
                     overflow: auto;
                 }
                 .availableSize {
-                    padding: 20px;
+                    padding: 15px;
                     display: flex;
                     flex-direction: row;
                     align-items: center;
                     justify-content: center;
                     border: 1px solid $Grey;
                     border-radius: 50%;
+                    height: 40px;
+                    width: 40px;
                     cursor: pointer;
-                transition: all 0s linear;
+                    transition: all 0.3s linear;
+                    position: relative;
+                    font-weight: bold;
+                    
                     &:hover {
                         border: 1px solid $primary-btn-red;
                         color: $primary-btn-red;
@@ -133,9 +156,28 @@
                 }
                 .selectedSize {
                     background-color: $primary-btn-red;
-                    color: $White !important;
+                    color: $fixed-white !important;
                     border: 1px solid $primary-btn-red;
                 }
+                .outOfStockSize {
+                    color: $Grey;
+                    cursor: not-allowed;
+                    &:hover {
+                        border: 1px solid $Grey;
+                        color: $Grey;
+                    }
+                  }
+                  .outOfStockSize-logo {
+                    position: absolute;
+                    height: 100%;
+                    width: 1px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: $Grey;
+                    transform: rotate(45deg);
+                    z-index: 0;
+                  }
             }
         }
         .addToCart-container {
@@ -155,9 +197,9 @@
                 justify-content: space-between;
             }
             &>.addToCart-btn {
-                padding: 20px 60px;
+                padding: 10px 60px;
                 background-color: $primary-btn-red;
-                color: $White;
+                color: $fixed-white;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
@@ -166,11 +208,12 @@
                 gap: 6px;
                 cursor: pointer;
                 width: 100%;
+                font-size: 16px;
+
                 @include breakpoint(small-only) {
-                padding: 0px 40px !important;
+                padding: 4px 40px !important;
                 text-wrap: nowrap;
                 border-radius: 30px;
-                height: 50px;
                 }
                 &:hover {
                     background-color: $primary-btn-red-disabled;
@@ -208,6 +251,8 @@
         display: flex;
         flex-direction: column;
         gap: 25px;
+        color: $Black;
+        
         @include breakpoint(small-only) {
             border: none;
         }

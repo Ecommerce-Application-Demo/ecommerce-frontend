@@ -1,19 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import StickyBox from "react-sticky-box";
 
 const ProductListingFilter = (props) => {
   const { productsFilter, filterLoading } = props;
 
-  const [selectedDropdown, setSelectedDropdown] = useState("");
+  // Initialize all dropdowns as open
+  const [dropdowns, setDropdowns] = useState({
+    masterCategory: true,
+    category: true,
+    brand: true,
+    colour: true,
+    size: true,
+    discountPercentage: true,
+    priceRange: true,
+  });
 
   const handleDropdownClick = (name) => {
-    setSelectedDropdown(name === selectedDropdown ? '' : name);
+    setDropdowns((prevState) => ({
+      ...prevState,
+      [name]: !prevState[name],
+    }));
   };
 
-  return (
-    filterLoading ? 
-     <div className="product-filter-container">
+  return filterLoading ? (
+    <div className="product-filter-container">
       <div className="filter-dropdown-loading"></div>
       <div className="filter-dropdown-loading"></div>
       <div className="filter-dropdown-loading"></div>
@@ -21,13 +32,9 @@ const ProductListingFilter = (props) => {
       <div className="filter-dropdown-loading"></div>
       <div className="filter-dropdown-loading"></div>
       <div className="filter-dropdown-loading"></div>
-
-      </div>
-      :
-    <StickyBox
-      className="product-filter-container"
-      offsetTop={150}
-    >
+    </div>
+  ) : (
+    <StickyBox className="product-filter-container" offsetTop={80}>
       {productsFilter && (
         <>
           {productsFilter.masterCategories?.length > 0 && (
@@ -35,7 +42,7 @@ const ProductListingFilter = (props) => {
               name="masterCategory"
               title="Master Category"
               items={productsFilter.masterCategories}
-              selectedDropdown={selectedDropdown}
+              isOpen={dropdowns.masterCategory}
               handleDropdownClick={handleDropdownClick}
             />
           )}
@@ -44,7 +51,7 @@ const ProductListingFilter = (props) => {
               name="category"
               title="Category"
               items={productsFilter.categories}
-              selectedDropdown={selectedDropdown}
+              isOpen={dropdowns.category}
               handleDropdownClick={handleDropdownClick}
             />
           )}
@@ -53,7 +60,7 @@ const ProductListingFilter = (props) => {
               name="brand"
               title="Brand"
               items={productsFilter.brands}
-              selectedDropdown={selectedDropdown}
+              isOpen={dropdowns.brand}
               handleDropdownClick={handleDropdownClick}
             />
           )}
@@ -62,14 +69,24 @@ const ProductListingFilter = (props) => {
               name="colour"
               title="Colour"
               items={productsFilter.colours}
-              selectedDropdown={selectedDropdown}
+              isOpen={dropdowns.colour}
               handleDropdownClick={handleDropdownClick}
-              renderItems={(colours) => colours.map((colour, index) => (
-                <li key={index}>
-                  <span style={{ backgroundColor: colour.hexCode, width: '20px', height: '20px', display: 'inline-block', marginRight: '8px' }}></span>
-                  {colour.colour}
-                </li>
-              ))}
+              renderItems={(colours) =>
+                colours.map((colour, index) => (
+                  <li key={index}>
+                    <span
+                      style={{
+                        backgroundColor: colour.hexCode,
+                        width: "20px",
+                        height: "20px",
+                        display: "inline-block",
+                        marginRight: "8px",
+                      }}
+                    ></span>
+                    {colour.colour}
+                  </li>
+                ))
+              }
             />
           )}
           {productsFilter.sizes?.length > 0 && (
@@ -77,7 +94,7 @@ const ProductListingFilter = (props) => {
               name="size"
               title="Size"
               items={productsFilter.sizes}
-              selectedDropdown={selectedDropdown}
+              isOpen={dropdowns.size}
               handleDropdownClick={handleDropdownClick}
             />
           )}
@@ -86,18 +103,20 @@ const ProductListingFilter = (props) => {
               name="discountPercentage"
               title="Discount Percentage"
               items={productsFilter.discountPercentages}
-              selectedDropdown={selectedDropdown}
+              isOpen={dropdowns.discountPercentage}
               handleDropdownClick={handleDropdownClick}
-              renderItems={(discounts) => discounts.map((discount, index) => (
-                <li key={index}>{discount.discountPercentageText}</li>
-              ))}
+              renderItems={(discounts) =>
+                discounts.map((discount, index) => (
+                  <li key={index}>{discount.discountPercentageText}</li>
+                ))
+              }
             />
           )}
           <Dropdown
             name="priceRange"
             title="Price Range"
             items={[]}
-            selectedDropdown={selectedDropdown}
+            isOpen={dropdowns.priceRange}
             handleDropdownClick={handleDropdownClick}
             renderItems={() => (
               <div>
@@ -112,25 +131,20 @@ const ProductListingFilter = (props) => {
   );
 };
 
-
-const Dropdown = ({ name, title, items, selectedDropdown, handleDropdownClick, renderItems }) => (
+const Dropdown = ({ name, title, items, isOpen, handleDropdownClick, renderItems }) => (
   <div className="filter-dropdown-wrapper">
-    <div
-      className="filter-dropdown-collaps"
-      onClick={() => handleDropdownClick(name)}
-    >
+    <div className="filter-dropdown-collaps" onClick={() => handleDropdownClick(name)}>
       <span>{title}</span>
-      <span className={`filterDropdownArrow${selectedDropdown === name ? '--open' : ''}`}>
+      <span className={`filterDropdownArrow${isOpen ? '--open' : ''}`}>
         <FaChevronDown />
       </span>
     </div>
-    {selectedDropdown === name && (
+    {isOpen && (
       <ul className="filter-dropdown-expand">
-        {renderItems ? renderItems(items) : items.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
+        {renderItems ? renderItems(items) : items.map((item, index) => <li key={index}>{item}</li>)}
       </ul>
     )}
   </div>
 );
+
 export default ProductListingFilter;

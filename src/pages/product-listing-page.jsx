@@ -116,7 +116,7 @@ const ProductListingPage = () => {
       if (loader.current) observer.unobserve(loader.current);
     };
   }, [handleObserver]);
-  console.log(productList);
+  
   return (
     <div className="global-margin">
       <ScrollToTopButton />

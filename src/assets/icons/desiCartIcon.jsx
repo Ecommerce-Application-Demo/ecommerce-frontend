@@ -1,4 +1,4 @@
-const desiCartIcon=({color='#DB4444'})=>{
+const desiCartIcon=({color= 'var(--primary-btn-red)' })=>{
     return(
         <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="120px" height="120px" viewBox="0 0 490.000000 242.000000" preserveAspectRatio="xMidYMid meet">
 

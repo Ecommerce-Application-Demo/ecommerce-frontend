@@ -35,13 +35,13 @@
 
 }
 .single-big-image-wrapper {
-  max-height: 100%; 
-  max-width: 100%;
+  max-height: 450px; 
+  max-width: 350px;
   overflow: hidden;
   position: relative;
 
   .product-icon {
-    background: $product-ratings-background;
+    background: $fixed-white-overlay-background;
     height: 50px;
     width: 50px;
     border-radius: 30px;

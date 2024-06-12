@@ -13,17 +13,16 @@ const SingleProductPage = () => {
   const productStyle = useSelector((state)=> state.product.productWithStyleidData);
 
   const { isMobile } = useBreakpoints();
-  const { productId, styleId } = useParams();
+  const { styleName, styleId } = useParams();
   const dispatch = useDispatch();
 
   const { getProductWithStyleId } = singleProductThunk;
   const { productWithStyleId, START, FAIL } = productStyle;
-  const productImages = productWithStyleId?.[0]?.images;
-  const productDetails = productWithStyleId?.[0];
+  const productImages = productWithStyleId?.images;
 
   useEffect(()=> {
     const dataToDispatch = {
-      productId,
+      styleName: styleName.toLowerCase(),
       styleId,
     }
     dispatch(getProductWithStyleId(dataToDispatch));
@@ -35,7 +34,8 @@ const SingleProductPage = () => {
             {isMobile ? <ProductImagePhone/> : <ProductImage productImages = { productImages }/>}
             <SingleProductDetails 
               dispatch={ dispatch }
-              productDetails ={ productDetails }
+              isMobile={ isMobile }
+              productDetails={ productWithStyleId }
             />
         </div>
     </div>

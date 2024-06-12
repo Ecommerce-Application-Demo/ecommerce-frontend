@@ -23,7 +23,7 @@ const ProductListingNewCard = ({ product }) => {
   };
   const handleClick = () => {
     console.log(product, "selected product");
-    navigate(`/product/${product?.productId}/${product?.styleId}/buy`,);
+    navigate(`/product/${product?.styleName}/${product?.styleId}/buy`,);
   };
   return (
     <motion.div
