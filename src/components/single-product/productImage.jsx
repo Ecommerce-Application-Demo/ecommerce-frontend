@@ -22,7 +22,7 @@ const ProductImage = ({productImages}) => {
 
   return (
     <div>
-      <StickyBox offsetTop={150} offsetBottom={-150}>
+      <StickyBox offsetTop={130}>
       <div className='productImage-singleImage-container'>
       <div className='productImage-singleImage-wrapper'>
         {imageArray?.map((productImage, index) => (

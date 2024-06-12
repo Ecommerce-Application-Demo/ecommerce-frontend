@@ -1,6 +1,6 @@
 import React from 'react';
 
-const payOnDelivery=()=>{
+const payOnDelivery=({color='var(--Black)'})=>{
       return (
     <svg
       id="prefix__Layer_1"
@@ -39,7 +39,7 @@ const payOnDelivery=()=>{
           </g>
         </mask>
         <style>
-          {`.prefix__cls-1,.prefix__cls-4{fill:#fff;fill-rule:evenodd;}.prefix__cls-4{fill:black}`}
+          {`.prefix__cls-1,.prefix__cls-4{fill:#fff;fill-rule:evenodd;}.prefix__cls-4{fill:${color}}`}
         </style>
       </defs>
       <g mask="url(#prefix__mask)">

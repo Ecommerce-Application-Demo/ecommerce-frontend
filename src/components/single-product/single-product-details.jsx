@@ -1,32 +1,42 @@
 import React from "react";
 import { AddToBag, FreeDelivery, GreenTick, PayOnDelivery, ReturnDelivery, StarLogo, Wishlist } from "../../assets/icons";
 import { products } from "../../assets/pictures/productImageAddress";
+import SingleProductSize from "./single-product-size";
 
 const SingleProductDetails = (props) => {
-  const { dispatch, productDetails } = props;
+  const { 
+    dispatch,
+    isMobile,
+     productDetails,
+   } = props;
   
+   const productSize = productDetails?.sizes;
   return (
     <div className="singleproduct-details-container">
       <div className="singleProduct-details-price-container">
-      <p className="singleproduct-details-brandName">{productDetails?.color}</p>
+      <p className="singleproduct-details-brandName">{productDetails?.brand?.brandName}</p>
       <p className="singleProduct-product-name">{productDetails?.styleName}</p>
       <div className="rating-container">
         <div className="rating-wrapper">
           <span>{productDetails?.productAvgRating}</span>
           <span>
             <StarLogo />
-          </span>{' '}
-          <span>(150 Ratings)</span>
+          </span>
+          {productDetails?.reviewCount &&<span>{productDetails?.reviewCount} review</span>}
         </div>
-        <span className="singleproduct-details-instock">in stock</span>
+        {productDetails?.inStock && <span className="singleproduct-details-instock">in stock</span>}
       </div>
       <div className="price-container">
-        <h1>₹1599</h1>
+        <h3>₹{productDetails?.finalPrice}</h3>
+        {productDetails?.mrp > 0 &&
         <div className="mrp-wrapper">
           <span>MRP </span>
-          <span>₹2999</span>
+          <span>₹{productDetails?.mrp}</span>
         </div>
-        <div>(45% OFF)</div>
+        }
+        {productDetails?.discountPercentage &&
+        <div>{productDetails?.discountPercentageText}</div>
+        }
       </div>
         <span className="allTaxes-text">inclusive of all taxes</span>
       </div>
@@ -41,21 +51,13 @@ const SingleProductDetails = (props) => {
 })}
           </div>
         </div>
-        <div className="size-container">
-        <span className="selectSize-text">SELECT SIZE</span>
-        <div className="allAvailableSize-wrapper">
-          <span className="availableSize selectedSize">30</span>
-          <span className="availableSize">30</span>
-          <span className="availableSize">30</span>
-          <span className="availableSize">30</span>
-          <span className="availableSize">30</span>
-          <span className="availableSize">30</span>
-
-        </div>
-        </div>
+        <SingleProductSize 
+          dispatch={ dispatch }
+          productSize={ productSize }
+        />
         <div className="addToCart-container">
           <div className="addToCart-btn"><AddToBag/>ADD TO BAG</div>
-          <div className="wishlist-btn"><Wishlist/>WISHLIST</div>
+          {isMobile && <div className="wishlist-btn"><Wishlist/>WISHLIST</div>}
         </div>
       </div>
       <div className="singleProduct-details-deliveryOption-container">

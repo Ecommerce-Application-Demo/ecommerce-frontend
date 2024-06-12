@@ -45,6 +45,7 @@ $product-brand-text: var(--product-brand-text);
 $product-card-content-background: var(--product-card-content-background);
 $product-ratings-background: var(--product-ratings-background);
 $orangeRed: orangered;
+$fixed-white-overlay-background: var(--fixed-white-overlay-background);
 
 //------------z-indexes-------------------
 $top-most-zIndex: 100;
@@ -75,7 +76,7 @@ $bp-small-small: 450px !default;
     --boxShadow: rgba(99, 99, 99, 0.2);
     --Black: black;
     --SearchBar-background: #F5F5F5;
-    --primary-btn-red: #DB4444;
+    --primary-btn-red: #F52549;
     --primary-btn-red-disabled: #f26868d1;
     --primary-box-shadow-2: #f30e0e60;
     --primary-box-shadow: #db444498;
@@ -113,6 +114,7 @@ $bp-small-small: 450px !default;
    --product-brand-text:rgb(19, 22, 56);
    --product-card-content-background: #e5eaf5;
    --product-ratings-background:rgba(255, 255, 255, 0.696);
+   --fixed-white-overlay-background: rgba(255, 255, 255, 0.696);
 }
 
 .dark-mode {
@@ -124,7 +126,7 @@ $bp-small-small: 450px !default;
     --homepage-background:linear-gradient(180deg, #1c1919 0%, rgb(0, 0, 0) 100%);
     --brand-title-text:#00FF66;
     --circular-boxShadow-primary: 2px 0 10px 2px #00FF66;
-    --primary-btn-red:#ee1717;
+    --primary-btn-red:#fb0b2b;
     --hover-grey:rgb(51, 49, 49);
     --freeze-purple: #8458B3;
     --medium-purple: black;
@@ -135,6 +137,7 @@ $bp-small-small: 450px !default;
    --product-ratings-background:rgba(34, 32, 32, 0.696);
    --SearchBar-background: rgb(33, 32, 32);
    --text-color-blue: rgb(245, 166, 166);
+   --purple-pain: #e5eaf5;
 }
 
 //-------------------------fixed colors------------------

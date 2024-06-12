@@ -19,14 +19,8 @@ const getSingleProductWithProductIdService = async (searchingData) => {
 
  //get perticular stryleID of product
 const getProductWithStyleIdServivce = async (styleData) => {
-    const { productId, styleId } = styleData;
-     const response = await axiosInstanceProduct.get(`/get/product/style`,
-     {
-         params:{
-             productId,
-             styleId,
-         }
-     }
+    const { styleName, styleId } = styleData;
+     const response = await axiosInstanceProduct.get(`/get/search/product/${styleName}/${styleId}`,
      );
  
      return response.data;

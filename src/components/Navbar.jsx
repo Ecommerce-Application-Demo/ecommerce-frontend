@@ -86,7 +86,7 @@ const Navbar = () => {
         {!isMobile && (
           <>
             <Link className="navbar-logo-container" to="/">
-              <DesiCartIcon color={isDarkMode ? '#ee1717' : '#DB4444'} />
+              <DesiCartIcon />
             </Link>
             <div className="navbar-section-container">
               <Link className="navbar-section-link">MEN</Link>
