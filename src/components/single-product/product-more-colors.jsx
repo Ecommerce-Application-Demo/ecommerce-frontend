@@ -1,0 +1,31 @@
+import React from 'react'
+import { products } from '../../assets/pictures/productImageAddress';
+import { useSelector } from 'react-redux';
+
+const ProductMoreolors = (props) => {
+    //--------redux state--------------------------
+    const productMoreColorsData = useSelector((state) => state.product.productMoreColorsData);
+
+    //----------props---------------------
+    const {
+        dispatch,
+        styleId,
+    } = props;
+
+    const { START, FAIL, SUCCESS, productMoreColors } = productMoreColorsData;
+    
+    return (
+        <div className="color-container">
+            <span className="moreColor-text">MORE COLORS</span>
+            <div className="more-color-image-wrapper">
+                {productMoreColors?.map(product => {
+                    return (
+                        <img src={product?.defaultImage} alt='product' className="more-color-image" />
+                    )
+                })}
+            </div>
+        </div>
+    )
+}
+
+export default ProductMoreolors

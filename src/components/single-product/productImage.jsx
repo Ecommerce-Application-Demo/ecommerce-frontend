@@ -21,7 +21,7 @@ const ProductImage = ({productImages}) => {
   };
 
   return (
-    <div>
+    <div className='productImage-main-container'>
       <StickyBox offsetTop={130}>
       <div className='productImage-singleImage-container'>
       <div className='productImage-singleImage-wrapper'>

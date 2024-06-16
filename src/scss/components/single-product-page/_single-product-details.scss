@@ -1,9 +1,13 @@
 .singleproduct-details-container {
     padding: 0px;
+    // width: calc(102% - 500px);
+    width: 50%;
     @include breakpoint(small-only) {
     padding: 0px 20px; 
     color: $Black;
+    width: 100%;
    }
+
     .singleProduct-details-price-container {
         padding: 0px 0px 30px 0px;
         border-bottom: 1px solid $freeze-purple;
@@ -12,13 +16,24 @@
         @include breakpoint(small-only) {
             border: none;
         }
-        .singleProduct-product-name {
-            color: $Grey;
-        }
-        .singleproduct-details-brandName {
-            font-size: 20px;
-            font-weight: bold;
-            color: $Black;
+        .singleProductName-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            @include breakpoint(small-only) {
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+            }
+            .singleProduct-product-name {
+                color: $Grey;
+            }
+            .singleproduct-details-brandName {
+                font-size: 20px;
+                font-weight: bold;
+                color: $Black;
+            }
         }
         .rating-container {
             display: flex;
@@ -50,11 +65,21 @@
             }
         }
         .price-container {
-            margin-top: 15px;
+            margin-top: 10px;
             display: flex;
             gap: 12px;
             align-items: center;
             font-size: 18px;
+
+            @include breakpoint(medium) {
+            font-size: 14px;
+            }
+            @include breakpoint(medium-large) {
+            font-size: 22px;
+            }
+            @include breakpoint(large) {
+            font-size: 22px;
+            }
 
             &>.mrp-wrapper {
                 color: $Grey;
@@ -98,14 +123,21 @@
             .more-color-image-wrapper {
                 display: flex;
                 flex-direction: row;
-                gap: 15px;
+                gap: 25px;
+                width: 100%;
+                overflow-x: scroll;
+                @include breakpoint(small-only) {
+                  width: 100%;
+                }
                 .more-color-image {
-                    height: 60px;
-                    width: 50px;
+                    height: 80px;
+                    width: 60px;
+                    object-fit: cover;
+                    border-radius: 4px;
                     @include breakpoint(small-only) {
-                        height: 80px;
-                        width: 60px;
-                        border-radius: 10px;
+                      height: 80px;
+                      width: 60px;
+                      border-radius: 10px;
                     }
                 }
             }
@@ -130,7 +162,6 @@
                 flex-direction: row;
                 gap: 20px;
                 @include breakpoint(small-only){
-                    // flex-wrap: wrap;
                     overflow: auto;
                 }
                 .availableSize {
@@ -139,7 +170,6 @@
                     flex-direction: row;
                     align-items: center;
                     justify-content: center;
-                    border: 1px solid $Grey;
                     border-radius: 50%;
                     height: 40px;
                     width: 40px;
@@ -154,6 +184,11 @@
                         
                     }
                 }
+                .nonSelectedSize {
+                    border: 1px solid $Grey;
+                    background: $White;
+                    color: $Black;
+                }
                 .selectedSize {
                     background-color: $primary-btn-red;
                     color: $fixed-white !important;
@@ -162,6 +197,8 @@
                 .outOfStockSize {
                     color: $Grey;
                     cursor: not-allowed;
+                    border: 1px solid $Grey;
+
                     &:hover {
                         border: 1px solid $Grey;
                         color: $Grey;
@@ -189,6 +226,7 @@
             letter-spacing: 2px;
             justify-content: space-between;
             width: 100%;
+            position: relative;
             @include breakpoint(small-only) {
                 letter-spacing: normal;
                 font-size: 12px;
