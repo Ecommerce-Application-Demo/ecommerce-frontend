@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  justify-content: center;
 
   @include breakpoint(medium) {
     padding: 20px 80px;

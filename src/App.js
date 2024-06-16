@@ -9,7 +9,6 @@ import LoginPopupMobile from "./components/navbar/login-popup-mobile";
 import SplashScreen from "./small-components/Splash-screen";
 import Router from "./Router";
 import { AnimatePresence, motion } from "framer-motion";
-import CustomHeadroom from "./small-components/CustomHeadroom";
 import Headroom from "react-headroom";
 import SearchBar from "./components/SearchBar";
 import { enableFooterAction, enableNavbarAction, enableSearchbarAction } from "./redux/Slices/Theme/themeSlice";
@@ -32,7 +31,7 @@ function App() {
     '/products',
     '/my/dashboard'
   ].includes(routeParams);
-  
+
   const footerRoute = [
     '/my/dashboard',
     '/products',
@@ -40,13 +39,19 @@ function App() {
   ].includes(routeParams);
 
   const footerValidation = footerRoute && isMobile;
-  const navbarValidation = ["/product-admin", "/checkout/cart", '/checkout/payment'] .includes(routeParams);
-  const searchBarValidation = routeParams?.includes('/product');
-  useEffect(()=>{
+  const navbarValidation = ["/product-admin", "/checkout/cart", '/checkout/payment'].includes(routeParams);
+
+  // Updated searchBarValidation logic
+  const excludedSearchBarRoutes = ["/product-admin", "/checkout/cart", '/checkout/payment'];
+  const isProductDetailPage = routeParams.startsWith('/product/') && routeParams.split('/').length === 5; // Assuming product detail URL pattern
+
+  const searchBarValidation = isProductDetailPage || excludedSearchBarRoutes.some(route => routeParams.includes(route));
+
+  useEffect(() => {
     dispatch(enableFooterAction(!footerValidation));
     dispatch(enableNavbarAction(!navbarValidation));
-    dispatch(enableSearchbarAction(isMobile && !navbarValidation));
-  },[footerValidation, routeParams, isMobile]);
+    dispatch(enableSearchbarAction(isMobile && !searchBarValidation));
+  }, [footerValidation, routeParams, isMobile, searchBarValidation]);
 
   useEffect(() => {
     if (!isLoggedIn && isMobile && !routeValidationForLoginPopup) {
@@ -77,11 +82,11 @@ function App() {
         <NetworkStatus>
           {enableNavbar && <Navbar />}
           {routeParams.includes("/product-admin") && <NavbarProductAdmin />}
-          {enableSearchbar || !searchBarValidation && 
+          {enableSearchbar && 
           <Headroom>
-          <div className="mobile-search-bar-container">
-            <SearchBar />
-          </div>
+            <div className="mobile-search-bar-container">
+              <SearchBar />
+            </div>
           </Headroom>}
           {/* {openLoginPopup && (
             <LoginPopupMobile setOpenLoginPopup={setOpenLoginPopup} />
