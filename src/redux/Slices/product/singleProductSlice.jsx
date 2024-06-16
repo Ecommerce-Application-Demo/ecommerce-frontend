@@ -5,12 +5,16 @@ import {
 } from "../../../api/utilities/stateHelper";
 import singleProductThunk from "../../../api/asyncThunk/product-thunk/singleProductThunk";
 
-const { getProductWithStyleId, getSingleProductWithProductId } = singleProductThunk;
+const { getProductWithStyleId, getSingleProductWithProductId, getProductMoreColors } = singleProductThunk;
 
 const initialState = {
   productWithStyleidData: reduxProfileInitialState(
     "productWithStyleId",
     "productWithStyleIdError"
+  ),
+  productMoreColorsData: reduxProfileInitialState(
+    "productMoreColors",
+    "productMoreColorsError"
   ),
 };
 
@@ -54,6 +58,35 @@ const getSingleProductSlice = createSlice({
             "rejected",
             "productWithStyleId",
             "productWithStyleIdError",
+            action?.payload
+          );
+      })
+      .addCase(getProductMoreColors.pending, (state) => {
+        reduxProfileUpdateState(
+            state,
+            "productMoreColorsData",
+            "pending",
+            "productMoreColors",
+            "productMoreColorsError",
+          );
+      })
+      .addCase(getProductMoreColors.fulfilled, (state, action) => {
+        reduxProfileUpdateState(
+            state,
+            "productMoreColorsData",
+            "fulfilled",
+            "productMoreColors",
+            "productMoreColorsError",
+            action?.payload
+          );
+      })
+      .addCase(getProductMoreColors.rejected, (state, action) => {
+        reduxProfileUpdateState(
+            state,
+            "productMoreColorsData",
+            "rejected",
+            "productMoreColors",
+            "productMoreColorsError",
             action?.payload
           );
       })

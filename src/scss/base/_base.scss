@@ -12,15 +12,15 @@
 }
 
 .global-margin {
-    display: flex;
-    justify-content: center;
     margin: 80px auto 0px;
     width: 100vw !important;
     position: relative;
     box-sizing: border-box;
     background-color: $White;
-
+    min-height: calc(100vh - 100px);
      @include breakpoint(small-only) {
+      display: flex;
+      justify-content: center;
       margin: 20px auto 0px;
      }
 }

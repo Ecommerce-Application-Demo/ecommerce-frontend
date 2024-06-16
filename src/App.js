@@ -41,6 +41,7 @@ function App() {
 
   const footerValidation = footerRoute && isMobile;
   const navbarValidation = ["/product-admin", "/checkout/cart", '/checkout/payment'] .includes(routeParams);
+  const searchBarValidation = routeParams?.includes('/product');
   useEffect(()=>{
     dispatch(enableFooterAction(!footerValidation));
     dispatch(enableNavbarAction(!navbarValidation));
@@ -76,7 +77,7 @@ function App() {
         <NetworkStatus>
           {enableNavbar && <Navbar />}
           {routeParams.includes("/product-admin") && <NavbarProductAdmin />}
-          {enableSearchbar && 
+          {enableSearchbar || !searchBarValidation && 
           <Headroom>
           <div className="mobile-search-bar-container">
             <SearchBar />

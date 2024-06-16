@@ -7,7 +7,6 @@ const SingleProductSize = (props) => {
   const [selectedSize, setSelectedSize] = useState('');
 
   useEffect(() => {
-    // Automatically select the first size with quantity greater than 0
     const firstAvailableSize = productSize?.find(size => size.quantity > 0);
     if (firstAvailableSize) {
       setSelectedSize(firstAvailableSize.size);
@@ -25,8 +24,8 @@ const SingleProductSize = (props) => {
         {productSize?.map((size) => (
           <div
             key={size.size}
-            className={`availableSize ${selectedSize === size.size ? 'selectedSize' : ''} ${(!size?.quantity || size?.quantity === 0) ? 'outOfStockSize' : ''}`}
-            onClick={() => (!size?.quantity || size?.quantity === 0) && handleSelectedSize(size.size)}
+            className={`availableSize ${(!size?.quantity || size?.quantity === 0) ? 'outOfStockSize' : (selectedSize === size?.size) ? 'selectedSize' : 'nonSelectedSize'}`}
+            onClick={() => !(!size?.quantity || size?.quantity === 0) && handleSelectedSize(size.size)}
           >
             {size.size}
             {(!size?.quantity || size?.quantity === 0) && <span className='outOfStockSize-logo'></span>}

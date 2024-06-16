@@ -1,11 +1,13 @@
 .productImage-singleImage-container {
   height: max-content;
-  width: 500px;
+  width: 400px;
   display: flex;
   flex-direction: row;
   gap: 30px;
   // border: 1px solid black;
-
+  @include breakpoint(large) {
+  width: 500px;
+  }
   .productImage-singleImage-wrapper {
     display: flex;
     flex-direction: column;
@@ -39,6 +41,11 @@
   max-width: 350px;
   overflow: hidden;
   position: relative;
+
+  @include breakpoint(large) {
+    max-height: 90vh; 
+    max-width: 700px;
+  }
 
   .product-icon {
     background: $fixed-white-overlay-background;

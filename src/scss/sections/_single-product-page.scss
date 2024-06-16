@@ -1,20 +1,69 @@
 .single-product-container {
     display: flex;
     flex-direction: column;
-    margin-top: 0px;
+    margin-top: 40px;
     gap: 20px;
     width: 100%;
     @include breakpoint(medium) {
         flex-direction: row;
-    gap: 40px;
-    margin-top: 80px;
-        padding: 0px 30px;
+        margin-top: 80px;
+        padding: 40px 60px;
+        justify-content: center;
+        gap: 2%;
+
     }
     @include breakpoint(large) {
         flex-direction: row;
-    gap: 40px;
-    margin-top: 80px;
-    padding: 0px 150px;
-
+        gap: 40px;
+        margin-top: 80px;
+        padding: 40px 200px;
+        justify-content: center;
+        gap: 4%;
     }
 }
+.mobile-btn-container {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: $White;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    z-index: 100; 
+
+    .addToCart-btn, .wishlist-btn {
+      flex: 1;
+      margin: 0 10px;
+      padding: 10px 0px;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      border-radius: 8px;
+    }
+    .addToCart-btn {
+        background: $primary-btn-red;
+        color: $fixed-white;
+    }
+    .wishlist-btn {
+        background: $White;
+        color: $Black;
+        border: 1px solid $Grey;
+    }
+    
+    .addToCart-btn:hover, .wishlist-btn:hover {
+      background-color: #ddd;
+    }
+  }
+  
+    .mobile-btn-container.static {
+    position: static;
+    box-shadow: none;
+    margin-top: 20px;
+  }
+  

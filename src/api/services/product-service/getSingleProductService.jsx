@@ -26,9 +26,23 @@ const getProductWithStyleIdServivce = async (styleData) => {
      return response.data;
  }
 
+  //get perticular stryleID of product
+const getProductMoreColorsService = async (styleId) => {
+     const response = await axiosInstanceProduct.get(`/get/search/product/colours`,
+        {
+            params:{
+                styleId,
+            }
+        }
+     );
+ 
+     return response.data;
+ }
+
  const SINGLEPRODUCTSERVICE = {
     getSingleProductWithProductIdService,
     getProductWithStyleIdServivce,
+    getProductMoreColorsService,
  };
 
  export default SINGLEPRODUCTSERVICE;
