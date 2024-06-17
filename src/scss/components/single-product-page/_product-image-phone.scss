@@ -12,10 +12,14 @@
     height: auto;
     @include breakpoint(small-only) {
         max-height: 67vh;
+        object-fit: contain;
     }
+    @include breakpoint(small-mobile) {
+      max-height: 67vh;
+      object-fit: fill;
+  }
     .swiper-container {
-      // width: calc(100% - 40px); /* Adjust width to fit the screen with padding */
-      margin: 0 auto; /* Center the Swiper container horizontally */
+      margin: 0 auto;
     }
     
     .swiper-slide {

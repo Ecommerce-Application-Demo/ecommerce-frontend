@@ -1,9 +1,12 @@
 .single-product-container {
     display: flex;
     flex-direction: column;
-    margin-top: 40px;
+    margin-top: 60px;
     gap: 20px;
     width: 100%;
+    @include breakpoint(small-mobile) {
+    margin-top: 0px;
+    }
     @include breakpoint(medium) {
         flex-direction: row;
         margin-top: 80px;
