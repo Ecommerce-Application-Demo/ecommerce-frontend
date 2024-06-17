@@ -16,11 +16,11 @@ import ThemeToggle from "../small-components/ThemeToggle";
 import SearchBar from "./SearchBar";
 import AccountDropdown from "../small-components/AccountDropdown";
 import CustomHeadroom from "../small-components/CustomHeadroom";
+import ProductNavbar from "../small-components/productNavbar";
 
-const Navbar = () => {
+const Navbar = ({isProductDetailPage}) => {
   const user = useSelector((state) => state.user);
   const { isDarkMode } = useSelector((state) => state.theme);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -49,10 +49,12 @@ const Navbar = () => {
     setShowDropdown(false);
   };
 
+  const normalNavbarValidation = isProductDetailPage && isMobile;
   return (
     <>
+      {!normalNavbarValidation ?
       <div className="navbar-container">
-        {isMobile && (
+        {isMobile && !isProductDetailPage && (
           <div className="navbar-section-mobile-container">
             <div className="left-side-mobile-navbar">
               <FaBars
@@ -128,14 +130,9 @@ const Navbar = () => {
             </div>
           </>
         )}
-      </div>
-      {/* {isMobile && (
-        <CustomHeadroom>
-          <div className="mobile-search-bar-container">
-            <SearchBar />
-          </div>
-        </CustomHeadroom>
-      )} */}
+      </div> :
+      <ProductNavbar />
+      }
     </>
   );
 };

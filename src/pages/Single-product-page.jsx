@@ -32,7 +32,7 @@ const SingleProductPage = () => {
   }, []);
 
   return (
-    <div className='global-margin'>
+    <div className={!isMobile ? 'global-margin' : 'global-margin-singleProduct'}>
       {SUCCESS && productImages ?
       <div className="single-product-container">
         {isMobile ? <ProductImagePhone productImages={productImages}/> : <ProductImage productImages={productImages} />}

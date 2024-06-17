@@ -80,7 +80,7 @@ function App() {
         <SplashScreen />
       ) : (
         <NetworkStatus>
-          {enableNavbar && <Navbar />}
+          {enableNavbar && <Navbar isProductDetailPage={ isProductDetailPage }/>}
           {routeParams.includes("/product-admin") && <NavbarProductAdmin />}
           {enableSearchbar && 
           <Headroom>
