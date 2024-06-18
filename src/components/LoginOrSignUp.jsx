@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import InputField from '../small-components/InputField';
 import * as Yup from 'yup';
 import LoadingScreen from '../small-components/Loading-screen';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import  { reset } from '../redux/Slices/userSlice';
@@ -61,27 +61,8 @@ const LoginOrSignUp = () => {
   };
 
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (isLoading) {
-  //     setButtonText('Checking...');
-  //     // toast.info('Checking..');
-  //   }
-  //   if (!existEmail && isSuccess) {
-  //     navigate('/signup', { state: { id: formData.email } });
-  //     console.log('signup');
-  //     setTimeout(() => {
-  //       dispatch(reset());
-  //     }, 5000);
-  //   } else if (existEmail && isSuccess) {
-  //     navigate('/login', { state: { id: formData.email } });
-  //     console.log('login');
-  //     setTimeout(() => {
-  //       dispatch(reset());
-  //     }, 5000);
-  //   }
-  // }, [existEmail, isSuccess, isLoading,msg,dispatch,formData.email,navigate]);
-
+  const prevUrl = document.referrer;
+  console.log(prevUrl, 'p');
   const handleSubmit = async (e) => {
     e.preventDefault();
   
@@ -91,10 +72,10 @@ const LoginOrSignUp = () => {
         let data = {
           input: formData.email
         };
-  
+        
         setButtonText('Checking...');
         if(formData.email === 's@g.com' || formData.email === 'k@g.com' || formData.email === 'x@g.com' || formData.email === 'y@g.com' || formData.email === 'z@g.com') {
-          navigate('/login', {state: { email: formData.email}})
+          navigate(`/login`, {state: { email: formData.email, prevUrl: prevUrl}})
         }else {
         dispatch(generateOtp(data)).then(() => {
           toast.success('otp send successfully');

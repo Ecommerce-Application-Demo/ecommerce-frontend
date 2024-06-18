@@ -12,11 +12,12 @@ import profileThunk from '../../api/asyncThunk/profileAsyncThnuk';
 import { resetProfileDetails } from '../../redux/Slices/profileSlice';
 import { resetUserDetails } from '../../redux/Slices/userSlice';
 import { addNewPreviousLogin, authenticateErrorHandler } from '../../api/utilities/helper';
+import { useNavigate } from 'react-router-dom';
 
 const ChangeEmailModal = (props) => {
   const { dispatch, email, setOpenEmailModal, closePage } = props;
   const { isMobile, isDesktopOrLaptop } = useBreakpoints();
-  
+  const navigate = useNavigate();
   // Refs and state for OTP inputs
   const inputRefs = [useRef(), useRef(), useRef(), useRef()];
   const [otp, setOtp] = useState(Array(4).fill(''));
@@ -120,12 +121,12 @@ const ChangeEmailModal = (props) => {
             dispatch(resetProfileDetails());
             dispatch(resetUserDetails());
           }).catch((error)=>{
-            if (error?.errorCode===122) {
-              toast.info('your session is expired, try to login again.')
+            if (error?.name === 'CustomError') {
+              navigate('/login-signup')
+              authenticateErrorHandler(dispatch, error);
             } else {
               toast.error('some error occured.');
             }
-            authenticateErrorHandler(dispatch, error);
           })
         }).catch((error) => {
           toast.error('invalid otp.')

@@ -18,7 +18,9 @@ const SplashScreen = () => {
         dispatch(userApi.authenticateCall()).unwrap()
         .then(()=>{})
         .catch((error)=>{
-          authenticateErrorHandler(dispatch, error);
+          if (error?.name === 'CustomError') {
+            authenticateErrorHandler(dispatch, error);
+          }
         })
       }
     },[]);

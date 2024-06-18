@@ -5,9 +5,12 @@ import {useLocation } from 'react-router-dom';
 import Login from '../components/Login';
 import LoginOrSignUp from '../components/LoginOrSignUp';
 import Otp from '../components/Otp';
+import { useDispatch, useSelector } from 'react-redux';
+
 const LoginSignUp = () => {
+    const refrerLink = useSelector((state)=>state.theme.refrerLink);
     const routeParams=useLocation().pathname;
-    console.log(routeParams);
+    const dispatch = useDispatch();
     const signUpRef=useRef(null);
     const loginSignUpRef=useRef(null);
     const location=useLocation();
@@ -25,11 +28,12 @@ const LoginSignUp = () => {
         ref.current.scrollIntoView({ behavior: 'smooth' });
       }
     };
+    console.log(window.location, 'url');
   return (
     <div className='global-margin'>
   <div className='login-signup-container'>
   <div className='loginSIgnup-component-container'>
-    {routeParams==='/login-signup' && <LoginOrSignUp/>}
+    {routeParams===`/login-signup` && <LoginOrSignUp/>}
     {routeParams==='/otp-verification' && <Otp/>}
     {routeParams==='/signup' && <SignUp/>}
     {routeParams==='/login' && <Login/>}

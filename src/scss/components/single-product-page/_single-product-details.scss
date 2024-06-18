@@ -328,7 +328,8 @@
         }
         .changePincode-wrapper {
             padding: 10px;
-            width: 280px;
+            width: max-content;
+            min-width: 300px;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
@@ -338,7 +339,16 @@
             @include breakpoint(small-only) {
             width: 100%; 
            }
-
+           & .enterpincode-input {
+            width: 100%;
+            background: inherit;
+            color: $Black;
+            border: none;
+            &:focus {
+                outline: none;
+                border: none;
+            }
+           }
             & span:first-child {
                 display: flex;
                 align-items: center;
@@ -348,6 +358,7 @@
                 color: $primary-btn-red;
                 letter-spacing: 2px;
                 font-weight: 600;
+                cursor: pointer;
             }
         }
     }

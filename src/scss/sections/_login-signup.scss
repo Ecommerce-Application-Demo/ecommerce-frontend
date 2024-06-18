@@ -2,24 +2,24 @@
     display: flex; 
     justify-content: center;
     align-items: center; 
-    height: fit-content;
-    margin-top: 80px;
-    margin-bottom: 80px;
+    height: 80vh;
+    // margin-top: 80px;
+    // margin-bottom: 80px;
 
     @include breakpoint(small-only) {
-    margin-top: 40px;
+    // margin-top: 40px;
     margin-bottom: 0px;
+    width: 100%;
     }
 }
 
 .loginSIgnup-component-container {
-      box-shadow: 0px 20px 20px 0px $primary-box-shadow-2;
       padding: 40px;
       display: flex;
       align-items: center;
-    //   border-radius: 100px;
-      background: $secondary-background;
-
+      border-radius: 6px;
+      background: $White;
+      box-shadow: $product-card-box-shadow;
     /* Your existing styles for the component container */
   }
   

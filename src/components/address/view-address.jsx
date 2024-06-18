@@ -4,8 +4,10 @@ import addressThunk from '../../api/asyncThunk/addressAsyncThunk';
 import LoadingScreen from '../../small-components/Loading-screen';
 import { toast } from 'react-toastify';
 import { authenticateErrorHandler } from '../../api/utilities/helper';
+import { useNavigate } from 'react-router-dom';
 
 const ViewAddress = (props) => {
+  const navigate = useNavigate();
   const {
     setShowEditAddressModal,
     setSelectedAddressForEdit,
@@ -20,7 +22,10 @@ const ViewAddress = (props) => {
     useEffect(()=>{
         dispatch(viewAddress()).unwrap().then()
         .catch((error)=> {
-          authenticateErrorHandler(dispatch, error);
+          if (error?.name === 'CustomError') {
+            navigate('/login-signup')
+            authenticateErrorHandler(dispatch, error);
+          }
         })
     },[]);
 
@@ -28,7 +33,10 @@ const ViewAddress = (props) => {
         if (editDeleteAddAddressSuccess) {
         dispatch(viewAddress()).unwrap().then()
         .catch((error)=> {
-          authenticateErrorHandler(dispatch, error);
+          if (error?.name === 'CustomError') {
+            navigate('/login-signup')
+            authenticateErrorHandler(dispatch, error);
+          } 
         })
         }
     },[editDeleteAddAddressSuccess]);
@@ -45,7 +53,10 @@ const ViewAddress = (props) => {
         dispatch(removeAddress(addId)).unwrap().then(()=>{
             toast.success('address deleted successfully')
         }).catch(error=> {
-          authenticateErrorHandler(dispatch, error);
+          if (error?.name === 'CustomError') {
+            navigate('/login-signup')
+            authenticateErrorHandler(dispatch, error);
+          }
         })
     } else {
         toast.warn('default address could not be deleted!!')
@@ -73,7 +84,10 @@ const ViewAddress = (props) => {
         dispatch(editAddress(dataTobeDispatched)).unwrap().then(()=>{
             toast.success('default address changed successfully.')
         }).catch(error=>{
-          authenticateErrorHandler(dispatch, error);
+          if (error?.name === 'CustomError') {
+            navigate('/login-signup')
+            authenticateErrorHandler(dispatch, error);
+          }
         })
     }
   return (

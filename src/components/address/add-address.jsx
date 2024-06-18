@@ -7,11 +7,13 @@ import addressThunk from "../../api/asyncThunk/addressAsyncThunk";
 import { getPincode } from "../../api/services/pincodeService";
 import { toast } from "react-toastify";
 import { authenticateErrorHandler } from "../../api/utilities/helper";
+import { useNavigate } from "react-router-dom";
 
 const AddAddress = (props) => {
   const { setShowAddModal } = props;
   const addressData = useSelector((state) => state.address);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
   const firstDefault =
     addressData.address === "No Address registered." ||
     addressData.address.length === 0;
@@ -193,8 +195,10 @@ const AddAddress = (props) => {
           toast.success("address added successfully");
           setShowAddModal(false);
         }).catch((error)=>{
-          toast.error('an error occured.')
-          authenticateErrorHandler(dispatch, error);
+          if (error?.name === 'CustomError') {
+            navigate('/login-signup')
+            authenticateErrorHandler(dispatch, error);
+          } else toast.error('an error occured.')
         })
       })
       .catch((validationErrors) => {

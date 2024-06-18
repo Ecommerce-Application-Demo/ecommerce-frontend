@@ -7,6 +7,7 @@ import addressThunk from "../../api/asyncThunk/addressAsyncThunk";
 import { getPincode } from "../../api/services/pincodeService";
 import { toast } from "react-toastify";
 import { authenticateErrorHandler } from "../../api/utilities/helper";
+import { useNavigate } from "react-router-dom";
 
 const EditAddress = (props) => {
   const {
@@ -17,6 +18,7 @@ const EditAddress = (props) => {
   const {defaultAddress} = addressData;
 
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
   const firstDefault =
     addressData.address === "No Address registered." ||
     addressData.address.length === 0;
@@ -234,7 +236,10 @@ const EditAddress = (props) => {
         });
         setErrors(newErrors);
         toast.error("please fill the required field");
-        authenticateErrorHandler(dispatch, error);
+        if (error?.name === 'CustomError') {
+          navigate('/login-signup')
+          authenticateErrorHandler(dispatch, error);
+        }
       });
   };
   return (

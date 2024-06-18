@@ -1,29 +1,40 @@
-import React from 'react';
-import  UnauthorizedComponent  from './UnauthorizedError'; // Import the unauthorized component
+// GlobalErrorHandler.jsx
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+// import { resetUserDetails } from '../../redux/Slices/userSlice';
+import CustomError from '../api/utilities/CustomError';  // Adjust the path accordingly
+import { resetProfileDetails } from '../redux/Slices/profileSlice';
+import { resetUserDetails } from '../redux/Slices/userSlice';
 
-class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false, errorType: null };
-  }
-
-  static getDerivedStateFromError(error) {
-    // Update state so the next render will show the fallback UI.
-    return { hasError: true, errorType: error.message };
-  }
-
-  componentDidCatch(error, errorInfo) {
-    // You can also log the error to an error reporting service
-    console.error('ErrorBoundary caught an error:', error, errorInfo);
-  }
-
-  render() {
-    if (this.state.hasError) {
-        return <div>Something went wrong.</div>;
+const GlobalErrorHandler = ({ children }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+    console.log('error boundary');
+    useEffect(() => {
+      const handleError = (error) => {
+      console.log(error instanceof CustomError, 'error custom');
+      if (error instanceof CustomError) {
+        dispatch(resetUserDetails());
+        dispatch(resetProfileDetails());
+        console.log('inside the if');
+      } else {
+        console.error(error);
       }
+    };
 
-    return this.props.children;
-  }
-}
+    const errorHandler = (event) => {
+      handleError(event.error);
+    };
 
-export default ErrorBoundary;
+    window.addEventListener('error', errorHandler);
+
+    return () => {
+      window.removeEventListener('error', errorHandler);
+    };
+  }, [dispatch, navigate]);
+
+  return <>{children}</>;
+};
+
+export default GlobalErrorHandler;
