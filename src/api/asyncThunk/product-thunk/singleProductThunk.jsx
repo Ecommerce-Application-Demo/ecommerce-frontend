@@ -46,10 +46,25 @@ const getProductMoreColors = createAsyncThunk(
     }
   );
 
+//async thunk for fetching single product's other colors
+const checkDelivery = createAsyncThunk(
+    'CHECK_DELIVERY',
+    async (deliveryDetails,thunkAPI) =>{
+        try {
+           return SINGLEPRODUCTSERVICE.checkDeliveryService(deliveryDetails); 
+  
+        }
+        catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+            return thunkAPI.rejectWithValue(message)
+        } 
+    }
+  );
 const singleProductThunk = {
   getSingleProductWithProductId,
   getProductWithStyleId,
   getProductMoreColors,
+  checkDelivery
 };
 
 export default singleProductThunk;

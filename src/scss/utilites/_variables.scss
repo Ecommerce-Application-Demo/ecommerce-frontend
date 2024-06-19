@@ -46,6 +46,8 @@ $product-card-content-background: var(--product-card-content-background);
 $product-ratings-background: var(--product-ratings-background);
 $orangeRed: orangered;
 $fixed-white-overlay-background: var(--fixed-white-overlay-background);
+$white-darklight: var(--white-darklight);
+$grey-dark: var(--grey--dark);
 
 //------------z-indexes-------------------
 $top-most-zIndex: 100;
@@ -115,6 +117,8 @@ $bp-small-small: 450px !default;
    --product-card-content-background: #e5eaf5;
    --product-ratings-background:rgba(255, 255, 255, 0.696);
    --fixed-white-overlay-background: rgba(255, 255, 255, 0.696);
+   --white-darklight: white;
+   --grey-dark: grey;
 }
 
 .dark-mode {
@@ -138,6 +142,8 @@ $bp-small-small: 450px !default;
    --SearchBar-background: rgb(33, 32, 32);
    --text-color-blue: rgb(245, 166, 166);
    --purple-pain: #e5eaf5;
+   --white-darklight: rgb(21, 27, 26);
+   --grey--dark: rgb(194, 191, 191);
 }
 
 //-------------------------fixed colors------------------
