@@ -1,3 +1,4 @@
+// App.js
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,7 +9,7 @@ import FooterPage from "./pages/footer-page";
 import LoginPopupMobile from "./components/navbar/login-popup-mobile";
 import SplashScreen from "./small-components/Splash-screen";
 import Router from "./Router";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import Headroom from "react-headroom";
 import SearchBar from "./components/SearchBar";
 import { enableFooterAction, enableNavbarAction, enableSearchbarAction } from "./redux/Slices/Theme/themeSlice";
@@ -21,7 +22,7 @@ function App() {
   const { isLoggedIn } = useSelector((state) => state.user);
   const [openLoginPopup, setOpenLoginPopup] = useState(false);
   const [splashVisible, setSplashVisible] = useState(true);
-  const {isDarkMode, enableFooter, enableNavbar, enableSearchbar} = useSelector((state)=>state.theme);
+  const { isDarkMode, enableFooter, enableNavbar, enableSearchbar } = useSelector((state) => state.theme);
 
   const routeValidationForLoginPopup = [
     "/login-signup",
@@ -75,27 +76,27 @@ function App() {
   }, []);
 
   return (
-    <AnimatePresence mode="wait">
-      {splashVisible ? (
-        <SplashScreen />
-      ) : (
-        <NetworkStatus>
-          {enableNavbar && <Navbar isProductDetailPage={ isProductDetailPage }/>}
-          {routeParams.includes("/product-admin") && <NavbarProductAdmin />}
-          {enableSearchbar && 
-          <Headroom>
-            <div className="mobile-search-bar-container">
-              <SearchBar />
-            </div>
-          </Headroom>}
-          {/* {openLoginPopup && (
-            <LoginPopupMobile setOpenLoginPopup={setOpenLoginPopup} />
-          )} */}
-          <Router />
-          {enableFooter && <FooterPage />}
-        </NetworkStatus>
-      )}
-    </AnimatePresence>
+      <AnimatePresence mode="wait">
+        {splashVisible ? (
+          <SplashScreen />
+        ) : (
+          <NetworkStatus>
+            {enableNavbar && <Navbar isProductDetailPage={isProductDetailPage} />}
+            {routeParams.includes("/product-admin") && <NavbarProductAdmin />}
+            {enableSearchbar &&
+              <Headroom>
+                <div className="mobile-search-bar-container">
+                  <SearchBar />
+                </div>
+              </Headroom>}
+            {/* {openLoginPopup && (
+              <LoginPopupMobile setOpenLoginPopup={setOpenLoginPopup} />
+            )} */}
+            <Router />
+            {enableFooter && <FooterPage />}
+          </NetworkStatus>
+        )}
+      </AnimatePresence>
   );
 }
 

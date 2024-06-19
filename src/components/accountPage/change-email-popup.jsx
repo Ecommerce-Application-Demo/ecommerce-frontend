@@ -8,6 +8,7 @@ import { resetAuthGenerateOtp } from '../../redux/Slices/otpSlice';
 import ChangeEmailModal from './change-email-modal';
 import otpAsyncThunk from '../../api/asyncThunk/otpAsyncThunk';
 import { authenticateErrorHandler } from '../../api/utilities/helper';
+import { useNavigate } from 'react-router-dom';
 
 const ChangeEmailPopup = (props) => {
     const {
@@ -18,6 +19,7 @@ const ChangeEmailPopup = (props) => {
         closePage,
     } = props;
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const generateOtp = useSelector(state => state.otp.authGenerateOtpData);
 
     const [selectEmail, setSelectEmail] = useState(false);
@@ -48,10 +50,11 @@ const ChangeEmailPopup = (props) => {
             setOpenEmailModal(true);
         })
         .catch((error) => {
-          authenticateErrorHandler(dispatch, error);
-          if (error?.errorCode === 122) {
-            toast.info('Your session has expired. Please login again.');
-          } else {
+          if (error?.name === 'CustomError') {
+            navigate('/login-signup')
+            authenticateErrorHandler(dispatch, error);
+          }
+          else {
             toast.error('Error in sending OTP.');
           }
         });

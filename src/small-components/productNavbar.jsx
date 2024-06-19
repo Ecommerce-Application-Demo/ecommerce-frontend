@@ -27,7 +27,8 @@ const ProductNavbar = () => {
             navigate(-1);
           } else {
             navigate('/');
-          }      };
+          }
+        };
     const backgroundNav = {
         background: !isDarkMode ? `rgba(255, 255, 255, ${opacity})` : `rgba(0, 0, 0, ${opacity})`,
         boxShadow: opacity > 0.80 ? `var(--product-card-box-shadow)` : '',

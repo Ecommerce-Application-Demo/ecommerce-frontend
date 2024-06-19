@@ -10,11 +10,12 @@ import { toast } from "react-toastify";
 import OtpVerificationModal from "../../modals/OtpVerificationModal";
 import { setUnauthorizedError } from "../../redux/Slices/errorSlice";
 import { authenticateErrorHandler } from "../../api/utilities/helper";
+import { useNavigate } from "react-router-dom";
 
 const ViewProfile = () => {
   const dispatch = useDispatch();
   const profileDetails = useSelector((state) => state.profile);
-//   const errorAuthorized = useSelector((state) => state.error?.unAuthorizedError);
+  const navigate = useNavigate();
   const { viewProfile, validatePassword } = profileThunk;
 
   const { profile, isProfileLoading, isVerifiedPassword, isPasswordLoading } = profileDetails;
@@ -26,7 +27,10 @@ const ViewProfile = () => {
       .then((data) => {})
       .catch((error) => {
         console.log(error,'viewProfile');
-        authenticateErrorHandler(dispatch, error);
+        if (error?.name === 'CustomError') {
+          navigate('/login-signup')
+          authenticateErrorHandler(dispatch, error);
+        }
       });
   }, [dispatch, viewProfile]);
 

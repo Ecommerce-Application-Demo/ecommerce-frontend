@@ -23,8 +23,10 @@ const Login = () => {
   } = data;
 
   const location = useLocation();
-  const { email } = location.state || {};
+  const { email, prevUrl } = location.state || {};
+  console.log(prevUrl, 'prev');
   const navigate = useNavigate();
+  const refrerUrl = document.referrer;
 
   const [formData, setFormData] = useState({
     password: '',
@@ -43,11 +45,16 @@ const Login = () => {
 
   useEffect(() => {
     if (msg && isLoggedIn) {
-      navigate('/');
+      if (prevUrl || refrerUrl) {
+        navigate(prevUrl || refrerUrl)
+      } else navigate('/');
     }
   }, [msg, isLoggedIn, error, isLoading,navigate,previousLogin]);
   useEffect(() => {
     if (isSuccess && isLoggedIn) {
+      if (prevUrl || refrerUrl) {
+        navigate(prevUrl || refrerUrl);
+      } else navigate('/')
       toast.success('Logged in successfully');
     }
   }, [isSuccess, isLoggedIn]);

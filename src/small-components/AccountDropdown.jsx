@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AccountLogo, CancelationLogo, LogoutLogo, OrderLogo, ReviewsLogo } from '../assets/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,17 +6,20 @@ import userApi from '../api/asyncThunk/userApi';
 import { toast } from 'react-toastify';
 import { reset } from '../redux/Slices/userSlice';
 import { authenticateErrorHandler } from '../api/utilities/helper';
+import { updateRefrerLink } from '../redux/Slices/Theme/themeSlice';
 
 const AccountDropdown = () => {
   const navigate = useNavigate();
   const {logout} = userApi;
   const dispatch = useDispatch();
-  const user = useSelector((state)=>{
-    return state.user;
-  })
+  const user = useSelector((state)=>state.user);
   const {
     isLoggedIn,
   }=user;
+
+  useEffect(()=>{
+    dispatch(updateRefrerLink(document.referrer))
+  },[document.referrer]);
 
   const handleLogout = () => {
     dispatch(logout())
@@ -26,8 +29,9 @@ const AccountDropdown = () => {
       navigate('/');
     })
     .catch((error)=>{
-      toast.error('an error occured during logout.');
-      authenticateErrorHandler(dispatch, error);
+      if (error?.name === 'CustomError') {
+        authenticateErrorHandler(dispatch, error);
+      }
     });
     dispatch(reset());
   }
@@ -39,7 +43,7 @@ const AccountDropdown = () => {
            <div className='accountDropdown-link-wrapper-nologgedin'>
            <b>WELCOME!!</b>
            <p>To Access account and manage orders</p>
-           <Link to='/login-signup' className='accountDropdown-link-notlogin'>LOG IN/SIGN UP</Link>
+           <Link to={`/login-signup?refrer=${document.referrer}`} className='accountDropdown-link-notlogin'>LOG IN/SIGN UP</Link>
            </div>
            :
            <>

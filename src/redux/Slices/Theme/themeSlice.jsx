@@ -8,6 +8,7 @@ const initialState = {
   enableNavbar : true,
   enableSearchbar: true,
   enableFooter: true,
+  refrerLink: '/',
 }
 
 const themeSlice = createSlice({
@@ -25,10 +26,13 @@ const themeSlice = createSlice({
         },
         enableFooterAction: (state, action) => {
             state.enableFooter = action?.payload;
+        },
+        updateRefrerLink: (state, action) => {
+            state.refrerLink = action?.payload;
         }
     },  
 })
 
 export default themeSlice.reducer;
 
-export const { updateThemeFromLocalStorage, enableNavbarAction,enableFooterAction, enableSearchbarAction } = themeSlice.actions;
+export const { updateThemeFromLocalStorage, enableNavbarAction,enableFooterAction, enableSearchbarAction, updateRefrerLink } = themeSlice.actions;

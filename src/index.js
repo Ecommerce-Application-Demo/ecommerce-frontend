@@ -9,11 +9,12 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import ErrorBoundary from './error/ErrorBoundary';
+import GlobalErrorHandler from './error/ErrorBoundary';
 
 ReactDOM.render(
   <Router>
-    <ErrorBoundary>
       <Provider store={store}>
+    <GlobalErrorHandler>
         <App />
         <ToastContainer
           position="top-center"
@@ -27,8 +28,8 @@ ReactDOM.render(
           pauseOnHover
           theme="colored"
         />
+        </GlobalErrorHandler>
       </Provider>
-    </ErrorBoundary>
   </Router>,
   document.getElementById('root')
 );

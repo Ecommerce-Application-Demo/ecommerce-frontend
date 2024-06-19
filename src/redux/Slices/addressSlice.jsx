@@ -25,7 +25,11 @@ const initialState = {
 const addressSlice = createSlice({
     name:'ADDRESS',
     initialState,
-    reducers:{},
+    reducers:{
+        resetAddress: (state)=>{
+            Object.assign(state, initialState);
+          }
+    },
     extraReducers:(builder)=>{
         builder
         .addCase(viewAddress.pending, (state)=>{
@@ -110,5 +114,5 @@ const addressSlice = createSlice({
         // });
     }
 })
-
+export const {resetAddress} = addressSlice.actions;
 export default addressSlice.reducer;

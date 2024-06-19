@@ -34,8 +34,11 @@ const DeleteAccountModal = (props) => {
             navigate('/');
         })
         .catch((error)=>{
-            authenticateErrorHandler(dispatch, error);
-        })
+            if (error?.name === 'CustomError') {
+                navigate('/login-signup')
+                authenticateErrorHandler(dispatch, error);
+              }
+            })
     }
     const confirmBtnStyle = classNames({
         'confirm-delete-btn': inputValue === user?.loggedInEmail,

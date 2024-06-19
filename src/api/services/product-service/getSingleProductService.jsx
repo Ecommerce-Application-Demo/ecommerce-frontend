@@ -26,7 +26,7 @@ const getProductWithStyleIdServivce = async (styleData) => {
      return response.data;
  }
 
-  //get perticular stryleID of product
+  //get particular stryleID of product
 const getProductMoreColorsService = async (styleId) => {
      const response = await axiosInstanceProduct.get(`/get/search/product/colours`,
         {
@@ -38,11 +38,25 @@ const getProductMoreColorsService = async (styleId) => {
  
      return response.data;
  }
+  //get particular stryleID of product
+  const checkDeliveryService = async (deliveryDetails) => {
+    const {pincode, skuId} = deliveryDetails;
+    const response = await axiosInstanceProduct.get(`/helper/isDeliverable`,
+       {
+           params:{
+               pincode,
+               skuId,
+           }
+       }
+    );
 
+    return response.data;
+}
  const SINGLEPRODUCTSERVICE = {
     getSingleProductWithProductIdService,
     getProductWithStyleIdServivce,
     getProductMoreColorsService,
+    checkDeliveryService,
  };
 
  export default SINGLEPRODUCTSERVICE;

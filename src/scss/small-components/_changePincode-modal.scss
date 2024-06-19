@@ -1,0 +1,134 @@
+.changePincodeModal-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
+  @include breakpoint(small-only) {
+    padding: 10px;
+  }
+
+  .custompincode-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    background: $fixed-white;
+    border: 1px solid $Grey;
+    padding: 10px;
+    border-radius: 4px;
+
+    &>input {
+      background: inherit;
+      color: $fixed-black;
+      width: 100%;
+      border-radius: 4px;
+      height: 30px;
+      outline: none;
+      border: none;
+
+      &:focus {
+        outline: none;
+        border: none;
+      }
+    }
+
+    &>span {
+      color: $primary-btn-red;
+      font-weight: bold;
+      font-size: 20px;
+    }
+  }
+
+  .or-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    gap: 5px;
+    color: $fixed-white;
+
+    &>div {
+      width: 48%;
+    }
+  }
+
+  .selectAddress-text {
+    color: $fixed-white;
+    text-align: center;
+    font-size: 25px;
+    @include breakpoint(small-mobile) {
+      font-size: 18px;
+      }
+  }
+
+  .allAddresses-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 300px;
+    width: 100%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+
+    .addressCardPincode-wrapper {
+      width: 100%;
+      background: $white-darklight;
+      border: 1px solid $Grey;
+      padding: 10px;
+      border-radius: 4px;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      flex-direction: row;
+      cursor: pointer;
+
+      .addressCardPincode-leftside {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        gap: 5px;
+
+        .addressCardPincodeLeft-nameWrap {
+          font-weight: bold;
+          color: $Black;
+          display: flex;
+          flex-direction: row;
+          gap: 5px;
+          align-items: center;
+          .addressType {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px 10px;
+            background: $Grey;
+            color: $fixed-white;
+            border-radius: 10px;
+            font-size: 10px;
+          }
+        }
+        .addressLine {
+          @include ellipsisText;
+          color: $grey-dark;
+          font-size: 12px;
+        }
+      }
+      .addressCardPincode-rightside {
+        display: flex;
+        align-items: center;
+        color: $primary-btn-red;
+      }
+    }
+  }
+}
+.changepincodepopuptitle {
+  font-size: 25px;
+  font-weight: bold;
+  @include breakpoint(small-mobile) {
+  font-size: 18px;
+  }
+}

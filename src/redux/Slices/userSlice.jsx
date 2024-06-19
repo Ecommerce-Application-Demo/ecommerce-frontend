@@ -41,7 +41,7 @@ const userSlice = createSlice({
       state.isSuccess = false;
     },
     resetUserDetails: (state) => {
-       localStorage.removeItem("JWT");
+      localStorage.removeItem("JWT");
       localStorage.removeItem("REFRESH_TOKEN");
       localStorage.removeItem("USERNAME");
       localStorage.removeItem("EMAIL");

@@ -79,9 +79,9 @@ const EditProfile = () => {
         });
       })
       .catch((error) => {
-         authenticateErrorHandler(dispatch, error);
-        if (error?.message === "Invalid or missing JWT token" || error?.message !== "Unauthorized") {
-          dispatch(setUnauthorizedError("UNAUTHORIZED"));
+        if (error?.name === 'CustomError') {
+          navigate('/login-signup')
+          authenticateErrorHandler(dispatch, error);
         }
       });
   }, [dispatch, viewProfile]);
@@ -220,7 +220,10 @@ const EditProfile = () => {
       })
       .catch((error) => {
         console.error("Error editing profile:", error);
-        authenticateErrorHandler(dispatch, error);
+        if (error?.name === 'CustomError') {
+          navigate('/login-signup')
+          authenticateErrorHandler(dispatch, error);
+        }
         toast.error("Error editing profile");
       });
     console.log(formData.name);
@@ -264,7 +267,10 @@ const EditProfile = () => {
        }, 1000);
       }).catch(error=>{
         console.log(error);
-        authenticateErrorHandler(dispatch, error);
+        if (error?.name === 'CustomError') {
+          navigate('/login-signup')
+          authenticateErrorHandler(dispatch, error);
+        }
         toast.error('error in password changes');
       })
   };

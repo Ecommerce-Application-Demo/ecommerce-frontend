@@ -1,20 +1,9 @@
 import axios from "axios";
 import { hostname } from "./utilites"; 
-import { jwtDecode } from "jwt-decode";
-import dayjs from "dayjs";
-import { Navigate } from "react-router-dom";
+import {jwtDecode} from "jwt-decode"; // Make sure this is imported correctly
 import { toast } from "react-toastify";
 import axiosInstanceNotProtected from "./axiosInstanceNotProtected";
-
-class CustomError extends Error {
-  constructor(message, type) {
-    super(message);
-    this.name = this.constructor.name;
-    this.type = type;
-
-  }
-}
-
+import CustomError from "./CustomError";
 
 const axiosInstanceProtected = axios.create({
   baseURL: hostname,
@@ -24,25 +13,32 @@ const axiosInstanceProtected = axios.create({
 });
 
 axiosInstanceProtected.interceptors.request.use(async (req) => {
-
   try {
-    const decodeJwt = jwtDecode(localStorage.getItem("JWT")) || null;
-    const isJwtExpired = dayjs.unix(decodeJwt.exp).diff(dayjs()) < 1 || null;
+    const jwt = localStorage.getItem("JWT");
+    console.log(jwt);
+
+    if (!jwt) {
+      throw new CustomError("JWT token is missing", "INVALID_JWT");
+    }
+
+    const decodeJwt = jwtDecode(jwt);
+    console.log(decodeJwt);
+
+    // Check if the token has expired
+    const currentTime = Date.now() / 1000; // Current time in seconds
+    const isJwtExpired = decodeJwt.exp < currentTime;
+    console.log(isJwtExpired);
+
     if (isJwtExpired) {
-      await refreshToken(); 
-    } 
+      await refreshToken();
+    }
+    
     req.headers.Authorization = `Bearer ${localStorage.getItem("JWT")}`;
     return req;
   } catch (error) {
-    console.log(error, 'error from interceptor caall');
-      localStorage.removeItem("JWT");
-      localStorage.removeItem("REFRESH_TOKEN");
-      localStorage.removeItem("USERNAME");
-      localStorage.removeItem("EMAIL");
-      localStorage.removeItem("REFRESH_TOKEN_EXPIRY");
-      Navigate('/login-signup.');
-      toast.error('seems something went wrong. please login again.')
-    throw new CustomError("Invalid or missing JWT token", "INVALID_JWT")
+    console.log(error, 'error from interceptor call');
+    handleLogout();
+    throw new CustomError("Invalid or missing JWT token", "INVALID_JWT");
   }
 });
 
@@ -50,25 +46,19 @@ async function refreshToken() {
   const refreshToken = localStorage.getItem("REFRESH_TOKEN")?.toString() || null;
   const refreshTokenExpiry = localStorage.getItem("REFRESH_TOKEN_EXPIRY")?.toString() || null;
 
-  if (refreshTokenExpiry && (dayjs().isAfter(dayjs.unix(refreshTokenExpiry)))) {
-    localStorage.removeItem("JWT");
-    localStorage.removeItem("REFRESH_TOKEN");
-    localStorage.removeItem("USERNAME");
-    localStorage.removeItem("EMAIL");
-    localStorage.removeItem("REFRESH_TOKEN_EXPIRY");
-    Navigate('/login-signup');
+  if (refreshTokenExpiry && (Date.now() / 1000) > refreshTokenExpiry) {
+    handleLogout();
     throw new CustomError("Error refreshing token", "REFRESH_ERROR");
   }
   try {
     const response = await axiosInstanceNotProtected.post(`/api/auth/jwt-token`, {
       input: refreshToken,
     });
-    console.log(response);
-    localStorage.setItem('JWT', await response.data?.accessToken);
-    localStorage.setItem('REFRESH_TOKEN_EXPIRY', await response.data?.refreshTokenExpiration);
-    localStorage.setItem('USERNAME', await response.data?.name);
-    localStorage.setItem('EMAIL', await response.data?.email);
-    localStorage.setItem('REFRESH_TOKEN', await response.data?.refreshToken);
+    localStorage.setItem('JWT', response.data?.accessToken);
+    localStorage.setItem('REFRESH_TOKEN_EXPIRY', response.data?.refreshTokenExpiration);
+    localStorage.setItem('USERNAME', response.data?.name);
+    localStorage.setItem('EMAIL', response.data?.email);
+    localStorage.setItem('REFRESH_TOKEN', response.data?.refreshToken);
 
     return response.data?.accessToken;
   } catch (error) {
@@ -76,14 +66,13 @@ async function refreshToken() {
   }
 }
 
-// axiosInstanceProtected.interceptors.response.use(
-//   (response)=> {
-//       return response;
-//   },
-//   (error)=>{
-//       console.log(error);
-//      toast.error(error?.response?.data?.errorMessage || 'something went wrong');
-//   }
-// )
+function handleLogout() {
+  localStorage.removeItem("JWT");
+  localStorage.removeItem("REFRESH_TOKEN");
+  localStorage.removeItem("USERNAME");
+  localStorage.removeItem("EMAIL");
+  localStorage.removeItem("REFRESH_TOKEN_EXPIRY");
+  // throw new CustomError("User needs to login", "LOGOUT");
+}
 
 export default axiosInstanceProtected;
