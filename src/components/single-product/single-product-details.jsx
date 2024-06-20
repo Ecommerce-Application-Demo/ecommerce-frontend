@@ -1,18 +1,19 @@
 import React from "react";
 import { StarLogo } from "../../assets/icons";
 import SingleProductSize from "./single-product-size";
-import ProductMoreolors from "./product-more-colors";
+import ProductMoreColors from "./product-more-colors";
 import { CiHeart } from "react-icons/ci";
 import { BsCartCheck } from "react-icons/bs";
 import SingleProductDeliveryOptions from "./singleProduct-delivery-options";
 
-const SingleProductDetails = ({
-  dispatch,
-  isLoggedIn,
-  isMobile,
-  productDetails,
-  styleId,
-}) => {
+const SingleProductDetails = (props) => {
+  const {
+    dispatch,
+    isLoggedIn,
+    isMobile,
+    productDetails,
+    styleId,
+  } = props;
 
   const productSize = productDetails?.sizes;
 
@@ -23,17 +24,17 @@ const SingleProductDetails = ({
           <p className="singleproduct-details-brandName">{productDetails?.brand?.brandName}</p>
           <p className="singleProduct-product-name">{productDetails?.styleName}</p>
         </div>
-        {!isMobile &&
-          <div className="rating-container">
-            <div className="rating-wrapper">
-              <span>{productDetails?.productAvgRating}</span>
-              <span>
-                <StarLogo />
-              </span>
-              {productDetails?.reviewCount && <span>{productDetails?.reviewCount} review</span>}
-            </div>
-            {productDetails?.inStock && <span className="singleproduct-details-instock">in stock</span>}
-          </div>}
+        { !isMobile &&
+        <div className="rating-container">
+          <div className="rating-wrapper">
+            <span>{productDetails?.productAvgRating}</span>
+            <span>
+              <StarLogo />
+            </span>
+            {productDetails?.reviewCount && <span>{productDetails?.reviewCount} review</span>}
+          </div>
+          {productDetails?.inStock && <span className="singleproduct-details-instock">in stock</span>}
+        </div>}
         <div className="price-container">
           <h3>₹{productDetails?.finalPrice}</h3>
           {productDetails?.mrp > 0 &&
@@ -53,7 +54,7 @@ const SingleProductDetails = ({
           dispatch={dispatch}
           productSize={productSize}
         />
-        <ProductMoreolors
+        <ProductMoreColors
           dispatch={dispatch}
           styleId={styleId}
         />
@@ -66,14 +67,14 @@ const SingleProductDetails = ({
         <div
           className={`mobile-btn-container`}
         >
-          <div className="wishlist-btn"><CiHeart size={20} /> WISHLIST</div>
-          <div className="addToCart-btn"><BsCartCheck size={20} />ADD TO BAG</div>
+          <div className="wishlist-btn"><CiHeart size={20}/> WISHLIST</div>
+          <div className="addToCart-btn"><BsCartCheck size={20}/>ADD TO BAG</div>
         </div>
       }
-      <SingleProductDeliveryOptions
-        dispatch={dispatch}
-        isLoggedIn={isLoggedIn}
-      />
+     <SingleProductDeliveryOptions 
+      dispatch={ dispatch }
+      isLoggedIn={ isLoggedIn }
+     />
 
     </div>
   );

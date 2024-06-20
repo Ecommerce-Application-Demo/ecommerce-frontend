@@ -35,6 +35,7 @@
     "react-sticky-box": "^2.0.5",
     "react-toastify": "^10.0.4",
     "redux": "^5.0.1",
+    "reselect": "^5.1.1",
     "sass": "^1.69.7",
     "slick-carousel": "^1.8.1",
     "swiper": "^11.1.4",
