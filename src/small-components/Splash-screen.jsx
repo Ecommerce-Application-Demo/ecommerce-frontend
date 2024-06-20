@@ -43,7 +43,7 @@ const SplashScreen = () => {
               animate={{ rotate: 360 }}
               transition={{ ease: "anticipate", duration: 1, repeat: 0, delay:0.3 }}
             >
-              <DesiCartIconForLoading color={isDarkMode ? '#ee1717' : '#DB4444'}/>
+              <DesiCartIconForLoading />
             </motion.div>
           </motion.div>
           <motion.h2

@@ -73,6 +73,10 @@
     overflow-y: scroll;
     scroll-behavior: smooth;
 
+    &>.selectedAddress {
+    border: 1px solid $selected-address-background !important;
+    background: $selected-address-background !important;
+    }
     .addressCardPincode-wrapper {
       width: 100%;
       background: $white-darklight;
@@ -86,6 +90,7 @@
       align-items: center;
       flex-direction: row;
       cursor: pointer;
+
 
       .addressCardPincode-leftside {
         display: flex;
@@ -120,7 +125,12 @@
       .addressCardPincode-rightside {
         display: flex;
         align-items: center;
+        &--selected {
         color: $primary-btn-red;
+        }
+        &--notSelected {
+          color: $Grey;
+        }
       }
     }
   }

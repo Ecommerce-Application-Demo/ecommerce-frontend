@@ -2,7 +2,7 @@ import React from 'react'
 import { products } from '../../assets/pictures/productImageAddress';
 import { useSelector } from 'react-redux';
 
-const ProductMoreolors = (props) => {
+const ProductMoreColors = (props) => {
     //--------redux state--------------------------
     const productMoreColorsData = useSelector((state) => state.product.productMoreColorsData);
 
@@ -28,4 +28,4 @@ const ProductMoreolors = (props) => {
     )
 }
 
-export default ProductMoreolors
+export default ProductMoreColors;
