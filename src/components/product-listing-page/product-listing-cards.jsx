@@ -4,14 +4,16 @@ import ProductListingNewCard from './product-listing-new-card';
 
 const ProductListingCards = (props) => {
   const {
-    products
+    products,
+    isMobile,
+    isSmallMobile,
   } = props;
 
   return (
     <div className='product-listing-cards-container'>
       <div className='product-listing-cards-wrapper'>
        {products?.map((product)=>{
-        return <ProductListingNewCard product = { product } />;
+        return <ProductListingNewCard product = { product } isMobile={ isMobile } isSmallMobile={isSmallMobile}/>;
        })}
       </div>
     </div>

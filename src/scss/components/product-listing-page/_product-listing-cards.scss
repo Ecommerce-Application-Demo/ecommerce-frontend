@@ -7,6 +7,7 @@
 
   @include breakpoint(small-only) {
   padding-top: 0px;
+  padding: 0px 3px;
   }
 
   .product-listing-cards-wrapper {
@@ -15,6 +16,10 @@
     gap: 20px;
     max-width: 100%;
 
+    @include breakpoint(small-mobile) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
     @include breakpoint(small-medium) {
       grid-template-columns: repeat(2, 1fr);
     }

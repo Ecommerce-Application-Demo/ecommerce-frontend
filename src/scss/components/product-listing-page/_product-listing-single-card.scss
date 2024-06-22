@@ -10,10 +10,13 @@
   text-align: center;
   cursor: pointer;
 
-  @include breakpoint(medium) {
-
+  @include breakpoint(small-mobile) {
+    width: 100%;
+    height: fit-content;
+    padding: 0;
+    border-radius: 0px;
   }
-
+ 
   @include breakpoint(large) {
     width: 300px;
   }
@@ -37,9 +40,17 @@
     flex-direction: row;
     align-items: center;
     border-radius: 0px 4px 4px 0px;
+
+    @include breakpoint(small-mobile) {
+    bottom: 56px;
+    left: 5px;
+    padding: 2px 4px 2px 4px;
+    border-radius: 30px;
+    }
   }
 
   .product-card-courosel-main-container{
+    height: fit-content;
     width: 100%;
   }
   &:hover .product-cardBrand {
@@ -55,6 +66,12 @@
   width: 100%;
   border-top-left-radius: 30px;
   border-bottom-right-radius: 30px;
+
+  @include breakpoint(small-mobile) {
+    width: 100%;
+    height: fit-content;
+    border-radius: 15px !important;
+  }
 }
 
 .product-newCard-content {
@@ -71,10 +88,24 @@
   border-top-right-radius: 30px;
   border-bottom-left-radius: 30px;
 
+  @include breakpoint(small-mobile) {
+   padding: 0px 5px;
+   align-items: flex-start;
+   gap: 3px;
+   border-radius: 0px;
+  }
   &>p {
     font-weight: bold;
     font-size: 20px;
     color: $Black;
+
+    @include breakpoint(small-mobile) {
+      @include ellipsisText;
+      font-weight: 400;
+      font-size: 10px;
+      text-align: left;
+      color: $grey-dark;
+    }
   }
 }
 
@@ -88,6 +119,11 @@
   border-radius: 50px;
   transition: all 0.5s ease;
   z-index: -1;
+
+  @include breakpoint(small-mobile) {
+    width: 0px;
+    height: 0px;
+  }
 }
 
 .product-newCard-content.hovered::before {
@@ -97,6 +133,12 @@
   border-radius: 0;
   border-top-right-radius: 30px;
   border-bottom-left-radius: 30px;
+
+  @include breakpoint(small-mobile) {
+  width: 0px;
+  height: 0px;
+  z-index: -1;
+  }
 }
 
 .product-cardBrand {
@@ -106,6 +148,14 @@
   background: $product-brand-text;
   color: $White;
   border-radius: 30px;
+
+  @include breakpoint(small-mobile) {
+    margin-top: 0px;
+    font-size: 12px;
+    background: $White;
+    color: $Black;
+    padding: 0;
+    }
 }
 
 .product-card-price-breakdown {
@@ -115,15 +165,26 @@
   gap: 10px;
   color: $Black;
 
+  @include breakpoint(small-mobile) {
+    gap: 4px;
+    }
   .actual-price {
     font-size: 23px;
     font-weight: bold;
+
+    @include breakpoint(small-mobile) {
+    font-size: 10px;
+    }
   }
 
   .discount {
     color: $primary-btn-red;
     font-weight: 600;
     font-size: 13px;
+
+    @include breakpoint(small-mobile) {
+      font-size: 10px;
+      }
   }
 
   .mrp-price {
@@ -131,6 +192,10 @@
     color: $Grey-text-color;
     font-weight: 600;
     font-size: 13px;
+
+    @include breakpoint(small-mobile) {
+      font-size: 10px;
+      }
   }
 }
 }

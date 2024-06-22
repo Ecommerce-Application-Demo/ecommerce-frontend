@@ -27,7 +27,7 @@ const ProductListingPage = () => {
   const location = useLocation();
   const isProductsFetching = useRef(false);
   const isFilterFetching = useRef(false);
-  const { isMobile } = useBreakpoints();
+  const { isMobile, isSmallMobile } = useBreakpoints();
   const loader = useRef(null);
 
   //----------state declaration---------------------
@@ -153,12 +153,16 @@ const ProductListingPage = () => {
             </div>
             </>
             : null}
-            <div className="divider--verticle" />
+            {!isMobile &&<div className="divider--verticle" />}
           <div className="product-listing-cards-container">
             {START ?
               <ProductListingCardsLoading />
               :
-              <ProductListingCards products={productList} />
+              <ProductListingCards 
+              products={ productList } 
+              isMobile={ isMobile }
+              isSmallMobile= { isSmallMobile }
+              />
             }
           </div>
         </div>
