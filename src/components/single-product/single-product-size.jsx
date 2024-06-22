@@ -19,22 +19,26 @@ const SingleProductSize = ({
     if (firstAvailableSize) {
       setSelectedSize(firstAvailableSize?.size);
       dispatch(selectSizeForDeliveryOption(firstAvailableSize?.skuId));
-      const checkDeliveryData = {
-        skuId: firstAvailableSize?.skuId,
-        pincode: addressForDeliveryOption?.pincode,
+      if (addressForDeliveryOption?.pincode) {
+        const checkDeliveryData = {
+          skuId: firstAvailableSize?.skuId,
+          pincode: addressForDeliveryOption?.pincode,
+        }
+        dispatch(singleProductThunk.checkDelivery(checkDeliveryData));
       }
-      dispatch(singleProductThunk.checkDelivery(checkDeliveryData));
     }
   }, [productSize]);
 
   const handleSelectedSize = (size) => {
     setSelectedSize(size?.size);
     dispatch(selectSizeForDeliveryOption(size?.skuId));
-    const checkDeliveryData = {
-      skuId: size?.skuId,
-      pincode: addressForDeliveryOption?.pincode,
+    if (addressForDeliveryOption?.pincode) {
+      const checkDeliveryData = {
+        skuId: size?.skuId,
+        pincode: addressForDeliveryOption?.pincode,
+      }
+      dispatch(singleProductThunk.checkDelivery(checkDeliveryData));
     }
-    dispatch(singleProductThunk.checkDelivery(checkDeliveryData));
   };
 
   return (

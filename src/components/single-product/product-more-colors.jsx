@@ -10,6 +10,7 @@ const ProductMoreColors = (props) => {
     const {
         dispatch,
         styleId,
+        refForExpressDeliveryBanner,
     } = props;
 
     const { START, FAIL, SUCCESS, productMoreColors } = productMoreColorsData;
@@ -24,6 +25,7 @@ const ProductMoreColors = (props) => {
                     )
                 })}
             </div>
+            {/* <div ref={refForExpressDeliveryBanner}/> */}
         </div>
     )
 }

@@ -55,7 +55,7 @@ const checkDelivery = createAsyncThunk(
   
         }
         catch (error) {
-            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+            const message = (error?.response && error?.response.data && error?.response.data.message) || error?.message || error?.toString()
             return thunkAPI.rejectWithValue(message)
         } 
     }
