@@ -27,6 +27,7 @@
 
       @include breakpoint(small-only) {
         margin-top: 0px;
+        gap: 0;
       }
   
   
@@ -56,7 +57,7 @@
     background-color: $White;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); 
     z-index: 60;
-    padding: 10px;
+    padding: 0px;
     display: flex;
     justify-content: center;
     align-items: center;

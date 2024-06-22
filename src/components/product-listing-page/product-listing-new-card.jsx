@@ -10,16 +10,15 @@ import {
 import { DesiCartIconForLoading, StarLogo } from "../../assets/icons";
 import { useNavigate } from "react-router";
 
-const ProductListingNewCard = ({ product }) => {
+const ProductListingNewCard = ({ 
+  product,
+  isMobile,
+  isSmallMobile,
+ }) => {
   const navigate = useNavigate();
   const [openCourosel, setOpenCourosel] = useState(false);
-
   const hoveredTextColor = {
-    color: openCourosel
-      ? isColorLight(product?.colourHexCode)
-        ? "black"
-        : "white"
-      : "",
+    color: openCourosel && !isSmallMobile ? isColorLight(product?.colourHexCode) ? "black" : "white" : "",
   };
   const handleClick = () => {
     console.log(product, "selected product");
@@ -31,7 +30,7 @@ const ProductListingNewCard = ({ product }) => {
       onHoverStart={() => setOpenCourosel(true)}
       onHoverEnd={() => setOpenCourosel(false)}
       initial={{ scale: 1 }}
-      whileHover={{ scale: 1.05 }}
+      whileHover={{ scale: isMobile ? 1.00 : 1.05 }}
       transition={{ type: "spring", stiffness: 300 }}
       style={{ "--card-color": createOverlay(product?.colourHexCode) }}
       onClick={handleClick}
@@ -39,11 +38,11 @@ const ProductListingNewCard = ({ product }) => {
       {product?.productAvgRating>0 && (
         <div className="rating-wrapper">
           {product?.productAvgRating} &nbsp;
-          <StarLogo color="#DB4444" size={12} />
+          <StarLogo color="var(--primary-btn-red)" size={12} />
           {product?.reviewCount>0 && <>&nbsp; |&nbsp; {product?.reviewCount}</>}
         </div>
       )}
-      {!openCourosel ? (
+      {!openCourosel || isSmallMobile ? (
         <motion.img
           key="productImage"
           alt={"DesiCartIconForLoading"}
@@ -67,7 +66,7 @@ const ProductListingNewCard = ({ product }) => {
         </motion.div>
       )}
       <motion.div
-        className={`product-newCard-content ${openCourosel ? "hovered" : ""}`}
+        className={`product-newCard-content ${openCourosel && !isSmallMobile ? "hovered" : ""}`}
         transition={{ duration: 0.5 }}
       >
         <h3 className="product-cardBrand">{product?.brandName}</h3>
