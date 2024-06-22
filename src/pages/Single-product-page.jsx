@@ -25,6 +25,7 @@ const SingleProductPage = () => {
   const { productWithStyleId, START,SUCCESS, FAIL } = productStyle;
   const productImages = productWithStyleId?.images;
   const isDeliverable = isDeliverableData?.isDeliverable;
+
   useEffect(() => {
     const dataToDispatch = {
       styleName: styleName.toLowerCase(),
@@ -32,7 +33,7 @@ const SingleProductPage = () => {
     }
     dispatch(getProductWithStyleId(dataToDispatch));
     dispatch(getProductMoreColors(styleId));
-  }, []);
+  }, [styleName, styleId]);
 
   return (
     <div className={!isMobile ? 'global-margin' : 'global-margin-singleProduct'}>

@@ -54,10 +54,10 @@
     justify-content: space-around;
     padding: 10px 0;
     z-index: 100; 
+    gap: 5px;
 
     .addToCart-btn, .wishlist-btn {
       flex: 1;
-      margin: 0 10px;
       padding: 10px 0px;
       text-align: center;
       border: none;
@@ -68,25 +68,47 @@
       justify-content: center;
       gap: 2px;
       border-radius: 8px;
+      font-weight: bold;
     }
     .addToCart-btn {
-        background: $primary-btn-red;
-        color: $fixed-white;
+        &:not([disabled]) {
+          background: $primary-btn-red;
+          color: $fixed-white;
+          cursor: pointer;
+        &:hover {
+          background: $orangeRed;
+          }
+      }
+        &[disabled] {
+          background: $primary-btn-red-disabled;
+          color: $fixed-white;
+          cursor: not-allowed;
+      }
     }
     .wishlist-btn {
         background: $White;
         color: $Black;
         border: 1px solid $Grey;
+        &:hover {
+        background: $grey-dark;
+        }
+    }
+    .outOfStock-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $fixed-white;
+      background: $Grey;
+      padding: 10px 0px;
+      flex: 1 1;
+      border-radius: 4px;
     }
     
-    .addToCart-btn:hover, .wishlist-btn:hover {
-      background-color: #ddd;
-    }
   }
   
-    .mobile-btn-container.static {
-    position: static;
-    box-shadow: none;
-    margin-top: 20px;
-  }
+  //   .mobile-btn-container.static {
+  //   position: static;
+  //   box-shadow: none;
+  //   margin-top: 20px;
+  // }
   
