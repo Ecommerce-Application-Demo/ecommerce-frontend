@@ -49,8 +49,7 @@ const getProductMoreColorsService = async (styleId) => {
            }
        }
     );
-
-    return response.data;
+    return response?.data;
 }
  const SINGLEPRODUCTSERVICE = {
     getSingleProductWithProductIdService,

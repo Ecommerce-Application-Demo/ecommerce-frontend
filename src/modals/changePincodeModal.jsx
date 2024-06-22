@@ -7,19 +7,14 @@ import { addAddressForDeliveryOption } from '../redux/Slices/product/singleProdu
 import singleProductThunk from '../api/asyncThunk/product-thunk/singleProductThunk';
 import { useSelector } from 'react-redux';
 
-const ChangePincodeModal = ({
+const AddressContent = ({
   addresses,
   addressForDeliveryOption,
+  sizeForDeliveryOption,
   dispatch,
-  setChangePincodeModal,
+  onClose
 }) => {
-  const sizeForDeliveryOption = useSelector((state) => state.product.sizeForDeliveryOption);
-  const { isMobile } = useBreakpoints();
   const [pincodeText, setPincodeText] = useState('');
-
-  const onClose = useCallback(() => {
-    setChangePincodeModal(false);
-  }, [setChangePincodeModal]);
 
   const clickCheck = useCallback(() => {
     if (pincodeText?.length === 6) {
@@ -28,7 +23,7 @@ const ChangePincodeModal = ({
         pincode: pincodeText,
         addId: null,
       };
-      console.log(addressData, 'data');
+
       const checkDeliveryData = {
         skuId: sizeForDeliveryOption,
         pincode: pincodeText,
@@ -59,15 +54,15 @@ const ChangePincodeModal = ({
         onClose();
       });
   }, [sizeForDeliveryOption, dispatch, onClose]);
-  console.log('hii');
-  const AddressContent = () => (
+
+  return (
     <div className='changePincodeModal-container'>
       <div className='custompincode-wrapper'>
         <input
           placeholder='Enter your pincode'
           onChange={(e) => setPincodeText(e.target.value)}
           value={pincodeText}
-          autoFocus
+          maxLength={6}
           type='number'
         />
         <span onClick={clickCheck}>CHECK</span>
@@ -100,6 +95,20 @@ const ChangePincodeModal = ({
       </div>
     </div>
   );
+};
+
+const ChangePincodeModal = ({
+  addresses,
+  addressForDeliveryOption,
+  dispatch,
+  setChangePincodeModal,
+}) => {
+  const sizeForDeliveryOption = useSelector((state) => state.product.sizeForDeliveryOption);
+  const { isMobile } = useBreakpoints();
+
+  const onClose = useCallback(() => {
+    setChangePincodeModal(false);
+  }, [setChangePincodeModal]);
 
   return (
     !isMobile ? (
@@ -111,7 +120,13 @@ const ChangePincodeModal = ({
         onClose={onClose}
         title='Use pincode to check delivery info'
       >
-        <AddressContent />
+        <AddressContent 
+          addresses={addresses}
+          addressForDeliveryOption={addressForDeliveryOption}
+          sizeForDeliveryOption={sizeForDeliveryOption}
+          dispatch={dispatch}
+          onClose={onClose}
+        />
       </Modal>
     ) : (
       <Popup
@@ -119,7 +134,13 @@ const ChangePincodeModal = ({
         title='Use pincode to check delivery info'
         titleClassName='changepincodepopuptitle'
       >
-        <AddressContent />
+        <AddressContent 
+          addresses={addresses}
+          addressForDeliveryOption={addressForDeliveryOption}
+          sizeForDeliveryOption={sizeForDeliveryOption}
+          dispatch={dispatch}
+          onClose={onClose}
+        />
       </Popup>
     )
   );

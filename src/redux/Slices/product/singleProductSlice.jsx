@@ -26,6 +26,7 @@ const initialState = {
     "deliverableDetails",
     "isDeliverableError"),
     lowestDeliveryTime:'',
+    isDeliverable: true,
   },
   addressForDeliveryOption: {
     addId: storedAddress.addId,
@@ -131,6 +132,7 @@ const getSingleProductSlice = createSlice({
           action?.payload
         );
         state.isDeliverableData.lowestDeliveryTime = action?.payload?.deliveryTimeDetails?.[0]?.deliveryTime || 'Could not Delivery on this pincode.';
+        state.isDeliverableData.isDeliverable = action?.payload?.isDeliverable || false;
       })
       .addCase(checkDelivery.rejected, (state, action) => {
         reduxProfileUpdateState(
@@ -141,7 +143,8 @@ const getSingleProductSlice = createSlice({
           "isDeliverableError",
           action?.payload
         );
-        state.isDeliverableData.lowestDeliveryTime = '';
+        console.log(action);
+        state.isDeliverableData.lowestDeliveryTime = action?.payload?.errorMessage;        ;
       })
   }
 });

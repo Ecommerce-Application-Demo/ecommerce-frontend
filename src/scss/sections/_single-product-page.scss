@@ -24,12 +24,32 @@
         gap: 4%;
     }
 }
+.mobile-stickybottom-container {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: $White;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.expressDelivery {
+  text-align: center;
+  color: $Black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  .expressText {
+    font-weight: bold;
+  }
+  .getExpressDeliveryText {
+    color: $grey-dark;
+  }
+}
 .mobile-btn-container {
-    position: sticky;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: $White;
     display: flex;
     justify-content: space-around;
     padding: 10px 0;

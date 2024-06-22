@@ -37,13 +37,42 @@ const SingleProductDeliveryOptions = ({
     }
   }, [dispatch, isLoggedIn]);
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   if (isLoggedIn) {
+  //     if (addressForDeliveryOption?.addId) {
+  //       setPincode(`${addressForDeliveryOption.name} (${addressForDeliveryOption.pincode})`);
+  //       setCheckPincodeText('CHANGE');
+  //     } else if (defaultAddress?.pincode && !addressForDeliveryOption?.pincode) {
+  //       setPincode(`${defaultAddress.name} (${defaultAddress.pincode})`);
+  //       const addressData = {
+  //         name: defaultAddress?.name,
+  //         addId: defaultAddress?.addId,
+  //         pincode: defaultAddress?.pincode,
+  //       }
+  //       dispatch(addAddressForDeliveryOption(addressData));
+  //       setCheckPincodeText('CHANGE');
+  //     }
+  //   } else {
+  //     if (addressForDeliveryOption?.pincode) {
+  //       setPincode(addressForDeliveryOption.pincode);
+  //       setCheckPincodeText('CHANGE');
+  //     } else {
+  //       setPincode('');
+  //       setCheckPincodeText('CHECK');
+  //     }
+  //   }
+  // }, [isLoggedIn, addressForDeliveryOption, defaultAddress]);
+
+  useEffect(()=>{
     if (isLoggedIn) {
-      if (addressForDeliveryOption?.addId) {
+      if (addressForDeliveryOption?.pincode && addressForDeliveryOption?.addId) {
         setPincode(`${addressForDeliveryOption.name} (${addressForDeliveryOption.pincode})`);
         setCheckPincodeText('CHANGE');
-      } else if (defaultAddress?.pincode) {
-        setPincode(`${defaultAddress.name} (${defaultAddress.pincode})`);
+      } else if(addressForDeliveryOption?.pincode && !addressForDeliveryOption?.addId) {
+        setPincode(addressForDeliveryOption.pincode);
+        setCheckPincodeText('CHANGE');
+      } else if(!addressForDeliveryOption?.pincode && !addressForDeliveryOption?.addId && defaultAddress) {
+        setPincode(`${defaultAddress?.name} (${defaultAddress?.pincode})`);
         const addressData = {
           name: defaultAddress?.name,
           addId: defaultAddress?.addId,
@@ -53,16 +82,19 @@ const SingleProductDeliveryOptions = ({
         setCheckPincodeText('CHANGE');
       }
     } else {
-      if (addressForDeliveryOption?.pincode) {
-        setPincode(addressForDeliveryOption.pincode);
-        setCheckPincodeText('CHANGE');
+      if (addressForDeliveryOption?.pincode && addressForDeliveryOption?.addId) {
+        setPincode(``);
+        dispatch(deleteAddressForDeliveryOption());
+        setCheckPincodeText('CHECK');
+      } else if(addressForDeliveryOption?.pincode && !addressForDeliveryOption?.addId) {
+        setPincode(addressForDeliveryOption?.pincode);
+          setCheckPincodeText('CHANGE');
       } else {
         setPincode('');
         setCheckPincodeText('CHECK');
       }
     }
-    console.log('useeffect');
-  }, [isLoggedIn, addressForDeliveryOption, defaultAddress]);
+  },[isLoggedIn, addressForDeliveryOption]);
 
   const handleCheckPincode = () => {
     if (!isLoggedIn) {
@@ -70,7 +102,6 @@ const SingleProductDeliveryOptions = ({
         setPincode('');
         setCheckPincodeText('CHECK');
         dispatch(deleteAddressForDeliveryOption());
-        localStorage.removeItem('ADDRESS');
       } else if (pincode?.length === 6 && checkPincodeText === 'CHECK') {
         const addressData = {
           name: null,
@@ -84,8 +115,9 @@ const SingleProductDeliveryOptions = ({
         dispatch(singleProductThunk.checkDelivery(checkDeliveryData)).unwrap()
         .then(()=>{
           dispatch(addAddressForDeliveryOption(addressData));
+        setCheckPincodeText('CHANGE');
         })
-        dispatch(addAddressForDeliveryOption(addressData));
+        // dispatch(addAddressForDeliveryOption(addressData));
       }
     } else {
       if (checkPincodeText === 'CHANGE') {
@@ -100,34 +132,40 @@ const SingleProductDeliveryOptions = ({
         <div className="deliveryOption-text">DELIVERY OPTIONS</div>
         <div className="changePincode-wrapper">
           <span>
-            {isLoggedIn && (addressForDeliveryOption?.addId || defaultAddress) ? (
+            {addressForDeliveryOption?.pincode ? 
               <p>{pincode}</p>
-            ) : checkPincodeText === 'CHANGE' ? (
-              <p>{pincode}</p>
-            ) : (
+               : 
               <input
                 className="enterpincode-input"
                 placeholder="enter your pincode"
-                onChange={(e) => setPincode(e.target.value)}
+                onChange={(e) => {
+                  if (e.target.value.length <= 6) {
+                    setPincode(e.target.value);
+                  }
+                }}
                 value={pincode}
                 type="number"
                 maxLength={6}
                 max={6}
               />
-            )}
+            }
           </span>
           <span onClick={handleCheckPincode}>{checkPincodeText}</span>
         </div>
+          {!addressForDeliveryOption?.pincode && <p style={{color: 'orangered'}}>Enter your pincode to check the delivery availability</p>}
         {isDeliverableData?.START ?
           <div className="deliveryOption-wrapper">
             <div className='delivery-time-loading-left'/>
             <span className='delivery-time-loading-right'/>
           </div>
           :
+          lowestDeliveryTime && addressForDeliveryOption?.pincode ? 
           <div className="deliveryOption-wrapper">
             <FreeDelivery />
             <span>{lowestDeliveryTime}</span>
-          </div>}
+          </div>:
+          null
+          }
         <div className="deliveryOption-wrapper">
           <PayOnDelivery />
           <span>Pay on delivery available</span>

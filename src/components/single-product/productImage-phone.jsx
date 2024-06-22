@@ -8,14 +8,11 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import 'swiper/css/effect-flip';
-import { products } from '../../assets/pictures/productImageAddress';
 import { objectToArrayConverter } from '../../api/utilities/helper';
 
 const ProductImagePhone = ({productImages}) => {
-
   const imageArray = productImages ? objectToArrayConverter(productImages) : [];
-  console.log(productImages, 'pro');
-  console.log(imageArray, 'imnage');
+
   return (
     <div className='product-image-phone-container'>
     <Swiper
@@ -24,8 +21,8 @@ const ProductImagePhone = ({productImages}) => {
       slidesPerView={1}
       pagination={{ clickable: true }}
       EffectFlip={true}
-      onSwiper={(swiper) => console.log(swiper)}
-      onSlideChange={() => console.log('slide change')}
+      loop={true}
+      autoplay={20}
     >
         {imageArray?.map(product=>{
             return (
