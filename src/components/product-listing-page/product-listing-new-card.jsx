@@ -21,7 +21,6 @@ const ProductListingNewCard = ({
     color: openCourosel && !isSmallMobile ? isColorLight(product?.colourHexCode) ? "black" : "white" : "",
   };
   const handleClick = () => {
-    console.log(product, "selected product");
     navigate(`/product/${product?.styleName}/${product?.styleId}/buy`,);
   };
   return (

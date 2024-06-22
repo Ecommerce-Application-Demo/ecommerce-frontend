@@ -85,7 +85,9 @@ const SingleProductDetails = ({
               </span>
               {productDetails?.reviewCount && <span>{productDetails?.reviewCount} review</span>}
             </div>
-            {productDetails?.inStock && <span className="singleproduct-details-instock">in stock</span>}
+            {productDetails?.inStock ? 
+            <span className="singleproduct-details-instock">In Stock</span> : 
+            <span className="singleproduct-details-outstock">Out Of Stock</span>}
           </div>}
         <div className="price-container">
           <h3>₹{productDetails?.finalPrice}</h3>
@@ -102,19 +104,23 @@ const SingleProductDetails = ({
         <span className="allTaxes-text">inclusive of all taxes</span>
       </div>
       <div className="singleProduct-details-size-container">
+        {productDetails?.inStock &&
         <SingleProductSize
           dispatch={dispatch}
           productSize={productSize}
-        />
+        />}
         <ProductMoreColors
           dispatch={dispatch}
           styleId={styleId}
         // refForExpressDeliveryBanner={refForExpressDeliveryBanner}
         />
         {!isMobile &&
+          (productDetails?.inStock ?
           <div className="addToCart-container">
-            <div className="addToCart-btn" disabled={!isDeliverable && addressForDeliveryOption?.pincode}><BsCartCheck />ADD TO BAG</div>
-          </div>}
+            <div className="addToCart-btn" disabled={(!isDeliverable && addressForDeliveryOption?.pincode)}><BsCartCheck />ADD TO BAG</div>
+          </div> :
+          <div className="outOfStock-btn">OUT OF STOCK</div>)
+        }
       </div>
       <div ref={refForExpressDeliveryBanner} />
       {isMobile &&
@@ -129,14 +135,19 @@ const SingleProductDetails = ({
             </span>}
           <div className={`mobile-btn-container`}>
             <div className="wishlist-btn"><CiHeart size={20} /> WISHLIST</div>
-            <div className="addToCart-btn" disabled={!isDeliverable && addressForDeliveryOption?.pincode}><BsCartCheck size={20} />ADD TO BAG</div>
+            {productDetails?.inStock ?
+            <div className="addToCart-btn" disabled={(!isDeliverable && addressForDeliveryOption?.pincode)}><BsCartCheck size={20} />ADD TO BAG</div>
+            :
+            <div className="outOfStock-btn">OUT OF STOCK</div>}
           </div>
         </div>
       }
+      {productDetails?.inStock &&
       <SingleProductDeliveryOptions
         dispatch={dispatch}
         isLoggedIn={isLoggedIn}
-      />
+        inStock={ productDetails?.inStock }
+      />}
     </div>
   );
 };

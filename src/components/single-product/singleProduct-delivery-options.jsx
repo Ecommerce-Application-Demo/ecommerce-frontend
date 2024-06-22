@@ -9,7 +9,8 @@ import { addAddressForDeliveryOption, deleteAddressForDeliveryOption } from '../
 
 const SingleProductDeliveryOptions = ({
   dispatch,
-  isLoggedIn
+  inStock,
+  isLoggedIn,
 }) => {
 //redux states---------------------------------------
   const addressData = useSelector((state) => state.address);
