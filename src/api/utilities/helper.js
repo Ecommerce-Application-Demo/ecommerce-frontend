@@ -94,3 +94,27 @@ export const updateState = (state, actionName, actionType, successName, errorNam
 export const objectToArrayConverter = (obj) => {
     return Object.values(obj)?.filter((image)=> (image !==null));
 }
+
+export const filterEmptyArraysFromObject = (obj) => {
+    return Object.fromEntries(
+      Object.entries(obj).filter(([key, value]) => Array.isArray(value) && value.length > 0)
+    );
+  };
+
+  export const getSelectedFilters = (filters) => {
+    const selectedFilters = {};
+    for (const [key, value] of Object.entries(filters)) {
+      if (value.length > 0) {
+        if (Array.isArray(value)) {
+          selectedFilters[key] = value.map(item => {
+            // Handle discountPercentage if it's a number
+            return key === 'discountPercentages' && typeof item === 'number' ? item.toString() : item;
+          }).toString();
+        } else {
+          selectedFilters[key] = value.toString();
+        }
+      }
+    }
+    return selectedFilters;
+  };
+  

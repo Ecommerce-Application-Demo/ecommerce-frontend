@@ -1,20 +1,32 @@
-import React, { useState, useEffect } from "react";
-import { FaChevronDown } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
 import StickyBox from "react-sticky-box";
+import Dropdown from "../../small-components/filter-dropdown";
+import RangeSlider from 'react-range-slider-input';
+import 'react-range-slider-input/dist/style.css';
 
 const ProductListingFilter = (props) => {
-  const { productsFilter, filterLoading } = props;
+  const { productsFilter, filterLoading, selectedItems, setSelectedItems, priceRange, setPriceRange } = props;
 
   // Initialize all dropdowns as open
   const [dropdowns, setDropdowns] = useState({
-    masterCategory: true,
-    category: true,
-    brand: true,
-    colour: true,
-    size: true,
-    discountPercentage: true,
-    priceRange: true,
+    masterCategories: true,
+    categories: true,
+    brands: true,
+    colours: true,
+    sizes: true,
+    discountPercentages: true,
+    priceRanges: true,
   });
+
+  const handleSliderChange = (value, newValue) => {
+    console.log(newValue, 'new ');
+    if (newValue && newValue.length === 2) {
+      setPriceRange({
+        minPrice: newValue[0],
+        maxPrice: newValue[1]
+      });
+    }
+  };
 
   const handleDropdownClick = (name) => {
     setDropdowns((prevState) => ({
@@ -23,15 +35,48 @@ const ProductListingFilter = (props) => {
     }));
   };
 
+  useEffect(() => {
+    if (productsFilter) {
+      const minPrice = productsFilter.minPrice;
+      const maxPrice = productsFilter.maxPrice;
+      if (minPrice !== priceRange.minPrice || maxPrice !== priceRange.maxPrice) {
+        setPriceRange({
+          ...priceRange,
+          minPrice,
+          maxPrice
+        });
+      }
+    }
+  }, [productsFilter]);
+
+  const handleItemClick = (name, item) => {
+    setSelectedItems((prevItems) => {
+      if (name === 'discountPercentages') {
+        return {
+          ...prevItems,
+          [name]: item,
+        };
+      } else {
+        const updatedItems = prevItems[name] ? [...prevItems[name]] : [];
+        const itemIndex = updatedItems.indexOf(item);
+        if (itemIndex === -1) {
+          updatedItems.push(item);
+        } else {
+          updatedItems.splice(itemIndex, 1);
+        }
+        return {
+          ...prevItems,
+          [name]: updatedItems,
+        };
+      }
+    });
+  };
+
   return filterLoading ? (
     <div className="product-filter-container">
-      <div className="filter-dropdown-loading"></div>
-      <div className="filter-dropdown-loading"></div>
-      <div className="filter-dropdown-loading"></div>
-      <div className="filter-dropdown-loading"></div>
-      <div className="filter-dropdown-loading"></div>
-      <div className="filter-dropdown-loading"></div>
-      <div className="filter-dropdown-loading"></div>
+      {Array.from({ length: 7 }).map((_, index) => (
+        <div key={index} className="filter-dropdown-loading"></div>
+      ))}
     </div>
   ) : (
     <StickyBox className="product-filter-container" offsetTop={80}>
@@ -39,51 +84,68 @@ const ProductListingFilter = (props) => {
         <>
           {productsFilter.masterCategories?.length > 0 && (
             <Dropdown
-              name="masterCategory"
-              title="Master Category"
+              name="masterCategories"
+              title="Master Categories"
               items={productsFilter.masterCategories}
-              isOpen={dropdowns.masterCategory}
+              isOpen={dropdowns.masterCategories}
               handleDropdownClick={handleDropdownClick}
+              handleItemClick={handleItemClick}
+              selectedItems={selectedItems}
             />
           )}
           {productsFilter.categories?.length > 0 && (
             <Dropdown
-              name="category"
-              title="Category"
+              name="categories"
+              title="Categories"
               items={productsFilter.categories}
-              isOpen={dropdowns.category}
+              isOpen={dropdowns.categories}
               handleDropdownClick={handleDropdownClick}
+              handleItemClick={handleItemClick}
+              selectedItems={selectedItems}
             />
           )}
           {productsFilter.brands?.length > 0 && (
             <Dropdown
-              name="brand"
-              title="Brand"
+              name="brands"
+              title="Brands"
               items={productsFilter.brands}
-              isOpen={dropdowns.brand}
+              isOpen={dropdowns.brands}
               handleDropdownClick={handleDropdownClick}
+              handleItemClick={handleItemClick}
+              selectedItems={selectedItems}
             />
           )}
           {productsFilter.colours?.length > 0 && (
             <Dropdown
-              name="colour"
-              title="Colour"
+              name="colours"
+              title="Colours"
               items={productsFilter.colours}
-              isOpen={dropdowns.colour}
+              isOpen={dropdowns.colours}
               handleDropdownClick={handleDropdownClick}
+              handleItemClick={handleItemClick}
+              selectedItems={selectedItems}
               renderItems={(colours) =>
                 colours.map((colour, index) => (
                   <li key={index}>
-                    <span
-                      style={{
-                        backgroundColor: colour.hexCode,
-                        width: "20px",
-                        height: "20px",
-                        display: "inline-block",
-                        marginRight: "8px",
-                      }}
-                    ></span>
-                    {colour.colour}
+                    <label>
+                      <input
+                        type="checkbox"
+                        name="colours"
+                        value={colour.colour}
+                        checked={selectedItems.colours?.includes(colour.colour)}
+                        onChange={() => handleItemClick('colours', colour.colour)}
+                      />
+                      <span
+                        style={{
+                          backgroundColor: colour.hexCode,
+                          width: "20px",
+                          height: "20px",
+                          display: "inline-block",
+                          marginRight: "8px",
+                        }}
+                      ></span>
+                      {colour.colour}
+                    </label>
                   </li>
                 ))
               }
@@ -91,60 +153,63 @@ const ProductListingFilter = (props) => {
           )}
           {productsFilter.sizes?.length > 0 && (
             <Dropdown
-              name="size"
-              title="Size"
+              name="sizes"
+              title="Sizes"
               items={productsFilter.sizes}
-              isOpen={dropdowns.size}
+              isOpen={dropdowns.sizes}
               handleDropdownClick={handleDropdownClick}
+              handleItemClick={handleItemClick}
+              selectedItems={selectedItems}
             />
           )}
           {productsFilter.discountPercentages?.length > 0 && (
             <Dropdown
-              name="discountPercentage"
-              title="Discount Percentage"
+              name="discountPercentages"
+              title="Discount Percentages"
               items={productsFilter.discountPercentages}
-              isOpen={dropdowns.discountPercentage}
+              isOpen={dropdowns.discountPercentages}
               handleDropdownClick={handleDropdownClick}
+              handleItemClick={handleItemClick}
+              selectedItems={selectedItems}
               renderItems={(discounts) =>
                 discounts.map((discount, index) => (
-                  <li key={index}>{discount.discountPercentageText}</li>
+                  <li key={index}>
+                    <label>
+                      <input
+                        type="radio"
+                        name="discountPercentages"
+                        value={discount.discountPercentageText}
+                        checked={selectedItems.discountPercentages === discount.discountPercentage}
+                        onChange={() => handleItemClick('discountPercentages', discount.discountPercentage)}
+                      />
+                      {discount.discountPercentageText}
+                    </label>
+                  </li>
                 ))
               }
             />
           )}
-          <Dropdown
-            name="priceRange"
-            title="Price Range"
-            items={[]}
-            isOpen={dropdowns.priceRange}
-            handleDropdownClick={handleDropdownClick}
-            renderItems={() => (
-              <div>
-                <p>Min Price: {productsFilter.minPrice}</p>
-                <p>Max Price: {productsFilter.maxPrice}</p>
-              </div>
-            )}
-          />
+          {/* <div> */}
+            {/* <RangeSlider
+              min={productsFilter?.minPrice || 0}
+              max={productsFilter?.maxPrice || 1000} // Adjust this default max price
+              defaultValue={[priceRange.minPrice, priceRange.maxPrice]}
+              onRangeDragEnd={handleSliderChange}
+            /> */}
+            {/* <input
+                type="range"
+                min={productsFilter?.minPrice}
+                max={productsFilter?.maxPrice}
+                value={[priceRange?.minPrice, priceRange?.maxPrice]}
+                onChange={handleSliderChange}
+                step="1"
+            />
+            <p>Selected range: {priceRange?.minPrice} - {priceRange?.maxPrice}</p>
+          </div> */}
         </>
       )}
     </StickyBox>
   );
 };
-
-const Dropdown = ({ name, title, items, isOpen, handleDropdownClick, renderItems }) => (
-  <div className="filter-dropdown-wrapper">
-    <div className="filter-dropdown-collaps" onClick={() => handleDropdownClick(name)}>
-      <span>{title}</span>
-      <span className={`filterDropdownArrow${isOpen ? '--open' : ''}`}>
-        <FaChevronDown />
-      </span>
-    </div>
-    {isOpen && (
-      <ul className="filter-dropdown-expand">
-        {renderItems ? renderItems(items) : items.map((item, index) => <li key={index}>{item}</li>)}
-      </ul>
-    )}
-  </div>
-);
 
 export default ProductListingFilter;

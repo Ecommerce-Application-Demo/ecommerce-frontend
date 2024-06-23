@@ -9,7 +9,7 @@
   align-items: center;
   text-align: center;
   cursor: pointer;
-
+  height: fit-content;
   @include breakpoint(small-mobile) {
     width: 100%;
     height: fit-content;
