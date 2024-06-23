@@ -8,7 +8,7 @@ const SearchBar = () => {
   const {isDarkMode} = useSelector((state)=>state.theme);
 
   const navigate = useNavigate();
-  const [searchedText, setSearchedText] = useState('');
+  const [searchedText, setSearchedText] = useState('Tshirts');
   const dispatch = useDispatch();
   const handleSearchBar = (e) => {
     setSearchedText(e.target.value);
