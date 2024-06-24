@@ -104,17 +104,17 @@ export const filterEmptyArraysFromObject = (obj) => {
   export const getSelectedFilters = (filters) => {
     const selectedFilters = {};
     for (const [key, value] of Object.entries(filters)) {
-      if (value.length > 0) {
+      if ((Array.isArray(value) && value.length > 0) || (!Array.isArray(value) && value)) {
+        // If the value is an array, convert it to a string
         if (Array.isArray(value)) {
-          selectedFilters[key] = value.map(item => {
-            // Handle discountPercentage if it's a number
-            return key === 'discountPercentages' && typeof item === 'number' ? item.toString() : item;
-          }).toString();
+          selectedFilters[key] = value.toString();
         } else {
+          // If the value is not an array (e.g., a number for discountPercentages), convert it to a string
           selectedFilters[key] = value.toString();
         }
       }
     }
     return selectedFilters;
   };
+  
   

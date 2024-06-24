@@ -18,7 +18,7 @@ const Dropdown = ({ name, title, items, isOpen, handleDropdownClick, handleItemC
               <li key={index}>
                 <label>
                   <input
-                    type={name === "discountPercentages" ? "radio" : "checkbox"}
+                    type={"checkbox"}
                     name={name}
                     value={item}
                     checked={selectedItems[name].includes(item)}

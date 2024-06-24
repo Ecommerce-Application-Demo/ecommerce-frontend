@@ -16,6 +16,7 @@ import ScrollToTopButton from "../small-components/scrollToTop";
 import { resetSearchedProduct } from "../redux/Slices/product/productSlice";
 import NoProductFoundPage from "../components/product-listing-page/noProductFoundPage";
 import { filterEmptyArraysFromObject, getSelectedFilters } from "../api/utilities/helper";
+import ProductListingEditFilter from "../components/product-listing-page/product-listing-edit-filter";
 
 const ProductListingPage = () => {
   //------------------redux states access----------------
@@ -42,7 +43,7 @@ const ProductListingPage = () => {
     brands: [],
     colours: [],
     sizes: [],
-    discountPercentages: [],
+    discountPercentage: [],
   });
   const [priceRange, setPriceRange] = useState({
     minPrice: '',
@@ -62,45 +63,22 @@ const ProductListingPage = () => {
   const productsFilter = searchproductsFilter?.searchProductsFilter;
   const anyfilter = Object.values(selectedItems).some(item =>
     Array.isArray(item) ? item.length > 0 : item !== ''
-  );  const selectedFilters = getSelectedFilters(selectedItems);
+  ); 
+   const selectedFilters = getSelectedFilters(selectedItems);
 
-//   useEffect(() => {
-//     if (searchQuery !== previousSearchQuery) {
-//       isProductsFetching.current = false;
-//       isFilterFetching.current = false;
-//       setPreviousSearchQuery(searchQuery);
-//     }
+   const handleClearAll = () => {
+    const emptySelectedItems = Object.keys(selectedItems).reduce((acc, key) => {
+      acc[key] = [];
+      return acc;
+    }, {});
+    setSelectedItems(emptySelectedItems);
+  };
 
-//     if (searchQuery && (!productList || productList.length === 0) && !isProductsFetching.current && !anyfilter) {
-//       isProductsFetching.current = true;
-//       const dataForSerach = {
-//         searchQuery: searchQuery,
-//         sortBy: sortBy === 'Price: Low to High' ? 'lowToHigh' : sortBy === 'Price: High to Low' ? 'highTOLow' : sortBy,
-//       };
-
-//       dispatch(getSearchedProductsThunk(dataForSerach)).unwrap().then((res) => {
-//         if (res?.productList) {
-//           isProductsFetching.current = false;
-//         }
-//       });
-//     }
-//   }, [dispatch, getSearchedProductsThunk, searchQuery, productList, sortBy, previousSearchQuery]);
-// useEffect(()=> {
-//   if (selectedFilters !== previousFilter) {
-//     setPreviousFilter(selectedFilters);
-//   }
-// }, [selectedFilters]);
-//   useEffect(() => {
-//     if (searchQuery && (!productList || productList.length === 0) && !isFilterFetching.current && !anyfilter) {
-//       isFilterFetching.current = true;
-//       const data = {
-//         searchQuery
-//       };
-//       dispatch(getSearchedProductFilterThunk(data)).unwrap().then((res) => {
-//           isProductsFetching.current = false;
-//       });
-//     }
-//   }, [dispatch, getSearchedProductsThunk, searchQuery, productList, previousSearchQuery]);
+  useEffect(()=>{
+    if (searchQuery !== previousSearchQuery) {
+      handleClearAll();
+    }
+  },[searchQuery]);
 
   const handleObserver = useCallback(
     (entities) => {
@@ -144,10 +122,10 @@ const ProductListingPage = () => {
   
   useEffect(() => {
     if (anyfilter) {
-      dispatch(getSearchedProductFilterThunk({
-        searchQuery,
-        selectedFilters,
-      }));
+      // dispatch(getSearchedProductFilterThunk({
+      //   searchQuery,
+      //   selectedFilters,
+      // }));
       dispatch(getSearchedProductsThunk({
         searchQuery,
         sortBy: sortBy === 'Price: Low to High' ? 'lowToHigh' : sortBy === 'Price: High to Low' ? 'highTOLow' : sortBy,
@@ -190,8 +168,14 @@ const ProductListingPage = () => {
                 sortBy={sortBy}
               />
             </div>
-            <div className="divider--horizontal" />
           </div>
+        )}
+         {!isMobile && (
+          <ProductListingEditFilter 
+          selectedItems={ selectedItems }
+          setSelectedItems={ setSelectedItems }
+          handleClearAll={ handleClearAll }
+          />
         )}
         <div className="product-listing-content-section">
           {!isMobile ?

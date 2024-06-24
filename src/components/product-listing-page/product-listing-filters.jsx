@@ -51,10 +51,10 @@ const ProductListingFilter = (props) => {
 
   const handleItemClick = (name, item) => {
     setSelectedItems((prevItems) => {
-      if (name === 'discountPercentages') {
+      if (name === 'discountPercentage') {
         return {
           ...prevItems,
-          [name]: item,
+          [name]: prevItems[name] === item ? null : item, 
         };
       } else {
         const updatedItems = prevItems[name] ? [...prevItems[name]] : [];
@@ -176,11 +176,11 @@ const ProductListingFilter = (props) => {
                   <li key={index}>
                     <label>
                       <input
-                        type="radio"
-                        name="discountPercentages"
+                        type="checkbox"
+                        name="discountPercentage"
                         value={discount.discountPercentageText}
-                        checked={selectedItems.discountPercentages === discount.discountPercentage}
-                        onChange={() => handleItemClick('discountPercentages', discount.discountPercentage)}
+                        checked={selectedItems.discountPercentage === discount.discountPercentage}
+                        onChange={() => handleItemClick('discountPercentage', discount.discountPercentage)}
                       />
                       {discount.discountPercentageText}
                     </label>
