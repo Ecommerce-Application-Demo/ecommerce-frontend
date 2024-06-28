@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { GiTireIronCross } from "react-icons/gi";
 
-const Popup = ({ onClose, children, title=null, titleClassName='' }) => {
+const Popup = ({ onClose, children, title=null, titleClassName='', backgroundColor= '' }) => {
   const [closing, setClosing] = useState(false);
   // const popupContainerRef = useRef(null);
   // const [overlayHeight, setOverlayHeight] = useState('100%');
@@ -49,7 +49,7 @@ const Popup = ({ onClose, children, title=null, titleClassName='' }) => {
         onClick={handleClose}
       ></div>
       <div className={`popup-main-container ${closing ? 'closing' : ''}`}>
-        <div className="popup-container">
+        <div className={`popup-container ${!backgroundColor && 'popup-container-background'}`} style={{backgroundColor}}>
           <div className={`${titleClassName} ${title ? 'popup-title-wrapper' : `popup-title-wrapper-without-title`}`}>
             {title}
             <div onClick={handleClose}>

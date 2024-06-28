@@ -17,6 +17,9 @@ import { resetSearchedProduct } from "../redux/Slices/product/productSlice";
 import NoProductFoundPage from "../components/product-listing-page/noProductFoundPage";
 import { filterEmptyArraysFromObject, getSelectedFilters } from "../api/utilities/helper";
 import ProductListingEditFilter from "../components/product-listing-page/product-listing-edit-filter";
+import { motion } from "framer-motion";
+import ProductListingMobileSortBy from "../components/product-listing-page/product-listing-mobile-sortBy";
+import ProductListingMobileFilter from "../components/product-listing-page/product-listing-mobile-filter";
 
 const ProductListingPage = () => {
   //------------------redux states access----------------
@@ -33,10 +36,12 @@ const ProductListingPage = () => {
   const loader = useRef(null);
 
   //----------state declaration---------------------
-  const [sortBy, setSortBy] = useState('popularity');
+  const [sortBy, setSortBy] = useState('Popularity');
   const [previousSearchQuery, setPreviousSearchQuery] = useState('');
-  const [previousFilter, setPreviousFilter] = useState('');
-  // State to hold selected items
+  const [showFilter, setShowFilter] = useState(true);
+  const [openFilterModal, setOpenFilterModal] = useState(false);
+  const [openSortByModal, setOpenSortByModal] = useState(false);
+  
   const [selectedItems, setSelectedItems] = useState({
     masterCategories: [],
     categories: [],
@@ -145,6 +150,28 @@ const ProductListingPage = () => {
     }
   }, [selectedItems, anyfilter, dispatch, getSearchedProductFilterThunk, getSearchedProductsThunk, searchQuery, sortBy]);
   
+  useEffect(() => {
+    let lastScrollTop = 0;
+    let scrollTimeout;
+
+    const handleScroll = () => {
+      const currentScrollTop = window.scrollY;
+      if (currentScrollTop > lastScrollTop) {
+        setShowFilter(false);
+      } else {
+        setShowFilter(true);
+      }
+      lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        setShowFilter(true);
+      }, 200);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <div className="global-margin">
@@ -209,9 +236,28 @@ const ProductListingPage = () => {
         <div ref={loader} />
       </div>}
       {((isMobile &&  !(!productList || totalProduct===0)) && 
-        <div className="mobile-filter-container">
-          <ProductListingFilter />
-        </div>
+        <>
+        <motion.div 
+        initial={{ y: 0, opacity: 1 }}
+        animate={{ y: showFilter ? 0 : 60, opacity: showFilter ? 1 : 0 }}
+        transition={{ duration: 0.4 }}
+        className="mobile-filter-container">
+          <div onClick={()=>setOpenSortByModal(true)}>Sort By</div>
+          <span className="divider--verticle" />
+          <div onClick={()=>setOpenFilterModal(true)}>Filter</div>
+        </motion.div>
+          {openSortByModal && 
+          <ProductListingMobileSortBy 
+            setOpenSortByModal={ setOpenSortByModal }
+            dispatch={dispatch}
+            loading={START}
+            setSortBy={setSortBy}
+            sortBy={sortBy}
+
+          />}
+          {openFilterModal && 
+          <ProductListingMobileFilter setOpenFilterModal={ setOpenFilterModal }/>}
+        </>
       )}
     </div>
   );
