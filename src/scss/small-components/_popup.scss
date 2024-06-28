@@ -20,8 +20,10 @@
 }
 
 .popup-container {
-  @include modalGlassBackground;
   width: 100%;
+}
+.popup-container-background {
+  @include modalGlassBackground;
 }
 
 .popup-title-wrapper {

@@ -68,3 +68,21 @@
     }
   }
 }
+
+.mobile-sortby-main-container {
+  width: 100%;
+  padding: 10px 20px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  & .sortBy-option {
+    color: $fixed-white;
+    font-size: 20px;
+  }
+  .selected-option {
+    color: $primary-btn-red !important;
+    font-weight: bold;
+  }
+}
