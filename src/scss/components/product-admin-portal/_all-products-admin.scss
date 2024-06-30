@@ -41,8 +41,31 @@
     text-align: center;
   }
   
-  .allProduct-admin-container .admin-table-row-container {
-    // background-color: $primary-btn-red-disabled;
-    // color: $White;
+  .admin-table-row-container {
+    position: relative;
+    .product-click-container {
+      position: absolute;
+      border: 1px solid $primary-btn-red;
+      padding: 10px;
+      border-radius: 0px 8px 8px 8px;
+      left: 50%;
+      top: 10px;
+      background: $White;
+      color: $primary-btn-red;
+      cursor: pointer;
+    } 
   }
-  
+  .selectedProduct {
+    background: $primary-btn-red-disabled;
+    color: $fixed-white;
+  }
+  .productSearchbar {
+    width: 100%;
+    border: 1px solid $primary-btn-red;
+    background: $White;
+    padding: 15px;
+    border-radius: 5px;
+    &:focus {
+      outline: none;
+    }
+  }

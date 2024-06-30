@@ -1,5 +1,7 @@
 .admin-addCategories-container {
-
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
     .admin-addCategory-input-code {
         width:  100%;
         border: 1px solid $primary-btn-red;

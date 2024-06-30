@@ -21,6 +21,7 @@ const AddCategories = () => {
     masterCategoryName: "",
     masterCategoryDescription: "",
     masterCategoryDefaultImage: '',
+    breadcrumbUrl: '',
   });
 
   const [categoryForm, setCategoryForm] = useState({
@@ -28,6 +29,7 @@ const AddCategories = () => {
     categoryDescription: "",
     selectedMasterCategoryOption: "",
     categoryDefaultImage:'',
+    breadcrumbUrl: '',
   });
 
   const [subCategoryForm, setSubCategoryForm] = useState({
@@ -36,6 +38,7 @@ const AddCategories = () => {
     selectedMasterCategoryOption: "",
     selectedCategoryOption: "",
     subCategoryDefaultImage:'',
+    breadcrumbUrl: '',
   });
 
   const [brandForm, setBrandForm] = useState({
@@ -43,6 +46,7 @@ const AddCategories = () => {
     brandDescription: "",
     brandAddress: '',
     brandLogoImage:'',
+    breadcrumbUrl: '',
   });
   
   useEffect(()=>{
@@ -282,6 +286,14 @@ const AddCategories = () => {
                   value={masterCategoryForm.masterCategoryDefaultImage}
                   onChange={handleAddMasterCategory}
                 />
+              <input
+                className="admin-addCategory-input"
+                type="text"
+                name="breadcrumbUrl"
+                placeholder="enter breadcrumb URL"
+                value={masterCategoryForm.breadcrumbUrl}
+                onChange={handleAddMasterCategory}
+              />
                 <textarea
                   id="masterCategoryDescription"
                   placeholder="Write a description for your master category"
@@ -346,6 +358,15 @@ const AddCategories = () => {
                   disabled={categoryForm.selectedMasterCategoryOption === ""}
                   value={categoryForm.categoryDefaultImage}
                   onChange={handleAddCategory}
+                />
+                <input
+                  className={addCategoryInput}
+                  type="text"
+                  name="breadcrumbUrl"
+                  placeholder="enter breadcrumb URL"
+                  value={categoryForm.breadcrumbUrl}
+                  onChange={handleAddCategory}
+                  disabled={categoryForm?.selectedMasterCategoryOption === ""}
                 />
                 <textarea
                   id="categoryDescription"
@@ -431,6 +452,18 @@ const AddCategories = () => {
                   value={subCategoryForm.subCategoryDefaultImage}
                   onChange={handleAddSubCategory}
                 />
+                <input
+                className={addSubCategoryInput}
+                type="text"
+                name="breadcrumbUrl"
+                placeholder="enter breadcrumb URL"
+                value={subCategoryForm.breadcrumbUrl}
+                onChange={handleAddSubCategory}
+                disabled={
+                  subCategoryForm?.selectedMasterCategoryOption === "" ||
+                  subCategoryForm?.selectedCategoryOption === ""
+                }
+              />
                 <textarea
                   id="subCategoryDescription"
                   placeholder="Write a description for your sub category"
