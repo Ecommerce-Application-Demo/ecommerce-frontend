@@ -1,11 +1,5 @@
 .admin-addProduct-main-container {
-    // margin: 30px 20px 20px;
-    // width: 100%;
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: center;
-    // position: relative;
-    height: 70vh;
+    height: 80vh;
     overflow: scroll;
     @include breakpoint(medium) {
         // margin: 60px 75px 20px;
@@ -63,7 +57,7 @@
         flex-wrap: wrap;
         justify-content: center;
         overflow-y: scroll;
-        max-height: 65%;
+        max-height: 80%;
         @include breakpoint(medium) {
         // margin: 30px 75px;
         justify-content: center;
@@ -139,17 +133,7 @@
             width: 40%;
             }
         }
-            .admin-addCategory-input-code {
-                width:  100%;
-                border: 1px solid $primary-btn-red;
-                height: 40px;
-                border-radius: 10px;
-                padding-left: 20px;
-                margin-bottom: 10px;
-                &:focus {
-                    outline: none;
-                }
-            }
+
         
             & ::placeholder {
                 @include breakpoint(small-only) {
@@ -159,20 +143,30 @@
             }
         }
     }
-    .admin-addCategory-Btn {
-        width: 100%;
-        margin-top: auto;
-        background-color: $primary-btn-red;
-        color: $White;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        margin: 10px 0px 0px;
-        padding: 20px;
-        margin-bottom: 0px;
-    }
-    .admin-addCategory-Btn-disabled {
-        cursor: not-allowed;
-        background-color: $primary-btn-red-disabled;
+}
+.admin-addCategory-Btn {
+    width: 100%;
+    margin-top: auto;
+    background-color: $primary-btn-red;
+    color: $White;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 20px;
+    margin-bottom: 0px;
+}
+.admin-addCategory-Btn-disabled {
+    cursor: not-allowed;
+    background-color: $primary-btn-red-disabled;
+}
+.admin-addCategory-input-code {
+    width:  100%;
+    border: 1px solid $primary-btn-red;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 20px;
+    margin-bottom: 10px;
+    &:focus {
+        outline: none;
     }
 }

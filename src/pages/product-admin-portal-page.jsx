@@ -27,8 +27,6 @@ const ProductAdminPage = () => {
         return <AddCategories />;
       case "ADD_PRODUCT":
         return <AddProduct />;
-      case "ADD_SKU":
-        return <AddProductSku />;
       case "ALL_PRODUCTS":
         return <AllProducts />;
       default:
@@ -38,6 +36,7 @@ const ProductAdminPage = () => {
 
   return (
     <div className="global-margin">
+      <div className="admin-input-container">
       {code !== "1213" ? (
           <input
             id="code"
@@ -55,7 +54,6 @@ const ProductAdminPage = () => {
             ADD CATEGORIES
           </h3>
           <h3 onClick={() => handleItemClick("ADD_PRODUCT")} className={selectedComponent === 'ADD_PRODUCT' ? 'active' : ''}>ADD PRODUCT</h3>
-          <h3 onClick={() => handleItemClick("ADD_SKU")} className={selectedComponent === 'ADD_SKU' ? 'active' : ''}>ADD SKU</h3>
           <h3 onClick={() => handleItemClick("ALL_PRODUCTS")} className={selectedComponent === 'ALL_PRODUCTS' ? 'active' : ''}>ALL PRODUCTS</h3>
         </div>
         <div className="rightSide-admin-portal">
@@ -63,6 +61,8 @@ const ProductAdminPage = () => {
         </div>
       </div>}
     </div>
+    </div>
+
   );
 };
 

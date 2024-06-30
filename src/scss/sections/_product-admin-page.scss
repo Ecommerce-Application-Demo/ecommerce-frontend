@@ -3,18 +3,18 @@
     flex-direction: row;
     width: 100%;
     gap: 50px;
-    margin: 0px 20px;
+    // margin: 0px 20px;
 
     @include breakpoint(small-only) {
     flex-direction: column;
     }
-    @include breakpoint(medium) {
-    margin: 50px 75px;
-    }
+    // @include breakpoint(medium) {
+    // margin: 50px 75px;
+    // }
 
-    @include breakpoint(large) {
-    margin: 80px 300px;
-    }
+    // @include breakpoint(large) {
+    // margin: 80px 300px;
+    // }
 
     .leftSide-admin-portal {
         padding: 100px 20px 100px 0px;
@@ -51,18 +51,22 @@
         }
     }
 }
-.admin-secret-input {
+
+.admin-input-container {
     width: 100%;
-    border: 1px solid $primary-btn-red;
-    height: 40px;
-    border-radius: 10px;
-    padding-left: 20px;
-    margin: 30px 20px;
+    padding: 60px 20px 0px 30px;
     @include breakpoint(medium) {
-    margin: 50px 75px;
+    padding: 50px 75px 0px 75px;
     }
 
     @include breakpoint(large) {
-    margin: 80px 300px;
+    padding: 80px 180px 0px 180px;
+    }
+    .admin-secret-input {
+        width: 100%;
+        border: 1px solid $primary-btn-red;
+        height: 40px;
+        border-radius: 10px;
+        padding-left: 20px;
     }
 }
