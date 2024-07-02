@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import addCategoriesProductThunk from "../../../api/asyncThunk/product-thunk/addCategories-thunk";
 
-const { addMasterCategory, addCategory, addSubCategory, addBrand, addProduct, addProductSkuThunk } = addCategoriesProductThunk;
+const { addMasterCategory, addCategory, addSubCategory, addBrand, addProduct, addProductSkuThunk, addStyleInventory } = addCategoriesProductThunk;
 
 const initialState = {
     addMasterCategory: {
@@ -30,6 +30,11 @@ const initialState = {
         FAIL: false,
     },
     addProductSku: { // Initial state for adding product
+        START: false,
+        SUCCESS: false,
+        FAIL: false,
+    },
+    addStyleInventory: { // Initial state for adding inventory
         START: false,
         SUCCESS: false,
         FAIL: false,
@@ -126,6 +131,19 @@ const addProductCategorySlice = createSlice({
           .addCase(addProductSkuThunk.rejected, (state) => {
             state.addProduct.FAIL = true;
             state.addProduct.START = false;
+          })
+          .addCase(addStyleInventory.pending, (state) => {
+            state.addStyleInventory.START = true;
+            state.addStyleInventory.SUCCESS = false;
+            state.addStyleInventory.FAIL = false;
+          })
+          .addCase(addStyleInventory.fulfilled, (state) => {
+            state.addStyleInventory.SUCCESS = true;
+            state.addStyleInventory.START = false;
+          })
+          .addCase(addStyleInventory.rejected, (state) => {
+            state.addStyleInventory.FAIL = true;
+            state.addStyleInventory.START = false;
           });
     }
 });

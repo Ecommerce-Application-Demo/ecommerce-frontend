@@ -5,7 +5,7 @@ import {
   reduxProfileUpdateState,
 } from "../../../api/utilities/stateHelper";
 
-const { getAllProductThunk, getSearchedProductsThunk, getInfinitySearchedProductsThunk, getSearchedProductFilterThunk } = getProductThunk;
+const { getAllProductThunk, getSearchedProductsThunk, getInfinitySearchedProductsThunk, getSearchedProductFilterThunk, getAllStylesOfProduct, getAllSizesOfStyle, getAllWarehouse } = getProductThunk;
 
 const initialState = {
   getAllProduct: {
@@ -28,6 +28,18 @@ const initialState = {
   searchProductsFilterData: reduxProfileInitialState(
     "searchProductsFilter",
     "searchProductsFilterError"
+  ),
+  allStylesOfProductData: reduxProfileInitialState(
+    "allStylesOfProduct",
+    "allStylesOfProductError"
+  ),
+  allSizesOfStyleData: reduxProfileInitialState(
+    "allSizesOfStyle",
+    "allSizesOfStyleError"
+  ),
+  allWarehouseData: reduxProfileInitialState(
+    "allWarehouse",
+    "allWarehouseError"
   ),
 };
 
@@ -57,6 +69,93 @@ const getProductsSlice = createSlice({
         state.getAllProduct.FAIL = true;
         state.getAllProduct.START = false;
         state.errorGetAllProduct = action.payload;
+      })
+      .addCase(getAllStylesOfProduct.pending, (state) => {
+        reduxProfileUpdateState(
+          state,
+          "allStylesOfProductData",
+          "pending",
+          "allStylesOfProduct",
+          "allStylesOfProductError"
+        );
+      })
+      .addCase(getAllStylesOfProduct.fulfilled, (state, action) => {
+        reduxProfileUpdateState(
+          state,
+          "allStylesOfProductData",
+          "fulfilled",
+          "allStylesOfProduct",
+          "allStylesOfProductError",
+          action?.payload
+        );
+      })
+      .addCase(getAllStylesOfProduct.rejected, (state, action) => {
+        reduxProfileUpdateState(
+          state,
+          "allStylesOfProductData",
+          "rejected",
+          "allStylesOfProduct",
+          "allStylesOfProductError",
+          action?.payload
+        );
+      })
+      .addCase(getAllSizesOfStyle.pending, (state) => {
+        reduxProfileUpdateState(
+          state,
+          "allSizesOfStyleData",
+          "pending",
+          "allSizesOfStyle",
+          "allSizesOfStyleError"
+        );
+      })
+      .addCase(getAllSizesOfStyle.fulfilled, (state, action) => {
+        reduxProfileUpdateState(
+          state,
+          "allSizesOfStyleData",
+          "fulfilled",
+          "allSizesOfStyle",
+          "allSizesOfStyleError",
+          action?.payload
+        );
+      })
+      .addCase(getAllSizesOfStyle.rejected, (state, action) => {
+        reduxProfileUpdateState(
+          state,
+          "allSizesOfStyleData",
+          "rejected",
+          "allSizesOfStyle",
+          "allSizesOfStyleError",
+          action?.payload
+        );
+      })
+      .addCase(getAllWarehouse.pending, (state) => {
+        reduxProfileUpdateState(
+          state,
+          "allWarehouseData",
+          "pending",
+          "allWarehouse",
+          "allWarehouseError"
+        );
+      })
+      .addCase(getAllWarehouse.fulfilled, (state, action) => {
+        reduxProfileUpdateState(
+          state,
+          "allWarehouseData",
+          "fulfilled",
+          "allWarehouse",
+          "allWarehouseError",
+          action?.payload
+        );
+      })
+      .addCase(getAllWarehouse.rejected, (state, action) => {
+        reduxProfileUpdateState(
+          state,
+          "allWarehouseData",
+          "rejected",
+          "allWarehouse",
+          "allWarehouseError",
+          action?.payload
+        );
       })
       .addCase(getSearchedProductsThunk.pending, (state) => {
         reduxProfileUpdateState(

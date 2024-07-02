@@ -37,7 +37,7 @@ const ProductAdminPage = () => {
   return (
     <div className="global-margin">
       <div className="admin-input-container">
-      {code !== "1213" ? (
+      {/* {code !== "1213" ? (
           <input
             id="code"
             className="admin-secret-input"
@@ -47,7 +47,7 @@ const ProductAdminPage = () => {
             onChange={handleCode}
           />
       )
-      :
+      : */}
      <div className="admin-portal-container">
         <div className="leftSide-admin-portal">
           <h3 onClick={() => handleItemClick("ADD_CATEGORIES")} className={selectedComponent === 'ADD_CATEGORIES' ? 'active' : ''}>
@@ -59,7 +59,7 @@ const ProductAdminPage = () => {
         <div className="rightSide-admin-portal">
           {renderSelectedComponent()}
         </div>
-      </div>}
+      </div>
     </div>
     </div>
 

@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import ErrorBoundary from './error/ErrorBoundary';
 import GlobalErrorHandler from './error/ErrorBoundary';
+import TooltipWrapper from './small-components/TooltipWrapper';
 
 ReactDOM.render(
   <Router>

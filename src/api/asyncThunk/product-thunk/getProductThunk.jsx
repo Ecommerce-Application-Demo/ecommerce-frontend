@@ -16,6 +16,51 @@ const getAllProductThunk = createAsyncThunk(
     }
 );
 
+//async thunk for get all styles of a product
+const getAllStylesOfProduct = createAsyncThunk(
+    'GET_ALL_STYLES_PRODUCT',
+    async (productId,thunkAPI) =>{
+        try {
+           return getProductMainService.getAllStylesOfProductService(productId); 
+
+        }
+        catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+            return thunkAPI.rejectWithValue(message)
+        } 
+    }
+);
+
+//async thunk for get all styles of a product
+const getAllSizesOfStyle = createAsyncThunk(
+    'GET_ALL_SIZES_STYLE',
+    async (styleId,thunkAPI) =>{
+        try {
+           return getProductMainService.getAllSizesOfStyleService(styleId); 
+
+        }
+        catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+            return thunkAPI.rejectWithValue(message)
+        } 
+    }
+);
+
+//async thunk for get all styles of a product
+const getAllWarehouse = createAsyncThunk(
+    'GET_ALL_WAREHOUSE',
+    async (_,thunkAPI) =>{
+        try {
+           return getProductMainService.getAllWarehouseService(); 
+
+        }
+        catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+            return thunkAPI.rejectWithValue(message)
+        } 
+    }
+);
+
 //async thunk for get searched products
 const getSearchedProductsThunk = createAsyncThunk(
     'GET_SEARCHED_PRODUCTS',
@@ -65,5 +110,8 @@ const getProductThunk = {
    getSearchedProductsThunk,
    getInfinitySearchedProductsThunk,
    getSearchedProductFilterThunk,
+   getAllStylesOfProduct,
+   getAllSizesOfStyle,
+   getAllWarehouse,
 }
 export default getProductThunk;
