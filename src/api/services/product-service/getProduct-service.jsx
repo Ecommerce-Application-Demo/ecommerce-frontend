@@ -8,6 +8,24 @@ const getAllProductService = async (masterCategory) => {
     return  response.data;
 };
 
+const getAllStylesOfProductService = async (productId) => {
+    const response = await axiosInstanceProduct.get(`/get/product/style?productId=${productId}`);
+
+    return  response.data;
+};
+
+const getAllSizesOfStyleService = async (styleId) => {
+    const response = await axiosInstanceProduct.get(`/get/search/style/sizes?styleId=${styleId}`);
+
+    return  response.data;
+};
+
+const getAllWarehouseService = async () => {
+    const response = await axiosInstanceProduct.get(`/get/warehouse`);
+
+    return  response.data;
+};
+
 //get searched product for profuct listing
 const getSearchedProducts = async (searchingData) => {
     const { searchQuery, sortBy, selectedFilters } = searchingData;
@@ -63,6 +81,9 @@ const getProductMainService = {
     getSearchedProducts,
     getInfinitySearchedProducts,
     getSearchedProductFilter,
+    getAllStylesOfProductService,
+    getAllSizesOfStyleService,
+    getAllWarehouseService,
  }
  
  export default getProductMainService;

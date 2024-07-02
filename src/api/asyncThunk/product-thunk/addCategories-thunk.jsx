@@ -83,6 +83,18 @@ const addProductSkuThunk = createAsyncThunk(
     }
 );
 
+const addStyleInventory = createAsyncThunk(
+    'ADD_STYLE_INVENTORY',
+    async (inventoryData, thunkAPI) => {
+        try {
+            return addCategoriesProduct.addStyleInventoryService(inventoryData); 
+        } catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+);
+
 const addCategoriesProductThunk = {
    addMasterCategory,
    addCategory,
@@ -90,5 +102,6 @@ const addCategoriesProductThunk = {
    addBrand,
    addProduct,
    addProductSkuThunk,
+   addStyleInventory,
 }
 export default addCategoriesProductThunk;

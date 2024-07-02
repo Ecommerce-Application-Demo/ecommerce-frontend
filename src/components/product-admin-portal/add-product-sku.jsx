@@ -13,13 +13,16 @@ const AddProductSku = ({
   const dispatch = useDispatch();
   const { addProductSkuThunk } = addCategoriesProductThunk;
   const [formData, setFormData] = useState({
-    productId: "",
+    styleName: "",
     colour: "",
+    colourHexCode: '',
     mrp: "",
     discountPercentage: "",
     images: [],
+    sizeDetailsImageUrl: '',
     sizeVariants: [],
   });
+  const productName = productClick?.productName;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -82,9 +85,7 @@ const AddProductSku = ({
         ...formData.sizeVariants,
         {
           size: "",
-          sizeDetailsImageUrl: "",
           quantity: "",
-          availablePincodes: "",
         },
       ],
     });
@@ -100,17 +101,19 @@ const AddProductSku = ({
 
   const handleSubmitBtn = () => {
     const dataToAddProductSku = {
-      productId: productClick.productId,
+      productId: productClick?.productId,
+      styleName: formData.styleName,
       colour: formData.colour,
       mrp: formData.mrp,
       discountPercentage: formData.discountPercentage,
       images: formData.images,
+      sizeDetailsImageUrl: formData.sizeDetailsImageUrl,
       sizeVariantDetails: formData.sizeVariants,
     };
     dispatch(addProductSkuThunk(dataToAddProductSku))
       .unwrap()
       .then(() => {
-        toast.success("Product SKU added successfully.");
+        toast.success("Product Style added successfully.");
       })
       .catch(() => {
         toast.error("There was an error while adding the product SKU.");
@@ -124,14 +127,12 @@ const AddProductSku = ({
         return Object.values(variant).some((value) => value === "");
       }),
   });
-
-  console.log('styles modal;');
   return (
     <Modal
-      width="80vw"
+      width="65vw"
       height='80vh'
       onClose={()=>setOpenStyleModal(false)}
-      title="ADD PRODUCT STYLES"
+      title={`ADD PRODUCT STYLES FOR ${productName}`}
       footer=<button
         className={submitBtnStyle}
         onClick={handleSubmitBtn}
@@ -150,15 +151,14 @@ const AddProductSku = ({
         </div>
         <div className="admin-addProducts-container">
           <label htmlFor="productName">
-            Product name:
+            Style name:
             <input
-              id="productName"
-              name="productName"
+              id="styleName"
+              name="styleName"
               className="admin-addCategory-input-code"
-              placeholder="Enter the discount percentage"
-              value={productClick?.productName}
+              placeholder="Enter the name of styles"
+              value={formData.styleName}
               onChange={handleChange}
-              readOnly
             />
           </label>
 
@@ -171,6 +171,32 @@ const AddProductSku = ({
               className="admin-addCategory-input-code"
               placeholder="Enter the colour"
               value={formData.colour}
+              onChange={handleChange}
+            />
+          </label>
+
+          {/* Colour */}
+          <label htmlFor="colourHexCode">
+            Colour:
+            <input
+              id="colourHexCode"
+              name="colourHexCode"
+              className="admin-addCategory-input-code"
+              placeholder="Enter the colourHexCode"
+              value={formData.colourHexCode}
+              onChange={handleChange}
+            />
+          </label>
+
+          {/* sizeDetailsImageUrl */}
+          <label htmlFor="sizeDetailsImageUrl">
+          Size Details Image Url:
+            <input
+              id="sizeDetailsImageUrl"
+              name="sizeDetailsImageUrl"
+              className="admin-addCategory-input-code"
+              placeholder="Enter the sizeDetailsImageUrl"
+              value={formData.sizeDetailsImageUrl}
               onChange={handleChange}
             />
           </label>
@@ -218,7 +244,7 @@ const AddProductSku = ({
 
           {/* Render size variants */}
           {formData.sizeVariants?.map((sizeVariant, index) => (
-            <div>
+            <div style={{width: '100%'}}>
               <div className="sizeVariants-btn-wrapper">
                 <h3>add size variant {index + 1}</h3>
                 <button onClick={() => handleRemoveSizeVariant(index)}>Remove</button>
@@ -235,17 +261,6 @@ const AddProductSku = ({
                     onChange={(e) => handleSizeVariantChange(index, e)}
                   />
                 </label>
-                <label htmlFor={`sizeDetailsImageUrl_${index}`}>
-                  Size Details Image URL:
-                  <input
-                    id={`sizeDetailsImageUrl_${index}`}
-                    name="sizeDetailsImageUrl"
-                    className="admin-addCategory-input-code" // Add this class name
-                    placeholder="Enter the size details image URL"
-                    value={sizeVariant.sizeDetailsImageUrl}
-                    onChange={(e) => handleSizeVariantChange(index, e)}
-                  />
-                </label>
                 <label htmlFor={`quantity_${index}`}>
                   Quantity:
                   <input
@@ -254,17 +269,6 @@ const AddProductSku = ({
                     className="admin-addCategory-input-code"
                     placeholder="Enter the quantity"
                     value={sizeVariant.quantity}
-                    onChange={(e) => handleSizeVariantChange(index, e)}
-                  />
-                </label>
-                <label htmlFor={`availablePincodes_${index}`}>
-                  Available Pincodes:
-                  <input
-                    id={`availablePincodes_${index}`}
-                    name="availablePincodes"
-                    className="admin-addCategory-input-code"
-                    placeholder="Enter available pincodes"
-                    value={sizeVariant.availablePincodes}
                     onChange={(e) => handleSizeVariantChange(index, e)}
                   />
                 </label>

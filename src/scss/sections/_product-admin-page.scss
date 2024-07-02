@@ -20,7 +20,7 @@
         padding: 100px 20px 100px 0px;
         display: flex;
         flex-direction: column;
-        width: fit-content;
+        width: 30%;
         text-wrap: nowrap;
         gap: 10px;
         border-right: 1px solid $primary-btn-red;
@@ -45,16 +45,17 @@
         }
     }
     .rightSide-admin-portal {
-        width: 100%;
+        width: 69%;
         @include breakpoint(small-only) {
             margin-top: 60px;
+            width: 100%;
         }
     }
 }
 
 .admin-input-container {
     width: 100%;
-    padding: 60px 20px 0px 30px;
+    padding: 60px 30px 0px 30px;
     @include breakpoint(medium) {
     padding: 50px 75px 0px 75px;
     }

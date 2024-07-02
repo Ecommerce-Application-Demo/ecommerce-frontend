@@ -41,6 +41,12 @@ const addProductSkuService = async (productSku) => {
     return  response.data;
 };
 
+const addStyleInventoryService = async (inventoryData) => {
+    const response = await axiosInstanceProduct.post(`/add/product/inventory`,
+    inventoryData
+    );
+    return  response.data;
+};
 
 const addCategoriesProduct = {
    addMasterCategory,
@@ -49,6 +55,7 @@ const addCategoriesProduct = {
    addBrand,
    addProduct,
    addProductSkuService,
+   addStyleInventoryService,
 }
 
 export default addCategoriesProduct;
