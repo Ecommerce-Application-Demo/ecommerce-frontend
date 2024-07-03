@@ -8,6 +8,7 @@ import { useParams } from 'react-router';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import NoProductFoundPage from '../components/product-listing-page/noProductFoundPage';
+import tags from '../metaTag/dynamicTags';
 
 const SingleProductPage = () => {
   //redux states--------------
@@ -37,9 +38,10 @@ const SingleProductPage = () => {
 
   return (
     <div className={!isMobile ? 'global-margin' : 'global-margin-singleProduct'}>
+         {productWithStyleId && tags.SingleProductTag(productWithStyleId)}
       {!FAIL ?
       <div className="single-product-container">
-        {isMobile ? <ProductImagePhone productImages={ productImages }/> : <ProductImage productImages={ productImages } />}
+        {isMobile ? <ProductImagePhone productImages={ productImages } productWithStyleId={ productWithStyleId } /> : <ProductImage productImages={ productImages } productWithStyleId={ productWithStyleId }/>}
         <SingleProductDetails
           addressForDeliveryOption={ addressForDeliveryOption }
           dispatch={ dispatch }
