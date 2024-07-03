@@ -1,0 +1,58 @@
+.noProductFound-main-container {
+  width: 100%;
+  height: calc(100vh - 150px);
+  padding: 0px 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  @include breakpoint(medium) {
+    padding: 20px 80px;
+  }
+
+  @include breakpoint(large) {
+    padding: 20px 160px;
+  }
+
+  .noProductFound-imagewrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    width: 200px;
+
+    @include breakpoint(medium) {
+      height: 300px;
+      width: 300px;
+    }
+
+    @include breakpoint(large) {
+      height: 300px;
+      width: 300px;
+    }
+    & img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .noProductFound-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+
+    .noProduct-title {
+      font-size: 34px;
+      color: $primary-btn-red;
+
+      @include breakpoint(small-only) {
+        font-size: 22px;
+      }
+    }
+    & p {
+      color: $Black;
+    }
+  }
+}

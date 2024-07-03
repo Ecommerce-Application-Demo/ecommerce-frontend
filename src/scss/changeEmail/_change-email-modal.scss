@@ -1,0 +1,212 @@
+.change-email-modal-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 30px;
+    height: 100%;
+    width: 100%;
+
+    @include breakpoint(small-only) {
+      flex-direction: column;
+    }
+
+  .old-otp-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 500px;
+    width: 100%;
+    border: 1px solid $Grey;
+    padding: 20px;
+    border-radius: 5px;
+    background: $primary-background;
+    position: relative;
+
+    @include breakpoint(medium) {
+      width: 350px;
+      height: 400px;
+    }
+
+    @include breakpoint(large) {
+      width: 300px;
+      height: 400px;
+    }
+
+    & .old-otp-card-overlay {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      left: 0;
+      top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+
+      &--disabled {
+        background: $disabled-modal-background;
+        cursor: not-allowed;
+      }
+
+      &--success {
+        background: $success-modal-background;
+        font-size: 25px;
+        color: $success-tick;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
+    & > h2 {
+      color: $Black;
+    }
+    & > p {
+      color: $Black;
+    }
+    & > .otp-input-wrapper {
+      display: flex;
+      // margin: 20px 0px;
+      flex-direction: row;
+      gap: 30px;
+      & > .otp-input {
+        height: 40px;
+        width: 30px;
+        gap: 20px;
+        caret-color: $primary-btn-red;
+        text-align: center;
+        border: 0.5px solid $Grey;
+        font-weight: bold;
+        border-radius: 3px;
+        &:focus {
+          outline: none;
+          border: 2px solid $primary-btn-red;
+        }
+      }
+      input[type="number"] {
+        -moz-appearance: textfield;
+      }
+
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+    & > .resend-otp-text,
+    & > .loginText > .password {
+      color: $primary-btn-red;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    & .change-email-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $fixed-white;
+      padding: 10px;
+
+      &:not([disabled]) {
+        background: $primary-btn-red;
+        cursor: pointer;
+    }
+      &[disabled] {
+        background: $primary-btn-red-disabled;
+        cursor: not-allowed;
+    }
+  }
+}
+
+  .new-email-card {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 20px;
+    height: 100%;
+    width: 100%;
+    border: 1px solid $Grey;
+    padding: 40px 20px 20px 20px;
+    border-radius: 5px;
+    background: $primary-background;
+
+    @include breakpoint(medium) {
+      width: 350px !important;
+      height: 400px;
+    }
+
+    @include breakpoint(large) {
+      width: 300px;
+      height: 400px;
+    }
+
+    & h2 {
+      color: $Black;
+    }
+    & input {
+      // height: 40px;
+      border-radius: 40px;
+      width: 100%;
+      border: none;
+      padding: 10px;
+      font-size: 14px;
+
+      @include breakpoint(medium) {
+        padding: 14px;
+        font-size: 18px;
+      }
+
+      @include breakpoint(large) {
+        padding: 20px;
+        font-size: 24px;
+      }
+
+      &:focus {
+        outline: none;
+        border: none;
+      }
+    }
+
+    & .request-otp-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      color: $fixed-white;
+
+      &:not([disabled]) {
+        background: $primary-btn-red;
+        cursor: pointer;
+    }
+    &[disabled] {
+        background: $primary-btn-red-disabled;
+        cursor: not-allowed;
+    }
+    }
+
+    & .new-email-card-overlay {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      left: 0;
+      top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 15px;
+    
+      &--disabled {
+        background: $disabled-modal-background;
+        cursor: not-allowed;
+      }
+
+      &--success {
+        background: $success-modal-background;
+        font-size: 25px;
+        color: $success-tick;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
+  }
+}

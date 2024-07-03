@@ -1,0 +1,116 @@
+.admin-editProduct-main-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: scroll;
+    @include breakpoint(medium) {
+        // margin: 60px 75px 20px;
+        justify-content: center;
+        gap: 20px;
+        }
+    
+        @include breakpoint(large) {
+        // margin: 70px 300px 20px;
+        justify-content: space-between;
+        }
+        &>h2 {
+            text-align: center;
+            font-size: 30px;
+            color: $primary-btn-red;
+        }
+    &>.admin-addProducts-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        column-gap: 20px;
+        row-gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+        overflow-y: scroll;
+
+        @include breakpoint(medium) {
+        justify-content: center;
+        gap: 20px;
+        }
+    
+        @include breakpoint(large) {
+        justify-content: space-between;
+    
+        }
+        &>label {
+            width: 100%;
+
+            .admin-addCategory-input-code {
+                width:  100%;
+                border: 1px solid $primary-btn-red;
+                height: 40px;
+                border-radius: 10px;
+                padding-left: 20px;
+                margin-bottom: 10px;
+                &:focus {
+                    outline: none;
+                }
+            }
+            .admin-addCategory-input-disabled {
+                width:  100%;
+                border: 1px solid $Grey;
+                height: 40px;
+                background-color: $Grey;
+                color: $White;
+                border-radius: 10px;
+                padding-left: 20px;
+                margin-bottom: 10px;
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+        .admin-addCategory-dropdown {
+            width: 100%;
+            height: 40px;
+            border: 1px solid $primary-btn-red;
+            border-radius: 10px;
+            padding-left: 10px;
+            background-color: white;
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+}
+.editProduct-btn-footer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    margin: 10px 0px 0px;
+    .admin-addCategory-Btn {
+        background-color: $primary-btn-red;
+        color: $White;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        padding: 20px;
+        width: 45%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    .admin-addCategory-Btn-disabled {
+        cursor: not-allowed;
+        background-color: $primary-btn-red-disabled;
+    }
+    .admin-addCategory-cancelBtn {
+       display: flex;
+       flex-direction: row;
+       justify-content: center;
+       align-items: center;
+       background-color: $Grey;
+       color: $White;
+       width: 45%;
+       border-radius: 10px;
+       padding: 20px;
+    }
+}

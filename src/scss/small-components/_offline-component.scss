@@ -1,0 +1,30 @@
+.offline-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+
+    &>img {
+     height: fit-content;
+     max-width: 80%;
+     width: fit-content;
+     max-height: 60%;
+    }
+    .offline-title {
+        @include primaryGradientText;
+        font-size: 35px;
+        @include breakpoint(small-only) {
+            font-size: 25px;
+        }
+    }
+    .offline-description {
+        width: 60%;
+        color: $Grey;
+    }
+    .offline-soon {
+      color: $primary-btn-red;
+    }
+}

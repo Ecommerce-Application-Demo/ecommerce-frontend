@@ -1,0 +1,181 @@
+.cartSection-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    position: relative;
+
+  .crossSymbol {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: $Black;
+  }
+    .cartSection-items {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        @include breakpoint(small-only) {
+          padding: 0px 10px;
+
+        }
+        .cartSection-item-left {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            align-items: center;
+
+            @include breakpoint(small-only) {
+              font-size: 9px;
+              gap: 2px;
+            }
+        }
+        .cartSection-item-right {
+          display: flex;
+          flex-direction: row;
+          gap: 5px;
+          color: $Grey;
+          font-weight: bold;
+
+          &>p {
+            cursor: pointer;
+            font-size: 14px;
+
+            @include breakpoint(small-only) {
+              font-size: 9px;
+            }
+          }
+        }
+    }
+    .cartsection-cardwrapper {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+
+      .cartCard-container {
+        width: 100%;
+        height: 220px;
+        padding: 10px;
+        border: 1.5px solid $freeze-purple;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        font-size: 12px;
+        transition: hover 0.3s ease-in-out;
+        position: relative;
+
+        @include breakpoint(small-only) {
+          height: fit-content;
+        }
+        &:hover {
+         border: none;
+         box-shadow: $product-card-box-shadow;
+        }
+
+        .card-leftside {
+          width: 150px;
+          min-width: 150px;
+          height: 100%;
+
+          @include breakpoint(small-only) {
+            width: 100px ;
+            height: 100%;
+            min-width: 100px;
+          }
+          &>img {
+            height: 100%;
+            width: 100%;
+          }
+          &>div {
+           position: absolute;
+           top: 18px;
+           left: 18px;
+          }
+        } 
+        .card-rightside {
+          width: 80%;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          color: $Black;
+          justify-content: center;
+          
+          @include breakpoint(small-mobile) {
+            font-size: 9px;
+          }
+          &>p>span {
+            font-weight: bold;
+          }
+          .brandname {
+            font-weight: bold;
+            color: $Black;
+            font-size: 16px;
+          }
+          .productname {
+            color: $Grey;
+          }
+          .size-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+
+            .size-btn {
+              background: $product-card-content-background;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: 2px;
+              border-radius: 3px;
+              gap: 3px;
+            }
+            .left-btn {
+              color: $orangeRed;
+              border: 1px solid $orangeRed;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: 2px;
+              border-radius: 3px;
+            }
+          }
+          .price-container {
+            display: flex;
+            flex-direction: row;
+            gap: 8px;
+            font-size: 14px;
+
+            @include breakpoint(small-mobile) {
+              font-size: 9px;
+            }
+            .price {
+              &--actual {
+                font-weight: bold;
+                color: $Black;
+              }
+              &--mrp {
+                text-decoration: line-through;
+                color: $Grey;
+              }
+              &--discount {
+                color: $orangeRed;
+                font-weight: bold;
+              }
+            }
+          }
+          .return-textwrap {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            gap: 2px;
+          }
+        }
+      }
+    }
+}

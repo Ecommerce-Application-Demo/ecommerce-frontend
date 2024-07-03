@@ -1,0 +1,33 @@
+.splash-screen-container {
+    background: $secondary-background;
+    text-align: center;
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    // position: fixed;
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
+    z-index: $splash-zIndex;
+
+    .splashScreen-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; /* Center horizontally */
+        height: 100%; /* Fill the parent's height */
+
+        @include breakpoint(medium) {
+            flex-direction: row;
+        }
+
+        @include breakpoint(large) {
+            flex-direction: row;
+        }
+
+        .text-container {
+            color: $primary-btn-red;
+            font-size: 30px;
+        }
+    }
+}

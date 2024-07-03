@@ -1,51 +1,89 @@
-.createAccount-container {
+.createAccount-main-container {
     display: flex;
+    align-items: center;
     flex-direction: column;
-    gap: 10px;
-    margin-bottom: 48px;
-    &>p{
-    color: rgb(90, 77, 77);
-/* Title/16PX Regular */
-font-family: Poppins;
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: 24px; 
-    }
+}
+.createAccount-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 48px;
+  width: fit-content;
+
+  & > h1 {
+    color: $Black;
+  }
+  & > p {
+    color: $brandTitleText;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+  }
 }
 
 .signup-form-container {
-        display: flex;
-        flex-direction: column;
-        gap: 40px;
-        width: 370px;
-    
-        & .create-acount-btn {
-            width: 100%;
-            color: var(--Text, #FAFAFA);
-            font-family: Poppins;
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 500;
-            border-radius: 4px;
-            background: var(--Button2, #DB4444);
-            line-height: 56px;
-            border: none;
-    }
-    &>div>p {
-        margin-top: 15px;
-        color: red;
-    }
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 370px;
+
+  & .create-acount-btn {
+    width: 100%;
+    color: $Button-text-color;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    // margin-top: 20px;
+    font-weight: 500;
+    border-radius: 4px;
+    background: $primary-btn-red;
+    line-height: 56px;
+    border: none;
+    cursor: pointer;
+  }
+  & > div > p {
+    margin-top: 15px;
+    color: $primary-btn-red;
+  }
 }
 
-.signupform-google-btn{
-    margin-top: 16px;
-    display: flex;
-padding: 16px 86px;
-flex-direction: row;
-align-items:center;
-gap: 10px;
-border-radius: 4px;
-border: 1px solid rgba(0, 0, 0, 0.40);
-cursor: pointer;
+.signupform-google-btn {
+  margin-top: 16px;
+  display: flex;
+  padding: 16px 86px;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  border-radius: 4px;
+  border: 1px solid $Button-border-black-shadow;
+  cursor: pointer;
+}
+
+.signupPassword-validation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: -20px;
+  & > div {
+    width: fit-content;
+    box-shadow: 0 8px 10px 0 $Box-shadow-blue;
+    text-wrap: nowrap;
+    font-size: 13px;
+    border-radius: 3px;
+    padding: 3px;
+    color: $Black;
+    background-color: $White;
+  }
+  & .number,
+  .special,
+  .uppercase,
+  .lowercase,
+  .charrecters {
+    background-color: $green;
+    color: $fixed-white;
+  }
 }

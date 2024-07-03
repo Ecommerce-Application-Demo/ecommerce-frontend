@@ -1,0 +1,103 @@
+.dashboard-main-container {
+    padding: 0px;
+    width: 100%;
+    background: $White;
+    @include breakpoint(medium) {
+        margin: 0px 180px;
+    }
+    @include breakpoint(large) {
+        margin: 20px 280px;
+    }
+
+    .dashboard-top-background {
+        background: $secondary-background;
+        height: 20vh;
+        width: 100%;
+    }
+    .dashboard-user-icon-wrapper {
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: -50px;
+        align-items: center;
+        justify-content: center;
+        height: 120px;
+        width: 120px;
+        border-radius: 6px;
+        position: relative;
+        background: $brand-gradient;
+        &>div {
+            padding: 10px;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .dashboard-user-icon {
+           height: 105px;
+           width: 116px;
+           border-radius: 6px;
+           background: $White;
+           color: $Black;
+        }
+    }
+    .dashboard-user-email {
+        margin-top: 15px;
+        color: $Black;
+        text-align: center;
+    }
+    .dashboard-divider-line {
+        margin: 20px 0px;
+        width: 100%;
+        height: 4px;
+        background: $secondary-background;
+    }
+    .dashboard-sections-wrapper {
+        display: flex;
+        flex-direction: column;
+        .dashboard-sections {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            padding: 12px 10px;
+            justify-content: space-between;
+            align-items: center;
+            color: $Grey;
+            text-decoration: none;
+            
+            &:hover {
+                background: $hover-grey;
+            }
+
+            .dashboard-section-leftside-wrapper {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 15px;
+                width: 70%;
+
+                .dashboard-section-content-wrapper {
+                    &>:first-child {
+                        color: $Black;
+                        font-weight: 600;
+                    }
+                    &>:last-child {
+                        color: $Grey;
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+        .dashboard-logout-wrapper {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            padding: 20px;
+            justify-content: center;
+            color: $fixed-white;
+            background: $primary-btn-red;
+        }
+    }
+}

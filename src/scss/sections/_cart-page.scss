@@ -1,0 +1,40 @@
+.cartpage-main-container {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    @include breakpoint(small-only) {
+        align-items: center;
+    }
+
+    @include breakpoint(medium) {
+        padding: 30px 40px;
+        display: flex;
+        flex-direction: row;
+        gap: 2%;
+    }
+
+    @include breakpoint(large) {
+        padding: 40px 180px;
+        display: flex;
+        flex-direction: row;
+        gap: 2%;
+    }
+
+    .cartpage-leftsection {
+        width: 63%;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+
+        @include breakpoint(small-only) {
+        width: 100%;
+        }
+    }
+    .cartpage-rightsection {
+        width: 35%;
+        @include breakpoint(small-only) {
+        width: 100%;
+        }
+    }
+}

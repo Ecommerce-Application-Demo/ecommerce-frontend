@@ -1,6 +1,65 @@
-@import '../utilites/variables';
-
-.home {
+.homepage-main-container {
+    display: flex;
+    width: 100%;
     background-color: $White;
-    margin-top: 80px;
+    flex-direction: column;
+    @include breakpoint(small-only) {
+    }
+    @include breakpoint(medium) {
+    margin: 0px 0px;
+    }
+
+    @include breakpoint(large) {
+    margin: 0px 0px;
+    }
+    .homepage-titleImages-container {
+        display: flex;
+        flex-wrap: nowrap;
+        @include breakpoint(small-only) {
+            flex-direction: column;
+            }
+    }
+    .homePage-titleImages-desktop-wrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        & :nth-child(1) {
+            width: 100%;
+        }
+        & :nth-child(2) {
+            width: 100%;
+        }
+    }
+    .homePage-titleImages-mobile-wrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        & :nth-child(1) {
+            width: 100%;
+        }
+        & :nth-child(2) {
+            width: 100%;
+        }
+    }
+    .homePage-backgroundStyle {
+        height: 250px;
+        width: 100%;
+        position: relative;
+        top: -5px;
+        background: $homepage-background;
+
+        @include breakpoint(small-only) {
+        height: 200px;
+        top: -5px;
+        }
+    }
+   
+}
+.swiper-pagination {
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    z-index: 1000000;
 }

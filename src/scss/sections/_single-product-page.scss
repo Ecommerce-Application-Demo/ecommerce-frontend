@@ -1,0 +1,114 @@
+.single-product-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+    gap: 20px;
+    width: 100%;
+    @include breakpoint(small-mobile) {
+    margin-top: 0px;
+    }
+    @include breakpoint(medium) {
+        flex-direction: row;
+        margin-top: 80px;
+        padding: 40px 60px;
+        justify-content: center;
+        gap: 2%;
+
+    }
+    @include breakpoint(large) {
+        flex-direction: row;
+        gap: 40px;
+        margin-top: 80px;
+        padding: 40px 200px;
+        justify-content: center;
+        gap: 4%;
+    }
+}
+.mobile-stickybottom-container {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: $White;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.expressDelivery {
+  text-align: center;
+  color: $Black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  .expressText {
+    font-weight: bold;
+  }
+  .getExpressDeliveryText {
+    color: $grey-dark;
+  }
+}
+.mobile-btn-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    z-index: 100; 
+    gap: 5px;
+
+    .addToCart-btn, .wishlist-btn {
+      flex: 1;
+      padding: 10px 0px;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+    .addToCart-btn {
+        &:not([disabled]) {
+          background: $primary-btn-red;
+          color: $fixed-white;
+          cursor: pointer;
+        &:hover {
+          background: $orangeRed;
+          }
+      }
+        &[disabled] {
+          background: $primary-btn-red-disabled;
+          color: $fixed-white;
+          cursor: not-allowed;
+      }
+    }
+    .wishlist-btn {
+        background: $White;
+        color: $Black;
+        border: 1px solid $Grey;
+        &:hover {
+        background: $grey-dark;
+        }
+    }
+    .outOfStock-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $fixed-white;
+      background: $Grey;
+      padding: 10px 0px;
+      flex: 1 1;
+      border-radius: 4px;
+    }
+    
+  }
+  
+  //   .mobile-btn-container.static {
+  //   position: static;
+  //   box-shadow: none;
+  //   margin-top: 20px;
+  // }
+  

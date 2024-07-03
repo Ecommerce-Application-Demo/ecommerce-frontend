@@ -1,16 +1,99 @@
-@import 'base/base';
 
+
+//utilities
+@import 'utilites/variables';
+@import 'utilites/mixins';
+
+@import 'base/base';
 //components
 @import 'components/navbar';
 @import 'components/signUp';
 @import 'components/loginOrSignup';
+@import 'components/otp';
+@import 'components/address/add-address';
+@import 'components/address/view-address';
+@import 'components/unauthorizedError/unauthorizedError.scss';
+@import 'authFlow/previous-login';
+
+
+//profile page components-----
+@import 'components/profile/edit-profile';
+@import 'components/profile/delete-account-modal';
+@import 'changeEmail/change-email-popup';
+@import 'changeEmail/change-email-modal';
+
+//components-----single product page
+@import 'components/single-product-page/product-image';
+@import 'components/single-product-page/single-product-details';
+@import 'components/single-product-page/product-image-phone';
+
+//components--------product admin portal page
+@import 'components/product-admin-portal/product-admin-add-categories';
+@import 'components/product-admin-portal/product-admin-add-product';
+@import 'components/product-admin-portal/all-products-admin';
+@import 'components/product-admin-portal/product-admin-edit-product';
+@import 'components/product-admin-portal/add-inventory';
+
+@import 'components/navbar/sideNavbar';
+
+//components-------- home pages
+@import 'components/home/brand-section';
+@import 'components/home/category-section';
+
+//components ------------- product-listing-pages
+@import 'components/product-listing-page/product-listing-breadcrump';
+@import 'components/product-listing-page/product-listing-cards';
+@import 'components/product-listing-page/product-listing-filter';
+@import 'components/product-listing-page/product-listing-sortBy';
+@import 'components/product-listing-page/product-listing-single-card';
+@import 'components/product-listing-page/noproduct-found';
+@import 'components/product-listing-page/product-listing-edit-filter';
+
+//components-------------- loading pages----
+@import 'sections/loadingPages/product-listing-loading-page';
+
+
+//components---------------cartpages
+@import 'components/cart/address-section';
+@import 'components/cart/cart-section';
+@import 'components/cart/moveToWishlist-section';
+@import 'components/cart/priceDetails-section';
+
+
 
 //small components
-@import 'small-components/inputField';
+// @import 'small-components/inputField';
+@import 'small-components/loading-screen';
+@import 'small-components/accountDropdown';
+@import 'small-components/modal-global';
+@import 'small-components/global-toast';
+@import 'small-components/inputFIeld';
+@import 'small-components/popup';
+@import 'small-components/splash-screen';
+@import 'small-components/reactSwiper';
+@import 'small-components/theme-toggle';
+@import 'small-components/custom-headroom';
+@import 'small-components/scrollToTop';
+@import 'small-components/offline-component';
+@import 'small-components/checkbox';
+@import 'small-components/productNavbar';
+@import 'small-components/changePincode-modal';
 
 //pages import
 @import 'sections/home';
 @import 'sections/login-signup';
 @import 'sections/notFound';
+@import 'sections/address';
+@import 'sections/footer-page';
+@import 'sections/profile-page';
+@import 'sections/single-product-page';
+@import 'sections/product-admin-page';
+@import 'sections/dashboard-page';
+@import 'sections/product-listing-page';
+@import 'sections/cart-page';
+@import 'sections/payment-page';
 
-@import 'utilites/variables';
+
+//nested component import
+@import 'nested_pages/account-imformation-page';
+@import 'nested_pages/order-section';

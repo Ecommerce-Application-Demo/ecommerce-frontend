@@ -1,6 +1,155 @@
-$Blue: blue;
-$Red: red;
-$White:#fff;
-$boxShadow:rgba(99, 99, 99, 0.2);
-$Black:black;
-$SearchBar-background: #F5F5F5;
+//-------------------------------------colors--------------------------------------->
+$Blue: var(--Blue);
+$Red: var(--Red);
+$White: var(--White);
+$boxShadow: var(--boxShadow);
+$Black: var(--Black);
+$SearchBar-background: var(--SearchBar-background);
+$primary-btn-red: var(--primary-btn-red);
+$primary-btn-red-disabled: var(--primary-btn-red-disabled);
+$primary-box-shadow-2: var(--primary-box-shadow-2);
+$primary-box-shadow: var(--primary-box-shadow);
+$Grey: var(--Grey);
+$green: var(--green);
+$Grey-text-color: var(--Grey-text-color);
+$Button-text-color: var(--Button-text-color);
+$Button-border-black-shadow: var(--Button-border-black-shadow);
+$Disabled-background: var(--Disabled-background);
+$Input-success-background: var(--Input-success-background);
+$Input-normal-background: var(--Input-normal-background);
+$Box-shadow-blue: var(--Box-shadow-blue);
+$Black-opacity-0_5: var(--Black-opacity-0_5);
+$highlighted-text: var(--highlighted-text);
+$text-color-blue: var(--text-color-blue);
+$homepage-background: var(--homepage-background);
+$modal-primary-box-shadow: var(--modal-primary-box-shadow);
+$popup-primary-box-shadow: var(--popup-primary-box-shadow);
+$card-box-shadow: var(--card-box-shadow);
+$circular-boxShadow-primary: var(--circular-boxShadow-primary);
+$brandTitleText: var(--brand-title-text);
+$secondary-background: var(--secondary-background);
+$hover-grey: var(--hover-grey);
+$primary-background: var(--primary-background);
+$ice-cold: var(--ice-Cold);
+$freeze-purple:var(--freeze-purple);
+$medium-purple : var(--medium-purple);
+$purple-pain: var(--purple-pain);
+$heavy-purple:var(--heavy-purple);
+$gradient-card-background : radial-gradient(circle, $freeze-purple, $medium-purple);
+$inside-box-shadow-card: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+$success-tick: var(--success-tick);
+$success-modal-background: var(--success-modal-background);
+$disabled-modal-background: var(--disabled-modal-background);
+$product-card-background: var(--product-card-background);
+$product-brand-text: var(--product-brand-text);
+$product-card-content-background: var(--product-card-content-background);
+$product-ratings-background: var(--product-ratings-background);
+$orangeRed: orangered;
+$fixed-white-overlay-background: var(--fixed-white-overlay-background);
+$white-darklight: var(--white-darklight);
+$grey-dark: var(--grey--dark);
+$selected-address-background: var(--selected-address-background);
+//------------z-indexes-------------------
+$top-most-zIndex: 100;
+$secondTop-zIndex: 99;
+$general-zIndex: 1;
+$splash-zIndex: 101;
+
+
+// box shadowsss------
+$product-card-box-shadow: var(--product-card-box-shadow);
+
+
+//--------------------------------------breakpoints for responsiveness------------------------>
+
+$bp-small: 320px !default;
+$bp-small-medium: 650px !default;
+$bp-medium: 768px !default;
+$bp-medium-large: 950px !default;
+$bp-large: 1280px !default;
+$bp-max-small-only: 767.98px !default;
+$bp-small-small: 450px !default;
+
+
+:root {
+    --Blue: blue;
+    --Red: red;
+    --White: #fff;
+    --boxShadow: rgba(99, 99, 99, 0.2);
+    --Black: black;
+    --SearchBar-background: #F5F5F5;
+    --primary-btn-red: #f70767;
+    --primary-btn-red-disabled: #f26868d1;
+    --primary-box-shadow-2: #f30e0e60;
+    --primary-box-shadow: #db444498;
+    --Grey: grey;
+    --green: green;
+    --Grey-text-color: rgb(90, 77, 77);
+    --Button-text-color: #FAFAFA;
+    --Button-border-black-shadow: rgba(0, 0, 0, 0.40);
+    --Disabled-background: rgb(169, 160, 160);
+    --Input-success-background: rgb(211, 254, 211);
+    --Input-normal-background: rgb(247, 243, 243);
+    --Box-shadow-blue: rgba(31, 38, 135, 0.37);
+    --Black-opacity-0_5: rgba(0, 0, 0, 0.5);
+    --highlighted-text: #00FF66;
+    --text-color-blue: rgb(19, 22, 56);
+    --homepage-background: linear-gradient(180deg, #a49696 0%, rgb(235, 234, 230) 100%);
+    --modal-primary-box-shadow: 0 0 0 50vmax rgba(0, 0, 0, 0.8);
+    --popup-primary-box-shadow: 0 0 0 80vmax rgba(0, 0, 0, 0.8);
+    --card-box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    --circular-boxShadow-primary: 2px 0 10px 2px #db4444;
+    --brand-title-text:rgb(17, 14, 14);
+    --secondary-background: radial-gradient(circle, rgba(236,232,234,1) 0%, rgba(115,119,125,1) 100%);
+    --hover-grey:rgb(208, 204, 204);
+    --primary-background: rgb(232, 229, 229);
+    --ice-Cold: #a0d2eb;
+   --freeze-purple: #e5eaf5;
+   --medium-purple: #d0bdf4;
+   --purple-pain: #8458B3;
+   --heavy-purple: #a28089;
+   --success-tick: rgb(5, 196, 5);
+   --success-modal-background: #084408d0;
+   --disabled-modal-background:#8c8686a0;
+   --product-card-background: #ffff;
+   --product-card-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+   --product-brand-text:rgb(19, 22, 56);
+   --product-card-content-background: #e5eaf5;
+   --product-ratings-background:rgba(255, 255, 255, 0.696);
+   --fixed-white-overlay-background: rgba(255, 255, 255, 0.696);
+   --white-darklight: white;
+   --grey-dark: grey;
+   --selected-address-background: #fcd2f3;
+}
+
+.dark-mode {
+    // --primary-btn-red: white;
+    --primary-background: rgb(33, 32, 32);
+    --secondary-background:rgb(21, 27, 26);
+    --Black: white;
+    --White: black;
+    --homepage-background:linear-gradient(180deg, #1c1919 0%, rgb(0, 0, 0) 100%);
+    --brand-title-text:#00FF66;
+    --circular-boxShadow-primary: 2px 0 10px 2px #00FF66;
+    --primary-btn-red:#f70767;
+    --hover-grey:rgb(51, 49, 49);
+    --freeze-purple: #8458B3;
+    --medium-purple: black;
+    --product-card-background:rgb(21, 27, 26);
+    --product-card-box-shadow: rgba(255, 254, 254, 0.1) 0px 10px 50px;
+    --product-brand-text:white;
+   --product-card-content-background: rgb(33, 32, 32);
+   --product-ratings-background:rgba(34, 32, 32, 0.696);
+   --SearchBar-background: rgb(33, 32, 32);
+   --text-color-blue: rgb(245, 166, 166);
+   --purple-pain: #e5eaf5;
+   --white-darklight: rgb(21, 27, 26);
+   --grey--dark: rgb(194, 191, 191);
+   --selected-address-background: #42323f;
+}
+
+//-------------------------fixed colors------------------
+
+$fixed-white: white;
+$fixed-black: black;
+$brand-gradient: linear-gradient(to right, #f32170, #ff6b08, #cf23cf, #eedd44);

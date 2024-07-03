@@ -1,0 +1,88 @@
+.account-imformation-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    width: 100%;
+
+    @include breakpoint(medium) {
+        padding: 20px 40px;
+    }
+
+    @include breakpoint(large) {
+        padding: 20px 150px;
+    }
+
+    & >.account-imformation-roadmap-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        &> .account-imformation-roadmap{
+            display: flex;
+            flex-direction: row;
+            gap: 12px;
+            align-items: center;
+
+            &>.link-under-roadmap {
+                text-decoration: none;
+                &>span {
+                    cursor: pointer;
+                    color: $Grey;
+                }
+            }
+            &>.link-under-roadmap:last-child {
+                text-decoration: none;
+                &>span {
+                    cursor: pointer;
+                    color: $primary-btn-red;
+                    font-weight: 800;
+                }
+            }
+        }
+        & .login-account-name {
+            color: $primary-btn-red;
+            font-size: 22px;
+            font-weight: 800;
+        }
+    }
+    &>.account-imformation-main-container {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        border-top: 1px solid $Grey;
+        justify-content: space-between;
+
+        &>.account-imformation-sidebar-container {
+            padding-right: 40px;
+            padding-bottom: 40px;
+            width: fit-content;
+            border-right: 1px solid $Grey;
+            &>.account-imformation-sidebar-wrapper {
+                margin-top: 15px;
+                text-wrap: nowrap;
+                &>.sidebar-dt-active {
+                    color:$primary-btn-red;
+                }
+                &>dt {
+                    font-weight: bold;
+                }
+                &>dd {
+                    margin:15px 0px 0px 30px;
+                    font-size: 14px;
+                    cursor: pointer;
+                }
+                &> .sidebar-subchild-non-active {
+                    color: $Grey;
+                }
+                &>.sidebar-subchild-active {
+                    color: $primary-btn-red;
+                }
+            }
+        }
+        
+        &>.account-imformation-right-sidebar-container {
+            width: 100%;
+        }
+    }
+}

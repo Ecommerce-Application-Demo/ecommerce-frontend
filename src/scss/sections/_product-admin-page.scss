@@ -1,0 +1,73 @@
+.admin-portal-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 50px;
+    // margin: 0px 20px;
+
+    @include breakpoint(small-only) {
+    flex-direction: column;
+    }
+    // @include breakpoint(medium) {
+    // margin: 50px 75px;
+    // }
+
+    // @include breakpoint(large) {
+    // margin: 80px 300px;
+    // }
+
+    .leftSide-admin-portal {
+        padding: 100px 20px 100px 0px;
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+        text-wrap: nowrap;
+        gap: 10px;
+        border-right: 1px solid $primary-btn-red;
+
+        @include breakpoint(small-only) {
+        border-bottom: 1px solid $primary-btn-red;
+        border-right: none;
+        flex-direction: row;
+        font-size: 10px;
+        text-wrap: wrap;
+        justify-content: space-between;
+        width: 90vw;
+        padding: 20px 20px 20px 20px;
+        position: fixed;
+        background-color: $White;
+        }
+        & h3 {
+            cursor: pointer;
+        }
+        .active {
+            color: $primary-btn-red;
+        }
+    }
+    .rightSide-admin-portal {
+        width: 69%;
+        @include breakpoint(small-only) {
+            margin-top: 60px;
+            width: 100%;
+        }
+    }
+}
+
+.admin-input-container {
+    width: 100%;
+    padding: 60px 30px 0px 30px;
+    @include breakpoint(medium) {
+    padding: 50px 75px 0px 75px;
+    }
+
+    @include breakpoint(large) {
+    padding: 80px 180px 0px 180px;
+    }
+    .admin-secret-input {
+        width: 100%;
+        border: 1px solid $primary-btn-red;
+        height: 40px;
+        border-radius: 10px;
+        padding-left: 20px;
+    }
+}

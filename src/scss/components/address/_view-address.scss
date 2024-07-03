@@ -1,0 +1,84 @@
+.viewAddress-main-container {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    &>h4 {
+        color: $Grey;
+    }
+    &>.viewAddress-empty-wrapper {
+        display: flex;
+        align-items: center;
+        color: $primary-btn-red;
+        justify-content: center;
+        margin-top: 30px;
+    }
+    & .viewAddress-allCard-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        width: 100%;
+        max-width: 650px;
+        
+        &>.viewAddress-card-wrapper {
+            height: fit-content;
+            width: 100%;
+            padding: 20px;
+            // border: 1px solid $Grey;
+            border-radius: 4px;
+            background: $primary-background;
+            color: $Black;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            &:hover {
+                box-shadow: 0 8px 16px 0 $primary-box-shadow;
+            }
+            &>.viewAddress-card-addressBar {
+                margin-top: 30px;
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+            &>.viewAddress-address-type {
+                position: relative;
+                float: right;
+                bottom: 20px;
+                font-size: 12px;
+                background-color: $primary-btn-red;
+                padding: 5px;
+                color: white;
+                border-radius: 10px;
+            }
+            &>.viewAddress-defaultAddress-link {
+                margin-top: 10px;
+                margin-bottom: 10px;
+                cursor: pointer;
+                color: $primary-btn-red;
+                font-weight: bold;
+                width: fit-content;
+            }
+            &>.viewAddress-card-footer-btn {
+                display: flex;
+                flex-direction: row;
+                margin-top: 20px;
+                justify-content: space-between;
+                gap: 20px;
+                &>div {
+                    width: 50%;
+                    display: flex;
+                    padding: 10px 48px;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 10px;
+                    border: 1px solid $primary-btn-red;
+                    border-radius: 4px;
+                    background: $White;
+                    color: $primary-btn-red;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

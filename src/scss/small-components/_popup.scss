@@ -1,0 +1,85 @@
+.popup-main-container {
+  @include modalGlassBackground;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: max-content;
+  z-index: 9999;
+  width: 100vw;
+  animation: popupAnimation 0.8s;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  height: 100vh;
+  width: 100%;
+  z-index: 9998;
+}
+
+.popup-container {
+  width: 100%;
+}
+.popup-container-background {
+  @include modalGlassBackground;
+}
+
+.popup-title-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  color: $fixed-white; 
+  justify-content: space-between;
+  padding: 5px 10px;
+}
+.popup-title-wrapper-without-title {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  color: $Black;
+}
+
+// .popup-title-wrapper > div:first-child {
+//   width: 85%;
+// }
+
+.popup-title-wrapper > div:last-child {
+  cursor: pointer;
+}
+
+.popup-children-wrapper {
+}
+
+.login-image-container {
+  background-image: url('https://www.appmysite.com/blog/wp-content/uploads/2021/06/2-696x392.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100%;
+  background-position: center;
+  height: 150px;
+}
+
+@keyframes popupAnimation {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes closeAnimation {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.popup-main-container.closing {
+  animation: closeAnimation 0.8s;
+}

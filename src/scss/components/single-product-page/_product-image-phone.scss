@@ -1,0 +1,30 @@
+.product-image-phone-container {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+  }
+  
+  .single-product-image-phone {
+    width: 100%;
+    max-height: 500px; 
+    height: auto;
+    @include breakpoint(small-only) {
+        max-height: 67vh;
+        object-fit: contain;
+    }
+    @include breakpoint(small-mobile) {
+      max-height: 67vh;
+      object-fit: fill;
+  }
+    .swiper-container {
+      margin: 0 auto;
+    }
+    
+    .swiper-slide {
+      width: 100% !important; /* Set slide width to 100% */
+    }
+  }
+  
+  

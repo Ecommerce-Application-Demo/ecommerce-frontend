@@ -1,0 +1,253 @@
+.edit-profile-main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    align-items: center;
+
+    .edit-profile-details-container {
+        position: relative; 
+        padding: 20px 40px;
+        width: 100%;
+        max-width: 650px;
+        height: 100%;
+        background: $primary-background;
+        color: $Black;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        font-size: 25px;
+        justify-content: center;
+
+        @include breakpoint(small-only) {
+            padding: 10px 20px;
+        }
+        .profile-info-email {
+            width: 100%;
+            padding: 5px 10px;
+            border-radius: 50px;
+            font-size: 14px;
+            border: 1px solid $Grey;
+            background: $fixed-white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: $fixed-black;
+            cursor: pointer;
+
+            .profile-info-email-change {
+                background: $primary-btn-red;
+                color: $fixed-white;
+                border-radius: 5px;
+                display: flex;
+                 font-size: 12px; 
+                padding: 5px;
+                border-radius: 20px;
+            }
+        }
+        
+        & .edit-profile-gender-container {
+            // margin-top: 20px;
+            display: flex;
+            // margin: 0px 30px;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 40px;
+            &>.edit-profile-gender-type-container {
+                width: 100%;
+                padding: 10px;
+                display: flex;
+                border-radius: 30px;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                background-color: $Input-normal-background;
+                border: 1px solid $SearchBar-background;
+                color: $Grey;
+
+                @include breakpoint(small-only) {
+                    font-size: 12px;
+                }
+            }
+            &>.edit-profile-gender-type-container-active {
+                width: 100%;
+                padding: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                border-radius: 30px;
+                background-color: $Input-success-background;
+                border: 1px solid $SearchBar-background;
+                color: $green;
+                font-size: 20px;
+                font-weight: 800;
+
+                @include breakpoint(small-only) {
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+    .profile-edit-btn {
+        width: 100%;
+        max-width: 650px;
+        padding: 12px;
+        color: $fixed-white;
+        background-color: $primary-btn-red;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+     &>.edit-profile-saveChanges-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 650px;
+        gap: 20px;
+        width: 100%;
+
+
+        &>.edit-profile-cancel-btn {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: $Grey;
+            border-radius: 4px;
+            background-color: $Input-normal-background;
+            width: 100%;
+            border: 1px solid $Black;
+
+            @include breakpoint(small-only) {
+                font-size: 12px;
+                padding: 14px;
+            }
+
+        }
+        &>.edit-profile-saveChanges-btn {
+        background-color: $primary-btn-red;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        color: $fixed-white;
+        border-radius: 4px;
+        width: 100%;
+        cursor: pointer;
+
+        @include breakpoint(small-only) {
+            font-size: 12px;
+            padding: 14px;
+        }
+        }
+    }
+    .edit-profile-password-container {
+        width: 100%;
+        max-width: 650px;
+        display: flex;
+        margin-top: 40px;
+        flex-direction: column;
+        gap: 20px;
+        &>h3 {
+            color: $Black;
+        }
+        &>.edit-profile-password-wrapper {
+            display: flex;
+            gap: 40px;
+            flex-direction: row;
+
+            @include breakpoint(small-only) {
+                flex-direction: column;
+                align-items: center;
+            }
+           & > div {
+            width: 100%;
+               &>.edit-profile-password-input {
+                   width: 100%;
+               }
+           } 
+           &>.edit-profile-verify-btn-disabled {
+            color: $White;
+            background-color: $primary-btn-red-disabled;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 30px;
+            width: 200px;
+            border-radius: 4px;
+            cursor: not-allowed;
+           }
+           &>.edit-profile-verify-btn {
+            color: $fixed-white;
+            background-color: $primary-btn-red;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 30px;
+            width: 200px;
+            border-radius: 4px;
+            cursor: pointer;
+           }
+        }
+        &>.edit-forgot-password-text {
+            color: $primary-btn-red;
+            cursor: pointer;
+        }
+        .edit-newPassword-wrapper {
+            display: flex;
+            width: 100%;
+        }
+    }
+
+}
+.logout-or-delete-account-container {
+    width: 100%;
+    margin-top: 20px;
+    max-width: 650px;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+
+    &>h3 {
+        color: $Black;
+    }
+    .delete-account-btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        justify-content: center;
+        color: $primary-btn-red;
+        font-weight: bold;
+        background: $primary-background;
+        cursor: pointer;
+    }
+    .logout-account-btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        justify-content: center;
+        color: $fixed-white;
+        font-weight: bold;
+        background: $primary-btn-red-disabled;
+        cursor: pointer;
+
+    }
+    .logoutAll-account-btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        justify-content: center;
+        font-weight: bold;
+        background: $primary-btn-red;
+        color: $fixed-white;
+        cursor: pointer;
+    }
+}

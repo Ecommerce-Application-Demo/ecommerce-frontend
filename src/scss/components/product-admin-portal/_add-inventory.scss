@@ -1,0 +1,102 @@
+.productAdmin-inventory-container {
+    width: 100%;
+    height: 100%;
+
+    .selectStyledropdown-toggle {
+        width: 100%;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+    }
+    .style-dropdown-menu {
+        width: 100%;
+        background: $White;
+        border-radius: 5px;
+        .style-dropdown-menuitem {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 5px 30px;
+            &>div {
+                height: 20px;
+                width: 20px;
+                border-radius: 50%;
+                border: 1px solid $Grey;
+            }
+        }
+    }
+    .allSizes-container {
+        width: 100%;
+        color: $fixed-white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 5px;
+        margin: 10px 0px;
+
+        .sizes-wrapper {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+
+            .individual-size {
+                padding: 10px;
+                border-radius: 3px;
+                background: $White;
+                color: $Black;
+                width: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+            }
+        }
+    }
+}
+.inventoryModal-footer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border: none;
+    background: $primary-btn-red;
+    color: $fixed-white;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+
+    &:disabled {
+        cursor: not-allowed;
+        background: $primary-btn-red-disabled !important;
+    }
+}
+
+.inventory-form {
+    background: $White;
+    color: $Black;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .inventoryForm-titleWrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .inventoryForm-contentWrapper {
+        display: flex;
+        background: $medium-purple;
+        padding: 4px;
+        flex-direction: row;
+        gap: 20px;
+        flex-wrap: wrap;
+        border-radius: 4px;
+        width: fit-content;
+    }
+}

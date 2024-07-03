@@ -1,0 +1,16 @@
+.headroom {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+  }
+  
+  .headroom--unpinned {
+    transform: translateY(-100%);
+  }
+  
+  .headroom--pinned {
+    transform: translateY(0);
+  }
+  

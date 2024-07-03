@@ -1,22 +1,102 @@
-import './app.scss'
-import Navbar from './components/Navbar';
-import SignUp from './components/SignUp';
-import Home from './pages/Home';
-import LoginSignUp from './pages/Login-SignUp';
-import {Routes, BrowserRouter, Route} from 'react-router-dom';
-import NotFound from './pages/Not-found';
+// App.js
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import useBreakpoints from "./api/utilities/responsive";
+import Navbar from "./components/Navbar";
+import NavbarProductAdmin from "./components/navbar-product-admin";
+import FooterPage from "./pages/footer-page";
+import LoginPopupMobile from "./components/navbar/login-popup-mobile";
+import SplashScreen from "./small-components/Splash-screen";
+import Router from "./Router";
+import { AnimatePresence } from "framer-motion";
+import Headroom from "react-headroom";
+import SearchBar from "./components/SearchBar";
+import { enableFooterAction, enableNavbarAction, enableSearchbarAction } from "./redux/Slices/Theme/themeSlice";
+import NetworkStatus from "./small-components/NetworkStatus";
+
 function App() {
+  const routeParams = useLocation().pathname;
+  const dispatch = useDispatch();
+  const { isMobile } = useBreakpoints();
+  const { isLoggedIn } = useSelector((state) => state.user);
+  const [openLoginPopup, setOpenLoginPopup] = useState(false);
+  const [splashVisible, setSplashVisible] = useState(true);
+  const { isDarkMode, enableFooter, enableNavbar, enableSearchbar } = useSelector((state) => state.theme);
+
+  const routeValidationForLoginPopup = [
+    "/login-signup",
+    "/login",
+    "/signup",
+    "/otp-verification",
+    '/products',
+    '/my/dashboard'
+  ].includes(routeParams);
+
+  const footerRoute = [
+    '/my/dashboard',
+    '/products',
+    '/checkout/cart'
+  ].includes(routeParams);
+
+  const footerValidation = footerRoute && isMobile;
+  const navbarValidation = ["/product-admin", "/checkout/cart", '/checkout/payment'].includes(routeParams);
+
+  // Updated searchBarValidation logic
+  const excludedSearchBarRoutes = ["/product-admin", "/checkout/cart", '/checkout/payment'];
+  const isProductDetailPage = routeParams.startsWith('/product/') && routeParams.split('/').length === 5; // Assuming product detail URL pattern
+
+  const searchBarValidation = isProductDetailPage || excludedSearchBarRoutes.some(route => routeParams.includes(route));
+
+  useEffect(() => {
+    dispatch(enableFooterAction(!footerValidation));
+    dispatch(enableNavbarAction(!navbarValidation));
+    dispatch(enableSearchbarAction(isMobile && !searchBarValidation));
+  }, [footerValidation, routeParams, isMobile, searchBarValidation]);
+
+  useEffect(() => {
+    if (!isLoggedIn && isMobile && !routeValidationForLoginPopup) {
+      setTimeout(() => {
+        setOpenLoginPopup(true);
+      }, 6000);
+    }
+  }, [isMobile, isLoggedIn, routeParams, routeValidationForLoginPopup]);
+
+  useEffect(() => {
+    setOpenLoginPopup(false);
+  }, [routeParams]);
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add('dark-mode');
+    }
+    setTimeout(() => {
+      setSplashVisible(false);
+    }, 2500);
+  }, []);
+
   return (
-    <BrowserRouter>
-    <Navbar/>
-    <Routes>
-      <Route path='/' element={<Home/>}/>
-      <Route path='/login-signup' element={<LoginSignUp />}/>
-      <Route path='/signup' element={<LoginSignUp />}/>
-      <Route path='/login' element={<LoginSignUp />}/>
-      <Route path='*' element={<NotFound/>}/>
-    </Routes>
-    </BrowserRouter>
+      <AnimatePresence mode="wait">
+        {splashVisible ? (
+          <SplashScreen />
+        ) : (
+          <NetworkStatus>
+            {enableNavbar && <Navbar isProductDetailPage={isProductDetailPage} />}
+            {routeParams.includes("/product-admin") && <NavbarProductAdmin />}
+            {enableSearchbar &&
+              <Headroom>
+                <div className="mobile-search-bar-container">
+                  <SearchBar />
+                </div>
+              </Headroom>}
+            {/* {openLoginPopup && (
+              <LoginPopupMobile setOpenLoginPopup={setOpenLoginPopup} />
+            )} */}
+            <Router />
+            {enableFooter && <FooterPage />}
+          </NetworkStatus>
+        )}
+      </AnimatePresence>
   );
 }
 

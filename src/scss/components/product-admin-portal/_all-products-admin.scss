@@ -1,0 +1,102 @@
+.allProduct-admin-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    width: 100%;
+    width: 100%;
+    font-size: 10px;
+
+    @include breakpoint(medium) {
+    font-size: 16px;
+
+    }
+
+    @include breakpoint(large) {
+    font-size: 20px;
+
+    }
+    .allProducts-cards-wrapper {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      .allProduct-card {
+        width: 300px;
+        height: 150px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 10px;
+        gap: 10px;
+        border: 3px solid $Button-text-color;
+        border-radius: 5px;
+        transition: all 0.4s linear;
+
+        &:hover {
+          box-shadow: $product-card-box-shadow;
+          border: 3px solid $White;
+        }
+
+        @include breakpoint(small-only) {
+          width: 100%;
+        }
+
+        .productName-wrapper {
+          display: flex;
+          flex-direction: row;
+          color: $Grey;
+          font-size: 16px;
+          align-items: center;
+          width: 100%;
+
+          &>span {
+          @include ellipsisText;
+          color: $Black !important;
+          font-size: 18px;
+          font-weight: bold;
+          }
+        }
+        .productCard-btn-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          gap: 4px;
+
+          &>div {
+            display: flex;
+            flex-direction: column;
+            width: fit-content;
+            padding: 4px;
+            align-items: center;
+            gap: 3px;
+            cursor: pointer;
+
+            &>p {
+              font-size: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .selectedProduct {
+    background: $primary-btn-red-disabled;
+    color: $fixed-white;
+  }
+  .productSearchbar {
+    width: 100%;
+    border: 1px solid $primary-btn-red;
+    background: $White;
+    padding: 15px;
+    border-radius: 5px;
+    &:focus {
+      outline: none;
+    }
+  }

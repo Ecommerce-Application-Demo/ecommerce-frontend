@@ -1,0 +1,91 @@
+//-----------------respponsive brekpoints function------------------
+@mixin breakpoint($breakpoint) {
+    @if $breakpoint == 'medium' {
+        @media (min-width: $bp-medium) {
+            @content;
+        };
+    } @else if $breakpoint == 'large' {
+        @media (min-width: $bp-large) {
+            @content;
+        }
+    } @else if $breakpoint == 'small-only' {
+        @media (max-width : $bp-max-small-only) {
+            @content;
+        } 
+    } @else if $breakpoint == 'small' {
+        @media (min-width : $bp-max-small-only) and (max-width: $bp-max-small-only) {
+            @content;
+        } 
+    } @else if $breakpoint == 'small-medium' {
+        @media (min-width : $bp-small-medium) {
+            @content;
+        } 
+    }  @else if $breakpoint == 'medium-large' {
+        @media (min-width : $bp-medium-large) {
+            @content;
+        } 
+    } 
+    @else if $breakpoint == 'small-mobile' {
+        @media (max-width : $bp-small-small) {
+            @content;
+        } 
+    } 
+     @else {
+        @error 'No value could be retrived for ' + $breakpoint;
+    }
+}
+
+@mixin modalGlassBackground {
+background: rgba( 255, 255, 255, 0.1 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 11.5px );
+-webkit-backdrop-filter: blur( 11.5px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+@mixin primaryGradientText {
+    background: $brand-gradient;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    text-shadow: $primary-btn-red;
+}
+
+@mixin productListingCardBackground {
+    background: rgba(146, 144, 144, 0.4);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 50px );
+    -webkit-backdrop-filter: blur( 9px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+@mixin ratingGlassMorphism {
+background: rgba(8, 225, 30, 0.57);
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 11.5px );
+-webkit-backdrop-filter: blur( 11.5px );
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+@mixin loadingSkeletonAnimation {
+    animation: shimmer 1.5s infinite;
+    background: linear-gradient(90deg, rgba(179, 176, 176, 0.725) 25%, rgba(255, 255, 255, 0.1) 50%, rgba(179, 176, 176, 0.725) 75%);
+    background-size: 200% 100%;
+}
+
+@mixin ellipsisText {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 90%;
+}
+
+@keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }

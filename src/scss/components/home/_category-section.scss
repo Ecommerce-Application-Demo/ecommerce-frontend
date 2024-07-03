@@ -1,0 +1,87 @@
+.CategorySection-main-container {
+        position: relative;
+        margin: 20px 10px 20px;
+      
+      @include breakpoint(medium) {
+          margin:30px 80px 20px;
+      }
+      
+      @include breakpoint(large) {
+          margin: 30px 140px 20px;
+      }
+
+      .ourBrands-text {
+        @include primaryGradientText;
+        text-align: center;
+        font-size: 50px;
+        margin-bottom: 30px;
+      }
+      .categorySection-cards-wrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+        flex-wrap: wrap;
+        justify-content: center;
+        height: max-content;
+
+        .categorySection-card {
+            // height: fit-content;
+            // width: fit-content;
+            width: 200px;
+            height: 350px;
+            position: relative;
+
+            @include breakpoint(small-only) {
+                width: 175px;
+                height: 250px;
+            }
+
+            &:hover {
+                scale: 1.2;
+                transition: all 0.3s linear;
+                .categorySection-card-Description {
+                    display: inline-grid;
+                    top: 50px;
+                    height: 72%;
+                    padding: 10px;
+                    background: rgba(255, 255, 255, 0.25);
+                    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+                    backdrop-filter: blur(11.5px);
+                    -webkit-backdrop-filter: blur(11.5px);
+                    border-radius: 10px; 
+                    color: $text-color-blue;
+                    font-weight: 800;
+
+                    @include breakpoint(small-only) {
+                        // width: 175px;
+                        height: 65%;
+                        font-size: 12px;
+                    }                    
+                }
+                    // .categorySection-card-titleText {
+                    //    font-size: 30px;
+                    //    @include breakpoint(small-only) {
+                    
+                    //     font-size: 20px;
+                    // }    
+                    // }
+            }
+            .categorySection-card-image {
+               border-radius: 6px;
+               height: 85%;
+               width: 100%;
+            }
+            .categorySection-card-titleText {
+                text-align: center;
+                margin: 4px 0px;
+                color: $primary-btn-red;
+                font-weight: 800;
+                font-size: 22px;
+            }
+            .categorySection-card-Description {
+                position: absolute;
+                display: none;
+            }
+        }
+      }
+}

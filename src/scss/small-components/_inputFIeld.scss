@@ -1,60 +1,120 @@
+
 .react-input-container {
   position: relative;
   height: 40px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  & > .label-text-focus-disabled {
+    color:$White;
+    background-color:$Disabled-background;
+    top: -12px;
+    left: 20px;
+    padding: 0px 5px 0px 5px;
+
+  }
 
   & label {
-    color: var(--Text2, #000);
-    font-family: "Poppins", sans-serif;
+    position: absolute;
+    font-weight: 800;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 24px; /* 150% */
-    // opacity: 0.4;
+    // border-radius: 20px;
+    line-height: 24px; 
   }
   & > .label-text {
-    position: absolute;
+    color:$Grey;
+    left: 40px;
+    font-size: 20px;
+    background-color: $Input-normal-background;
+    transition: all 0.5s ease-in-out;
+
+    @include breakpoint(small-only) {
+      font-size: 12px;
+    }
+  }
+
+  & > .label-text-focus {
+    color:$fixed-black;
+    font-size: 14px;
+    top: -12px;
+    font-weight: 600;
+    left: 20px;
+    background-color: $Input-normal-background;
+    padding: 0px 5px 0px 5px;
+    letter-spacing: 1px;
+    transition: all 0.5s ease-in-out;
+  }
+  & > .label-text-success {
+    color:$green;
+    font-size: 14px;
+    background-color: $Input-success-background;
+    top: -12px;
+    font-weight: 600;
+    padding: 0px 5px 0px 5px;
+    left: 20px;
+    letter-spacing: 1px;
+    transition: all 0.5s ease-in-out;
+  }
+  
+  & > .label-text-disabled {
+    color: $White;
+    background-color: $Disabled-background;
     bottom: 6px;
     left: 10px;
     // z-index: 15;
     transition: transform 0.2s ease-out;
   }
-
-  & > .label-text-focus {
-    position: absolute;
-    top: -10px;
-    left: 10px;
-  }
-  
   & .react-input-wrapper--success {
-    background-color: rgb(211, 254, 211);
+    background-color: $Input-success-background;
+    border: 1px solid $green;
+    transition: all 0.2s ease-in-out;
+
   }
   & .react-input-wrapper--normal {
-    background-color: rgb(247, 243, 243);
+    background-color:$Input-normal-background;
+    border: 1px solid $Disabled-background;
+    transition: all 0.2s ease-in-out;
+
+  }
+  & .react-input-wrapper--disabled {
+    background-color:$Disabled-background;
+    cursor: not-allowed;
+    // color: $Black;
+    &>.input-disabled {
+          color: $White;
+          width: 50%;
+          cursor:not-allowed;
+          &:focus {
+            outline: none;
+          }
+        }
   }
   & .react-input-wrapper {
     display: flex;
     flex-direction: row;
     border-radius: 4px;
-    // gap: 10px;
     width: 100%;
     align-items: center;
     height: 100%;
-    &>.greenTick {
-       margin-right: 10px;
-    }
- & > input {
-    margin-left: 10px;
-        height: 32px;
-        width: 90%;
-        border: none;
-        background-color: inherit;
-        // z-index: 10;
-        &:focus {
-          outline: none;
+    border-radius: 20px;
+
+    &>.input-basic {
+      margin-left: 25px;
+          height: 32px;
+          width: 85%;
+          border: none;
+          background-color: inherit;
+          &:focus {
+            outline: none;
+          }
         }
-      }
-    //   &>input--normal {
-    //     background-color: inherit;
-    //   }
+    &>.greenTick {
+      position: fixed;
+       margin-right: 20px;
+    }
   }
+  
 }
