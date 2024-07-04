@@ -38,7 +38,7 @@ const SingleProductPage = () => {
 
   return (
     <div className={!isMobile ? 'global-margin' : 'global-margin-singleProduct'}>
-         {productWithStyleId && tags.SingleProductTag(productWithStyleId)}
+         {tags.SingleProductTag(productWithStyleId)}
       {!FAIL ?
       <div className="single-product-container">
         {isMobile ? <ProductImagePhone productImages={ productImages } productWithStyleId={ productWithStyleId } /> : <ProductImage productImages={ productImages } productWithStyleId={ productWithStyleId }/>}
