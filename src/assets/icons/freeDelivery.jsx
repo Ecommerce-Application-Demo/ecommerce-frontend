@@ -1,3 +1,5 @@
+import React from 'react'
+
 const freeDelivery = ({color='var(--Black)'}) => {
   return (
     <svg

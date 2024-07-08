@@ -1,3 +1,5 @@
+import React from 'react'
+
 const desiCartIcon=({color='var(--primary-btn-red)', size ="150px"})=>{
     return(
         <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width={size} height={size} viewBox="50 20 100 200" preserveAspectRatio="xMidYMid meet">

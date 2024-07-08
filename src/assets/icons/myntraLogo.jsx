@@ -1,3 +1,5 @@
+import React from 'react'
+
 const myntraLogo =()=>{
     return (
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 355.1 244.5" height="20px" width="25px">

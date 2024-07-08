@@ -1,3 +1,4 @@
+import React from 'react'
 
 const accountLogo = ({height='32', width='32', color='black'}) => {
   return (

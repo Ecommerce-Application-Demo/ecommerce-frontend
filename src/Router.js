@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, startTransition } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import CustomRoute from './api/utilities/CustomRoute';
 import Home from './pages/Home';
@@ -14,19 +14,11 @@ import ProtectedRoute from './api/utilities/ProtectedRoute';
 import ProductListingPage from './pages/product-listing-page';
 import OrderSection from './nested_pages/OrderSection';
 
+// const MfApp = React.lazy(() => import('MicroFrontend/App'));
+
 const Router = () => {
   return (
     <Routes>
-      {/* <CustomRoute path='/' component={Home} />
-      <CustomRoute path='/login-signup' component={LoginSignUp} />
-      <CustomRoute path='/signup' component={LoginSignUp} />
-      <CustomRoute path='/otp-verification' component={LoginSignUp} />
-      <CustomRoute path='/login' component={LoginSignUp} />
-      <CustomRoute path='/loading' component={LoginSignUp} />
-      <CustomRoute path='/my/*' component={AccountInformation} isPrivate />
-      <CustomRoute path='/product' component={SingleProductPage} />
-      <CustomRoute path='/product-admin' component={ProductAdminPage} isPrivate />
-      <CustomRoute path='*' component={NotFound} /> */}
       <Route path='/' element={<PageTransition><Home /></PageTransition>} />
       <Route path='/login-signup' element={<ProtectedRouteLogin><PageTransition><LoginSignUp /></PageTransition></ProtectedRouteLogin>} />
       <Route path="/signup" element={<ProtectedRouteLogin><PageTransition><LoginSignUp /></PageTransition></ProtectedRouteLogin>} />
@@ -38,7 +30,18 @@ const Router = () => {
       <Route path='/product-admin' element={<PageTransition><ProductAdminPage /></PageTransition>} />
       <Route path='/my/dashboard' element={<ProtectedRoute><PageTransition><Dashboard /></PageTransition></ProtectedRoute>} />
       <Route path='/products' element={<ProductListingPage />} />
-      <Route path='/checkout/cart' element={<PageTransition><OrderSection /></PageTransition>} />
+      <Route
+        path='/checkout/cart'
+        element={
+          <Suspense fallback={<div>Loading...</div>}>
+            <PageTransition>
+              {/* {startTransition(() => ( */}
+                <OrderSection />
+              {/* ))} */}
+            </PageTransition>
+          </Suspense>
+        }
+      />
       <Route path='/checkout/payment' element={<ProtectedRoute><PageTransition><OrderSection /></PageTransition></ProtectedRoute>} />
       <Route path='*' element={<PageTransition><NotFound /></PageTransition>} />
     </Routes>

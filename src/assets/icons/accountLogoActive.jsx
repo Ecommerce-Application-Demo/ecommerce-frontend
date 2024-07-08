@@ -1,3 +1,4 @@
+import React from 'react'
 
 const accountLogoActive = ({height='32', width='32'}) => {
     return (

@@ -1,3 +1,5 @@
+import React from 'react'
+
 const starLogo = ({color = '#DB4444', size= 15}) => {
   return (
     <svg

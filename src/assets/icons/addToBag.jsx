@@ -1,3 +1,5 @@
+import React from 'react'
+
 const addToBag = ({stroke= 'white', height=24, width=24}) => {
   return (
     <svg

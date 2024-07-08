@@ -1,3 +1,4 @@
+import React from 'react'
 
 const cancelationLogo = ({height='32', width='32', color='none'}) => {
     return (
