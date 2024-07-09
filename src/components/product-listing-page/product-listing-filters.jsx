@@ -49,6 +49,21 @@ const ProductListingFilter = (props) => {
     }
   }, [productsFilter]);
 
+  const isLastItemDeselected = (type, item) => {
+    const currentArray = selectedItems[type];
+    const isItemPresent = currentArray.includes(item);
+
+    if (isItemPresent) {
+      // If the item is present, it means we are about to deselect it
+      // Create a new array without the item to check if it's the last item
+      const newArray = currentArray.filter((i) => i !== item);
+      return newArray.length === 0; // Check if the array is empty after removal
+    }
+
+    // If the item is not present, it was never selected
+    return false;
+  };
+
   const handleItemClick = (name, item) => {
     setSelectedItems((prevItems) => {
       if (name === 'discountPercentage') {
@@ -70,9 +85,10 @@ const ProductListingFilter = (props) => {
         };
       }
     });
+    isLastItemDeselected(name, item);
     setLatestChangingKey(name);
   };
-
+  
   return filterLoading ? (
     <div className="product-filter-container">
       {Array.from({ length: 7 }).map((_, index) => (

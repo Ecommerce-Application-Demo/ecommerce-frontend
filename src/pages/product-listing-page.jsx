@@ -54,6 +54,7 @@ const ProductListingPage = () => {
     maxPrice: '',
   });
   const [latestChangingKey, setLatestChangingKey] = useState('');
+  const [firstLoad, setFirstLoad] = useState(true); 
   const searchParams = new URLSearchParams(location.search);
   const searchQuery = searchParams.get("search");
   const { getSearchedProductsThunk, getInfinitySearchedProductsThunk, getSearchedProductFilterThunk } = getProductThunk;
@@ -66,9 +67,14 @@ const ProductListingPage = () => {
   const totalProduct = searchedProducts?.totalProductCount || 0;
   const filterLoading = searchproductsFilter?.START;
   const productsFilter = searchproductsFilter?.searchProductsFilter;
+
   const anyfilter = Object.values(selectedItems).some(item =>
     Array.isArray(item) ? item.length > 0 : item !== ''
   ); 
+  const isAnyArrayEmpty = () => {
+    return Object.values(selectedItems).some((array) => array.length === 0);
+  };
+
    const selectedFilters = getSelectedFilters(selectedItems);
    const handleClearAll = () => {
     const emptySelectedItems = Object.keys(selectedItems).reduce((acc, key) => {
@@ -125,8 +131,7 @@ const ProductListingPage = () => {
   }, [handleObserver]);
   
   useEffect(() => {
-    console.log(anyfilter, 'any');
-    if (anyfilter) {
+    if ((anyfilter || !firstLoad) && productsFilter) {
       const latestArrayContent = { [latestChangingKey]: productsFilter[latestChangingKey]};
       dispatch(getSearchedProductFilterThunk({
         searchQuery,
@@ -138,7 +143,7 @@ const ProductListingPage = () => {
         sortBy: sortBy === 'Price: Low to High' ? 'lowToHigh' : sortBy === 'Price: High to Low' ? 'highTOLow' : sortBy,
         selectedFilters,
       }));
-    } else {
+    } else if (firstLoad) {
       dispatch(getSearchedProductsThunk({
         searchQuery,
         sortBy: sortBy === 'Price: Low to High' ? 'lowToHigh' : sortBy === 'Price: High to Low' ? 'highTOLow' : sortBy,
@@ -149,8 +154,9 @@ const ProductListingPage = () => {
         searchQuery,
         selectedFilters,
       }));
+      setFirstLoad(false);
     }
-  }, [anyfilter, dispatch, searchQuery, sortBy, latestChangingKey]);
+  }, [anyfilter, dispatch, searchQuery, sortBy, latestChangingKey, selectedItems, firstLoad]);
   
   useEffect(() => {
     let lastScrollTop = 0;
