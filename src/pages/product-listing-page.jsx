@@ -41,7 +41,6 @@ const ProductListingPage = () => {
   const [showFilter, setShowFilter] = useState(true);
   const [openFilterModal, setOpenFilterModal] = useState(false);
   const [openSortByModal, setOpenSortByModal] = useState(false);
-  
   const [selectedItems, setSelectedItems] = useState({
     masterCategories: [],
     categories: [],
@@ -54,6 +53,7 @@ const ProductListingPage = () => {
     minPrice: '',
     maxPrice: '',
   });
+  const [latestChangingKey, setLatestChangingKey] = useState('');
   const searchParams = new URLSearchParams(location.search);
   const searchQuery = searchParams.get("search");
   const { getSearchedProductsThunk, getInfinitySearchedProductsThunk, getSearchedProductFilterThunk } = getProductThunk;
@@ -70,7 +70,6 @@ const ProductListingPage = () => {
     Array.isArray(item) ? item.length > 0 : item !== ''
   ); 
    const selectedFilters = getSelectedFilters(selectedItems);
-
    const handleClearAll = () => {
     const emptySelectedItems = Object.keys(selectedItems).reduce((acc, key) => {
       acc[key] = [];
@@ -126,11 +125,14 @@ const ProductListingPage = () => {
   }, [handleObserver]);
   
   useEffect(() => {
+    console.log(anyfilter, 'any');
     if (anyfilter) {
-      // dispatch(getSearchedProductFilterThunk({
-      //   searchQuery,
-      //   selectedFilters,
-      // }));
+      const latestArrayContent = { [latestChangingKey]: productsFilter[latestChangingKey]};
+      dispatch(getSearchedProductFilterThunk({
+        searchQuery,
+        selectedFilters,
+        latestArrayContent,
+      }));
       dispatch(getSearchedProductsThunk({
         searchQuery,
         sortBy: sortBy === 'Price: Low to High' ? 'lowToHigh' : sortBy === 'Price: High to Low' ? 'highTOLow' : sortBy,
@@ -148,7 +150,7 @@ const ProductListingPage = () => {
         selectedFilters,
       }));
     }
-  }, [selectedItems, anyfilter, dispatch, getSearchedProductFilterThunk, getSearchedProductsThunk, searchQuery, sortBy]);
+  }, [anyfilter, dispatch, searchQuery, sortBy, latestChangingKey]);
   
   useEffect(() => {
     let lastScrollTop = 0;
@@ -215,6 +217,7 @@ const ProductListingPage = () => {
                 setSelectedItems={ setSelectedItems }
                 priceRange={ priceRange }
                 setPriceRange={ setPriceRange }
+                setLatestChangingKey={ setLatestChangingKey }
               />
             </div>
             </>

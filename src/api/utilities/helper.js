@@ -105,11 +105,9 @@ export const filterEmptyArraysFromObject = (obj) => {
     const selectedFilters = {};
     for (const [key, value] of Object.entries(filters)) {
       if ((Array.isArray(value) && value.length > 0) || (!Array.isArray(value) && value)) {
-        // If the value is an array, convert it to a string
         if (Array.isArray(value)) {
           selectedFilters[key] = value.toString();
         } else {
-          // If the value is not an array (e.g., a number for discountPercentages), convert it to a string
           selectedFilters[key] = value.toString();
         }
       }

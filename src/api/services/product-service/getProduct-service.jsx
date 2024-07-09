@@ -63,14 +63,18 @@ const getSearchedProductFilter = async (searchFilter) => {
     const { 
         searchQuery,
         selectedFilters,
+        latestArrayContent,
          } = searchFilter;
-
+         console.log(latestArrayContent ,'latest');
     const response = await axiosInstanceProduct.get(`/get/search/product/filters/${searchQuery}`,
-        {
+        {   
             params:{
-             ...selectedFilters
+                ...selectedFilters
             }
-        }
+        },
+        {
+         body: {...latestArrayContent},
+        },
     );
 
     return response.data;

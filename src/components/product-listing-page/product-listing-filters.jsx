@@ -5,7 +5,7 @@ import RangeSlider from 'react-range-slider-input';
 import 'react-range-slider-input/dist/style.css';
 
 const ProductListingFilter = (props) => {
-  const { productsFilter, filterLoading, selectedItems, setSelectedItems, priceRange, setPriceRange } = props;
+  const { productsFilter, filterLoading, selectedItems, setSelectedItems, priceRange, setPriceRange, setLatestChangingKey } = props;
 
   // Initialize all dropdowns as open
   const [dropdowns, setDropdowns] = useState({
@@ -70,6 +70,7 @@ const ProductListingFilter = (props) => {
         };
       }
     });
+    setLatestChangingKey(name);
   };
 
   return filterLoading ? (

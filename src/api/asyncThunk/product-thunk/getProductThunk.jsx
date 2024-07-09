@@ -94,9 +94,9 @@ const getInfinitySearchedProductsThunk = createAsyncThunk(
 //async thunk for infinity searched products
 const getSearchedProductFilterThunk = createAsyncThunk(
     'GET_SEARCHED_PRODUCTS_FILTER',
-    async (searchedData,thunkAPI) =>{
+    async (dataForFilter,thunkAPI) =>{
         try {
-           return getProductMainService.getSearchedProductFilter(searchedData); 
+           return getProductMainService.getSearchedProductFilter(dataForFilter); 
         }
         catch (error) {
             const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
