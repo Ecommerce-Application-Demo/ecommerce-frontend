@@ -64,21 +64,29 @@ const getSearchedProductFilter = async (searchFilter) => {
         searchQuery,
         selectedFilters,
         latestArrayContent,
-         } = searchFilter;
-         console.log(latestArrayContent ,'latest');
-    const response = await axiosInstanceProduct.get(`/get/search/product/filters/${searchQuery}`,
-        {   
-            params:{
-                ...selectedFilters
-            }
-        },
-        {
-         body: {...latestArrayContent},
-        },
-    );
+    } = searchFilter;
+
+    const flattenedLatestArrayContent = {};
+    for (const key in latestArrayContent) {
+        if (latestArrayContent.hasOwnProperty(key)) {
+            flattenedLatestArrayContent[key] = latestArrayContent[key].join(',');
+        }
+    }
+    const queryParams = {
+        ...selectedFilters,
+       ...flattenedLatestArrayContent,
+    };
+    console.log(queryParams, 'query');
+    const response = await axiosInstanceProduct.get(`/get/search/product/filters/${searchQuery}`, {
+        params: {
+            ...selectedFilters,
+           ...flattenedLatestArrayContent,
+        }
+    });
 
     return response.data;
-}
+};
+
 
 const getProductMainService = {
     getAllProductService,
