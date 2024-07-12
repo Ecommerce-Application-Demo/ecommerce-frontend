@@ -87,6 +87,7 @@ const ProductListingPage = () => {
   useEffect(()=>{
     if (searchQuery !== previousSearchQuery) {
       handleClearAll();
+      setFirstLoad(true)
     }
   },[searchQuery]);
 
@@ -129,15 +130,15 @@ const ProductListingPage = () => {
       if (loader.current) observer.unobserve(loader.current);
     };
   }, [handleObserver]);
-  
+
   useEffect(() => {
     if ((anyfilter || !firstLoad) && productsFilter) {
-      const latestArrayContent = { [latestChangingKey]: productsFilter[latestChangingKey]};
-      dispatch(getSearchedProductFilterThunk({
-        searchQuery,
-        selectedFilters,
-        latestArrayContent,
-      }));
+      // const latestArrayContent = { [latestChangingKey]: productsFilter[latestChangingKey]};
+      // dispatch(getSearchedProductFilterThunk({
+      //   searchQuery,
+      //   selectedFilters,
+      //   latestArrayContent,
+      // }));
       dispatch(getSearchedProductsThunk({
         searchQuery,
         sortBy: sortBy === 'Price: Low to High' ? 'lowToHigh' : sortBy === 'Price: High to Low' ? 'highTOLow' : sortBy,
@@ -184,7 +185,7 @@ const ProductListingPage = () => {
   return (
     <div className="global-margin">
       <ScrollToTopButton />
-      { !START && (!productList || totalProduct===0) ? 
+      { !START && (!productList || totalProduct===0) && !anyfilter ? 
       <NoProductFoundPage /> 
       :
       <div className="product-listing-container">
