@@ -23,7 +23,7 @@ const SingleProductPage = () => {
   const dispatch = useDispatch();
 
   const { getProductWithStyleId, getProductMoreColors } = singleProductThunk;
-  const { productWithStyleId, START,SUCCESS, FAIL } = productStyle;
+  const { productWithStyleId, START: productStyleLoading, SUCCESS, FAIL } = productStyle;
   const productImages = productWithStyleId?.images;
   const isDeliverable = isDeliverableData?.isDeliverable;
 
@@ -41,7 +41,7 @@ const SingleProductPage = () => {
          {tags.SingleProductTag(productWithStyleId)}
       {!FAIL ?
       <div className="single-product-container">
-        {isMobile ? <ProductImagePhone productImages={ productImages } productWithStyleId={ productWithStyleId } /> : <ProductImage productImages={ productImages } productWithStyleId={ productWithStyleId }/>}
+        {isMobile ? <ProductImagePhone productImages={ productImages } productWithStyleId={ productWithStyleId } productStyleLoading={productStyleLoading} /> : <ProductImage productImages={ productImages } productWithStyleId={ productWithStyleId } productStyleLoading={productStyleLoading} />}
         <SingleProductDetails
           addressForDeliveryOption={ addressForDeliveryOption }
           dispatch={ dispatch }
@@ -50,6 +50,7 @@ const SingleProductPage = () => {
           isMobile={ isMobile }
           productDetails={ productWithStyleId }
           styleId={ styleId }
+          productStyleLoading={ productStyleLoading }
         />
       </div> : 
       <NoProductFoundPage />

@@ -33,6 +33,16 @@
         overflow: hidden;
             }
     }
+    .productImage-singleImage-loading {
+      height: 80px;
+      width: 80px;
+      overflow: hidden;
+      cursor: pointer;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
 }

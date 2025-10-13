@@ -4,10 +4,12 @@ import { MdDoDisturb } from "react-icons/md";
 import { useSelector } from 'react-redux';
 import { selectSizeForDeliveryOption } from '../../redux/Slices/product/singleProductSlice';
 import singleProductThunk from '../../api/asyncThunk/product-thunk/singleProductThunk';
+import DesiCartCustomTags from '../../small-components/DesiCartCustomTags';
 
 const SingleProductSize = ({
   dispatch,
   productSize,
+  productStyleLoading
 }) => {
   const sizeForDeliveryOption = useSelector((state)=>state.product.sizeForDeliveryOption);
   const addressForDeliveryOption = useSelector((state) => state.product.addressForDeliveryOption);
@@ -42,7 +44,13 @@ const SingleProductSize = ({
   };
 
   return (
-    <div className="size-container">
+    <DesiCartCustomTags
+      tagName="div"
+      className='size-container'
+      loading={productStyleLoading}
+      skeletonWidth="400px"
+      skeletonHeight="100px"
+    >
       <span className="selectSize-text">SELECT SIZE</span>
       <div className="allAvailableSize-wrapper">
         {productSize?.map((size) => (
@@ -56,7 +64,7 @@ const SingleProductSize = ({
           </div>
         ))}
       </div>
-    </div>
+    </DesiCartCustomTags>
   );
 };
 

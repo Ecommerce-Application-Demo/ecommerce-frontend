@@ -62,7 +62,7 @@ const LoginOrSignUp = () => {
 
   const navigate = useNavigate();
   const prevUrl = document.referrer;
-  console.log(prevUrl, 'p');
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
   

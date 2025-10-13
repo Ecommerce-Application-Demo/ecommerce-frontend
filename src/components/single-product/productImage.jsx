@@ -5,8 +5,10 @@ import StickyBox from 'react-sticky-box';
 import { CiHeart } from "react-icons/ci";
 import { BsShareFill } from "react-icons/bs";
 import SocialShare from '../../small-components/SocialShare';
+import Skeleton from 'react-loading-skeleton';
+import { LoadingSkeleton } from '../../small-components/LoadingSkeleton';
 
-const ProductImage = ({productImages, productWithStyleId}) => {
+const ProductImage = ({productImages, productWithStyleId, productStyleLoading}) => {
 
   const [singleImage, setSingleImage] = useState('');
   const [openShareModal, setOpenShareModal] = useState(false);
@@ -14,10 +16,13 @@ const ProductImage = ({productImages, productWithStyleId}) => {
   const shareUrl = window.location.href;
   const imageArray = productImages ? objectToArrayConverter(productImages) : [];
   useEffect(() => {
-    if (!singleImage) {
+    if(productStyleLoading) {
+      setSingleImage('');
+    }
+    if (!singleImage && !productStyleLoading) {
       setSingleImage(imageArray?.[0]);
     }
-  }, [imageArray, singleImage]);
+  }, [imageArray, singleImage, productStyleLoading]);
 
   const handleClickImage = (image) => {
     setSingleImage(image);
@@ -31,7 +36,12 @@ const ProductImage = ({productImages, productWithStyleId}) => {
       <StickyBox offsetTop={130}>
       <div className='productImage-singleImage-container'>
       <div className='productImage-singleImage-wrapper'>
-        {imageArray?.map((productImage, index) => (
+        { productStyleLoading ? 
+        Array.from({ length: 4 }).map((_, index) => (
+            <div className='productImage-singleImage-loading'>
+              <LoadingSkeleton width="100%" height="100%" />
+              </div>)) : 
+        imageArray?.map((productImage, index) => (
           <div className="productImage-singleImage">
             <img
               key={index}
@@ -43,7 +53,7 @@ const ProductImage = ({productImages, productWithStyleId}) => {
         ))}
       </div>
       <div className="single-big-image-wrapper">
-        <img src={singleImage} alt='single image'/>
+        {productStyleLoading ? <LoadingSkeleton width="350px" height="450px" /> : <img src={singleImage} alt='single image'/>}
         <div className='product-icon wishlist'><CiHeart size={30}/></div>
         <div className='product-icon share' onClick={()=>setOpenShareModal(true)}><BsShareFill /></div>
       </div>

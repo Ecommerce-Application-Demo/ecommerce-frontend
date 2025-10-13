@@ -7,6 +7,7 @@ import { BsCartCheck } from "react-icons/bs";
 import SingleProductDeliveryOptions from "./singleProduct-delivery-options";
 import { TbTruckDelivery } from "react-icons/tb";
 import { useSelector } from "react-redux";
+import DesiCartCustomTags from "../../small-components/DesiCartCustomTags";
 
 const SingleProductDetails = ({
   addressForDeliveryOption,
@@ -16,6 +17,7 @@ const SingleProductDetails = ({
   isMobile,
   productDetails,
   styleId,
+  productStyleLoading
 }) => {
   //redux state------------
   const isDeliverableData = useSelector((state) => state.product.isDeliverableData);
@@ -73,11 +75,31 @@ const SingleProductDetails = ({
     <div className="singleproduct-details-container">
       <div className="singleProduct-details-price-container">
         <div className="singleProductName-wrapper">
-          <p className="singleproduct-details-brandName">{productDetails?.brand?.brandName}</p>
-          <p className="singleProduct-product-name">{productDetails?.styleName}</p>
+          {/* <p className="singleproduct-details-brandName">{productDetails?.brand?.brandName}</p> */}
+          <DesiCartCustomTags
+            tagName="p"
+            className="singleproduct-details-brandName"
+            loading={productStyleLoading}
+          >
+            {productDetails?.brand?.brandName}
+          </DesiCartCustomTags>
+          <DesiCartCustomTags
+            tagName="p"
+            className="singleProduct-product-name"
+            loading={productStyleLoading}
+          >
+            {productDetails?.styleName}
+          </DesiCartCustomTags>
+          {/* <p className="singleProduct-product-name">{productDetails?.styleName}</p> */}
         </div>
-        {!isMobile &&
-          <div className="rating-container">
+        {!isMobile && 
+        <DesiCartCustomTags
+          tagName="div"
+          className="rating-container"
+          loading={productStyleLoading}
+          skeletonWidth="300px"
+        >
+          <>
             <div className="rating-wrapper">
               <span>{productDetails?.productAvgRating}</span>
               <span>
@@ -88,30 +110,65 @@ const SingleProductDetails = ({
             {productDetails?.inStock ? 
             <span className="singleproduct-details-instock">In Stock</span> : 
             <span className="singleproduct-details-outstock">Out Of Stock</span>}
-          </div>}
+          </>
+        </DesiCartCustomTags>
+          }
         <div className="price-container">
-          <h3>₹{productDetails?.finalPrice}</h3>
+          <DesiCartCustomTags
+            tagName="h3"
+            loading={productStyleLoading}
+            skeletonWidth="100px"
+            >
+              ₹{productDetails?.finalPrice}
+            </DesiCartCustomTags>
           {productDetails?.mrp > 0 &&
-            <div className="mrp-wrapper">
+            <DesiCartCustomTags
+              tagName="div"
+              className="mrp-wrapper"
+              loading={productStyleLoading}
+              skeletonWidth="100px"
+            >
               <span>MRP </span>
               <span>₹{productDetails?.mrp}</span>
-            </div>
+            </DesiCartCustomTags>
+            // <div className="mrp-wrapper">
+            //   <span>MRP </span>
+            //   <span>₹{productDetails?.mrp}</span>
+            // </div>
           }
-          {productDetails?.discountPercentage &&
-            <div>{productDetails?.discountPercentageText}</div>
+            {/* <div>{productDetails?.discountPercentageText}</div> */}
+          {productDetails?.discountPercentageText &&
+            <DesiCartCustomTags
+              tagName="div"
+              className="discount-percentage-text"
+              loading={productStyleLoading}
+              skeletonWidth="100px"
+            >
+              <span>{productDetails?.discountPercentageText}</span>
+            </DesiCartCustomTags>
           }
         </div>
-        <span className="allTaxes-text">inclusive of all taxes</span>
+        {/* <span className="allTaxes-text">inclusive of all taxes</span> */}
+        <DesiCartCustomTags
+          tagName="span"
+          className="allTaxes-text"
+          loading={productStyleLoading}
+          skeletonWidth="150px"
+        >
+          inclusive of all taxes
+        </DesiCartCustomTags>
       </div>
       <div className="singleProduct-details-size-container">
-        {productDetails?.inStock &&
+        {(productStyleLoading || productDetails?.inStock) &&
         <SingleProductSize
           dispatch={dispatch}
           productSize={productSize}
+          productStyleLoading={productStyleLoading}
         />}
         <ProductMoreColors
           dispatch={dispatch}
           styleId={styleId}
+          productStyleLoading={productStyleLoading}
         // refForExpressDeliveryBanner={refForExpressDeliveryBanner}
         />
         {!isMobile &&

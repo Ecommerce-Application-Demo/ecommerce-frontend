@@ -110,6 +110,10 @@
         padding: 30px 0px;
         border-bottom: 1px solid $freeze-purple;
         color: $Black;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
         @include breakpoint(small-only) {
             border: none;
             padding: 10px 0px;

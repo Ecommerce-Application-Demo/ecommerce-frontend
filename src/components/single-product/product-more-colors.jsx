@@ -2,17 +2,16 @@ import React from 'react'
 import { products } from '../../assets/pictures/productImageAddress';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import DesiCartCustomTags from '../../small-components/DesiCartCustomTags';
 
-const ProductMoreColors = (props) => {
+const ProductMoreColors = ({
+    dispatch,
+    styleId,
+    // refForExpressDeliveryBanner,
+    productStyleLoading
+}) => {
     //--------redux state--------------------------
     const productMoreColorsData = useSelector((state) => state.product.productMoreColorsData);
-
-    //----------props---------------------
-    const {
-        dispatch,
-        styleId,
-        refForExpressDeliveryBanner,
-    } = props;
 
     const navigate = useNavigate();
     const { START, FAIL, SUCCESS, productMoreColors } = productMoreColorsData;
@@ -23,7 +22,14 @@ const ProductMoreColors = (props) => {
     };
     };
     return (
-        <div className="color-container">
+        <DesiCartCustomTags
+            tagName="div"
+            className="color-container"
+            loading={productStyleLoading || START}
+            skeletonWidth="600px"
+            skeletonHeight="100px"
+        > 
+            {/* <div className="color-container"> */}
             <span className="moreColor-text">MORE COLORS</span>
             <div className="more-color-image-wrapper">
                 {productMoreColors?.map(product => {
@@ -41,7 +47,8 @@ const ProductMoreColors = (props) => {
                 })}
             </div>
             {/* <div ref={refForExpressDeliveryBanner}/> */}
-        </div>
+            </DesiCartCustomTags>
+    /* </div> */
     )
 }
 
